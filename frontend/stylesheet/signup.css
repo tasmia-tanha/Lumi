@@ -1,0 +1,86 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Nunito',sans-serif;
+}
+body{
+    background-color: #B8CFB3;
+    min-height: 100vh;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    align-content: center;
+    margin: 0px;
+}
+
+
+#background{
+    height: 100vh;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    
+}
+
+.box{
+    
+    background-color: #FEFAF3;
+    height: 70vh;
+    width: 60vh;
+    border-radius: 25px;
+    border-width: 5px;
+    border-style: none;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+}
+
+.info{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logo{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#username,#key{
+    height: 40px;
+    width: 20vw;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 2px solid #84A282;
+}
+
+#username:focus,
+#key:focus{
+    border:4px ;
+}
+#signUpBtn{
+    background-color: #F6E2E9;
+    color:#84A282;
+    border-style: none;
+    border-radius: 15px;
+    width: 100px;
+    height: 35px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    
+}
+#signUpBtn:hover{
+    width: 105px;
+    background-color: #eec0d0;
+}
+
+#login{
+    font-size: 20px;
+    color:#84A282
+}
+
+#loginLink{
+    font-weight: bold;
+    color: #84A282;
+}
+#loginLink:hover{
+    color: #5c805a;
+}
