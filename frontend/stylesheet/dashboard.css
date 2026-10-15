@@ -52,9 +52,60 @@ body{
 #nameLogo{
     height: 10vh;
     border-radius: 25px;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
+    margin-top: 20px;
 
 }
+
+
+
+.navBtn{
+    width: 180px;
+    height: 60px;
+    background-color: #B8CFB3;
+    border:1px solid #FEFAF3;
+    
+    
+}
+.navBtn:hover{
+    background-color: #8caf85;
+}
+.navLinks{
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color:#3A4F41 ;
+}
+
+.logout{
+    width: 85px;
+    height: 35px;
+    background-color: #F6E2E9;
+    color:#8caf85 ;
+    font-weight: bold;
+    border: 0px solid #F6E2E9 ;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.logout:hover{
+    background-color: #eac3d1;
+}
+
+
+/*greeting*/
+
+.greeting{
+
+}
+
+#greetLogo{
+    width: 90px;
+}
+
+#greetMsg{
+
+}
+
 
 @media (max-width: 1024px) {
     .main {
