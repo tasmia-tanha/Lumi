@@ -13,14 +13,14 @@ body{
     min-height: 100vh;
     display: grid;
     grid-template-columns:180px 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: 180px 1fr 1fr 1fr;
     gap:1em;
     padding: 8px;
     grid-template-areas: 
-    "box-1 box-2 box-2 box-3"
-    "box-1 box-4 box-4 box-4"
-    "box-1 box-5 box-5 box-6"
-    "box-1 box-5 box-5 box-6";
+    "box-1 box-2 box-3 box-4"
+    "box-1 box-6 box-5 box-5"
+    "box-1 box-6 box-7 box-8"
+    "box-1 box-6 box-7 box-8";
     
 }
 
@@ -31,13 +31,13 @@ body{
 
 }
 
-.greeting,.date,.schedule,.analytics,.tasks{
+.greeting,.quote,.date,.schedule,.analytics,.tasks,.note{
     background-color:#F6E2E9 ;
     border: 1px solid #F6E2E9;
     border-radius: 10px;
     padding: 1rem;
 }
-.navbar, .greeting, .date, .schedule, .analytics, .tasks {
+.navbar, .greeting,.quote, .date, .schedule, .analytics, .tasks ,.note{
     margin: 0; 
 }
 
@@ -95,18 +95,315 @@ body{
 /*greeting*/
 
 .greeting{
-
-}
-
-#greetLogo{
-    width: 90px;
-}
-
-#greetMsg{
-
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    color: #8caf85;
 }
 
 
+
+#greetLogo {
+  width: 150px;
+  height: auto;
+ 
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+}
+
+
+
+#greetLogo:hover {
+  transform: translateY(-5px);
+}
+
+/*Quote*/
+
+.quote{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+.layer{
+    width: 95%;
+    height: 150px;
+    border-radius: 10px;
+    background-color: #B8CFB3;
+    padding: 1rem;
+    box-sizing: border-box;
+    
+}
+
+#quoteText{
+    
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 15px;
+    color: #222B22;   
+    
+}
+/*date*/
+
+
+.date {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background-color: #B8CFB3;
+    border-radius: 12px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+#deadLineHead {
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #222B22;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.listDeadLine {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.75rem; 
+}
+
+
+.deadLineItems {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+    background-color: #FEFAF3;          
+    border: 2px solid #222B22;         
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    
+    
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #222B22;
+}
+
+
+.deadLineItems:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #222B22;
+    background-color: #F6E2E9;         
+}
+
+
+.badge {
+    background-color: #F6E2E9;          
+    border: 1.5px solid #222B22;
+    border-radius: 20px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+/*schedule*/
+
+
+
+.scheduleHeader {
+    width: 100%;
+    background-color: #FEFAF3;          
+    border: 2px solid #222B22;          
+    border-radius: 10px;
+    padding: 0rem 1rem;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.routineLabel {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #3A4F41;                    
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+.dateTimeWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;             
+    text-align: right;
+}
+
+.mainDate {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #222B22;
+    letter-spacing: -0.5px;
+}
+
+.subTime {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #3A4F41;
+    margin-top: 0.1rem;
+}
+.tableSchedule {
+    width: 100%;
+    border: 2px solid #222B22;
+    border-collapse: collapse;
+    background-color: #FEFAF3;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.data {
+    padding: 8px 6px;
+    text-align: center;
+    border: 1.5px solid #222B22;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #222B22;
+}
+
+th.data {
+    background-color: #aac5a4; 
+    font-weight: 800;
+}
+
+/*task*/
+.tasks {
+    display: flex;      
+    flex-direction: column;
+}
+
+#taskHeader {
+    letter-spacing: 1px;
+    font-weight: 900;
+    text-align: center;
+    background-color: #B8CFB3;
+    border: 3px solid #FEFAF3;
+    border-radius: 6px;
+    margin-top: 2px;
+    height: 50px;
+    padding-top: 6px;
+    box-sizing: border-box;
+}
+
+.taskList {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-left: 0px;
+    padding-bottom: 3px;
+    overflow-y: auto;
+    max-height: 180px;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background-color: #FEFAF3;
+    border-radius: 6px;
+    border: 2px solid black;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.taskCheckbox {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+/*note*/
+
+.note {
+    background-color: #F6E2E9; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.stickyNote {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF9E6;          
+    border: 2px solid #222B22;          
+    border-radius: 8px;
+    padding: 1rem;
+    box-sizing: border-box;
+      
+    display: flex;
+    flex-direction: column;
+}
+
+
+.noteTape {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 16px;
+    background-color: #B8CFB3;          
+    border: 1.5px solid #222B22;
+    border-radius: 3px;
+    opacity: 0.85;
+}
+
+.noteTitle {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #222B22;
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+}
+
+
+.noteArea {
+    width: 100%;
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    resize: none;                       
+    outline: none;
+    
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #222B22;
+    line-height: 1.6;                  
+    
+    
+    background-image: linear-gradient(to bottom, transparent 95%, #E5DEC9 95%);
+    background-size: 100% 1.6rem;       
+}
+
+.noteArea::placeholder {
+    color: #A6A090;
+    font-style: italic;
+}
 @media (max-width: 1024px) {
     .main {
         grid-template-columns: 180px 1fr 1fr;
