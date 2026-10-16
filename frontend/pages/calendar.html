@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar</title>
+    <link rel="stylesheet" href="../stylesheet/calendar.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      
+      <div class="navbar" style="grid-area: box-1">
+        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" />
+        <ul id="list" style="list-style-type: none; padding: 0px">
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dashboard.html">Dashboard</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="task.html">Tasks</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="calendar.html">Calendar</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="note.html">Note</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="lessons.html">Lessons</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dailyHabits.html">Daily Habits</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="analytics.html">Analytics</a>
+            </button>
+          </li>
+        </ul>
+
+        <button class="logout">Log Out</button>
+      </div>
+
+      
+      <section class="calendarSection">
+        <div class="calendarHeaderArea">
+          <h2>Calendar</h2>
+          
+          <div class="calendarControls">
+            <select id="monthSelect" class="calSelect">
+              <option value="0">January</option>
+              <option value="1">February</option>
+              <option value="2">March</option>
+              <option value="3">April</option>
+              <option value="4">May</option>
+              <option value="5">June</option>
+              <option value="6">July</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9" selected>October</option>
+              <option value="10">November</option>
+              <option value="11">December</option>
+            </select>
+            <select id="yearSelect" class="calSelect">
+              <option value="2025">2025</option>
+              <option value="2026" selected>2026</option>
+              <option value="2027">2027</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calendarCard">
+         
+          <div class="weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          
+          <div class="calendarGrid">
+           
+            <div class="calDay prevMonth">27</div>
+            <div class="calDay prevMonth">28</div>
+            <div class="calDay prevMonth">29</div>
+            <div class="calDay prevMonth">30</div>
+            <div class="calDay">1</div>
+            <div class="calDay">2</div>
+            <div class="calDay">3</div>
+            
+            <div class="calDay">4</div>
+            <div class="calDay">5</div>
+            <div class="calDay">6</div>
+            <div class="calDay">7</div>
+            <div class="calDay">8</div>
+            <div class="calDay">9</div>
+            <div class="calDay">10</div>
+
+            <div class="calDay">11</div>
+            <div class="calDay">12</div>
+            <div class="calDay hasEvent">13 <span class="eventDot"></span></div>
+            <div class="calDay">14</div>
+            <div class="calDay">15</div>
+            <div class="calDay currentDay hasEvent">16 <span class="eventDot"></span></div>
+            <div class="calDay">17</div>
+
+            <div class="calDay hasEvent">18 <span class="eventDot"></span></div>
+            <div class="calDay">19</div>
+            <div class="calDay">20</div>
+            <div class="calDay">21</div>
+            <div class="calDay">22</div>
+            <div class="calDay hasEvent">23 <span class="eventDot"></span></div>
+            <div class="calDay">24</div>
+
+            <div class="calDay">25</div>
+            <div class="calDay">26</div>
+            <div class="calDay">27</div>
+            <div class="calDay">28</div>
+            <div class="calDay">29</div>
+            <div class="calDay">30</div>
+            <div class="calDay">31</div>
+          </div>
+        </div>
+      </section>
+
+     
+      <aside class="rightPanel">
+       
+        <div class="panelCard todaysAgenda">
+          <h3>Today's Agenda</h3>
+          <p class="dateSub">October 16, 2026</p>
+          <ul class="eventList">
+            <li class="eventItem">
+              <span class="eventTime">5:00 PM</span>
+              <span class="eventTitle">Complete DS assignment</span>
+            </li>
+            <li class="eventItem">
+              <span class="eventTime">8:00 PM</span>
+              <span class="eventTitle">Study Digital Logic</span>
+            </li>
+          </ul>
+        </div>
+
+     
+        <div class="panelCard upcomingAgenda">
+          <h3>Upcoming Events</h3>
+          <ul class="eventList">
+            <li class="eventItem">
+              <span class="eventDateBadge">Oct 18</span>
+              <div class="eventDetails">
+                <span class="eventTitle">Finish lab report</span>
+                <span class="eventTime">10:00 AM</span>
+              </div>
+            </li>
+            <li class="eventItem">
+              <span class="eventDateBadge">Oct 23</span>
+              <div class="eventDetails">
+                <span class="eventTitle">Data Structures Quiz</span>
+                <span class="eventTime">2:00 PM</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>

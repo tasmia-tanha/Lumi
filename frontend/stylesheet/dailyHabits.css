@@ -1,0 +1,362 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Nunito',sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    margin: 0px;
+    background-color: #FEFAF3;
+}
+.navbar{
+    background-color:#B8CFB3 ;
+    padding: 1rem;
+    border-radius: 10px;
+
+}
+.navbar{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+#nameLogo{
+    height: 10vh;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+}
+
+.navBtn{
+    width: 180px;
+    height: 60px;
+    background-color: #B8CFB3;
+    border:1px solid #FEFAF3;
+    
+    
+}
+.navBtn:hover{
+    background-color: #8caf85;
+    cursor: pointer;
+}
+.navLinks{
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color:#3A4F41 ;
+}
+
+.logout{
+    width: 85px;
+    height: 35px;
+    background-color: #F6E2E9;
+    color:#8caf85 ;
+    font-weight: bold;
+    border: 0px solid #F6E2E9 ;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.logout:hover{
+    background-color: #eac3d1;
+}
+
+.main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 180px 1fr 310px;
+    grid-template-areas: "box-1 habits right";
+    gap: 20px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+
+
+.habitSection {
+    grid-area: habits;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 5px 0;
+    min-width: 0;
+}
+
+.habitHeaderArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.habitHeaderArea h1 {
+    margin: 0;
+    color: #84A282;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.dateDisplay {
+    background-color: #B8CFB3;
+    border: 2px solid #84A282;
+    padding: 6px 16px;
+    border-radius: 8px;
+    color: #222B22;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+
+.habitCard {
+    background-color: #FEFAF3;
+    border: 2px solid #B8CFB3;
+    border-radius: 15px;
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(132, 162, 130, 0.1);
+}
+
+.tableWrapper {
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+}
+
+.habitTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+
+.habitNameCol {
+    position: sticky;
+    left: 0;
+    background-color: #FEFAF3;
+    z-index: 3;
+    min-width: 170px;
+    border-right: 2px solid #B8CFB3;
+}
+
+.habitColHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 8px;
+}
+
+.addHabitBtn {
+    background-color: #84A282;
+    color: #FEFAF3;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.addHabitBtn:hover {
+    background-color: #688566;
+}
+
+.habitTable th {
+    background-color: #B8CFB3;
+    color: #222B22;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 2px solid #84A282;
+    min-width: 34px;
+}
+
+.habitTable td {
+    padding: 8px 4px;
+    text-align: center;
+    border-bottom: 1px solid #e0ebd8;
+}
+
+.habitLabel {
+    position: sticky;
+    left: 0;
+    background-color: #FEFAF3;
+    z-index: 2;
+    text-align: left !important;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: #3A4F41;
+    padding-left: 8px !important;
+    border-right: 2px solid #B8CFB3;
+    white-space: nowrap;
+}
+
+
+.currentDayCol {
+    background-color: rgba(246, 226, 233, 0.4);
+}
+
+.habitTable th.currentDayCol {
+    background-color: #F6E2E9;
+    color: #8B4D63;
+}
+
+
+.habitTable input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #B8CFB3;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #FEFAF3;
+    transition: all 0.15s ease;
+    outline: none;
+}
+
+.habitTable input[type="checkbox"]:checked {
+    background-color: #eac3d1;
+    border-color: #eac3d1;
+    position: relative;
+}
+
+.habitTable input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    color: #FEFAF3;
+    font-size: 12px;
+    font-weight: 900;
+    top: -1px;
+    left: 3px;
+}
+
+
+.rightPanel {
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    padding: 5px 0;
+}
+
+.statCard {
+    background-color: #FEFAF3;
+    border: 2px solid #B8CFB3;
+    border-radius: 15px;
+    padding: 16px;
+    display: flex;
+    box-shadow: 0 4px 10px rgba(132, 162, 130, 0.1);
+}
+
+.streakCard {
+    align-items: center;
+    gap: 15px;
+    background-color: #F6E2E9;
+    border-color: #e5bdca;
+}
+
+.statIcon {
+    font-size: 2.2rem;
+}
+
+.statInfo h3 {
+    margin: 0;
+    color: #8B4D63;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.statValue {
+    margin: 2px 0 0;
+    color: #222B22;
+    font-size: 1.6rem;
+    font-weight: 900;
+}
+
+.statSubtext {
+    font-size: 0.7rem;
+    color: #8B4D63;
+    font-weight: 700;
+}
+
+
+.progressCard {
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.progressCard h3 {
+    margin: 0 0 15px 0;
+    color: #84A282;
+    font-size: 1.1rem;
+    font-weight: 900;
+    align-self: flex-start;
+}
+
+.progressCircle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: conic-gradient(#84A282 78%, #B8CFB3 78%);
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.progressCircle::before {
+    content: "";
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    background-color: #FEFAF3;
+    border-radius: 50%;
+}
+
+.progressPercent {
+    position: relative;
+    color: #84A282;
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.progressLabel {
+    margin: 0 0 15px 0;
+    color: #777;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.progressBreakdown {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid #B8CFB3;
+    padding-top: 12px;
+    margin-top: auto;
+}
+
+.breakdownItem {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #3A4F41;
+}
+
+.breakdownItem strong {
+    color: #84A282;
+    font-weight: 900;
+}

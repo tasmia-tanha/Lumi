@@ -1,222 +1,237 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../stylesheet/dashboard.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../stylesheet/dashboard.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="main">
-        <div class="navbar" style="grid-area: box-1">
-            <img id="nameLogo"src="../images/Lumi Sprout Heart Logo.png">
-            <ul id="list" style="list-style-type: none; padding: 0px;" >
-                    <li class="items"><button class="navBtn"><a class="navLinks" href="dashboard.html">Dashboard</a></button></li>
-                    <li class="items"><button class="navBtn"><a class="navLinks" href="task.html">Tasks</a></button></li>
-                    <li class="items"><button class="navBtn"><a class="navLinks" href="calendar.html">Calendar</a></button></li>
-                    <li class="items"><button class="navBtn"><a class="navLinks" href="note.html">Note</a></button></li>
-                    <li class="items"><button class="navBtn"><a class="navLinks" href="lessons.html">Lessons</a></button></li>
-                    <li class="items"><button class="navBtn"><a class="navLinks" href="assignments.html">Assignments</a></button></li>
-                    <li class="items"><button class="navBtn"><a class="navLinks" href="analytics.html">Analytics</a></button></li>
-            </ul>
-            
-            <button class="logout">Log Out</button>
+      <div class="navbar" style="grid-area: box-1">
+        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" />
+        <ul id="list" style="list-style-type: none; padding: 0px">
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dashboard.html">Dashboard</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="task.html">Tasks</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="calendar.html">Calendar</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="note.html">Note</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="lessons.html">Lessons</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dailyHabits.html">Daily Habits</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="analytics.html">Analytics</a>
+            </button>
+          </li>
+        </ul>
+
+        <button class="logout">Log Out</button>
+      </div>
+
+      <div class="greeting" style="grid-area: box-2">
+        <img id="greetLogo" src="../images/Kawaii Capybara With Flower.png" />
+        <h2 id="greetMsg">
+          Welcome Back <br />
+          Tanha!
+        </h2>
+      </div>
+
+      <div class="quote" style="grid-area: box-3">
+        <div class="layer">
+          <p id="quoteText">
+            "Small steps every day add up to big achievements. Keep growing at
+            your own pace! 🌱✨"
+          </p>
         </div>
-        
-            
-            <div class="greeting" style="grid-area: box-2">
-                
-                    <img id="greetLogo" src="../images/Kawaii Capybara With Flower.png">
-                    <h2 id="greetMsg">Welcome Back <br>
-                                        Tanha!</h2>
-                
-                
-                
-            </div>
+      </div>
 
-            <div class="quote" style="grid-area: box-3">
-                <div class="layer">
-                    <p id="quoteText">"Small steps every day add up to big achievements. Keep growing at your own pace! 🌱✨"</p>
-                </div>
-                
-            </div>
-
-
-            <div class="date" style="grid-area: box-4">
-
-                <div class="deadlineHeading">
-                    <h4 id="deadLineHead">Deadlines</h4>
-                    <p id="deadlineCount">4 deadlines within a week</p>
-                </div>
-
-                <ul class="listDeadLine">
-
-                    <li class="deadLineItems">
-                    <span class="deadlineName">DS Lab report</span>
-                    <span class="badge urgent">2 days</span>
-                    </li>
-
-                    <li class="deadLineItems">
-                    <span class="deadlineName">ME Lab report</span>
-                    <span class="badge">3 days</span>
-                    </li>
-
-                    <li class="deadLineItems">
-                    <span class="deadlineName">DLD Lab report</span>
-                    <span class="badge">3 days</span>
-                    </li>
-
-                    <li class="deadLineItems">
-                    <span class="deadlineName">Math assignment</span>
-                    <span class="badge">6 days</span>
-                    </li>
-
-                </ul>
-
-                <div class="deadlineActions">
-                    <button class="deadlineViewBtn">View more</button>
-                </div>
-
-            </div>
-
-            <div class="schedule" style="grid-area: box-5">
-        
-                <div class="scheduleHeader">
-                    <span class="routineLabel">Today's Routine:</span>
-                    <div class="dateTimeWrapper">
-                    <span class="mainDate">13th Oct, 2026</span>
-                    <span class="subTime">10:30 PM</span>
-                </div>
-                </div>
-
-                <table class="tableSchedule">
-                <thead>
-                    <tr class="row">
-                        <th class="data">Day</th>
-                        <th class="data">9.00-9.45</th>
-                        <th class="data">9.45-10.30</th>
-                        <th class="data">10.45-11.30</th>
-                        <th class="data">11.30-12.15</th>
-                        <th class="data">12.15-1.00</th>
-                        <th class="data">2.00-4.00</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="row">
-                        <td class="data">Sun</td>
-                        <td class="data">CSE-142</td>
-                        <td class="data">CSE-231</td>
-                        <td class="data">CSE-141</td>
-                        <td class="data">MATH-241</td>
-                        <td class="data">HUM-142</td>
-                        <td class="data">CSE-141</td>
-                    </tr>
-            </tbody>
-            </table>
-            </div>
-            
-            <div class="analytics" style="grid-area: box-6">
-
-                <div class="analyticsHeader">
-                    <h3>Studied Time This Week</h3>
-                    <span>This week ▾</span>
-                </div>
-
-                <div class="chartArea">
-                    <p class="chartTitle">Study hours</p>
-
-                    <!-- Chart.js will go here later -->
-                    <div class="chartPlaceholder">
-                    <span>Chart</span>
-                    </div>
-                </div>
-
-                <div class="analyticsStats">
-
-                <div class="stat">
-                <strong>18h 32m</strong>
-                <span>Studied this week</span>
-                </div>
-
-                <div class="stat">
-                <strong>4h 20m</strong>
-                <span>Studied today</span>
-                </div>
-
-                <div class="stat">
-                <strong>82%</strong>
-                <span>Tasks completed today</span>
-                </div>
-
-                </div>
-
+      <div class="date" style="grid-area: box-4">
+        <div class="deadlineHeading">
+          <h4 id="deadLineHead">Deadlines</h4>
+          <p id="deadlineCount">4 deadlines within a week</p>
         </div>
 
-            
-            <div class="note" style="grid-area: box-7">
-                <div class="stickyNote">
-                <div class="noteTape"></div>
-                <h4 class="noteTitle">Quick Notes 📌</h4>
-        
-                <textarea class="noteArea" placeholder="Write a quick note here..."></textarea>
-                </div>
-            </div>
+        <ul class="listDeadLine">
+          <li class="deadLineItems">
+            <span class="deadlineName">DS Lab report</span>
+            <span class="badge urgent">2 days</span>
+          </li>
 
+          <li class="deadLineItems">
+            <span class="deadlineName">ME Lab report</span>
+            <span class="badge">3 days</span>
+          </li>
 
-            <div class="tasks" style="grid-area: box-8">
+          <li class="deadLineItems">
+            <span class="deadlineName">DLD Lab report</span>
+            <span class="badge">3 days</span>
+          </li>
 
-                <div class="taskHeading">
-                <h3 id="taskHeader">Today's Tasks</h3>
-                <p id="taskCount">6 tasks remaining</p>
-                </div>
+          <li class="deadLineItems">
+            <span class="deadlineName">Math assignment</span>
+            <span class="badge">6 days</span>
+          </li>
+        </ul>
 
-                <ul class="taskList">
+        <div class="deadlineActions">
+          <button class="deadlineViewBtn">View more</button>
+        </div>
+      </div>
 
-                <li class="todo">
-                <input type="checkbox" class="taskCheckbox">
+      <div class="schedule" style="grid-area: box-5">
+        <div class="scheduleHeader">
+          <span class="routineLabel">Today's Routine:</span>
+          <div class="dateTimeWrapper">
+            <span class="mainDate">13th Oct, 2026</span>
+            <span class="subTime">10:30 PM</span>
+          </div>
+        </div>
 
-                <span class="taskName">Study DS</span>
+        <table class="tableSchedule">
+          <thead>
+            <tr class="row">
+              <th class="data">Day</th>
+              <th class="data">9.00-9.45</th>
+              <th class="data">9.45-10.30</th>
+              <th class="data">10.45-11.30</th>
+              <th class="data">11.30-12.15</th>
+              <th class="data">12.15-1.00</th>
+              <th class="data">2.00-4.00</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row">
+              <td class="data">Sun</td>
+              <td class="data">CSE-142</td>
+              <td class="data">CSE-231</td>
+              <td class="data">CSE-141</td>
+              <td class="data">MATH-241</td>
+              <td class="data">HUM-142</td>
+              <td class="data">CSE-141</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-                <span class="priority high">High</span>
-                </li>
+      <div class="analytics" style="grid-area: box-6">
+        <div class="analyticsHeader">
+          <h3>Studied Time This Week</h3>
+          <span>This week ▾</span>
+        </div>
 
-                <li class="todo">
-                <input type="checkbox" class="taskCheckbox">
+        <div class="chartArea">
+          <p class="chartTitle">Study hours</p>
 
-                <span class="taskName">Complete lecture slide</span>
+          <!-- Chart.js will go here later -->
+          <div class="chartPlaceholder">
+            <span>Chart</span>
+          </div>
+        </div>
 
-                <span class="priority medium">Medium</span>
-                </li>
+        <div class="analyticsStats">
+          <div class="stat">
+            <strong>18h 32m</strong>
+            <span>Studied this week</span>
+          </div>
 
-                <li class="todo">
-                <input type="checkbox" class="taskCheckbox">
+          <div class="stat">
+            <strong>4h 20m</strong>
+            <span>Studied today</span>
+          </div>
 
-                <span class="taskName">Complete note</span>
+          <div class="stat">
+            <strong>82%</strong>
+            <span>Tasks completed today</span>
+          </div>
+        </div>
+      </div>
 
-                <span class="priority low">Low</span>
-                </li>
+      <div class="note" style="grid-area: box-7">
+        <div class="stickyNote">
+          <div class="noteTape"></div>
+          <h4 class="noteTitle">Quick Notes 📌</h4>
 
-                <li class="todo">
-                <input type="checkbox" class="taskCheckbox">
+          <textarea
+            class="noteArea"
+            placeholder="Write a quick note here..."
+          ></textarea>
+        </div>
+      </div>
 
-                <span class="taskName">Do CP</span>
+      <div class="tasks" style="grid-area: box-8">
+        <div class="taskHeading">
+          <h3 id="taskHeader">Today's Tasks</h3>
+          <p id="taskCount">6 tasks remaining</p>
+        </div>
 
-                <span class="priority high">High</span>
-                </li>
+        <ul class="taskList">
+          <li class="todo">
+            <input type="checkbox" class="taskCheckbox" />
 
-                
+            <span class="taskName">Study DS</span>
 
-                </ul>
+            <span class="priority high">High</span>
+          </li>
 
-                <div class="taskActions">
-                <button class="viewMoreBtn">View more</button>
-                <button class="addTaskBtn">+ Add task</button>
-                </div>
+          <li class="todo">
+            <input type="checkbox" class="taskCheckbox" />
 
-            </div>
+            <span class="taskName">Complete lecture slide</span>
 
-            
-        
-    </div>    
-</body>
+            <span class="priority medium">Medium</span>
+          </li>
+
+          <li class="todo">
+            <input type="checkbox" class="taskCheckbox" />
+
+            <span class="taskName">Complete note</span>
+
+            <span class="priority low">Low</span>
+          </li>
+
+          <li class="todo">
+            <input type="checkbox" class="taskCheckbox" />
+
+            <span class="taskName">Do CP</span>
+
+            <span class="priority high">High</span>
+          </li>
+        </ul>
+
+        <div class="taskActions">
+          <button class="viewMoreBtn">View more</button>
+          <button class="addTaskBtn">+ Add task</button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
