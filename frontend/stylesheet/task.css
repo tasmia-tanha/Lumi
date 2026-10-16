@@ -1,0 +1,273 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Nunito',sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    margin: 0px;
+    background-color: #FEFAF3;
+}
+
+.navbar{
+    background-color:#B8CFB3 ;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 0;
+}
+
+
+.navbar{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+#nameLogo{
+    height: 10vh;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+}
+
+
+
+.navBtn{
+    width: 180px;
+    height: 60px;
+    background-color: #B8CFB3;
+    border:1px solid #FEFAF3;
+    
+    
+}
+.navBtn:hover{
+    background-color: #8caf85;
+    cursor: pointer;
+}
+.navLinks{
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color:#3A4F41 ;
+}
+
+.logout{
+    width: 85px;
+    height: 35px;
+    background-color: #F6E2E9;
+    color:#8caf85 ;
+    font-weight: bold;
+    border: 0px solid #F6E2E9 ;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.logout:hover{
+    background-color: #eac3d1;
+}
+
+.main {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 180px 1fr 29vw;
+    grid-template-areas: "box-1 box-2 box-3";
+    gap: 20px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+
+
+.taskPage {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px 5px;
+    min-width: 0;
+    overflow-y: auto;
+}
+
+.taskTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.taskTop h1 {
+    margin: 0;
+    color: #84A282;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+
+.progressSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.progressCircle {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: conic-gradient(#84A282 65%, #B8CFB3 65%);
+    position: relative;
+}
+
+.progressCircle::before {
+    content: "";
+    position: absolute;
+    width: 49px;
+    height: 49px;
+    background-color: #FEFAF3;
+    border-radius: 50%;
+}
+
+.progressCircle span {
+    position: relative;
+    color: #84A282;
+    font-size: 0.85rem;
+    font-weight: 900;
+}
+
+.progressSection p {
+    margin: 4px 0 0;
+    color: #84A282;
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+
+.addTask {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #84A282;
+    border-radius: 8px;
+    background-color: #B8CFB3;
+    color: #222B22;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+}
+
+.addTask:hover {
+    background-color: #84A282;
+    color: #FEFAF3;
+}
+
+.taskList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 4px;
+    padding-bottom: 10px;
+}
+
+.taskItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: #FEFAF3;
+    border: 2px solid #B8CFB3;
+    border-radius: 10px;
+    transition: 0.15s ease;
+    flex-shrink: 0;
+}
+
+.taskItem:hover {
+    transform: translateY(-2px);
+    background-color: #F6E2E9;
+    box-shadow: 2px 2px 0 #84A282;
+}
+
+.taskItem input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #84A282;
+    cursor: pointer;
+}
+
+.taskInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.taskInfo h3 {
+    margin: 0;
+    color: #222B22;
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.taskInfo p {
+    margin: 3px 0 0;
+    color: #777;
+    font-size: 0.68rem;
+}
+
+
+.priority {
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 800;
+}
+
+.priority.high {
+    background-color: #F6E2E9;
+    color: #8B4D63;
+}
+
+.priority.medium {
+    background-color: #B8CFB3;
+    color: #384D38;
+}
+
+.priority.low {
+    background-color: #FEFAF3;
+    color: #84A282;
+    border: 1px solid #B8CFB3;
+}
+
+
+.taskItem.completed .taskInfo h3 {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.taskItem.completed {
+    opacity: 0.7;
+}
+
+
+.capyArea {
+    grid-area: capy;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 5px solid #B8CFB3;
+    border-radius: 8px;
+    
+}
+
+.capyImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}

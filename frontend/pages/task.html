@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks</title>
+    <link rel="stylesheet" href="../stylesheet/task.css" />
+  </head>
+  <body>
+    <div class="main">
+      
+      <div class="navbar" style="grid-area: box-1">
+        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" />
+        <ul id="list" style="list-style-type: none; padding: 0px">
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dashboard.html">Dashboard</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="task.html">Tasks</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="calendar.html">Calendar</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="note.html">Note</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="lessons.html">Lessons</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="assignments.html">Assignments</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="analytics.html">Analytics</a>
+            </button>
+          </li>
+        </ul>
+
+        <button class="logout">Log Out</button>
+      </div>
+
+      <main class="taskPage" style="grid-area: box-2">
+        <div class="taskTop">
+          <h1>Tasks</h1>
+
+          <div class="progressSection">
+            <div class="progressCircle">
+              <span>65%</span>
+            </div>
+            <p>Completed</p>
+          </div>
+        </div>
+
+        <button class="addTask">+ Add Task</button>
+
+        <div class="taskList">
+          <div class="taskItem">
+            <input type="checkbox" />
+            <div class="taskInfo">
+              <h3>Complete DS assignment</h3>
+              <p>Today · 5:00 PM</p>
+            </div>
+            <span class="priority high">High</span>
+          </div>
+
+          <div class="taskItem">
+            <input type="checkbox" />
+            <div class="taskInfo">
+              <h3>Study Digital Logic</h3>
+              <p>Today · 8:00 PM</p>
+            </div>
+            <span class="priority medium">Medium</span>
+          </div>
+
+          <div class="taskItem completed">
+            <input type="checkbox" checked />
+            <div class="taskInfo">
+              <h3>Practice Codeforces</h3>
+              <p>Completed</p>
+            </div>
+            <span class="priority low">Low</span>
+          </div>
+
+          <div class="taskItem">
+            <input type="checkbox" />
+            <div class="taskInfo">
+              <h3>Finish lab report</h3>
+              <p>Tomorrow · 10:00 AM</p>
+            </div>
+            <span class="priority high">High</span>
+          </div>
+
+          <div class="taskItem">
+            <input type="checkbox" />
+            <div class="taskInfo">
+              <h3>Review lecture notes</h3>
+              <p>Tomorrow</p>
+            </div>
+            <span class="priority low">Low</span>
+          </div>
+          <div class="taskItem">
+            <input type="checkbox" />
+            <div class="taskInfo">
+              <h3>Complete DS assignment</h3>
+              <p>Today · 5:00 PM</p>
+            </div>
+            <span class="priority high">High</span>
+          </div>
+          <div class="taskItem">
+            <input type="checkbox" />
+            <div class="taskInfo">
+              <h3>Complete DS assignment</h3>
+              <p>Today · 5:00 PM</p>
+            </div>
+            <span class="priority high">High</span>
+          </div>
+          <div class="taskItem">
+            <input type="checkbox" />
+            <div class="taskInfo">
+              <h3>Complete DS assignment</h3>
+              <p>Today · 5:00 PM</p>
+            </div>
+            <span class="priority high">High</span>
+          </div>
+          <div class="taskItem">
+            <input type="checkbox" />
+            <div class="taskInfo">
+              <h3>Complete DS assignment</h3>
+              <p>Today · 5:00 PM</p>
+            </div>
+            <span class="priority high">High</span>
+          </div>
+        </div>
+      </main>
+
+      <div class="capyArea" style="grid-area: box-3">
+        <img
+          class="capyImage"
+          src="../images/Cozy Capybara’s All Done Bedtime.png"
+          alt="Sleeping capybara after completing tasks"
+        />
+      </div>
+    </div>
+  </body>
+</html>
