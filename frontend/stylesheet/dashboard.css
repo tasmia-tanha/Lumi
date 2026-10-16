@@ -147,75 +147,162 @@ body{
     
 }
 /*date*/
-
-
 .date {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+
     background-color: #B8CFB3;
     border-radius: 12px;
-    padding: 1rem;
+
+    padding: 0.8rem;
     box-sizing: border-box;
 }
 
-#deadLineHead {
+
+.deadlineHeading {
     text-align: center;
-    font-weight: 800;
-    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+#deadLineHead {
+    margin: 0;
+
     color: #222B22;
-    margin: 0 0 1rem 0;
+
+    font-size: 1rem;
+    font-weight: 800;
+
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
+#deadlineCount {
+    margin: 2px 0 0;
+
+    color: #222B22;
+
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+
+
 .listDeadLine {
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 0.45rem;
+
+    list-style: none;
+
     margin: 0;
     padding: 0;
-    gap: 0.75rem; 
 }
+
 
 
 .deadLineItems {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    
-    background-color: #FEFAF3;          
-    border: 2px solid #222B22;         
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    
-    cursor: pointer;
-    transition: transform 0.15s ease;
-    
-    
-    font-weight: 700;
-    font-size: 0.88rem;
-    color: #222B22;
-}
+    flex-direction: column;
+    align-items: flex-start;
 
+    gap: 2px;
+
+    min-width: 0;
+
+    padding: 0.2rem;
+
+    background-color: #FEFAF3;
+
+    border: 2px solid #222B22;
+    border-radius: 8px;
+
+    color: #222B22;
+
+    font-size: 0.7rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+}
 
 .deadLineItems:hover {
     transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px #222B22;
-    background-color: #F6E2E9;         
+
+    background-color: #F6E2E9;
+
+    box-shadow: 1px 1px 0 #222B22;
 }
+
+
+
+.deadlineName {
+    width: 100%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
 
 
 .badge {
-    background-color: #F6E2E9;          
-    border: 1.5px solid #222B22;
+    padding: 0.15rem 0.4rem;
+
+    background-color: #B8CFB3;
+
+    border: 1px solid #84A282;
     border-radius: 20px;
-    padding: 0.25rem 0.6rem;
-    font-size: 0.78rem;
+
+    color: #222B22;
+
+    font-size: 0.6rem;
     font-weight: 800;
+
     white-space: nowrap;
 }
+
+
+
+.badge.urgent {
+    background-color: #F6E2E9;
+
+    border-color: #222B22;
+}
+
+
+
+.deadlineActions {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 0.35rem;
+}
+
+.deadlineViewBtn {
+    padding: 3px 10px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #222B22;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.deadlineViewBtn:hover {
+    text-decoration: underline;
+}
+
+
 
 /*schedule*/
 
@@ -288,49 +375,155 @@ th.data {
 
 /*task*/
 .tasks {
-    display: flex;      
+    display: flex;
     flex-direction: column;
+}
+
+.taskHeading {
+    background-color: #B8CFB3;
+    border: 3px solid #FEFAF3;
+    border-radius: 6px;
+    margin-top: 2px;
+    padding: 6px 10px;
+    text-align: center;
 }
 
 #taskHeader {
     letter-spacing: 1px;
     font-weight: 900;
-    text-align: center;
-    background-color: #B8CFB3;
-    border: 3px solid #FEFAF3;
-    border-radius: 6px;
-    margin-top: 2px;
-    height: 50px;
-    padding-top: 6px;
-    box-sizing: border-box;
+    margin: 0;
+}
+
+#taskCount {
+    margin: 2px 0 0;
+    color: #222B22;
+    font-size: 0.8rem;
+    font-weight: 700;
 }
 
 .taskList {
     list-style-type: none;
-    padding-left: 0px;
-    margin-left: 0px;
-    padding-bottom: 3px;
-    overflow-y: auto;
-    max-height: 180px;
+    padding: 0;
+    margin: 8px 0 0;
 }
+
 
 .todo {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 8px;
+
+    padding: 7px 8px;
+
     background-color: #FEFAF3;
     border-radius: 6px;
-    border: 2px solid black;
-    margin-bottom: 6px;
+    border: 2px solid #B8CFB3;
+
+    margin-bottom: 4px;
+
     font-weight: 600;
     font-size: 0.85rem;
+    transition: 0.15 ease-in;
 }
+
+.todo:hover{
+    transform: translate(2px, 2px);
+    border: 2 px solid black;
+    background-color: #eac3d1;
+}
+
+.taskName {
+    flex: 1;
+}
+
+/* Priority badge */
+.priority {
+    padding: 3px 7px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 800;
+}
+
+
+.priority.high {
+    background-color: #F6E2E9;
+    color: #8B4D63;
+}
+
+
+.priority.medium {
+    background-color: #B8CFB3;
+    color: #384D38;
+}
+
+.priority.low {
+    background-color: #FEFAF3;
+    color: #84A282;
+    border: 1px solid #B8CFB3;
+}
+
+
 
 .taskCheckbox {
     cursor: pointer;
     width: 16px;
     height: 16px;
+    accent-color: #84A282;
+}
+
+
+
+.taskActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    gap: 8px;
+}
+
+
+.viewMoreBtn {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    color: #84A282;
+
+    font-size: 0.75rem;
+    font-weight: 800;
+
+    cursor: pointer;
+    padding: 6px;
+}
+
+.viewMoreBtn:hover {
+    text-decoration: underline;
+}
+
+
+
+.addTaskBtn {
+    border: 2px solid #84A282;
+    background-color: #B8CFB3;
+    color: #222B22;
+
+    border-radius: 6px;
+    padding: 6px 10px;
+
+    font-size: 0.75rem;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.addTaskBtn:hover {
+    background-color: #84A282;
+    color: #FEFAF3;
+}
+.taskCheckbox {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: #84A282;
 }
 
 /*note*/
@@ -404,6 +597,94 @@ th.data {
     color: #A6A090;
     font-style: italic;
 }
+
+/*analytics*/
+.analytics {
+    display: flex;
+    flex-direction: column;
+    background-color: #FEFAF3;
+    border: 3px solid #B8CFB3;
+    border-radius: 10px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.analyticsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.analyticsHeader h3 {
+    margin: 0;
+    color: #84A282;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.analyticsHeader span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #84A282;
+    background-color: #F6E2E9;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.chartArea {
+    flex: 1;
+}
+
+.chartTitle {
+    margin: 2px 0 5px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #84A282;
+}
+
+.chartPlaceholder {
+    height: 130px;
+    border: 2px dashed #B8CFB3;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F6E2E9;
+    color: #84A282;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.analyticsStats {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 2px solid #B8CFB3;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.stat strong {
+    color: #84A282;
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.stat span {
+    color: #555;
+    font-size: 0.68rem;
+    font-weight: 600;
+}
+
 @media (max-width: 1024px) {
     .main {
         grid-template-columns: 180px 1fr 1fr;

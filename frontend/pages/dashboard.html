@@ -43,25 +43,40 @@
 
 
             <div class="date" style="grid-area: box-4">
-                <h4 id="deadLineHead">DeadLine</h4>
+
+                <div class="deadlineHeading">
+                    <h4 id="deadLineHead">Deadlines</h4>
+                    <p id="deadlineCount">4 deadlines within a week</p>
+                </div>
+
                 <ul class="listDeadLine">
+
                     <li class="deadLineItems">
-                        <span>DS Lab report</span>
-                        <span class="badge">🚨 2 days remaining!</span>
+                    <span class="deadlineName">DS Lab report</span>
+                    <span class="badge urgent">2 days</span>
                     </li>
+
                     <li class="deadLineItems">
-                        <span>ME Lab report</span>
-                        <span class="badge">🚨 3 days remaining!</span>
+                    <span class="deadlineName">ME Lab report</span>
+                    <span class="badge">3 days</span>
                     </li>
+
                     <li class="deadLineItems">
-                        <span>DLD Lab report</span>
-                        <span class="badge">🚨 3 days remaining!</span>
+                    <span class="deadlineName">DLD Lab report</span>
+                    <span class="badge">3 days</span>
                     </li>
+
                     <li class="deadLineItems">
-                        <span>DS Lab report</span>
-                        <span class="badge">🚨 2 days remaining!</span>
+                    <span class="deadlineName">Math assignment</span>
+                    <span class="badge">6 days</span>
                     </li>
+
                 </ul>
+
+                <div class="deadlineActions">
+                    <button class="deadlineViewBtn">View more</button>
+                </div>
+
             </div>
 
             <div class="schedule" style="grid-area: box-5">
@@ -99,9 +114,43 @@
             </tbody>
             </table>
             </div>
+            
             <div class="analytics" style="grid-area: box-6">
-                <p>analytics</p>
-            </div>
+
+                <div class="analyticsHeader">
+                    <h3>Studied Time This Week</h3>
+                    <span>This week ▾</span>
+                </div>
+
+                <div class="chartArea">
+                    <p class="chartTitle">Study hours</p>
+
+                    <!-- Chart.js will go here later -->
+                    <div class="chartPlaceholder">
+                    <span>Chart</span>
+                    </div>
+                </div>
+
+                <div class="analyticsStats">
+
+                <div class="stat">
+                <strong>18h 32m</strong>
+                <span>Studied this week</span>
+                </div>
+
+                <div class="stat">
+                <strong>4h 20m</strong>
+                <span>Studied today</span>
+                </div>
+
+                <div class="stat">
+                <strong>82%</strong>
+                <span>Tasks completed today</span>
+                </div>
+
+                </div>
+
+        </div>
 
             
             <div class="note" style="grid-area: box-7">
@@ -115,50 +164,56 @@
 
 
             <div class="tasks" style="grid-area: box-8">
-                <h3 id="taskHeader">Today's Task</h3>
+
+                <div class="taskHeading">
+                <h3 id="taskHeader">Today's Tasks</h3>
+                <p id="taskCount">6 tasks remaining</p>
+                </div>
+
                 <ul class="taskList">
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Study DS</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Complete lecture slide</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Complete note</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Do CP</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Study Statistics</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Study DS</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Complete lecture slide</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Complete note</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Do CP</span>
-                    </li>
-                    <li class="todo">
-                        <input type="checkbox" class="taskCheckbox">
-                        <span>Study Statistics</span>
-                    </li>
+
+                <li class="todo">
+                <input type="checkbox" class="taskCheckbox">
+
+                <span class="taskName">Study DS</span>
+
+                <span class="priority high">High</span>
+                </li>
+
+                <li class="todo">
+                <input type="checkbox" class="taskCheckbox">
+
+                <span class="taskName">Complete lecture slide</span>
+
+                <span class="priority medium">Medium</span>
+                </li>
+
+                <li class="todo">
+                <input type="checkbox" class="taskCheckbox">
+
+                <span class="taskName">Complete note</span>
+
+                <span class="priority low">Low</span>
+                </li>
+
+                <li class="todo">
+                <input type="checkbox" class="taskCheckbox">
+
+                <span class="taskName">Do CP</span>
+
+                <span class="priority high">High</span>
+                </li>
+
+                
+
                 </ul>
-</div>
+
+                <div class="taskActions">
+                <button class="viewMoreBtn">View more</button>
+                <button class="addTaskBtn">+ Add task</button>
+                </div>
+
+            </div>
 
             
         
