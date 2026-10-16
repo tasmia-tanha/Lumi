@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons & Materials</title>
+    <link rel="stylesheet" href="../stylesheet/lessons.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+</head>
+<body>
+    <div class="main">
+        <!-- EXISTING NAVBAR (Unchanged) -->
+        <div class="navbar" style="grid-area: box-1">
+        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" alt="Lumi Sprout Logo" />
+        <ul id="list" style="list-style-type: none; padding: 0px">
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dashboard.html">Dashboard</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="task.html">Tasks</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="calendar.html">Calendar</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="notes.html">Note</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="lessons.html">Lessons</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dailyHabits.html">Daily Habits</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="analytics.html">Analytics</a>
+            </button>
+          </li>
+        </ul>
+
+        <button class="logout">Log Out</button>
+      </div>
+
+      <!-- MIDDLE: LESSONS WORKSPACE -->
+      <main class="lessonsWorkspace">
+        <!-- Top Header & Subject Selector -->
+        <div class="lessonsTopBar">
+          <div class="headerTitleArea">
+            <h1>Lessons</h1>
+            <select class="subjectDropdown">
+              <option value="ds">Data Structures (CS-101)</option>
+              <option value="logic">Digital Logic & Design</option>
+              <option value="algorithms">Algorithms</option>
+            </select>
+          </div>
+          <button class="addLessonBtn">+ Add Lesson</button>
+        </div>
+
+        <!-- Lessons List Container -->
+        <div class="lessonsList">
+          <!-- Lesson Card 1 -->
+          <div class="lessonCard">
+            <div class="lessonHeader">
+              <div class="lessonMeta">
+                <span class="lessonBadge completed">Completed</span>
+                <h3>Lesson 3.1: Binary Search Trees Overview</h3>
+              </div>
+              <!-- Shortcut to Notes under this subject -->
+              <a href="note.html?tag=CS101" class="notesShortcutBtn">📝 Subject Notes</a>
+            </div>
+
+            <!-- Attached Resources Section -->
+            <div class="resourcesSection">
+              <span class="resourceCategoryLabel">Attached Materials:</span>
+              <div class="resourceChips">
+                <!-- YouTube Link -->
+                <a href="https://youtube.com" target="_blank" class="resourceChip ytChip">
+                  ▶️ YouTube: BST Intro (18m)
+                </a>
+                <!-- File Attachment -->
+                <a href="#" class="resourceChip fileChip">
+                  📄 BST_Lecture_Slides.pdf
+                </a>
+                <!-- Text File / Note snippet -->
+                <a href="#" class="resourceChip textChip">
+                  📝 Summary_Notes.txt
+                </a>
+              </div>
+            </div>
+            
+            <div class="lessonCardFooter">
+              <button class="addResourceBtn">+ Add Link / File</button>
+              <span class="lessonDuration">45 mins</span>
+            </div>
+          </div>
+
+          <!-- Lesson Card 2 -->
+          <div class="lessonCard">
+            <div class="lessonHeader">
+              <div class="lessonMeta">
+                <span class="lessonBadge inProgress">In Progress</span>
+                <h3>Lesson 3.2: Self-Balancing Trees (AVL Trees)</h3>
+              </div>
+              <a href="note.html?tag=CS101" class="notesShortcutBtn">📝 Subject Notes</a>
+            </div>
+
+            <div class="resourcesSection">
+              <span class="resourceCategoryLabel">Attached Materials:</span>
+              <div class="resourceChips">
+                <a href="https://youtube.com" target="_blank" class="resourceChip ytChip">
+                  ▶️ YouTube: AVL Rotations Deep Dive
+                </a>
+                <a href="#" class="resourceChip fileChip">
+                  📄 AVL_Tree_Code_Examples.zip
+                </a>
+              </div>
+            </div>
+
+            <div class="lessonCardFooter">
+              <button class="addResourceBtn">+ Add Link / File</button>
+              <span class="lessonDuration">60 mins</span>
+            </div>
+          </div>
+
+          <!-- Lesson Card 3 -->
+          <div class="lessonCard">
+            <div class="lessonHeader">
+              <div class="lessonMeta">
+                <span class="lessonBadge locked">Locked</span>
+                <h3>Lesson 3.3: Red-Black Trees & Implementations</h3>
+              </div>
+              <a href="note.html?tag=CS101" class="notesShortcutBtn">📝 Subject Notes</a>
+            </div>
+
+            <div class="resourcesSection">
+              <span class="resourceCategoryLabel">Attached Materials:</span>
+              <div class="resourceChips emptyResources">
+                <span>No materials added yet</span>
+              </div>
+            </div>
+
+            <div class="lessonCardFooter">
+              <button class="addResourceBtn">+ Add Link / File</button>
+              <span class="lessonDuration">50 mins</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside class="rightSidebar">
+        <!-- Progress Card -->
+        <div class="sidebarCard progressCard">
+          <h3>Course Progress</h3>
+          <div class="progressCircle">
+            <span class="progressPercent">45%</span>
+          </div>
+          <p class="progressLabel">Data Structures Semester Goal</p>
+        </div>
+
+        <!-- Quick Course Resources Widget -->
+        <div class="sidebarCard resourcesCard">
+          <h3>📁 Course Resources</h3>
+          <ul class="resourceQuickList">
+            <li><a href="#">📘 Official Textbook PDF</a></li>
+            <li><a href="#">💻 Lab GitHub Repository</a></li>
+            <li><a href="#">📊 Syllabus & Grading Rubric</a></li>
+            <li><a href="#">💬 Discord Study Group</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+</body>
+</html>

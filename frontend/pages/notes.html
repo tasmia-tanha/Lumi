@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="../stylesheet/notes.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+</head>
+<body>
+    <div class="main">
+        
+        <div class="navbar" style="grid-area: box-1">
+        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" alt="Lumi Sprout Logo" />
+        <ul id="list" style="list-style-type: none; padding: 0px">
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dashboard.html">Dashboard</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="task.html">Tasks</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="calendar.html">Calendar</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="note.html">Note</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="lessons.html">Lessons</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dailyHabits.html">Daily Habits</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="analytics.html">Analytics</a>
+            </button>
+          </li>
+        </ul>
+
+        <button class="logout">Log Out</button>
+      </div>
+
+      
+      <main class="notesWorkspace">
+        
+        <div class="notesTopBar">
+          <input type="text" class="searchNotes" placeholder="Search Notes..." />
+          <button class="newNoteBtn">+ New Note</button>
+        </div>
+
+        
+        <div class="filterTabs">
+          <button class="filterBtn active">All</button>
+          <button class="filterBtn">Lectures</button>
+          <button class="filterBtn">Personal</button>
+          <button class="filterBtn">Ideas</button>
+        </div>
+
+        
+        <div class="notesList">
+          <div class="noteCard">
+            <div class="noteHeader">
+              <h3>📌 Data Structures - Trees</h3>
+              <span class="noteTag">#CS101</span>
+            </div>
+            <p class="notePreview">Binary tree traversals (Pre-order, In-order, Post-order), BST insertion, and deletion algorithms...</p>
+            <span class="noteDate">Oct 15</span>
+          </div>
+
+          <div class="noteCard">
+            <div class="noteHeader">
+              <h3>Digital Logic - K-Maps</h3>
+              <span class="noteTag">#Hardware</span>
+            </div>
+            <p class="notePreview">Simplified Boolean expressions using 4-variable Karnaugh maps, grouping prime implicants...</p>
+            <span class="noteDate">Oct 12</span>
+          </div>
+
+          <div class="noteCard">
+            <div class="noteHeader">
+              <h3>Codeforces Strategy</h3>
+              <span class="noteTag">#Coding</span>
+            </div>
+            <p class="notePreview">Practice two Div-3 problems daily, focus on binary search and two pointers before contests...</p>
+            <span class="noteDate">Oct 10</span>
+          </div>
+        </div>
+      </main>
+
+      
+      <aside class="rightSidebar">
+        
+        <div class="sidebarCard pinnedCard">
+          <h3>📌 Pinned Notes</h3>
+          <ul class="pinnedList">
+            <li>• CS101 Syllabus & Exam Rules</li>
+            <li>• Office Hours Zoom Link</li>
+            <li>• Project Group Members</li>
+          </ul>
+        </div>
+
+        
+        <div class="sidebarCard scratchpadCard">
+          <h3>📝 Quick Scratchpad</h3>
+          <textarea class="scratchpadArea" placeholder="Type temporary notes here..."></textarea>
+        </div>
+
+       
+        <div class="sidebarCard tagsCard">
+          <h3>🏷️ Tags</h3>
+          <div class="tagCloud">
+            <span class="tagBadge">#ExamPrep</span>
+            <span class="tagBadge">#CS101</span>
+            <span class="tagBadge">#Coding</span>
+            <span class="tagBadge">#Project</span>
+            <span class="tagBadge">#Hardware</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+</body>
+</html>

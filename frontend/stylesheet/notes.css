@@ -1,0 +1,307 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Nunito',sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    margin: 0px;
+    background-color: #FEFAF3;
+}
+
+
+.navbar{
+    background-color:#B8CFB3 ;
+    padding: 1rem;
+    border-radius: 10px;
+
+}
+
+.navbar{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 0; 
+}
+
+#nameLogo{
+    height: 10vh;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+}
+
+
+
+.navBtn{
+    width: 180px;
+    height: 60px;
+    background-color: #B8CFB3;
+    border:1px solid #FEFAF3;
+    
+    
+}
+.navBtn:hover{
+    background-color: #8caf85;
+    cursor: pointer;
+}
+.navLinks{
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color:#3A4F41 ;
+}
+
+.logout{
+    width: 85px;
+    height: 35px;
+    background-color: #F6E2E9;
+    color:#8caf85 ;
+    font-weight: bold;
+    border: 0px solid #F6E2E9 ;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.logout:hover{
+    background-color: #eac3d1;
+}
+
+.main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 180px 1fr 300px;
+    grid-template-areas: "box-1 workspace sidebar";
+    gap: 20px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+.notesWorkspace {
+    grid-area: workspace;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 5px 0;
+    min-width: 0;
+}
+
+.notesTopBar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.searchNotes {
+    flex-grow: 1;
+    padding: 10px 14px;
+    border: 2px solid #B8CFB3;
+    border-radius: 10px;
+    background-color: #FEFAF3;
+    color: #222B22;
+    font-weight: 700;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.searchNotes:focus {
+    border-color: #84A282;
+}
+
+.newNoteBtn {
+    padding: 10px 16px;
+    background-color: #B8CFB3;
+    border: 2px solid #84A282;
+    border-radius: 10px;
+    color: #222B22;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+    white-space: nowrap;
+}
+
+.newNoteBtn:hover {
+    background-color: #84A282;
+    color: #FEFAF3;
+}
+
+
+.filterTabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.filterBtn {
+    padding: 6px 14px;
+    background-color: #FEFAF3;
+    border: 1px solid #B8CFB3;
+    border-radius: 20px;
+    color: #3A4F41;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.filterBtn:hover, .filterBtn.active {
+    background-color: #84A282;
+    color: #FEFAF3;
+    border-color: #84A282;
+}
+
+
+.notesList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 4px;
+}
+
+.noteCard {
+    background-color: #FEFAF3;
+    border: 2px solid #B8CFB3;
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.noteCard:hover {
+    transform: translateY(-2px);
+    background-color: #F6E2E9;
+    box-shadow: 2px 2px 0 #84A282;
+}
+
+.noteHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.noteHeader h3 {
+    margin: 0;
+    color: #222B22;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.noteTag {
+    font-size: 0.65rem;
+    font-weight: 800;
+    background-color: #B8CFB3;
+    color: #3A4F41;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.notePreview {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 0.8rem;
+    line-height: 1.3;
+}
+
+.noteDate {
+    font-size: 0.7rem;
+    color: #84A282;
+    font-weight: 700;
+}
+
+
+.rightSidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    padding: 5px 0;
+}
+
+.sidebarCard {
+    background-color: #FEFAF3;
+    border: 2px solid #B8CFB3;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarCard h3 {
+    margin: 0 0 10px 0;
+    color: #84A282;
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+
+.pinnedCard {
+    background-color: #F6E2E9;
+    border-color: #e5bdca;
+}
+
+.pinnedCard h3 {
+    color: #8B4D63;
+}
+
+.pinnedList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #3A4F41;
+}
+
+
+.scratchpadCard {
+    flex-grow: 1;
+}
+
+.scratchpadArea {
+    width: 100%;
+    flex-grow: 1;
+    background-color: #f7f9f5;
+    border: 1px solid #B8CFB3;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.8rem;
+    color: #222B22;
+    resize: none;
+    outline: none;
+}
+
+.scratchpadArea:focus {
+    border-color: #84A282;
+}
+
+
+.tagCloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tagBadge {
+    background-color: #e5bdca;
+    color: #3A4F41;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.tagBadge:hover {
+    background-color: #84A282;
+    color: #FEFAF3;
+}

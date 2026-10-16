@@ -1,0 +1,413 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Nunito',sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    margin: 0px;
+    background-color: #FEFAF3;
+}
+
+
+.navbar{
+    background-color:#B8CFB3 ;
+    padding: 1rem;
+    border-radius: 10px;
+
+}
+
+.navbar{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 0; 
+}
+
+#nameLogo{
+    height: 10vh;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+}
+
+.navBtn{
+    width: 180px;
+    height: 60px;
+    background-color: #B8CFB3;
+    border:1px solid #FEFAF3;
+    
+    
+}
+.navBtn:hover{
+    background-color: #8caf85;
+    cursor: pointer;
+}
+.navLinks{
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color:#3A4F41 ;
+}
+
+.logout{
+    width: 85px;
+    height: 35px;
+    background-color: #F6E2E9;
+    color:#8caf85 ;
+    font-weight: bold;
+    border: 0px solid #F6E2E9 ;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.logout:hover{
+    background-color: #eac3d1;
+}
+
+
+.main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 180px 1fr 300px;
+    grid-template-areas: "box-1 workspace sidebar";
+    gap: 20px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+
+.lessonsWorkspace {
+    grid-area: workspace;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 5px 0;
+    min-width: 0;
+}
+
+.lessonsTopBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.headerTitleArea {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.lessonsTopBar h1 {
+    margin: 0;
+    color: #84A282;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.subjectDropdown {
+    padding: 8px 12px;
+    background-color: #B8CFB3;
+    border: 2px solid #84A282;
+    border-radius: 8px;
+    color: #222B22;
+    font-weight: 800;
+    font-size: 0.85rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.addLessonBtn {
+    padding: 9px 14px;
+    background-color: #B8CFB3;
+    border: 2px solid #84A282;
+    border-radius: 8px;
+    color: #222B22;
+    font-weight: 800;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.addLessonBtn:hover {
+    background-color: #84A282;
+    color: #FEFAF3;
+}
+
+
+.lessonsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 4px;
+}
+
+.lessonCard {
+    background-color: #FEFAF3;
+    border: 2px solid #B8CFB3;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: 0.15s ease;
+}
+
+.lessonCard:hover {
+    box-shadow: 2px 2px 0 #84A282;
+}
+
+.lessonHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.lessonMeta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.lessonHeader h3 {
+    margin: 0;
+    color: #222B22;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+/* Badges */
+.lessonBadge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.lessonBadge.completed {
+    background-color: #B8CFB3;
+    color: #384D38;
+}
+
+.lessonBadge.inProgress {
+    background-color: #F6E2E9;
+    color: #8B4D63;
+}
+
+.lessonBadge.locked {
+    background-color: #EFE8DC;
+    color: #777;
+}
+
+
+.notesShortcutBtn {
+    background-color: #f1d4df;
+    border: 1px solid #f1d4df;
+    color: #3A4F41;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 5px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+    white-space: nowrap;
+}
+
+.notesShortcutBtn:hover {
+    background-color: #B8CFB3;
+}
+
+
+.resourcesSection {
+    background-color: #f7f9f5;
+    border: 1px dashed #B8CFB3;
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.resourceCategoryLabel {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #777;
+}
+
+.resourceChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.resourceChip {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ytChip {
+    background-color: #F6E2E9;
+    color: #8B4D63;
+    border: 1px solid #e5bdca;
+}
+
+.fileChip {
+    background-color: #E4EFE0;
+    color: #384D38;
+    border: 1px solid #B8CFB3;
+}
+
+.textChip {
+    background-color: #FEFAF3;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.emptyResources {
+    font-size: 0.75rem;
+    color: #999;
+    font-style: italic;
+}
+
+.lessonCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.addResourceBtn {
+    background: none;
+    border: none;
+    color: #84A282;
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    padding: 0;
+}
+
+.addResourceBtn:hover {
+    text-decoration: underline;
+}
+
+.lessonDuration {
+    font-size: 0.75rem;
+    color: #777;
+    font-weight: 700;
+}
+
+
+
+.rightSidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    padding: 5px 0;
+}
+
+.sidebarCard {
+    background-color: #FEFAF3;
+    border: 2px solid #B8CFB3;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarCard h3 {
+    margin: 0 0 10px 0;
+    color: #84A282;
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+
+.progressCard {
+    align-items: center;
+}
+
+.progressCard h3 {
+    align-self: flex-start;
+    margin-bottom: 12px;
+}
+
+.progressCircle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: conic-gradient(#84A282 45%, #B8CFB3 45%);
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.progressCircle::before {
+    content: "";
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    background-color: #FEFAF3;
+    border-radius: 50%;
+}
+
+.progressPercent {
+    position: relative;
+    color: #84A282;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.progressLabel {
+    margin: 0;
+    color: #777;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+.resourcesCard {
+    flex-grow: 1;
+}
+
+.resourceQuickList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.resourceQuickList li a {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #3A4F41;
+    text-decoration: none;
+    display: block;
+    padding: 6px 8px;
+    background-color: #f7f9f5;
+    border: 1px solid #B8CFB3;
+    border-radius: 6px;
+    transition: 0.15s ease;
+}
+
+.resourceQuickList li a:hover {
+    background-color: #B8CFB3;
+    color: #222B22;
+}
