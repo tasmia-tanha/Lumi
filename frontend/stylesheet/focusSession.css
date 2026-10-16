@@ -1,0 +1,198 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Nunito',sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    margin: 0px;
+    background-color: #FEFAF3;
+}
+.main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    grid-template-areas: "box-1 workspace";
+    gap: 20px;
+    padding: 8px;
+    overflow: hidden;
+}
+.navbar{
+    background-color:#B8CFB3 ;
+    padding: 1rem;
+    border-radius: 10px;
+
+}
+
+.navbar{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+#nameLogo{
+    height: 10vh;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+}
+
+
+
+.navBtn{
+    width: 180px;
+    height: 60px;
+    background-color: #B8CFB3;
+    border:1px solid #FEFAF3;
+    
+    
+}
+.navBtn:hover{
+    background-color: #8caf85;
+    cursor: pointer;
+}
+.navLinks{
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color:#3A4F41 ;
+}
+
+.logout{
+    width: 85px;
+    height: 35px;
+    background-color: #F6E2E9;
+    color:#8caf85 ;
+    font-weight: bold;
+    border: 0px solid #F6E2E9 ;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.logout:hover{
+    background-color: #eac3d1;
+}
+
+
+.studyWorkspace {
+    grid-area: workspace;
+    height: calc(100vh - 40px);
+    border-radius: 15px;
+    
+    background: url('../images/Gemini_Generated_Image_d8hx2ld8hx2ld8hx.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(132, 162, 130, 0.15);
+}
+
+
+.timerOverlayCard {
+    background: rgba(254, 250, 243, 0.82);
+    backdrop-filter: blur(8px);
+    border: 2px solid #B8CFB3;
+    border-radius: 20px;
+    padding: 30px 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(58, 79, 65, 0.12);
+    max-width: 550px;
+    width: 100%;
+}
+
+.pageTitle {
+    margin: 0 0 10px 0;
+    color: #84A282;
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.totalHoursBadge {
+    background-color: #FEFAF3;
+    border: 1px solid #B8CFB3;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #3A4F41;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.totalHoursBadge span {
+    color: #84A282;
+    font-weight: 900;
+}
+
+
+.timerDisplay {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: #222B22;
+    letter-spacing: 2px;
+    line-height: 1;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.timerLabels {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 8px;
+    margin-bottom: 30px;
+    color: #555;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+
+.timerControls {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+}
+
+.controlBtn {
+    background-color: #D3E2D0;
+    border: 2px solid #84A282;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #222B22;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.controlBtn:hover {
+    background-color: #84A282;
+    color: #FEFAF3;
+    transform: translateY(-2px);
+}
+
+.controlBtn.stop {
+    background-color: #F6E2E9;
+    border-color: #e5bdca;
+    color: #8B4D63;
+}
+
+.controlBtn.stop:hover {
+    background-color: #8B4D63;
+    color: #FEFAF3;
+}
+
+.btnIcon {
+    font-size: 0.8rem;
+}

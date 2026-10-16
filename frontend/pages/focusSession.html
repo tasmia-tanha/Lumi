@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Log</title>
+    <link rel="stylesheet" href="../stylesheet/focusSession.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+</head>
+<body>
+    <div class="main">
+      
+      <div class="navbar" style="grid-area: box-1">
+        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" alt="Lumi Sprout Logo" />
+        <ul id="list" style="list-style-type: none; padding: 0px">
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dashboard.html">Dashboard</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="task.html">Tasks</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="calendar.html">Calendar</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="notes.html">Note</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="lessons.html">Lessons</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="dailyHabits.html">Daily Habits</a>
+            </button>
+          </li>
+          <li class="items">
+            <button class="navBtn">
+              <a class="navLinks" href="focusSession.html">Focus Session</a>
+            </button>
+          </li>
+        </ul>
+
+        <button class="logout">Log Out</button>
+      </div>
+
+      
+      <main class="studyWorkspace">
+        <div class="timerOverlayCard">
+          <h1 class="pageTitle">Study Log</h1>
+
+          
+          <div class="totalHoursBadge">
+            Total Hours Logged: <span id="totalHoursText">115.5</span> Hrs
+          </div>
+
+          
+          <div class="timerDisplay">
+            <span id="hours">02</span>:<span id="minutes">45</span>:<span id="seconds">10</span>
+          </div>
+          <div class="timerLabels">
+            <span>Hours</span>
+            <span>Minutes</span>
+            <span>Seconds</span>
+          </div>
+
+          
+          <div class="timerControls">
+            <button id="startBtn" class="controlBtn" onclick="startTimer()">
+              <span class="btnIcon">▶</span> Start
+            </button>
+            <button id="pauseBtn" class="controlBtn" onclick="pauseTimer()">
+              <span class="btnIcon">❚❚</span> Pause
+            </button>
+            <button id="resetBtn" class="controlBtn" onclick="resetTimer()">
+              <span class="btnIcon">↺</span> Reset
+            </button>
+            <button id="stopBtn" class="controlBtn stop" onclick="stopTimer()">
+              <span class="btnIcon">■</span> Stop
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+
+</body>
+</html>
