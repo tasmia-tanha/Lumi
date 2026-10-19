@@ -44,7 +44,7 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
 }
-#username,#key{
+#username,#key,#email,#confirmKey{
     height: 40px;
     width: 20vw;
     margin-bottom: 15px;
@@ -52,8 +52,8 @@ body{
     border: 2px solid #84A282;
 }
 
-#username:focus,
-#key:focus{
+#username:focus,#email:focus
+#key:focus,#confirmKey:focus{
     border:4px ;
 }
 #signUpBtn{
@@ -74,7 +74,7 @@ body{
 
 #login{
     font-size: 20px;
-    color:#84A282
+    color:#FEFAF3
 }
 
 #loginLink{
