@@ -1,5 +1,3 @@
 export function getLessons(req,res,next){
-    res.render("lessons",{
-        title:"Lessons"
-    })
+    res.render("lessons")
 }

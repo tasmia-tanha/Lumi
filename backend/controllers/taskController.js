@@ -1,5 +1,3 @@
 export function getTasks(req,res,next){
-    res.render("task",{
-        title:"Tasks"
-    })
+    res.render("task")
 }

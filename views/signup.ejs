@@ -1,38 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="../stylesheet/signup.css" >
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-</head>
-    
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="../stylesheet/signup.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  </head>
+
+  <body>
     <div class="main-img">
-        <img id="background"src="../images/Pastel Capybara Study Nook.png">
+      <img id="background" src="../images/Pastel Capybara Study Nook.png" />
     </div>
 
     <div class="box">
-       
-       
-       <div class="info">
+      <div class="info">
+        <img
+          id="logo"
+          src="../images/Lumi Capybara Study Planner.png"
+          height="150px"
+          width="auto"
+        />
+        <br />
+        <form action="/signup" method="POST" class="user_info">
+          <input
+            id="username"
+            type="text"
+            placeholder="Username"
+            name="name"
+            required
+          />
+          <p class="error name-error">This is error</p>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            name="email"
+            required
+          />
+          <p class="error email-error">This is error</p>
+          <input
+            id="key"
+            type="password"
+            placeholder="Password"
+            name="password"
+            required
+          />
+          <p class="error password-error">This is error</p>
+          <input
+            id="confirmKey"
+            type="password"
+            placeholder="Confirm Password"
+            name="confirmPassword"
+            required
+          />
+          <p class="error confirm-password-error">This is error</p>
+          <p class="error common-error">This is error</p>
+          <br />
+          <button id="signUpBtn">Sign Up</button>
+        </form>
 
-        <img id="logo" src="../images/Lumi Capybara Study Planner.png" height="150px" width="auto">
-        <br>
-        <input id="username" type="text" placeholder="Username" required>
-        <input id="email" type="email" placeholder="Email" required>
-        <input id="key"type="password" placeholder="Password" required>
-        <input id="confirmKey"type="password" placeholder="Confirm Password" required>
-
-        <br>
-        <button id="signUpBtn">Sign Up</button>
-
-        <p id="login">Already have an account?<a id="loginLink" href="login.html">Log In</a></p>
-       </div>
-        
+        <p id="login">
+          Already have an account?<a id="loginLink" href="/">Log In</a>
+        </p>
+      </div>
     </div>
-</body>
+  </body>
+  <script>
+    const successToast = Toastify({
+      text: "User registered successfully",
+      duration: 3000,
+    });
+    const form = document.querySelector(".user_info");
+
+    form.querySelectorAll("input").forEach((input) => {
+      input.addEventListener("input", () => {
+        input.classList.remove("error");
+
+        const errorClass =
+          input.name === "confirmPassword"
+            ? "confirm-password-error"
+            : `${input.name}-error`;
+
+        const errorMessage = document.querySelector(`${errorClass}`);
+        if (errorMessage) {
+          errorMessage.style.display = "none";
+        }
+      });
+    });
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const formData = new URLSearchParams(new FormData(form));
+      let response = await fetch("/signup", {
+        method: "POST",
+        body: formData,
+      });
+
+      let result = await response.json();
+
+      if (!response.ok && !result.errors) {
+        throw new Error("Something went wrong. Please try again.");
+      }
+      if (result.errors) {
+        //add error class to all inputs
+        Object.keys(result.errors).forEach((fieldName) => {
+          if (fieldName === "common") {
+            const errorPlaceholder = document.querySelector(".common-error");
+
+            errorPlaceholder.textContent = result.errors[fieldName].msg;
+            errorPlaceholder.style.display = "block";
+            return;
+          }
+
+          const input = form.elements.namedItem(fieldName);
+          input.classList.add("error");
+
+          const errorClass =
+            input.name === "confirmPassword"
+              ? "confirm-password-error"
+              : `${input.name}-error`;
+
+          const errorPlaceholder = document.querySelector(`.${errorClass}`);
+          if (errorPlaceholder) {
+            errorPlaceholder.textContent = result.errors[fieldName].msg;
+            errorPlaceholder.style.display = "block";
+          }
+        });
+      } else {
+        successToast.showToast();
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1000);
+      }
+    });
+  </script>
 </html>
