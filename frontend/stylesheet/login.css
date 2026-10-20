@@ -12,7 +12,32 @@ body{
     margin: 0px;
 }
 
+p.error{
+    visibility: hidden;
+    height: 24px;
+    line-height: 24px;
+    color: red;
+    font-size: 15px;
+    margin: 3px 0;
+    flex-shrink: 0;
+    line-height: 20px;
+    overflow: hidden;
+}
 
+p.error.visible{
+    visibility: visible;
+}
+
+
+
+#loginForm{
+    text-align: center;
+}
+
+#username:focus,#key:focus{
+    border:2px solid #84A282;
+    outline: 2px solid #7d9876;
+}
 #background{
     height: 100vh;
     width: 100%;
@@ -24,7 +49,8 @@ body{
 .box{
     
     background-color: #FEFAF3;
-    height: 70vh;
+    min-height: 70vh;
+    height: auto;
     width: 60vh;
     border-radius: 25px;
     border-width: 5px;
@@ -52,10 +78,7 @@ body{
     border: 2px solid #84A282;
 }
 
-#username:focus,
-#key:focus{
-    border:4px ;
-}
+
 #loginBtn{
     background-color: #F6E2E9;
     color:#84A282;
