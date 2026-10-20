@@ -3,12 +3,22 @@
     font-family: 'Nunito',sans-serif;
 }
 
-p.error{
-    display: none;
+p.error {
+    visibility: hidden;
     color: red;
-    font-size: 13px;
-    margin: 3px;
+    font-size: 12px;
+    margin: 3px 0;
+    height: 30px;
+    line-height: 15px;
     border: none;
+    white-space: normal;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+p.error.visible {
+    visibility: visible;
 }
 input.error{
     border: 2px solid red;
@@ -35,7 +45,8 @@ body{
 .box{
     
     background-color: #FEFAF3;
-    height: 70vh;
+    min-height: 70vh;
+    height: auto;
     width: 60vh;
     border-radius: 25px;
     border-width: 5px;
@@ -54,7 +65,7 @@ body{
 
 .user_info{
     text-align: center;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 }
 
 #logo{
@@ -64,14 +75,16 @@ body{
 #username,#key,#email,#confirmKey{
     height: 40px;
     width: 20vw;
-    margin-bottom: 1px;
+    margin-bottom: 5px;
+    
     border-radius: 10px;
     border: 2px solid #84A282;
 }
 
 #username:focus,#email:focus,
 #key:focus,#confirmKey:focus{
-    border:4px ;
+    border:2px solid #84A282;
+    outline: 2px solid #B8CFB3;
 }
 #signUpBtn{
     background-color: #F6E2E9;
@@ -80,7 +93,7 @@ body{
     border-radius: 15px;
     width: 100px;
     height: 30px;
-    margin-top: 20px;
+    margin-top:0px;
     margin-bottom: 0px;
     font-size: 20px;
     
@@ -92,7 +105,7 @@ body{
 
 #login{
     font-size: 20px;
-    color:#FEFAF3
+    color:#96ae94
 }
 
 #loginLink{

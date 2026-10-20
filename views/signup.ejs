@@ -32,7 +32,7 @@
           width="auto"
         />
         <br />
-        <form action="/signup" method="POST" class="user_info">
+        <form action="/signup" method="POST" class="user_info" novalidate>
           <input
             id="username"
             type="text"
@@ -66,12 +66,12 @@
           />
           <p class="error confirm-password-error">This is error</p>
           <p class="error common-error">This is error</p>
-          <br />
+          
           <button id="signUpBtn">Sign Up</button>
         </form>
 
         <p id="login">
-          Already have an account?<a id="loginLink" href="/">Log In</a>
+          Already have an account? &nbsp;<a id="loginLink" href="/">Log In</a>
         </p>
       </div>
     </div>
@@ -92,9 +92,9 @@
             ? "confirm-password-error"
             : `${input.name}-error`;
 
-        const errorMessage = document.querySelector(`${errorClass}`);
+        const errorMessage = document.querySelector(`.${errorClass}`);
         if (errorMessage) {
-          errorMessage.style.display = "none";
+          errorMessage.classList.remove("visible");
         }
       });
     });
@@ -120,7 +120,7 @@
             const errorPlaceholder = document.querySelector(".common-error");
 
             errorPlaceholder.textContent = result.errors[fieldName].msg;
-            errorPlaceholder.style.display = "block";
+            errorPlaceholder.classList.add("visible");
             return;
           }
 
@@ -135,10 +135,11 @@
           const errorPlaceholder = document.querySelector(`.${errorClass}`);
           if (errorPlaceholder) {
             errorPlaceholder.textContent = result.errors[fieldName].msg;
-            errorPlaceholder.style.display = "block";
+            errorPlaceholder.classList.add("visible");
           }
         });
       } else {
+        console.log("SIGNUP SUCCESS", result);
         successToast.showToast();
 
         setTimeout(() => {

@@ -9,9 +9,9 @@ export async function createUser(req, res, next) {
     const { name, email, password, confirmPassword } = req.body;
 
     if (password !== confirmPassword) {
-      res.status(400).json({
+      return res.status(400).json({
         errors: {
-          common: {
+          confirmPassword: {
             msg: "Password doesn't match",
           },
         },
@@ -26,9 +26,13 @@ export async function createUser(req, res, next) {
       password: hashedPassword,
     });
 
-    res.redirect("/");
+    return res.status(201).json({
+    message: "User registered successfully",
+    });
+
   } catch (error) {
-    res.status(500).json({
+    console.error(error);
+    return res.status(500).json({
       errors: {
         common: {
           msg: "unknown error occured",
