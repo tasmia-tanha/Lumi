@@ -11,6 +11,11 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </head>
   <body>
     <div class="main">
@@ -54,7 +59,7 @@
           </li>
         </ul>
 
-        <button class="logout">Log Out</button>
+        <button class="logout" onclick="logout()">Log Out</button>
       </div>
 
       <div class="greeting" style="grid-area: box-2">
@@ -234,4 +239,20 @@
       </div>
     </div>
   </body>
+  <script>
+      const logoutToast = Toastify({
+      text: "You are being logged out",
+      duration: 1000,
+    });
+
+    function logout(){
+      fetch("/logout",{
+        method:"DELETE"
+      });
+      logoutToast.showToast();
+      setTimeout(()=>{
+        window.location.href="/";
+      },1000)
+    }
+  </script>
 </html>

@@ -61,3 +61,11 @@ export async function login(req,res,next){
         })
     }
 }
+
+export function logout(req,res){
+    res.clearCookie(process.env.COOKIE_NAME,{
+        signed:true,
+        httpOnly:true
+    });
+    return res.redirect("/");
+}
