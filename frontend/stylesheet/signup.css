@@ -21,7 +21,8 @@ p.error.visible {
     visibility: visible;
 }
 input.error{
-    border: 2px solid red;
+    border: 2px solid red !important;
+    
 }
 body{
     background-color: #B8CFB3;
