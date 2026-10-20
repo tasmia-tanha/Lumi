@@ -18,7 +18,7 @@ const peopleSchema=mongoose.Schema({
     }
     },
     {
-        timeStamps:true
+        timestamps:true
     }
 );
 
