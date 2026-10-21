@@ -237,19 +237,15 @@ body{
 }
 
 .priority.low {
-    background-color: #FEFAF3;
+    background-color: #ebe2d1;
     color: #84A282;
     border: 1px solid #B8CFB3;
 }
 
 
-.taskItem.completed .taskInfo h3 {
+.taskInfo h3.completed{
     text-decoration: line-through;
-    color: #999;
-}
-
-.taskItem.completed {
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 
@@ -270,4 +266,20 @@ body{
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+
+.deleteTask {
+  border: none;
+  background: transparent;
+  color: #b87583;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.deleteTask:hover {
+  background-color: #f6e2e9;
 }

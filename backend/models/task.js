@@ -11,6 +11,11 @@ const taskSchema=mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    priority:{
+        type:String,
+        enum:["high","medium","low"],
+        default:"meduim",
+    },
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"People",

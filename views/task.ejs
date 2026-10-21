@@ -69,32 +69,100 @@
 
         <form action="/task" method="POST">
           <input type="text" name="title" placeholder="Enter a new task" required>
+          <select name="priority">
+            <option value="high">High</option>
+            <option value="medium" selected>Medium</option>
+            <option value="low">Low</option>
+          </select>
           <button class="addTask" type="submit">+ Add Task</button>
         </form>
         
+        <h4 class="filterText">Filter by:</h4>
+        <select id="priorityFilter">
+          <option value="all" selected>All</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
 
         <div class="taskList">
-          <% tasks.forEach(task=>{ %>
-          <div class="taskItem">
+          <h2 id="activeHeading">
+              Active Tasks (<span id="activeCount"><%= activeTasks.length %></span>)
+          </h2>
+
+          <div id="activeList">
+          
+          <p
+            id="noActiveTasks"
+            class="emptyMessage"
+            <%= activeTasks.length === 0 ? "" : 'hidden' %>
+          >
+          No active tasks. Time to relax! 🌱
+          </p>
+          
+          <% activeTasks.forEach((task)=>{ %>
+            <div class="taskItem">
             <input type="checkbox" data-task-id="<%= task._id%>" <%= task.completed? "checked":"" %> />
             <div class="taskInfo">
-              <h3><%=task.title%></h3>
+              <h3 class="<%= task.completed? 'completed':'' %>"><%=task.title%></h3>
               
             </div>
-            <span class="priority high">High</span>
+            <span class="priority <%=task.priority%>"><%= task.priority%></span>
+             <button
+              type="button"
+              class="deleteTask"
+              data-task-id="<%= task._id %>"
+              aria-label="Delete <%= task.title %>"
+              >
+              🗑
+            </button>
           </div>
-          <% }) %>
+         <% }) %>
+          </div>
+         <h2 id="completedHeading">
+          Completed Tasks (<span id="completedCount"><%= completedTasks.length %></span>)
+          <button type="button" id="toggleCompleted">Hide</button>
+          </h2>
+          <button class="clearButton"><span class="clearCompleted">Clear Completed Tasks</span></button>
 
+          <div id="completedList">
           
-
+          <p
+          id="noCompletedTasks"
+          class="emptyMessage"
+          <%= completedTasks.length === 0 ? "" : 'hidden' %>
+          >
+          No completed tasks yet.
+          </p>
+          
+          <% completedTasks.forEach((task)=>{ %>
+            <div class="taskItem">
+            <input type="checkbox" data-task-id="<%= task._id%>" <%= task.completed? "checked":"" %> />
+            <div class="taskInfo">
+              <h3 class="<%= task.completed? 'completed':'' %>"><%=task.title%></h3>
+              
+            </div>
             
+            <span class="priority <%=task.priority%>"><%= task.priority%></span>
+            <button
+            type="button"
+            class="deleteTask"
+            data-task-id="<%= task._id %>"
+            aria-label="Delete <%= task.title %>"
+            >
+              🗑
+            </button>
+          </div>
+         <% }) %>
+          </div>
         </div>
       </main>
 
       <div class="capyArea" style="grid-area: box-3">
         <img
+        id="capybaraImage"
           class="capyImage"
-          src="../images/Cozy Capybara’s All Done Bedtime.png"
+          src="/images/Cozy Capybara’s All Done Bedtime.png"
           alt="Sleeping capybara after completing tasks"
         />
       </div>
@@ -102,10 +170,149 @@
   </body>
 
   <script>
+
+    //clear complted tasks
+    const btn=document.querySelector(".clearButton");
+    btn.addEventListener("click",async function() {
+      const Tasks = [...document.querySelectorAll(".taskItem")];
+      Tasks.forEach(async(task)=>{
+        
+        const isCompleted=task.querySelector("input[type='checkbox']").checked;
+        const id = task.querySelector("input[type='checkbox']").dataset.taskId;
+        if(isCompleted){
+          try{
+            const response=await fetch(`/task/${id}`,{
+              method:"DELETE"
+            })
+
+            if(!response.ok){
+              throw new Error("Failed to clear the completed tasks!")
+            }
+
+            task.remove();
+            document.querySelector("#completedCount").textContent =0;
+          }catch(error){
+            console.log(error);
+            alert("Failed to clear the completed tasks!")
+          }
+        }
+      })
+    })
+    //delete
+    
+    document.querySelectorAll(".deleteTask").forEach((button) => {
+    button.addEventListener("click", async function () {
+    const taskId = this.dataset.taskId;
+    const taskItem = this.closest(".taskItem");
+
+    const confirmed = confirm("Are you sure you want to delete this task?");
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/task/${taskId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete task");
+      }
+
+      
+      taskItem.remove();
+      const remainingTasks = [...document.querySelectorAll(".taskItem")];
+
+      const activeCount = remainingTasks.filter(
+        item => !item.querySelector("input[type='checkbox']").checked
+        ).length;
+
+      const completedCount = remainingTasks.length - activeCount;
+
+      document.querySelector("#activeCount").textContent = activeCount;
+      updateCapybaraImage();
+      document.querySelector("#completedCount").textContent = completedCount;
+
+        document.querySelector("#noActiveTasks").hidden = activeCount !== 0;
+      document.querySelector("#noCompletedTasks").hidden = completedCount !== 0;
+
+
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete task. Please try again.");
+    }
+  });
+});
+
+    
+
+
+    //filter
+    const priorityFilter=document.querySelector("#priorityFilter");
+    
+    priorityFilter.addEventListener("change",function() {
+        let visibleActive=0;
+        let visibleCompleted=0;
+        const selectedPriority=this.value;
+        
+        document.querySelectorAll(".taskItem").forEach((taskItem)=>{
+        const priority=taskItem.querySelector(".priority").textContent.trim();
+        const isCompleted = taskItem.querySelector("input[type='checkbox']").checked;
+        const matches=selectedPriority==="all"||selectedPriority===priority;
+        taskItem.style.display=matches?"":"none";
+
+        if(matches && isCompleted){
+          visibleCompleted++;
+        }else if(matches){
+          visibleActive++;
+        }
+        document.querySelector("#activeCount").textContent = visibleActive;
+        document.querySelector("#completedCount").textContent = visibleCompleted;
+        document.querySelector("#noActiveTasks").hidden = visibleActive !== 0;
+        document.querySelector("#noCompletedTasks").hidden = visibleCompleted !== 0;
+
+       
+      })
+    })
+
+    //checkbox change
     document.querySelectorAll(".taskItem input[type='checkbox']").forEach((checkbox)=>{
 
       checkbox.addEventListener("change",async function () {
         const taskId=this.dataset.taskId;
+        const taskItem = this.closest(".taskItem");
+        const taskTitle = taskItem.querySelector(".taskInfo h3");
+        const taskList = document.querySelector(".taskList");
+        const activeHeading = [...taskList.querySelectorAll("h2")]
+          .find(heading => heading.textContent.includes("Active Tasks"));
+        const completedHeading = [...taskList.querySelectorAll("h2")]
+          .find(heading => heading.textContent.includes("Completed Tasks"));
+
+        taskTitle.classList.toggle("completed",this.checked);
+        
+        const targetList = this.checked
+          ? document.querySelector("#completedList")
+          : document.querySelector("#activeList");
+
+          if (targetList) {
+            targetList.appendChild(taskItem);
+          }
+
+        const taskItems = [...document.querySelectorAll(".taskItem")];
+
+        const completedCount = taskItems.filter(
+          item => item.querySelector("input[type='checkbox']").checked
+          ).length;
+
+        const activeCount = taskItems.length - completedCount;
+
+        document.querySelector("#activeCount").textContent = activeCount;
+        updateCapybaraImage();
+        document.querySelector("#completedCount").textContent = completedCount;
+        document.querySelector("#noActiveTasks").hidden = activeCount !== 0;
+        document.querySelector("#noCompletedTasks").hidden = completedCount !== 0;
+
         try{
           const response=await fetch(`/task/${taskId}`,{
             method:"PATCH",
@@ -123,9 +330,40 @@
         }catch(error){
           console.log(error);
           this.checked=!this.checked;
+          taskTitle.classList.toggle("completed",this.checked);
           alert("Failed to update task!Please try again")
         }
       });
     });
+
+    //hide completed list
+    const toggleBtn = document.querySelector("#toggleCompleted");
+    const completedList = document.querySelector("#completedList");
+
+    toggleBtn.addEventListener("click", function () {
+    completedList.hidden = !completedList.hidden;
+      console.log("Toggle clicked");
+    toggleBtn.textContent = completedList.hidden ? "Show" : "Hide";
+    });
+  
+    function updateCapybaraImage() {
+      console.log("Active count:", document.querySelector("#activeCount").textContent);
+      const activeCount = Number(
+      document.querySelector("#activeCount").textContent
+      );
+
+      const capybaraImage = document.querySelector("#capybaraImage");
+
+      if (activeCount > 0) {
+        capybaraImage.src = "/images/Sleepy Capybara’s Midnight Tasks.png";
+        capybaraImage.alt = "Capybara studying with unfinished tasks";
+      } else {
+        capybaraImage.src = "/images/Cozy Capybara’s All Done Bedtime.png";
+        capybaraImage.alt = "Sleeping capybara after completing tasks";
+      }
+  }
+
+  updateCapybaraImage();
+  
   </script>
 </html>

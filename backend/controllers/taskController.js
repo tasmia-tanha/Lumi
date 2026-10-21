@@ -3,10 +3,11 @@ import Task from "../models/task.js";
 
 export async function addTasks(req, res, next) {
   try {
-    const { title } = req.body;
+    const { title,priority } = req.body;
 
     const task = await Task.create({
       title: title,
+      priority:priority,
       user:req.user._id
     });
 
@@ -20,11 +21,17 @@ export async function addTasks(req, res, next) {
 export async function getTasks(req,res,next) {
 
     try{
-        const tasks=await Task.find({
-            user:req.user._id
+        const activeTasks=await Task.find({
+            user:req.user._id,
+            completed:{$ne:true},
         })
 
-        res.render("task",{ tasks });
+        const completedTasks=await Task.find({
+            user:req.user._id,
+            completed:true,
+        })
+
+        res.render("task",{ activeTasks,completedTasks });
     }catch(error){
         next(error);
     }
@@ -33,7 +40,9 @@ export async function getTasks(req,res,next) {
 
 export async function updateTasks(req,res,next) {
     try{
+    
         const {completed}=req.body;
+        
         const task=await Task.findOneAndUpdate(
         {
             _id:req.params.id,
@@ -57,3 +66,24 @@ export async function updateTasks(req,res,next) {
         next(error);
     }
 }
+
+
+export async function deleteTask(req, res, next) {
+  try {
+    const task = await Task.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user._id,
+    });
+
+    if (!task) {
+      return res.status(404).json({
+        message: "Task not found",
+      });
+    }
+
+    res.json({ message: "Task deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+}
+
