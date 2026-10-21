@@ -23,6 +23,7 @@ export async function login(req,res,next){
 
             if(isValidPassword){
                 const userObj={
+                    _id:user._id,
                     name:user.name,
                     email:user.email,
                     

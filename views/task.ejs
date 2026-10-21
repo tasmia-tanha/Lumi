@@ -67,85 +67,27 @@
           </div>
         </div>
 
-        <button class="addTask">+ Add Task</button>
+        <form action="/task" method="POST">
+          <input type="text" name="title" placeholder="Enter a new task" required>
+          <button class="addTask" type="submit">+ Add Task</button>
+        </form>
+        
 
         <div class="taskList">
+          <% tasks.forEach(task=>{ %>
           <div class="taskItem">
-            <input type="checkbox" />
+            <input type="checkbox" data-task-id="<%= task._id%>" <%= task.completed? "checked":"" %> />
             <div class="taskInfo">
-              <h3>Complete DS assignment</h3>
-              <p>Today · 5:00 PM</p>
+              <h3><%=task.title%></h3>
+              
             </div>
             <span class="priority high">High</span>
           </div>
+          <% }) %>
 
-          <div class="taskItem">
-            <input type="checkbox" />
-            <div class="taskInfo">
-              <h3>Study Digital Logic</h3>
-              <p>Today · 8:00 PM</p>
-            </div>
-            <span class="priority medium">Medium</span>
-          </div>
+          
 
-          <div class="taskItem completed">
-            <input type="checkbox" checked />
-            <div class="taskInfo">
-              <h3>Practice Codeforces</h3>
-              <p>Completed</p>
-            </div>
-            <span class="priority low">Low</span>
-          </div>
-
-          <div class="taskItem">
-            <input type="checkbox" />
-            <div class="taskInfo">
-              <h3>Finish lab report</h3>
-              <p>Tomorrow · 10:00 AM</p>
-            </div>
-            <span class="priority high">High</span>
-          </div>
-
-          <div class="taskItem">
-            <input type="checkbox" />
-            <div class="taskInfo">
-              <h3>Review lecture notes</h3>
-              <p>Tomorrow</p>
-            </div>
-            <span class="priority low">Low</span>
-          </div>
-          <div class="taskItem">
-            <input type="checkbox" />
-            <div class="taskInfo">
-              <h3>Complete DS assignment</h3>
-              <p>Today · 5:00 PM</p>
-            </div>
-            <span class="priority high">High</span>
-          </div>
-          <div class="taskItem">
-            <input type="checkbox" />
-            <div class="taskInfo">
-              <h3>Complete DS assignment</h3>
-              <p>Today · 5:00 PM</p>
-            </div>
-            <span class="priority high">High</span>
-          </div>
-          <div class="taskItem">
-            <input type="checkbox" />
-            <div class="taskInfo">
-              <h3>Complete DS assignment</h3>
-              <p>Today · 5:00 PM</p>
-            </div>
-            <span class="priority high">High</span>
-          </div>
-          <div class="taskItem">
-            <input type="checkbox" />
-            <div class="taskInfo">
-              <h3>Complete DS assignment</h3>
-              <p>Today · 5:00 PM</p>
-            </div>
-            <span class="priority high">High</span>
-          </div>
+            
         </div>
       </main>
 
@@ -158,4 +100,32 @@
       </div>
     </div>
   </body>
+
+  <script>
+    document.querySelectorAll(".taskItem input[type='checkbox']").forEach((checkbox)=>{
+
+      checkbox.addEventListener("change",async function () {
+        const taskId=this.dataset.taskId;
+        try{
+          const response=await fetch(`/task/${taskId}`,{
+            method:"PATCH",
+            headers:{
+              "Content-Type":"application/json",
+            },
+            body:JSON.stringify({
+              completed:this.checked
+            }),
+          })
+          if(!response.ok){
+            throw new Error("Failed to update task!")
+          }
+
+        }catch(error){
+          console.log(error);
+          this.checked=!this.checked;
+          alert("Failed to update task!Please try again")
+        }
+      });
+    });
+  </script>
 </html>
