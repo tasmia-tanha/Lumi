@@ -105,45 +105,7 @@ body{
 }
 
 
-.progressSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.progressCircle {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: conic-gradient(#84A282 65%, #B8CFB3 65%);
-    position: relative;
-}
-
-.progressCircle::before {
-    content: "";
-    position: absolute;
-    width: 49px;
-    height: 49px;
-    background-color: #FEFAF3;
-    border-radius: 50%;
-}
-
-.progressCircle span {
-    position: relative;
-    color: #84A282;
-    font-size: 0.85rem;
-    font-weight: 900;
-}
-
-.progressSection p {
-    margin: 4px 0 0;
-    color: #84A282;
-    font-size: 0.7rem;
-    font-weight: 800;
-}
 
 
 .addTask {

@@ -68,5 +68,5 @@ export function logout(req,res){
         signed:true,
         httpOnly:true
     });
-    return res.redirect("/");
+     return res.status(200).json({ message: "Logged out successfully" });
 }

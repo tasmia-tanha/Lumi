@@ -482,6 +482,9 @@ th.data {
     gap: 8px;
 }
 
+.completed {
+  text-decoration: line-through;
+}
 
 .viewMoreBtn {
     flex: 1;

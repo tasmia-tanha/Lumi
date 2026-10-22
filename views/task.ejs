@@ -8,6 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  
   </head>
   <body>
     <div class="main">
@@ -52,19 +58,14 @@
           </li>
         </ul>
 
-        <button class="logout">Log Out</button>
+        <button class="logout" onclick="logout()">Log Out</button>
       </div>
 
       <main class="taskPage" style="grid-area: box-2">
         <div class="taskTop">
           <h1>Tasks</h1>
 
-          <div class="progressSection">
-            <div class="progressCircle">
-              <span>65%</span>
-            </div>
-            <p>Completed</p>
-          </div>
+          
         </div>
 
         <form action="/task" method="POST">
@@ -170,7 +171,31 @@
   </body>
 
   <script>
+    const logoutToast = Toastify({
+      text: "You are being logged out",
+      duration: 1000,
+    });
 
+   async function logout(){
+     
+    try{
+      const response=await fetch("/logout",{
+        method:"DELETE"
+      });
+
+      if(!response.ok){
+        throw new Error("Logout failed!");
+      }
+      logoutToast.showToast();
+      setTimeout(()=>{
+        window.location.href="/";
+      },1500)
+    }catch(error){
+      console.error(error);
+      alert("Could not log out. Please try again.");
+    }
+      
+    }
     //clear complted tasks
     const btn=document.querySelector(".clearButton");
     btn.addEventListener("click",async function() {
@@ -250,32 +275,44 @@
 
     //filter
     const priorityFilter=document.querySelector("#priorityFilter");
-    
-    priorityFilter.addEventListener("change",function() {
-        let visibleActive=0;
-        let visibleCompleted=0;
-        const selectedPriority=this.value;
-        
-        document.querySelectorAll(".taskItem").forEach((taskItem)=>{
-        const priority=taskItem.querySelector(".priority").textContent.trim();
-        const isCompleted = taskItem.querySelector("input[type='checkbox']").checked;
-        const matches=selectedPriority==="all"||selectedPriority===priority;
-        taskItem.style.display=matches?"":"none";
+    function updateTaskFilter() {
+      let visibleActive = 0;
+      let visibleCompleted = 0;
+      const selectedPriority = priorityFilter.value;
 
-        if(matches && isCompleted){
-          visibleCompleted++;
-        }else if(matches){
-          visibleActive++;
-        }
-        document.querySelector("#activeCount").textContent = visibleActive;
-        document.querySelector("#completedCount").textContent = visibleCompleted;
-        document.querySelector("#noActiveTasks").hidden = visibleActive !== 0;
-        document.querySelector("#noCompletedTasks").hidden = visibleCompleted !== 0;
+      document.querySelectorAll(".taskItem").forEach((taskItem) => {
+      const priority = taskItem.querySelector(".priority").textContent.trim();
+      const isCompleted = taskItem.querySelector("input[type='checkbox']").checked;
+      const matches =
+              selectedPriority === "all" || selectedPriority === priority;
 
-       
-      })
-    })
+      taskItem.style.display = matches ? "" : "none";
 
+      if (matches && isCompleted) {
+        visibleCompleted++;
+      } else if (matches) {
+        visibleActive++;
+      }
+    });
+
+    const msgActive = document.querySelector("#noActiveTasks");
+    const msgCompleted = document.querySelector("#noCompletedTasks");
+
+    if (selectedPriority !== "all") {
+      msgActive.textContent = `No active ${selectedPriority}-priority tasks 🌱`;
+      msgCompleted.textContent = `No ${selectedPriority}-priority tasks completed yet`;
+    } else {
+      msgActive.textContent = "No active tasks. Time to relax 🌱";
+      msgCompleted.textContent = "No tasks have been completed yet";
+    }
+
+    document.querySelector("#activeCount").textContent = visibleActive;
+    document.querySelector("#completedCount").textContent = visibleCompleted;
+    msgActive.hidden = visibleActive !== 0;
+    msgCompleted.hidden = visibleCompleted !== 0;
+    }
+    priorityFilter.addEventListener("change", updateTaskFilter);
+   
     //checkbox change
     document.querySelectorAll(".taskItem input[type='checkbox']").forEach((checkbox)=>{
 
@@ -307,11 +344,10 @@
 
         const activeCount = taskItems.length - completedCount;
 
-        document.querySelector("#activeCount").textContent = activeCount;
+        updateTaskFilter();
+        
         updateCapybaraImage();
-        document.querySelector("#completedCount").textContent = completedCount;
-        document.querySelector("#noActiveTasks").hidden = activeCount !== 0;
-        document.querySelector("#noCompletedTasks").hidden = completedCount !== 0;
+       
 
         try{
           const response=await fetch(`/task/${taskId}`,{
@@ -331,7 +367,7 @@
           console.log(error);
           this.checked=!this.checked;
           taskTitle.classList.toggle("completed",this.checked);
-          alert("Failed to update task!Please try again")
+          alert("Failed to update task!Please try again");
         }
       });
     });

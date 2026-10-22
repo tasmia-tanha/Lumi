@@ -179,7 +179,7 @@
           </div>
         </div>
       </div>
-
+<!--
       <div class="note" style="grid-area: box-7">
         <div class="stickyNote">
           <div class="noteTape"></div>
@@ -191,50 +191,31 @@
           ></textarea>
         </div>
       </div>
-
+-->
       <div class="tasks" style="grid-area: box-8">
         <div class="taskHeading">
           <h3 id="taskHeader">Today's Tasks</h3>
-          <p id="taskCount">6 tasks remaining</p>
+          <p id="taskCount" data-count="<%= activeTasks.length %>" ><%= activeTasks.length %> tasks remaining</p>
         </div>
 
         <ul class="taskList">
-          <li class="todo">
-            <input type="checkbox" class="taskCheckbox" />
+         <% fourActiveTasks.forEach((task)=>{ %>
+          <li class="todo" data-task-id="<%= task._id%>">
+            <input type="checkbox" class="taskCheckbox" data-task-id="<%= task._id%>"/>
 
-            <span class="taskName">Study DS</span>
+            <span class="taskName"><%= task.title %></span>
 
-            <span class="priority high">High</span>
+            <span class="priority <%=task.priority%>"> <%=task.priority%></span>
           </li>
-
-          <li class="todo">
-            <input type="checkbox" class="taskCheckbox" />
-
-            <span class="taskName">Complete lecture slide</span>
-
-            <span class="priority medium">Medium</span>
-          </li>
-
-          <li class="todo">
-            <input type="checkbox" class="taskCheckbox" />
-
-            <span class="taskName">Complete note</span>
-
-            <span class="priority low">Low</span>
-          </li>
-
-          <li class="todo">
-            <input type="checkbox" class="taskCheckbox" />
-
-            <span class="taskName">Do CP</span>
-
-            <span class="priority high">High</span>
+          <%})%>
+          <li class="emptyTasks" style="display: none;">
+            🌸 All done, little capybara! Time to rest.
           </li>
         </ul>
 
         <div class="taskActions">
-          <button class="viewMoreBtn">View more</button>
-          <button class="addTaskBtn">+ Add task</button>
+          <button class="viewMoreBtn"><a id="viewAllTasks" href="/task" target="_self">View All Tasks</a></button>
+          
         </div>
       </div>
     </div>
@@ -254,5 +235,98 @@
         window.location.href="/";
       },1000)
     }
+
+      document.querySelector(".taskList").addEventListener("change", async function (event) {
+          if (!event.target.matches("input[type='checkbox']")) return;
+
+          const checkbox = event.target;
+          console.log("Checkbox changed");
+          const taskId=checkbox.dataset.taskId;
+          const taskItem=checkbox.closest(".todo");
+          const taskTitle=taskItem.querySelector(".taskName");
+          taskTitle.classList.toggle("completed",checkbox.checked);
+          try {
+          const response = await fetch(`/task/${taskId}`, {
+                method: "PATCH",
+                headers: {
+                            "Content-Type": "application/json",
+                        },
+                body: JSON.stringify({
+                            completed: checkbox.checked,
+                            }),
+          });
+
+          if (!response.ok) {
+              throw new Error("Failed to update task");
+          }
+          taskItem.remove();
+          const activeTasks = await loadActiveTasks();
+          console.log(activeTasks);
+          const displayedIds = [...document.querySelectorAll(".todo")].map(
+                  (item) => item.dataset.taskId
+          );
+
+          const nextTask = activeTasks.find(
+                (task) => !displayedIds.includes(task._id.toString())
+            );
+          if (nextTask) {
+              const li = document.createElement("li");
+              li.className = "todo";
+              li.dataset.taskId = nextTask._id;
+
+              li.innerHTML = `
+                  <input type="checkbox" class="taskCheckbox" data-task-id="${nextTask._id}">
+                  <span class="taskName">${nextTask.title}</span>
+                  <span class="priority ${nextTask.priority}">${nextTask.priority}</span>
+                  `;
+
+              document.querySelector(".taskList").appendChild(li);
+          }
+
+          const taskCount = document.querySelector("#taskCount");
+          const remaining = Number(taskCount.dataset.count) - 1;
+
+          taskCount.dataset.count = remaining;
+          taskCount.textContent = `${remaining} tasks remaining`;
+
+          const emptyText = document.querySelector(".emptyTasks");
+          const displayedTasks = document.querySelectorAll(".taskList .todo").length;
+
+          if (displayedTasks === 0) {
+              emptyText.style.display = "";
+              taskCount.textContent = "0 tasks remaining";
+          } else {
+              emptyText.style.display = "none";
+          }
+
+          } catch (error) {
+              console.error(error);
+              checkbox.checked=!checkbox.checked;
+              taskTitle.classList.toggle("completed",checkbox.checked);
+              alert("Failed to update task!Please try again");
+          }
+        })
+    
+
+
+      async function loadActiveTasks() {
+        try {
+          const response=await fetch("/dashboard/tasks-data",{
+            method:"GET"
+          })
+
+          if(!response.ok){
+            throw new Error("Cannot load the tasks!")
+          }
+
+          const result=await response.json();
+          return result.activeTasks;
+
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+    
   </script>
 </html>
