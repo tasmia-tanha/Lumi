@@ -88,7 +88,7 @@
 
         <div class="taskList">
           <h2 id="activeHeading">
-              Active Tasks (<span id="activeCount"><%= activeTasks.length %></span>)
+              Active Tasks <span id="activeCount"><%= activeTasks.length %></span>
           </h2>
 
           <div id="activeList">
@@ -121,7 +121,7 @@
          <% }) %>
           </div>
          <h2 id="completedHeading">
-          Completed Tasks (<span id="completedCount"><%= completedTasks.length %></span>)
+          Completed Tasks <span id="completedCount"><%= completedTasks.length %></span>
           <button type="button" id="toggleCompleted">Hide</button>
           </h2>
           <button class="clearButton"><span class="clearCompleted">Clear Completed Tasks</span></button>
@@ -376,12 +376,17 @@
     const toggleBtn = document.querySelector("#toggleCompleted");
     const completedList = document.querySelector("#completedList");
 
+    console.log("Button:", toggleBtn);
+    console.log("Completed list:", completedList);
+
     toggleBtn.addEventListener("click", function () {
-    completedList.hidden = !completedList.hidden;
-      console.log("Toggle clicked");
-    toggleBtn.textContent = completedList.hidden ? "Show" : "Hide";
-    });
-  
+    console.log("Toggle clicked");
+
+    completedList.style.display =
+    completedList.style.display === "none" ? "flex" : "none";
+    toggleBtn.textContent = completedList.style.display==="none" ? "Show" : "Hide";
+});
+    
     function updateCapybaraImage() {
       console.log("Active count:", document.querySelector("#activeCount").textContent);
       const activeCount = Number(
