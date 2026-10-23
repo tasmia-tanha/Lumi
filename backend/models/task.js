@@ -4,7 +4,7 @@ const taskSchema=mongoose.Schema({
     
     title:{
         type:String,
-        require:true,
+        required:true,
         trim:true,
     },
     completed:{
@@ -19,7 +19,7 @@ const taskSchema=mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"People",
-        require:true,
+        required:true,
     }
     },
     {
