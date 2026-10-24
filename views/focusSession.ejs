@@ -67,39 +67,199 @@
       </div>
 
       <main class="studyWorkspace">
-        <div class="timerOverlayCard">
-          <h1 class="pageTitle">Study Log</h1>
+        <div class="focusLayout">
+          <!-- Main timer area -->
+          <section class="timerSection">
+            <div class="timerHeader">
+              <div>
+                <h1 class="pageTitle">Focus Session</h1>
+                <p class="subtitle">Stay focused, study better 🌱</p>
+              </div>
+              <span class="focusBadge">✦ Time to focus</span>
+            </div>
 
-          <div class="totalHoursBadge">
-            Total Hours Logged: <span id="totalHoursText">0</span> Hrs
-          </div>
+            <div class="timerOverlayCard">
+              <div class="timerTopRow">
+                <span class="timerModeLabel">✿ FOCUS TIME</span>
+                <span class="timerStatus">Ready when you are</span>
+              </div>
 
-          <div class="timerDisplay">
-            <span id="hours">00</span>:<span id="minutes">00</span>:<span
-              id="seconds"
-              >00</span
-            >
-          </div>
-          <div class="timerLabels">
-            <span>Hours</span>
-            <span>Minutes</span>
-            <span>Seconds</span>
-          </div>
+              <div class="timerDisplay">
+                <span id="hours">00</span>:<span id="minutes">00</span>:<span
+                  id="seconds"
+                  >00</span
+                >
+              </div>
 
-          <div class="timerControls">
-            <button id="startBtn" class="controlBtn" onclick="startTimer()">
-              <span class="btnIcon">▶</span> Start
-            </button>
-            <button id="pauseBtn" class="controlBtn" onclick="pauseTimer()">
-              <span class="btnIcon">❚❚</span> Pause
-            </button>
-            <button id="resetBtn" class="controlBtn" onclick="resetTimer()">
-              <span class="btnIcon">↺</span> Reset
-            </button>
-            <button id="stopBtn" class="controlBtn stop" onclick="stopTimer()">
-              <span class="btnIcon">■</span> Stop
-            </button>
-          </div>
+              <div class="timerLabels">
+                <span>Hours</span>
+                <span>Minutes</span>
+                <span>Seconds</span>
+              </div>
+
+              <div class="timerModeSelector">
+                <button type="button" class="modeBtn active" data-mode="free">
+                  Free Study
+                </button>
+                <button type="button" class="modeBtn" data-mode="pomodoro">
+                  Pomodoro
+                </button>
+                <button type="button" class="modeBtn" data-mode="deep">
+                  Deep Focus
+                </button>
+              </div>
+
+              <div class="breakControls">
+                <span id="timerMessage">Ready to focus?</span>
+                <button type="button" id="startBreakBtn" class="modeBtn">
+                  ☕ Start 5-min Break
+                </button>
+              </div>
+
+              <div class="timerControls">
+                <button id="startBtn" class="controlBtn" onclick="startTimer()">
+                  <span class="btnIcon">▶</span> Start
+                </button>
+                <button id="pauseBtn" class="controlBtn" onclick="pauseTimer()">
+                  <span class="btnIcon">❚❚</span> Pause
+                </button>
+                <button id="resetBtn" class="controlBtn" onclick="resetTimer()">
+                  <span class="btnIcon">↺</span> Reset
+                </button>
+                <button
+                  id="stopBtn"
+                  class="controlBtn stop"
+                  onclick="stopTimer()"
+                >
+                  <span class="btnIcon">■</span> Stop
+                </button>
+              </div>
+            </div>
+
+            <div class="lastSessionCard">
+              <div class="lastSessionIcon">☕</div>
+              <div>
+                <span class="cardEyebrow">YOUR LAST SESSION</span>
+                <h3>Every minute counts!</h3>
+                <p>Your study journey, one session at a time.</p>
+              </div>
+              <span class="lastSessionDecoration">♡</span>
+            </div>
+
+            <!-- Overview cards -->
+            <div class="overviewGrid">
+              <div class="overviewCard">
+                <span class="overviewIcon">◷</span>
+                <span class="cardEyebrow">TOTAL HOURS LOGGED</span>
+                <h2><span id="totalHoursText">0</span> <small>hrs</small></h2>
+              </div>
+
+              <div class="overviewCard">
+                <span class="overviewIcon">🔥</span>
+                <span class="cardEyebrow">STUDY STREAK</span>
+                <h2>0 <small>days</small></h2>
+              </div>
+
+              <div class="overviewCard">
+                <span class="overviewIcon">🌱</span>
+                <span class="cardEyebrow">DAILY GOAL</span>
+                <h2>2 <small>hours</small></h2>
+              </div>
+            </div>
+          </section>
+
+          <!-- Right side panel -->
+          <aside class="focusSidebar">
+            <section class="sideCard pomodoroCard">
+              <div class="sideCardHeading">
+                <span class="sideIcon">⏱</span>
+                <div>
+                  <h3>Pomodoro Settings</h3>
+                  <p>Find your rhythm</p>
+                </div>
+              </div>
+
+              <div class="durationOptions">
+                <button class="durationBtn active">
+                  <strong>25 min</strong>
+                  <span>Classic</span>
+                </button>
+                <button class="durationBtn">
+                  <strong>50 min</strong>
+                  <span>Extended</span>
+                </button>
+                <button class="durationBtn">
+                  <strong>Custom</strong>
+                  <span>Your pace</span>
+                </button>
+              </div>
+
+              <div class="breakInfo">
+                <span>📖 Study session</span>
+                <strong>25 min</strong>
+              </div>
+              <div class="breakInfo">
+                <span>☕ Short break</span>
+                <strong>5 min</strong>
+              </div>
+            </section>
+
+            <section class="sideCard dailyGoalCard">
+              <div class="sideCardHeading">
+                <span class="sideIcon">🎯</span>
+                <div>
+                  <h3>Daily Study Goal</h3>
+                  <p>A little progress every day</p>
+                </div>
+              </div>
+
+              <div class="goalNumbers">
+                <strong>0 min</strong>
+                <span>of 120 min</span>
+              </div>
+
+              <div class="goalProgressTrack">
+                <div class="goalProgressFill"></div>
+              </div>
+
+              <p class="goalMessage">You've got this! Keep growing 🌿</p>
+            </section>
+
+            <section class="sideCard ambienceCard">
+              <div class="sideCardHeading">
+                <span class="sideIcon">♫</span>
+                <div>
+                  <h3>Focus Ambience</h3>
+                  <p>Set the mood for studying</p>
+                </div>
+              </div>
+
+              <div class="ambienceOptions">
+                <button class="ambienceBtn active">
+                  <span>🔇</span>
+                  <small>None</small>
+                </button>
+                <button class="ambienceBtn">
+                  <span>🌧️</span>
+                  <small>Rain</small>
+                </button>
+                <button class="ambienceBtn">
+                  <span>🎵</span>
+                  <small>Lo-fi</small>
+                </button>
+                <button class="ambienceBtn">
+                  <span>🌳</span>
+                  <small>Forest</small>
+                </button>
+              </div>
+            </section>
+
+            <div class="focusQuote">
+              <span>“</span>
+              <p>Small steps every day lead to big changes.</p>
+              <span class="quoteHeart">♡</span>
+            </div>
+          </aside>
         </div>
       </main>
     </div>
@@ -128,6 +288,51 @@
     const pauseBtn = document.querySelector("#pauseBtn");
     const resetBtn = document.querySelector("#resetBtn");
     const stopBtn = document.querySelector("#stopBtn");
+
+    const modeButtons = document.querySelectorAll(
+      ".timerModeSelector .modeBtn",
+    );
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (isRunning) {
+          Toastify({
+            text: "Pause the timer before changing modes",
+            duration: 2000,
+          }).showToast();
+          return;
+        }
+
+        currentMode = button.dataset.mode;
+        timerType = "study";
+
+        modeButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        isStopped = false;
+        startTime = null;
+        elaspedTime = 0;
+
+        if (currentMode === "pomodoro") {
+          countdownTime = 25 * 60 * 1000;
+          remainingTime = countdownTime;
+        }
+
+        updateDisplay();
+        saveTimerState();
+
+        document.querySelector("#timerMessage").textContent =
+          currentMode === "pomodoro"
+            ? "Ready for a 25-minute session?"
+            : currentMode === "deep"
+              ? "Ready for deep focus?"
+              : "Ready to focus?";
+      });
+    });
+
     async function loadTotalStudyTime() {
       try {
         const response = await fetch("/focusSession/total");
@@ -149,6 +354,10 @@
     let timerInterval = null;
     let isRunning = false;
     let isStopped = false;
+    let currentMode = "free";
+    let timerType = "study";
+    let countdownTime = 25 * 60 * 1000;
+    let remainingTime = countdownTime;
     function saveTimerState() {
       sessionStorage.setItem(
         "lumiTimerState",
@@ -194,7 +403,14 @@
     }
 
     function updateDisplay() {
-      const totalSeconds = Math.floor(elaspedTime / 1000);
+      let totalSeconds;
+      if(currentMode==="pomodoro"){
+        totalSeconds = Math.floor(remainingTime/ 1000);
+      }
+      else{
+         totalSeconds = Math.floor(elaspedTime / 1000);
+      }
+      
 
       const hoursVal = Math.floor(totalSeconds / 3600);
       const minVal = Math.floor((totalSeconds % 3600) / 60);
@@ -204,7 +420,7 @@
       mins.textContent = String(minVal).padStart(2, "0");
       sec.textContent = String(secVal).padStart(2, "0");
     }
-
+    //will fix later
     function startTimer() {
       if (isRunning) {
         return;
@@ -214,14 +430,25 @@
         isStopped = false;
       }
       isRunning = true;
-      startTime = Date.now() - elaspedTime;
+      if(currentMode==="pomodoro"){
+        startTime=remainingTime-Date.now();
+      }
+      else{
+        startTime = Date.now() - elaspedTime;
+      }
+      
 
-      ((timerInterval = setInterval(() => {
-        elaspedTime = Date.now() - startTime;
+      timerInterval = setInterval(() => {
+        if(currentMode==="pomodoro"){
+          remainingTime=startTime-Date.now();
+        }
+        else{
+          elaspedTime = Date.now() - startTime;
+        }
+        
         updateDisplay();
         saveTimerState();
-      })),
-        1000);
+      }, 1000);
     }
 
     function pauseTimer() {
