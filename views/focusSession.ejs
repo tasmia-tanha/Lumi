@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
@@ -11,12 +11,20 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
       rel="stylesheet"
     />
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  </head>
+  <body>
     <div class="main">
-      
       <div class="navbar" style="grid-area: box-1">
-        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" alt="Lumi Sprout Logo" />
+        <img
+          id="nameLogo"
+          src="../images/Lumi Sprout Heart Logo.png"
+          alt="Lumi Sprout Logo"
+        />
         <ul id="list" style="list-style-type: none; padding: 0px">
           <li class="items">
             <button class="navBtn">
@@ -55,22 +63,22 @@
           </li>
         </ul>
 
-        <button class="logout">Log Out</button>
+        <button class="logout" onclick="logout()">Log Out</button>
       </div>
 
-      
       <main class="studyWorkspace">
         <div class="timerOverlayCard">
           <h1 class="pageTitle">Study Log</h1>
 
-          
           <div class="totalHoursBadge">
-            Total Hours Logged: <span id="totalHoursText">115.5</span> Hrs
+            Total Hours Logged: <span id="totalHoursText">0</span> Hrs
           </div>
 
-          
           <div class="timerDisplay">
-            <span id="hours">02</span>:<span id="minutes">45</span>:<span id="seconds">10</span>
+            <span id="hours">00</span>:<span id="minutes">00</span>:<span
+              id="seconds"
+              >00</span
+            >
           </div>
           <div class="timerLabels">
             <span>Hours</span>
@@ -78,7 +86,6 @@
             <span>Seconds</span>
           </div>
 
-          
           <div class="timerControls">
             <button id="startBtn" class="controlBtn" onclick="startTimer()">
               <span class="btnIcon">▶</span> Start
@@ -96,7 +103,194 @@
         </div>
       </main>
     </div>
+  </body>
+  <script>
+    const logoutToast = Toastify({
+      text: "You are being logged out",
+      duration: 1000,
+    });
 
+    function logout() {
+      fetch("/logout", {
+        method: "DELETE",
+      });
+      logoutToast.showToast();
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1000);
+    }
 
-</body>
+    const totalHoursText = document.querySelector("#totalHoursText");
+    const hours = document.querySelector("#hours");
+    const mins = document.querySelector("#minutes");
+    const sec = document.querySelector("#seconds");
+    const startBtn = document.querySelector("#startBtn");
+    const pauseBtn = document.querySelector("#pauseBtn");
+    const resetBtn = document.querySelector("#resetBtn");
+    const stopBtn = document.querySelector("#stopBtn");
+    async function loadTotalStudyTime() {
+      try {
+        const response = await fetch("/focusSession/total");
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error("Failed to load total study time");
+        }
+
+        const totalHours = result.totalMilliseconds / (1000 * 60 * 60);
+
+        totalHoursText.textContent = totalHours.toFixed(5);
+      } catch (error) {
+        console.error("Error loading total study time:", error);
+      }
+    }
+    let elaspedTime = 0;
+    let startTime = null;
+    let timerInterval = null;
+    let isRunning = false;
+    let isStopped = false;
+    function saveTimerState() {
+      sessionStorage.setItem(
+        "lumiTimerState",
+        JSON.stringify({
+          elaspedTime,
+          startTime,
+          isRunning,
+          isStopped,
+        }),
+      );
+    }
+
+    function restoreTimerSate() {
+      const savedState = sessionStorage.getItem("lumiTimerState");
+
+      if (!savedState) {
+        updateDisplay();
+        return;
+      }
+
+      const state = JSON.parse(savedState);
+
+      elaspedTime = state.elaspedTime;
+      isStopped = state.isStopped;
+      isRunning = false;
+
+      if (state.isRunning) {
+        startTime = state.startTime;
+        isRunning = true;
+
+        timerInterval = setInterval(() => {
+          elaspedTime = Date.now() - startTime;
+          updateDisplay();
+          saveTimerState();
+        }, 1000);
+
+        elaspedTime = Date.now() - startTime;
+        updateDisplay();
+      } else {
+        startTime = null;
+        updateDisplay();
+      }
+    }
+
+    function updateDisplay() {
+      const totalSeconds = Math.floor(elaspedTime / 1000);
+
+      const hoursVal = Math.floor(totalSeconds / 3600);
+      const minVal = Math.floor((totalSeconds % 3600) / 60);
+      const secVal = Math.floor(totalSeconds % 60);
+
+      hours.textContent = String(hoursVal).padStart(2, "0");
+      mins.textContent = String(minVal).padStart(2, "0");
+      sec.textContent = String(secVal).padStart(2, "0");
+    }
+
+    function startTimer() {
+      if (isRunning) {
+        return;
+      }
+      if (isStopped) {
+        elaspedTime = 0;
+        isStopped = false;
+      }
+      isRunning = true;
+      startTime = Date.now() - elaspedTime;
+
+      ((timerInterval = setInterval(() => {
+        elaspedTime = Date.now() - startTime;
+        updateDisplay();
+        saveTimerState();
+      })),
+        1000);
+    }
+
+    function pauseTimer() {
+      if (!isRunning) {
+        return;
+      }
+      elaspedTime = Date.now() - startTime;
+      clearInterval(timerInterval);
+      isRunning = false;
+      updateDisplay();
+      saveTimerState();
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      isRunning = false;
+      startTime = null;
+      timerInterval = null;
+      elaspedTime = 0;
+      updateDisplay();
+      saveTimerState();
+    }
+
+    async function stopTimer() {
+      if (isStopped) {
+        return;
+      }
+      if (!isRunning && elaspedTime === 0) {
+        return;
+      }
+
+      if (isRunning) {
+        elaspedTime = Date.now() - startTime;
+      }
+
+      clearInterval(timerInterval);
+
+      isRunning = false;
+      isStopped = true;
+      startTime = null;
+      timerInterval = null;
+
+      updateDisplay();
+      saveTimerState();
+
+      try {
+        const response = await fetch("/focusSession", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            duration: elaspedTime,
+          }),
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.message || "Failed to save study session");
+        }
+        await loadTotalStudyTime();
+        console.log("study session saved", result.data);
+      } catch (error) {
+        console.log(error.message);
+        alert("Could not save your study session. Please try again.");
+      }
+    }
+
+    loadTotalStudyTime();
+    restoreTimerSate();
+  </script>
 </html>

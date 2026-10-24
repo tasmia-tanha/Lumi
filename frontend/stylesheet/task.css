@@ -109,7 +109,7 @@ body{
 .taskTop h1 {
     margin: 0;
     color: #3a4f41;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 2rem;
     font-weight: 800;
 }
@@ -222,7 +222,7 @@ body{
     gap: 8px;
     margin: 0 0 12px;
     color: #3a4f41;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 1.05rem;
     font-weight: 800;
 }
