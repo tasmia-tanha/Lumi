@@ -692,3 +692,90 @@ body{
 #startBreakBtn:hover {
     background-color: #eac3d1;
 }
+
+
+/* Focus-session controls added for daily-goal settings and accessibility */
+.goalSettings {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #edf0e7;
+}
+.goalSettings label {
+  color: #50654f;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.goalInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.goalInputs select,
+#customDurationInput {
+  min-width: 0;
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #dce5d5;
+  border-radius: 10px;
+  background: #fffdf7;
+  color: #435d45;
+  font: inherit;
+  font-size: 0.8rem;
+}
+#saveDailyGoalBtn {
+  align-self: flex-start;
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #84A282;
+  color: #fffdf7;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+#saveDailyGoalBtn:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+#goalSettingsMessage {
+  min-height: 1em;
+  margin: 0;
+  color: #718571;
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+.customDurationBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.customDurationBox[hidden] {
+  display: none;
+}
+.customDurationBox label {
+  color: #677765;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.customDurationBox #applyCustomDuration {
+  align-self: flex-start;
+  min-width: 100px;
+}
+.ambienceBtn:focus-visible,
+.controlBtn:focus-visible,
+.modeBtn:focus-visible,
+.durationBtn:focus-visible,
+#saveDailyGoalBtn:focus-visible {
+  outline: 3px solid #dba9b9;
+  outline-offset: 2px;
+}
+@media (max-width: 400px) {
+  .goalInputs {
+    grid-template-columns: 1fr;
+  }
+}
