@@ -2,277 +2,656 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title><%= title %></title>
+
     <link rel="stylesheet" href="../stylesheet/dailyHabits.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
       rel="stylesheet"
     />
   </head>
+
   <body>
     <div class="main">
-      
-      <div class="navbar" style="grid-area: box-1">
-        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" alt="Lumi Sprout Logo" />
-        <ul id="list" style="list-style-type: none; padding: 0px">
+      <div class="navbar">
+        <img
+          id="nameLogo"
+          src="../images/Lumi Sprout Heart Logo.png"
+          alt="Lumi Sprout Logo"
+        />
+
+        <ul id="list" style="list-style-type: none; padding: 0">
           <li class="items">
             <button class="navBtn">
-              <a class="navLinks" href="/dashboard">Dashboard</a>
+              <a class="navLinks" href="/dashboard"> Dashboard </a>
             </button>
           </li>
+
           <li class="items">
             <button class="navBtn">
-              <a class="navLinks" href="/task">Tasks</a>
+              <a class="navLinks" href="/task"> Tasks </a>
             </button>
           </li>
+
           <li class="items">
             <button class="navBtn">
-              <a class="navLinks" href="/calendar">Calendar</a>
+              <a class="navLinks" href="/calendar"> Calendar </a>
             </button>
           </li>
+
           <li class="items">
             <button class="navBtn">
-              <a class="navLinks" href="/note">Note</a>
+              <a class="navLinks" href="/note"> Note </a>
             </button>
           </li>
+
           <li class="items">
             <button class="navBtn">
-              <a class="navLinks" href="/lessons">Lessons</a>
+              <a class="navLinks" href="/lessons"> Lessons </a>
             </button>
           </li>
+
           <li class="items">
             <button class="navBtn">
-              <a class="navLinks" href="/dailyHabits">Daily Habits</a>
+              <a class="navLinks" href="/dailyHabits"> Daily Habits </a>
             </button>
           </li>
+
           <li class="items">
             <button class="navBtn">
-              <a class="navLinks" href="/focusSession">Focus Session</a>
+              <a class="navLinks" href="/focusSession"> Focus Session </a>
             </button>
           </li>
         </ul>
 
-        <button class="logout">Log Out</button>
+        <button class="logout" id="logoutBtn">Log Out</button>
       </div>
 
-      
       <main class="habitSection">
-        
         <div class="habitHeaderArea">
-          <h1>Sprout Habits</h1>
+          <div>
+            <h1>Sprout Habits</h1>
+
+            <p class="headerSubtitle">Small habits grow into big changes 🌱</p>
+          </div>
+
           <div class="dateDisplay">
-            <span id="currentMonthYear">October 2026</span>
+            <span id="currentMonthYear"></span>
           </div>
         </div>
 
-        
         <div class="habitCard">
           <div class="tableWrapper">
             <table class="habitTable">
               <thead>
-                <tr>
+                <tr id="habitDaysHeader">
                   <th class="habitNameCol">
                     <div class="habitColHeader">
                       <span>Habits</span>
-                      <button class="addHabitBtn" title="Add new habit (Max 10)" onclick="addHabitRow()">+ Add</button>
+
+                      <button
+                        class="addHabitBtn"
+                        id="addHabitBtn"
+                        title="Add new habit"
+                      >
+                        + Add
+                      </button>
                     </div>
                   </th>
-                  
-                  <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
-                  <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
-                  <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
-                  <th class="currentDayCol">16</th><th>17</th><th>18</th><th>19</th><th>20</th>
-                  <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
-                  <th>26</th><th>27</th><th>28</th><th>29</th><th>30</th><th>31</th>
                 </tr>
               </thead>
-              <tbody id="habitTableBody">
-                
-                <tr>
-                  <td class="habitLabel">💧 Drink 2L Water</td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td class="currentDayCol"><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                </tr>
 
-                
-                <tr>
-                  <td class="habitLabel">📖 Read 20 Pages</td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td class="currentDayCol"><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                </tr>
-
-                
-                <tr>
-                  <td class="habitLabel">💻 Code Practice</td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td class="currentDayCol"><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                </tr>
-
-                
-                <tr>
-                  <td class="habitLabel">🏃 30 Min Workout</td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" checked /></td>
-                  <td><input type="checkbox" /></td>
-                  <td class="currentDayCol"><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
-                </tr>
-              </tbody>
+              <tbody id="habitTableBody"></tbody>
             </table>
           </div>
         </div>
       </main>
 
-      
       <aside class="rightPanel">
-        
         <div class="statCard streakCard">
-          <div class="statIcon">🔥</div>
-          <div class="statInfo">
-            <h3>Active Streak</h3>
-            <p class="statValue">16 Days</p>
-            <span class="statSubtext">Best: 24 Days</span>
+          <div class="streakTop">
+            <div class="streakFire">🔥</div>
+
+            <div>
+              <h3>Active Streak</h3>
+
+              <p class="streakNumber" id="streakValue">0</p>
+
+              <span> days in a row </span>
+            </div>
+          </div>
+
+          <div class="streakBottom">
+            <span> 🏆 Best streak </span>
+
+            <strong id="bestStreak"> 0 days </strong>
           </div>
         </div>
 
-        
-        <div class="statCard progressCard">
-          <h3>Monthly Progress</h3>
-          <div class="progressCircle">
-            <span class="progressPercent">78%</span>
+        <div class="statCard todayCard">
+          <div class="cardHeading">
+            <h3>Today's Progress</h3>
+
+            <span> 🌱 </span>
           </div>
-          <p class="progressLabel">Habits Completed This Month</p>
-          
-          <div class="progressBreakdown">
-            <div class="breakdownItem">
-              <span>Goal Target</span>
-              <strong>80%</strong>
+
+          <div class="todayProgress">
+            <div class="progressCircle" id="todayProgressCircle">
+              <span class="progressPercent" id="todayProgressPercent">
+                0%
+              </span>
             </div>
-            <div class="breakdownItem">
-              <span>Total Check-ins</span>
-              <strong>142</strong>
+
+            <div class="todayInfo">
+              <strong id="todayCompleted"> 0 / 0 </strong>
+
+              <span> habits completed </span>
             </div>
+          </div>
+
+          <div class="progressBar">
+            <div class="progressBarFill" id="todayProgressBar"></div>
+          </div>
+        </div>
+
+        <div class="statCard monthlyCard">
+          <div class="cardHeading">
+            <h3>This Month</h3>
+
+            <span> 📊 </span>
+          </div>
+
+          <div class="monthlyStats">
+            <div class="monthlyStat">
+              <strong id="monthlyCompletion"> 0% </strong>
+
+              <span> Completion </span>
+            </div>
+
+            <div class="monthlyDivider"></div>
+
+            <div class="monthlyStat">
+              <strong id="monthlyCheckins"> 0 </strong>
+
+              <span> Check-ins </span>
+            </div>
+          </div>
+
+          <div class="monthlyMessage" id="monthlyMessage">
+            🌱 Start growing your habits!
           </div>
         </div>
       </aside>
     </div>
 
-    
+    <script id="habits-data" type="application/json">
+            <%- JSON.stringify(
+              habits.map(habit => ({
+        id: habit._id.toString(),
+        name: habit.name,
+        createdAt: habit.createdAt
+      }))
+            ) %>
+    </script>
+
+    <script id="checkins-data" type="application/json">
+      <%- JSON.stringify(
+        checkIns.map(checkIn => ({
+          habitId: checkIn.habit.toString(),
+          date: checkIn.date.toISOString().slice(0, 10)
+        }))
+      ) %>
+    </script>
+
+    <script>
+      const today = new Date();
+
+      const currentYear = today.getFullYear();
+
+      const currentMonth = today.getMonth();
+
+      const currentDate = today.getDate();
+
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      const monthName = monthNames[currentMonth];
+
+      document.getElementById("currentMonthYear").textContent =
+        `${monthName} ${currentYear}`;
+
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      const headerRow = document.getElementById("habitDaysHeader");
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const th = document.createElement("th");
+
+        th.textContent = day;
+
+        if (day === currentDate) {
+          th.classList.add("currentDayCol");
+        }
+
+        headerRow.appendChild(th);
+      }
+
+      let habits = JSON.parse(
+        document.getElementById("habits-data").textContent,
+      );
+      console.log(habits);
+
+      const checkIns = JSON.parse(
+        document.getElementById("checkins-data").textContent,
+      );
+
+      let savedData = {};
+
+      checkIns.forEach((checkIn) => {
+        const date = new Date(`${checkIn.date}T00:00:00`);
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const day = date.getDate();
+
+        if (year === currentYear && month === currentMonth) {
+          if (!savedData[checkIn.habitId]) {
+            savedData[checkIn.habitId] = {};
+          }
+
+          savedData[checkIn.habitId][String(day)] = true;
+        }
+      });
+
+      function createHabitRow(habit) {
+        const row = document.createElement("tr");
+
+        row.dataset.habitId = habit.id;
+
+        const nameCell = document.createElement("td");
+
+        nameCell.className = "habitLabel";
+
+        const nameWrapper = document.createElement("div");
+
+        nameWrapper.style.display = "flex";
+
+        nameWrapper.style.alignItems = "center";
+
+        nameWrapper.style.justifyContent = "space-between";
+
+        const nameText = document.createElement("span");
+
+        nameText.textContent = habit.name;
+
+        const deleteButton = document.createElement("button");
+
+        deleteButton.className = "deleteHabitBtn";
+
+        deleteButton.textContent = "×";
+
+        deleteButton.title = "Remove habit";
+
+        deleteButton.addEventListener("click", async function () {
+          const confirmed = confirm(
+            `Are you sure you want to delete "${habit.name}"?`,
+          );
+
+          if (!confirmed) {
+            return;
+          }
+
+          try {
+            const response = await fetch(`/dailyHabits/${habit.id}`, {
+              method: "DELETE",
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+              throw new Error(data.message || "Could not delete habit");
+            }
+
+            habits = habits.filter((item) => item.id !== habit.id);
+
+            delete savedData[habit.id];
+
+            renderHabits();
+          } catch (error) {
+            console.error("Delete habit failed:", error);
+            alert("Could not delete the habit. Please try again.");
+          }
+        });
+
+        nameWrapper.appendChild(nameText);
+
+        nameWrapper.appendChild(deleteButton);
+
+        nameCell.appendChild(nameWrapper);
+
+        row.appendChild(nameCell);
+
+        for (let day = 1; day <= daysInMonth; day++) {
+          const cell = document.createElement("td");
+
+          if (day === currentDate) {
+            cell.classList.add("currentDayCol");
+          }
+
+          const checkbox = document.createElement("input");
+
+          checkbox.type = "checkbox";
+
+          const dayKey = String(day);
+
+          if (savedData[habit.id] && savedData[habit.id][dayKey]) {
+            checkbox.checked = true;
+          }
+
+          checkbox.addEventListener("change", async function () {
+            const date = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+            try {
+              const response = await fetch(
+                `/dailyHabits/${habit.id}/check-in`,
+                {
+                  method: "PATCH",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    date,
+                    completed: checkbox.checked,
+                  }),
+                },
+              );
+
+              const data = await response.json();
+
+              if (!response.ok) {
+                throw new Error(data.message || "Could not save check-in");
+              }
+
+              if (!savedData[habit.id]) {
+                savedData[habit.id] = {};
+              }
+
+              savedData[habit.id][String(day)] = checkbox.checked;
+
+              saveData();
+              updateStats();
+              await loadHabitStats();
+            } catch (error) {
+              console.error("Check-in failed:", error);
+              checkbox.checked = !checkbox.checked;
+              alert("Could not save the check-in. Please try again.");
+            }
+          });
+
+          cell.appendChild(checkbox);
+
+          row.appendChild(cell);
+        }
+
+        return row;
+      }
+
+      function renderHabits() {
+        const body = document.getElementById("habitTableBody");
+
+        body.innerHTML = "";
+
+        habits.forEach((habit) => {
+          body.appendChild(createHabitRow(habit));
+        });
+
+        updateStats();
+      }
+
+      function saveData() {}
+
+      function updateTodayProgress() {
+        let total = habits.length;
+
+        let completed = 0;
+
+        habits.forEach((habit) => {
+          if (savedData[habit.id] && savedData[habit.id][currentDate]) {
+            completed++;
+          }
+        });
+
+        const percentage =
+          total === 0 ? 0 : Math.round((completed / total) * 100);
+
+        document.getElementById("todayCompleted").textContent =
+          `${completed} / ${total}`;
+
+        document.getElementById("todayProgressPercent").textContent =
+          `${percentage}%`;
+
+        document.getElementById("todayProgressBar").style.width =
+          `${percentage}%`;
+
+        document.getElementById("todayProgressCircle").style.background =
+          `conic-gradient(
+            #7f9f7a ${percentage}%,
+            #dbe6d8 ${percentage}%
+          )`;
+
+        const message = document.getElementById("monthlyMessage");
+
+        if (percentage === 100 && total > 0) {
+          message.textContent = "✨ Amazing! All habits done today!";
+        } else if (percentage >= 75) {
+          message.textContent = "🌿 You're doing great today!";
+        } else if (percentage >= 50) {
+          message.textContent = "🌱 You're halfway there!";
+        } else if (percentage > 0) {
+          message.textContent = "✨ Every check-in counts!";
+        } else {
+          message.textContent = "🌱 Start growing your habits!";
+        }
+      }
+
+      function updateMonthlyProgress() {
+        const totalPossible = habits.length * currentDate;
+        let totalCompleted = 0;
+
+        habits.forEach((habit) => {
+          if (!savedData[habit.id]) {
+            return;
+          }
+
+          for (let day = 1; day <= currentDate; day++) {
+            if (savedData[habit.id][String(day)] === true) {
+              totalCompleted++;
+            }
+          }
+        });
+
+        const percentage =
+          totalPossible === 0
+            ? 0
+            : Math.round((totalCompleted / totalPossible) * 100);
+
+        document.getElementById("monthlyCompletion").textContent =
+          `${percentage}%`;
+
+        document.getElementById("monthlyCheckins").textContent = totalCompleted;
+      }
+
+      function updateStreak() {
+        let currentStreak = 0;
+        let bestStreak = 0;
+        let runningStreak = 0;
+
+        function allHabitsCompleted(day) {
+          const dateToCheck = new Date(currentYear, currentMonth, day);
+
+          const habitsForThatDay = habits.filter((habit) => {
+            const createdAt = new Date(habit.createdAt);
+
+            return createdAt < new Date(currentYear, currentMonth, day + 1);
+          });
+
+          if (habitsForThatDay.length === 0) {
+            return false;
+          }
+
+          return habitsForThatDay.every((habit) => {
+            return (
+              savedData[habit.id] && savedData[habit.id][String(day)] === true
+            );
+          });
+        }
+
+        for (let day = 1; day <= currentDate; day++) {
+          if (allHabitsCompleted(day)) {
+            runningStreak++;
+            bestStreak = Math.max(bestStreak, runningStreak);
+          } else {
+            runningStreak = 0;
+          }
+        }
+
+        for (let day = currentDate; day >= 1; day--) {
+          if (allHabitsCompleted(day)) {
+            currentStreak++;
+          } else {
+            break;
+          }
+        }
+
+        document.getElementById("streakValue").textContent = currentStreak;
+
+        document.getElementById("bestStreak").textContent =
+          `${bestStreak} days`;
+      }
+
+      function updateStats() {
+        loadHabitStats();
+      }
+
+      async function loadHabitStats() {
+        try {
+          const response = await fetch("/dailyHabits/stats");
+
+          if (!response.ok) {
+            throw new Error("Failed to load habit statistics");
+          }
+
+          const stats = await response.json();
+
+          document.getElementById("todayCompleted").textContent =
+            `${stats.todayCompleted} / ${stats.totalHabits}`;
+
+          document.getElementById("todayProgressPercent").textContent =
+            `${stats.todayProgress}%`;
+
+          document.getElementById("todayProgressBar").style.width =
+            `${stats.todayProgress}%`;
+
+          document.getElementById("todayProgressCircle").style.background =
+            `conic-gradient(#7f9f7a ${stats.todayProgress}%, #dbe6d8 ${stats.todayProgress}%)`;
+
+          document.getElementById("monthlyCompletion").textContent =
+            `${stats.monthlyCompletion}%`;
+
+          document.getElementById("monthlyCheckins").textContent =
+            stats.monthlyCheckins;
+
+          // Update streak statistics
+          document.getElementById("streakValue").textContent =
+            stats.currentStreak;
+
+          document.getElementById("bestStreak").textContent = stats.bestStreak;
+        } catch (error) {
+          console.error("Failed to load habit statistics:", error);
+        }
+      }
+      document
+        .getElementById("addHabitBtn")
+        .addEventListener("click", async function () {
+          if (habits.length >= 10) {
+            alert("You can have a maximum of 10 habits.");
+            return;
+          }
+
+          const habitName = prompt("What habit would you like to add?");
+
+          if (!habitName || !habitName.trim()) {
+            return;
+          }
+
+          try {
+            const response = await fetch("/dailyHabits", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: habitName.trim(),
+              }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+              alert(data.message || "Could not add habit.");
+              return;
+            }
+
+            habits.push({
+              id: data.habit._id,
+              name: data.habit.name,
+              createdAt: data.habit.createdAt,
+            });
+
+            renderHabits();
+          } catch (error) {
+            console.error("Failed to add habit:", error);
+            alert("Could not connect to the server.");
+          }
+        });
+
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", async function () {
+          try {
+            const response = await fetch("/logout", {
+              method: "DELETE",
+            });
+
+            if (response.ok) {
+              window.location.href = "/";
+            }
+          } catch (error) {
+            console.error("Logout failed:", error);
+          }
+        });
+
+      renderHabits();
+      loadHabitStats();
+    </script>
   </body>
 </html>
