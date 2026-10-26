@@ -19,48 +19,35 @@
   </head>
   <body>
     <div class="main">
-      <div class="navbar" style="grid-area: box-1">
-        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" />
-        <ul id="list" style="list-style-type: none; padding: 0px">
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/dashboard">Dashboard</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/task">Tasks</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/calendar">Calendar</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/notes">Note</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/lessons">Lessons</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/dailyHabits">Daily Habits</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/focusSession">Focus Session</a>
-            </button>
-          </li>
-        </ul>
+      <aside class="sidebar">
+        <a href="/dashboard" class="brand">
+          <span>Lumi</span>
+        </a>
 
-        <button class="logout" onclick="logout()">Log Out</button>
-      </div>
+        <p class="navLabel">WORKSPACE</p>
+
+        <nav class="navigation">
+          <a href="/dashboard" class="navLink"> <span>🏡</span> Dashboard </a>
+          <a href="/task" class="navLink"> <span>🌱</span> My Tasks </a>
+          <a href="/calendar" class="navLink"> <span>📅</span> Calendar </a>
+          <a href="/notes" class="navLink"> <span>📝</span> Notes </a>
+          <a href="/lessons" class="navLink active">
+            <span>📚</span> Lessons
+          </a>
+          <a href="/dailyHabits" class="navLink">
+            <span>🌷</span> Daily Habits
+          </a>
+          <a href="/focusSession" class="navLink">
+            <span>⏳</span> Focus Session
+          </a>
+        </nav>
+
+        <div class="sidebarBottom">
+          <button id="logoutBtn" class="logoutButton" type="button">
+            Log out
+          </button>
+        </div>
+      </aside>
 
       <section class="calendarSection">
         <div class="calendarHeaderArea">
@@ -142,20 +129,21 @@
   </body>
 
   <script>
-    const logoutToast = Toastify({
-      text: "You are being logged out",
-      duration: 1000,
-    });
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        const response = await fetch("/logout", {
+          method: "DELETE",
+        });
 
-    function logout() {
-      fetch("/logout", {
-        method: "DELETE",
-      });
-      logoutToast.showToast();
-      setTimeout(() => {
+        if (!response.ok) {
+          throw new Error("Could not log out. Please try again.");
+        }
+
         window.location.href = "/";
-      }, 1000);
-    }
+      } catch (error) {
+        showToast(error.message, true);
+      }
+    });
 
     const selectedYear = document.querySelector("#yearSelect");
     const currentYear = new Date().getFullYear();
