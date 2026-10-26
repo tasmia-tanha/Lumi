@@ -1,144 +1,158 @@
+:root {
+  --green: #b8cfb3;
+  --green-dark: #84a282;
+  --green-deep: #587b59;
+  --pink: #f6e2e9;
+  --pink-dark: #eec0d0;
+  --cream: #fefaf3;
+  --white: #ffffff;
+  --text: #3e493d;
+  --muted: #899185;
+  --border: #e7e9df;
+  --shadow: 0 8px 25px rgba(86, 112, 80, 0.08);
+}
+
 * {
   box-sizing: border-box;
-  font-family: "Nunito", sans-serif;
 }
 
 body {
-  min-height: 100vh;
   margin: 0;
-  background-color: #eef3eb;
-  color: #334238;
+  font-family: "Nunito", sans-serif;
+  color: var(--text);
+  background: var(--cream);
 }
 
-/* =========================
-   MAIN LAYOUT
-========================= */
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.appLayout {
+  display: flex;
+  min-height: 100vh;
+}
 
 .main {
   height: 100vh;
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr) 280px;
-  grid-template-areas: "box-1 habits right";
+  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-areas: "habits right";
   gap: 18px;
+  margin-left: 245px;
   padding: 10px;
   overflow: hidden;
 }
 
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar {
-  grid-area: box-1;
-
-  background-color: #8fae8a;
-  border-radius: 18px;
-
-  padding: 18px 10px;
-
+.sidebar {
+  width: 245px;
+  min-width: 245px;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
-
-  box-shadow: 0 5px 15px rgba(72, 98, 70, 0.12);
+  padding: 28px 18px 20px;
+  background: #f4f3e9;
+  border-right: 1px solid var(--border);
 }
 
-#nameLogo {
-  width: 110px;
-  height: 110px;
-  object-fit: contain;
-
-  border-radius: 28px;
-
-  margin-top: 5px;
-  margin-bottom: 35px;
-
-  background-color: #fcf6ec;
-  padding: 6px;
-
-  box-shadow: 0 4px 10px rgba(72, 98, 70, 0.15);
-}
-
-#list {
-  width: 100%;
-  margin: 0;
-}
-
-.items {
-  width: 100%;
-  margin-bottom: 7px;
-}
-
-.navBtn {
-  width: 100%;
-  height: 50px;
-
-  background-color: transparent;
-
-  border: none;
-  border-radius: 12px;
-
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.navBtn:hover {
-  background-color: #b8cfb3;
-  cursor: pointer;
-  transform: translateX(2px);
-}
-
-.navLinks {
+.brand {
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-
-  color: #fdfcf8;
-
-  font-size: 15px;
+  gap: 10px;
+  padding: 0 12px;
+  margin-bottom: 38px;
+  font-size: 27px;
   font-weight: 800;
-
-  text-decoration: none;
+  color: var(--green-deep);
 }
 
-.navBtn:hover .navLinks {
-  color: #334238;
+.brand img {
+  width: 43px;
+  height: 43px;
+  object-fit: contain;
 }
 
-.logout {
-  width: 95px;
-  height: 36px;
+.navLabel,
+.eyebrow {
+  color: var(--green-deep);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
 
-  margin-top: auto;
+.navLabel {
+  margin: 0 12px 13px;
+}
 
-  background-color: #f3d6e0;
-  color: #795266;
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
 
-  font-weight: 900;
-
-  border: none;
-  border-radius: 10px;
-
-  cursor: pointer;
-
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 13px;
+  color: #737d70;
+  font-size: 14px;
+  font-weight: 700;
   transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
+    background 0.2s,
+    color 0.2s;
 }
 
-.logout:hover {
-  background-color: #eabccc;
-  transform: translateY(-1px);
+.navLink span {
+  font-size: 18px;
 }
 
-/* =========================
-   HABIT SECTION
-========================= */
+.navLink:hover {
+  background: #e8eee2;
+  color: var(--green-deep);
+}
+
+.navLink.active {
+  background: var(--green);
+  color: #344c35;
+}
+
+.sidebarBottom {
+  margin-top: auto;
+  padding-top: 35px;
+  text-align: center;
+}
+
+.sidebarBottom p {
+  margin: 5px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5cbd4;
+  border-radius: 12px;
+  background: #fff8fa;
+  color: #8c6471;
+  font-weight: 700;
+}
+
+.logoutButton:hover {
+  background: var(--pink);
+}
 
 .habitSection {
   grid-area: habits;
@@ -152,10 +166,6 @@ body {
 
   min-width: 0;
 }
-
-/* =========================
-   HEADER
-========================= */
 
 .habitHeaderArea {
   display: flex;
@@ -199,12 +209,8 @@ body {
   box-shadow: 0 3px 8px rgba(72, 98, 70, 0.06);
 }
 
-/* =========================
-   HABIT CARD
-========================= */
-
 .habitCard {
-  background-color: #ffffff;
+  background-color: #fefaf3;
 
   border: 2px solid #c9dcc5;
   border-radius: 18px;
@@ -230,8 +236,6 @@ body {
   border-radius: 10px;
 }
 
-/* Scrollbar */
-
 .tableWrapper::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -250,10 +254,6 @@ body {
 .tableWrapper::-webkit-scrollbar-thumb:hover {
   background: #8fae8a;
 }
-
-/* =========================
-   TABLE
-========================= */
 
 .habitTable {
   width: 100%;
@@ -306,10 +306,6 @@ body {
 .habitTable tbody tr:hover td {
   background-color: #f7faf6;
 }
-
-/* =========================
-   HABIT NAME COLUMN
-========================= */
 
 .habitNameCol {
   position: sticky !important;
@@ -393,10 +389,6 @@ body {
   background-color: #f7faf6 !important;
 }
 
-/* =========================
-   CURRENT DAY
-========================= */
-
 .currentDayCol {
   background-color: #f5e0e7 !important;
 }
@@ -412,10 +404,6 @@ body {
 .habitTable td.currentDayCol {
   background-color: #fff5f7;
 }
-
-/* =========================
-   CHECKBOX
-========================= */
 
 .habitTable input[type="checkbox"] {
   appearance: none;
@@ -464,10 +452,6 @@ body {
   left: 3px;
 }
 
-/* =========================
-   RIGHT PANEL
-========================= */
-
 .rightPanel {
   grid-area: right;
 
@@ -481,10 +465,6 @@ body {
   padding: 8px 0;
 }
 
-/* =========================
-   COMMON CARD
-========================= */
-
 .statCard {
   background-color: #ffffff;
 
@@ -496,16 +476,8 @@ body {
   box-shadow: 0 5px 15px rgba(72, 98, 70, 0.07);
 }
 
-/* =========================
-   STREAK CARD
-========================= */
-
 .streakCard {
-  background: linear-gradient(
-    135deg,
-    #f7e2e9 0%,
-    #ffffff 100%
-  );
+  background: linear-gradient(135deg, #f7e2e9 0%, #ffffff 100%);
 
   border-color: #e4bdca;
 }
@@ -585,10 +557,6 @@ body {
   color: #4d6650;
 }
 
-/* =========================
-   CARD HEADING
-========================= */
-
 .cardHeading {
   display: flex;
   justify-content: space-between;
@@ -609,10 +577,6 @@ body {
 .cardHeading span {
   font-size: 1.15rem;
 }
-
-/* =========================
-   TODAY'S PROGRESS
-========================= */
 
 .todayCard {
   padding-bottom: 17px;
@@ -639,10 +603,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  background: conic-gradient(
-    #7f9f7a 0%,
-    #dbe6d8 0%
-  );
+  background: conic-gradient(#7f9f7a 0%, #dbe6d8 0%);
 
   position: relative;
 }
@@ -688,8 +649,6 @@ body {
   font-weight: 700;
 }
 
-/* Progress bar */
-
 .progressBar {
   width: 100%;
   height: 8px;
@@ -707,20 +666,12 @@ body {
   width: 0%;
   height: 100%;
 
-  background: linear-gradient(
-    90deg,
-    #8fae8a,
-    #6f906a
-  );
+  background: linear-gradient(90deg, #8fae8a, #6f906a);
 
   border-radius: 20px;
 
   transition: width 0.3s ease;
 }
-
-/* =========================
-   MONTHLY SUMMARY
-========================= */
 
 .monthlyCard {
   flex-grow: 1;
@@ -785,10 +736,6 @@ body {
   font-weight: 800;
 }
 
-/* =========================
-   DELETE HABIT BUTTON
-========================= */
-
 .deleteHabitBtn {
   margin-left: 5px;
 
@@ -814,10 +761,6 @@ body {
 .deleteHabitBtn:hover {
   color: #a85f77;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 1100px) {
   .main {
@@ -879,4 +822,15 @@ body {
   .habitHeaderArea h1 {
     font-size: 1.5rem;
   }
+}
+
+.sidebar {
+  margin: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
 }

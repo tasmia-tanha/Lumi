@@ -21,59 +21,45 @@
 
   <body>
     <div class="main">
-      <div class="navbar">
-        <img
-          id="nameLogo"
-          src="../images/Lumi Sprout Heart Logo.png"
-          alt="Lumi Sprout Logo"
-        />
+      <aside class="sidebar">
+      <a href="/dashboard" class="brand">
+  <span>Lumi</span>
+</a>
 
-        <ul id="list" style="list-style-type: none; padding: 0">
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/dashboard"> Dashboard </a>
-            </button>
-          </li>
+      <p class="navLabel">WORKSPACE</p>
 
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/task"> Tasks </a>
-            </button>
-          </li>
+      <nav class="navigation">
+        <a href="/dashboard" class="navLink">
+          <span>🏡</span> Dashboard
+        </a>
+        <a href="/task" class="navLink">
+          <span>🌱</span> My Tasks
+        </a>
+        <a href="/calendar" class="navLink">
+          <span>📅</span> Calendar
+        </a>
+        <a href="/notes" class="navLink">
+          <span>📝</span> Notes
+        </a>
+        <a href="/lessons" class="navLink">
+          <span>📚</span> Lessons
+        </a>
+        <a href="/dailyHabits" class="navLink active">
+          <span>🌷</span> Daily Habits
+        </a>
+        <a href="/focusSession" class="navLink">
+          <span>⏳</span> Focus Session
+        </a>
+      </nav>
 
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/calendar"> Calendar </a>
-            </button>
-          </li>
-
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/note"> Note </a>
-            </button>
-          </li>
-
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/lessons"> Lessons </a>
-            </button>
-          </li>
-
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/dailyHabits"> Daily Habits </a>
-            </button>
-          </li>
-
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/focusSession"> Focus Session </a>
-            </button>
-          </li>
-        </ul>
-
-        <button class="logout" id="logoutBtn">Log Out</button>
+      <div class="sidebarBottom">
+        
+        
+        <button id="logoutBtn" class="logoutButton" type="button">
+          Log out
+        </button>
       </div>
+    </aside>
 
       <main class="habitSection">
         <div class="habitHeaderArea">
@@ -212,6 +198,21 @@
     </script>
 
     <script>
+      document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        const response = await fetch("/logout", {
+          method: "DELETE",
+        });
+
+        if (!response.ok) {
+          throw new Error("Could not log out. Please try again.");
+        }
+
+        window.location.href = "/";
+      } catch (error) {
+        showToast(error.message, true);
+      }
+    });
       const today = new Date();
 
       const currentYear = today.getFullYear();
