@@ -43,7 +43,7 @@ a {
   min-height: 100vh;
 }
 
-/* Sidebar */
+
 
 .sidebar {
   width: 245px;
@@ -122,14 +122,6 @@ a {
   text-align: center;
 }
 
-.sidebarCapybara {
-  display: block;
-  width: 125px;
-  height: 115px;
-  margin: 0 auto 8px;
-  object-fit: contain;
-}
-
 .sidebarBottom p {
   margin: 5px 0 18px;
   color: var(--muted);
@@ -151,7 +143,7 @@ a {
   background: var(--pink);
 }
 
-/* Main layout */
+
 
 .mainContent {
   flex: 1;
@@ -311,7 +303,7 @@ a {
   font-weight: 800;
 }
 
-/* Subjects */
+
 
 .subjectSection {
   margin-bottom: 28px;
@@ -383,7 +375,7 @@ input[type="url"]:focus {
   box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.13);
 }
 
-/* Lessons and materials */
+
 
 .contentGrid {
   display: grid;
@@ -583,7 +575,7 @@ input[type="url"]:focus {
   background: var(--green);
 }
 
-/* Empty states */
+
 
 .emptyState {
   padding: 30px 12px;
@@ -613,7 +605,7 @@ input[type="url"]:focus {
   display: none !important;
 }
 
-/* Modals */
+
 
 .modalOverlay {
   position: fixed;
@@ -704,7 +696,7 @@ input[type="url"]:focus {
   margin-top: 13px;
 }
 
-/* Toast */
+
 
 .toast {
   position: fixed;
@@ -736,17 +728,6 @@ input[type="url"]:focus {
   background: #fff0f2;
   color: #a04e60;
 }
-
-/* Footer */
-
-.pageFooter {
-  padding: 30px 0 5px;
-  color: #9aa394;
-  font-size: 12px;
-  text-align: center;
-}
-
-/* Responsive layout */
 
 @media (max-width: 1100px) {
   .sidebar {
@@ -900,9 +881,6 @@ input[type="url"]:focus {
 }
 
 
-/* ========================================
-   FIXED VIEWPORT LAYOUT
-======================================== */
 
 html,
 body {
@@ -920,7 +898,7 @@ body {
   overflow: hidden;
 }
 
-/* Fixed sidebar */
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -948,14 +926,14 @@ body {
   display: none;
 }
 
-/* Keep logout visible at the bottom */
+
 .sidebarBottom {
   margin-top: auto;
   padding-top: 15px;
   flex-shrink: 0;
 }
 
-/* Main page stays in place */
+
 .mainContent {
   position: fixed;
   top: 0;
@@ -979,7 +957,7 @@ body {
   gap: 0;
 }
 
-/* Smaller header */
+
 .pageHeader {
   flex-shrink: 0;
   margin-bottom: 16px;
@@ -993,7 +971,7 @@ body {
   margin-top: 4px;
 }
 
-/* Compact progress card */
+
 .overviewCard {
   flex-shrink: 0;
   min-height: 0;
@@ -1022,7 +1000,6 @@ body {
   display: none !important;
 }
 
-/* Subject selector stays above the scrolling lists */
 .subjectSection {
   flex-shrink: 0;
   margin-bottom: 16px;
@@ -1036,7 +1013,7 @@ body {
   padding: 11px 13px;
 }
 
-/* Lessons and materials share the remaining height */
+
 .contentGrid {
   flex: 1;
   min-height: 0;
@@ -1057,7 +1034,6 @@ body {
   padding: 18px;
 }
 
-/* Only the list content scrolls */
 .lessonList,
 .materialList {
   flex: 1;
@@ -1070,7 +1046,7 @@ body {
   scrollbar-color: #b8cfb3 #f4f3e9;
 }
 
-/* Scrollbar styling for Chrome / Edge */
+
 .lessonList::-webkit-scrollbar,
 .materialList::-webkit-scrollbar,
 .sidebar::-webkit-scrollbar {
@@ -1091,15 +1067,6 @@ body {
   border-radius: 10px;
 }
 
-/* Footer stays at the bottom of the page */
-.pageFooter {
-  flex-shrink: 0;
-  padding: 10px 0 0;
-}
-
-/* ========================================
-   SMALLER SCREENS
-======================================== */
 
 @media (max-width: 1100px) {
   .sidebar {
@@ -1233,7 +1200,7 @@ body {
     display: none;
   }
 }
-/* Give Lessons and Materials more room without scrolling the page */
+
 html,
 body {
   height: 100%;
@@ -1264,7 +1231,7 @@ body {
   overflow: hidden;
 }
 
-/* Scroll only the list inside each box */
+
 .lessonList,
 .materialList {
   flex: 1;
@@ -1273,14 +1240,14 @@ body {
   padding-right: 8px;
 }
 
-/* Let the boxes use the available height */
+
 .overviewCard {
   flex-shrink: 0;
   padding: 12px 18px;
   margin-bottom: 10px;
 }
 
-/* Keep the subject controls compact */
+
 .subjectSection {
   flex-shrink: 0;
   margin-bottom: 10px;
@@ -1312,14 +1279,3 @@ body {
   background: #f6e2e9;
 }
 
-.deleteItemBtn {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 6px;
-  flex-shrink: 0;
-}

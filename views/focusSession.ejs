@@ -20,7 +20,46 @@
   </head>
   <body>
     <div class="main">
-      <div class="navbar" style="grid-area: box-1">
+      <aside class="sidebar">
+      <a href="/dashboard" class="brand">
+  <span>Lumi</span>
+</a>
+
+      <p class="navLabel">WORKSPACE</p>
+
+      <nav class="navigation">
+        <a href="/dashboard" class="navLink">
+          <span>🏡</span> Dashboard
+        </a>
+        <a href="/task" class="navLink">
+          <span>🌱</span> My Tasks
+        </a>
+        <a href="/calendar" class="navLink">
+          <span>📅</span> Calendar
+        </a>
+        <a href="/notes" class="navLink">
+          <span>📝</span> Notes
+        </a>
+        <a href="/lessons" class="navLink">
+          <span>📚</span> Lessons
+        </a>
+        <a href="/dailyHabits" class="navLink">
+          <span>🌷</span> Daily Habits
+        </a>
+        <a href="/focusSession" class="navLink active">
+          <span>⏳</span> Focus Session
+        </a>
+      </nav>
+
+      <div class="sidebarBottom">
+        
+        
+        <button id="logoutBtn" class="logoutButton" type="button">
+          Log out
+        </button>
+      </div>
+    </aside>
+      <!--<div class="navbar" style="grid-area: box-1">
         <img
           id="nameLogo"
           src="../images/Lumi Sprout Heart Logo.png"
@@ -66,7 +105,7 @@
 
         <button class="logout" type="button" onclick="logout()">Log Out</button>
       </div>
-
+    -->
       <main class="studyWorkspace">
         <div class="focusLayout">
           <!-- Main timer area -->
@@ -317,16 +356,22 @@
       </main>
     </div>
   <script>
-  const logoutToast = Toastify({ text: "You are being logged out", duration: 1000 });
+  
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        const response = await fetch("/logout", {
+          method: "DELETE",
+        });
 
-  function logout() {
-    fetch("/logout", { method: "DELETE" })
-      .finally(() => {
-        logoutToast.showToast();
-        setTimeout(() => { window.location.href = "/"; }, 700);
-      });
-  }
+        if (!response.ok) {
+          throw new Error("Could not log out. Please try again.");
+        }
 
+        window.location.href = "/";
+      } catch (error) {
+        showToast(error.message, true);
+      }
+    });
   const totalHoursText = document.querySelector("#totalHoursText");
   const hoursDisplay = document.querySelector("#hours");
   const minsDisplay = document.querySelector("#minutes");
@@ -466,7 +511,7 @@
         ? "Daily goal completed! Amazing work 🌱"
         : "You've got this! Keep growing 🌿";
 
-      // Keep the controls in sync with the goal stored on the account.
+      
       goalHoursInput.value = String(Math.floor(goalMinutes / 60));
       goalMinutesInput.value = String(goalMinutes % 60);
       if (goalSettingsMessage && goalSettingsMessage.textContent === "Saving...") {
@@ -840,7 +885,7 @@ timerMessage.textContent = currentMode === "pomodoro"
     persistTimerState();
   }
 
-  // Web Audio ambience: sounds are generated locally; no external audio files are needed.
+  
   let audioContext = null;
   let ambienceNodes = [];
   let ambienceSource = null;
@@ -927,7 +972,7 @@ timerMessage.textContent = currentMode === "pomodoro"
     });
   });
 
-  // Initialize the break/session duration label and the live stats.
+ 
   updateStudyDurationLabel();
   loadFocusStats();
   restoreTimerState();

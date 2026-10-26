@@ -31,7 +31,7 @@
           <span>📅</span> Calendar
         </a>
         <a href="/notes" class="navLink">
-          <span>📝</span> Quick Notes
+          <span>📝</span> Notes
         </a>
         <a href="/lessons" class="navLink active">
           <span>📚</span> Lessons
@@ -85,11 +85,11 @@
           </div>
 
           <div class="progressTrack">
-  <div
-    id="overallProgressBar"
-    class="progressFill"
-  ></div>
-</div>
+                  <div
+                  id="overallProgressBar"
+                  class="progressFill"
+                  ></div>
+          </div>
 
           <p class="progressCaption" id="overallProgressText">
             <%= progress %>% completed
@@ -170,14 +170,13 @@
                     </p>
                   </div>
                   <button
-  type="button"
-  class="deleteItemBtn"
-  data-delete-type="lessons"
-  data-id="<%= lesson._id %>"
-  aria-label="Delete lesson"
->
-  🗑️
-</button>
+                    type="button"
+                    class="deleteItemBtn"
+                    data-delete-type="lessons"
+                    data-id="<%= lesson._id %>"
+                    aria-label="Delete lesson">
+                    🗑️
+                  </button>
                   <span class="lessonStatus">
                     <%= lesson.status === 'completed' ? 'Completed' : 'In progress' %>
                   </span>
@@ -234,14 +233,13 @@
                     aria-label="Open <%= material.title %>"
                   >↗</a>
                   <button
-  type="button"
-  class="deleteItemBtn"
-  data-delete-type="materials"
-  data-id="<%= material._id %>"
-  aria-label="Delete course material"
->
-  🗑️
-</button>
+                    type="button"
+                    class="deleteItemBtn"
+                    data-delete-type="materials"
+                    data-id="<%= material._id %>"
+                    aria-label="Delete course material">
+                    🗑️
+                  </button>
                 </article>
               <% }) %>
             <% } %>
@@ -320,7 +318,7 @@
     </div>
   </div>
 
-  <!-- Add Material Modal -->
+  
   <div class="modalOverlay hidden" id="materialModal">
     <div class="modalCard">
       <button class="closeModal" type="button" data-close="materialModal">×</button>
@@ -614,14 +612,14 @@ article.append(label, info, deleteButton, status);
         openLink.setAttribute("aria-label", `Open ${material.title}`);
 
         const deleteButton = document.createElement("button");
-deleteButton.type = "button";
-deleteButton.className = "deleteItemBtn";
-deleteButton.dataset.deleteType = "materials";
-deleteButton.dataset.id = material._id;
-deleteButton.setAttribute("aria-label", "Delete course material");
-deleteButton.textContent = "🗑️";
+        deleteButton.type = "button";
+        deleteButton.className = "deleteItemBtn";
+        deleteButton.dataset.deleteType = "materials";
+        deleteButton.dataset.id = material._id;
+        deleteButton.setAttribute("aria-label", "Delete course material");
+        deleteButton.textContent = "🗑️";
 
-article.append(icon, info, openLink, deleteButton);
+        article.append(icon, info, openLink, deleteButton);
         materialList.appendChild(article);
       });
     }

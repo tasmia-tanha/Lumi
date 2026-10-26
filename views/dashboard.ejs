@@ -19,7 +19,9 @@
   </head>
   <body>
     <div class="main">
-      <div class="navbar" style="grid-area: box-1">
+      
+      
+      <!--<div class="navbar" style="grid-area: box-1">
         <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" />
         <ul id="list" style="list-style-type: none; padding: 0px">
           <li class="items">
@@ -60,7 +62,46 @@
         </ul>
 
         <button class="logout" onclick="logout()">Log Out</button>
+      </div>-->
+      <aside class="sidebar">
+      <a href="/dashboard" class="brand">
+  <span>Lumi</span>
+</a>
+
+      <p class="navLabel">WORKSPACE</p>
+
+      <nav class="navigation">
+        <a href="/dashboard" class="navLink">
+          <span>🏡</span> Dashboard
+        </a>
+        <a href="/task" class="navLink">
+          <span>🌱</span> My Tasks
+        </a>
+        <a href="/calendar" class="navLink">
+          <span>📅</span> Calendar
+        </a>
+        <a href="/notes" class="navLink">
+          <span>📝</span> Notes
+        </a>
+        <a href="/lessons" class="navLink active">
+          <span>📚</span> Lessons
+        </a>
+        <a href="/dailyHabits" class="navLink">
+          <span>🌷</span> Daily Habits
+        </a>
+        <a href="/focusSession" class="navLink">
+          <span>⏳</span> Focus Session
+        </a>
+      </nav>
+
+      <div class="sidebarBottom">
+        
+        
+        <button id="logoutBtn" class="logoutButton" type="button">
+          Log out
+        </button>
       </div>
+    </aside>
 
       <div class="greeting" style="grid-area: box-2">
         <img id="greetLogo" src="../images/Kawaii Capybara With Flower.png" />

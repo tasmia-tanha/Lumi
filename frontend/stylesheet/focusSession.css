@@ -1,13 +1,48 @@
-*{
-    box-sizing: border-box;
-    font-family: 'Nunito',sans-serif;
+:root {
+  --green: #b8cfb3;
+  --green-dark: #84a282;
+  --green-deep: #587b59;
+  --pink: #f6e2e9;
+  --pink-dark: #eec0d0;
+  --cream: #fefaF3;
+  --white: #ffffff;
+  --text: #3e493d;
+  --muted: #899185;
+  --border: #e7e9df;
+  --shadow: 0 8px 25px rgba(86, 112, 80, 0.08);
 }
 
-body{
-    min-height: 100vh;
-    margin: 0px;
-    background-color: #FEFAF3;
+* {
+  box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  color: var(--text);
+  background: var(--cream);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.appLayout {
+  display: flex;
+  min-height: 100vh;
+}
+
 .main {
     height: 100vh;
     display: grid;
@@ -77,9 +112,11 @@ body{
 
 
 
-/* MAIN WORKSPACE */
 .studyWorkspace {
     grid-area: workspace;
+        position: fixed;
+    left: 245px;
+    right: 0;
     min-width: 0;
     height: calc(100vh - 16px);
     overflow-y: auto;
@@ -111,7 +148,7 @@ body{
     gap: 18px;
 }
 
-/* HEADER */
+
 .timerHeader {
     display: flex;
     align-items: center;
@@ -143,7 +180,7 @@ body{
     font-weight: 800;
 }
 
-/* TIMER CARD */
+
 .timerOverlayCard {
     position: relative;
     display: flex;
@@ -233,7 +270,7 @@ body{
     box-shadow: 0 2px 7px rgba(58, 79, 65, 0.12);
 }
 
-/* TIMER BUTTONS */
+
 .timerControls {
     display: flex;
     flex-wrap: wrap;
@@ -278,7 +315,7 @@ body{
     font-size: 0.8rem;
 }
 
-/* LAST SESSION */
+
 .lastSessionCard {
     position: relative;
     display: flex;
@@ -329,7 +366,7 @@ body{
     font-size: 2rem;
 }
 
-/* OVERVIEW CARDS */
+
 .overviewGrid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -370,7 +407,7 @@ body{
     font-weight: 700;
 }
 
-/* RIGHT SIDEBAR */
+
 .focusSidebar {
     display: flex;
     flex-direction: column;
@@ -415,7 +452,7 @@ body{
     font-size: 0.76rem;
 }
 
-/* POMODORO OPTIONS */
+
 .durationOptions {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -466,7 +503,6 @@ body{
     color: #435d45;
 }
 
-/* DAILY GOAL */
 .goalNumbers {
     display: flex;
     align-items: baseline;
@@ -504,7 +540,7 @@ body{
     font-size: 0.77rem;
 }
 
-/* AMBIENCE */
+
 .ambienceOptions {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -540,7 +576,7 @@ body{
     background: #e9f0e3;
 }
 
-/* MOTIVATIONAL QUOTE */
+
 .focusQuote {
     position: relative;
     padding: 17px 19px;
@@ -572,7 +608,7 @@ body{
     font-size: 1.2rem;
 }
 
-/* RESPONSIVE LAYOUT */
+
 @media (max-width: 1050px) {
     .studyWorkspace {
         padding: 18px;
@@ -694,7 +730,7 @@ body{
 }
 
 
-/* Focus-session controls added for daily-goal settings and accessibility */
+
 .goalSettings {
   display: flex;
   flex-direction: column;
@@ -778,4 +814,114 @@ body{
   .goalInputs {
     grid-template-columns: 1fr;
   }
+}
+
+
+.sidebar {
+  width: 245px;
+  min-width: 245px;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 18px 20px;
+  background: #f4f3e9;
+  border-right: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  margin-bottom: 38px;
+  font-size: 27px;
+  font-weight: 800;
+  color: var(--green-deep);
+}
+
+.brand img {
+  width: 43px;
+  height: 43px;
+  object-fit: contain;
+}
+
+.navLabel,
+.eyebrow {
+  color: var(--green-deep);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.navLabel {
+  margin: 0 12px 13px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 13px;
+  color: #737d70;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navLink span {
+  font-size: 18px;
+}
+
+.navLink:hover {
+  background: #e8eee2;
+  color: var(--green-deep);
+}
+
+.navLink.active {
+  background: var(--green);
+  color: #344c35;
+}
+
+.sidebarBottom {
+  margin-top: auto;
+  padding-top: 35px;
+  text-align: center;
+}
+
+.sidebarBottom p {
+  margin: 5px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5cbd4;
+  border-radius: 12px;
+  background: #fff8fa;
+  color: #8c6471;
+  font-weight: 700;
+}
+
+.logoutButton:hover {
+  background: var(--pink);
+}
+
+.sidebar {
+  margin: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 0;
+  position: fixed;
+top: 0;
+left: 0;
 }
