@@ -534,7 +534,15 @@
           status.className = "lessonStatus";
           status.textContent = isCompleted ? "Completed" : "In progress";
 
-          article.append(label, info, status);
+          const deleteButton = document.createElement("button");
+deleteButton.type = "button";
+deleteButton.className = "deleteItemBtn";
+deleteButton.dataset.deleteType = "lessons";
+deleteButton.dataset.id = lesson._id;
+deleteButton.setAttribute("aria-label", "Delete lesson");
+deleteButton.textContent = "🗑️";
+
+article.append(label, info, deleteButton, status);
           lessonList.appendChild(article);
         });
       }
@@ -605,7 +613,15 @@
         openLink.textContent = "↗";
         openLink.setAttribute("aria-label", `Open ${material.title}`);
 
-        article.append(icon, info, openLink);
+        const deleteButton = document.createElement("button");
+deleteButton.type = "button";
+deleteButton.className = "deleteItemBtn";
+deleteButton.dataset.deleteType = "materials";
+deleteButton.dataset.id = material._id;
+deleteButton.setAttribute("aria-label", "Delete course material");
+deleteButton.textContent = "🗑️";
+
+article.append(icon, info, openLink, deleteButton);
         materialList.appendChild(article);
       });
     }
