@@ -16,9 +16,15 @@
   "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon app.js",
-    "prod": "cross-env NODE_ENV=production node app.js"
+    "prod": "cross-env NODE_ENV=production node app.js",
+    "dev": "vite",
+    "build": "vite build"
   },
   "dependencies": {
+    "@tiptap/core": "^3.32.0",
+    "@tiptap/extension-highlight": "^3.32.0",
+    "@tiptap/extension-underline": "^3.32.0",
+    "@tiptap/starter-kit": "^3.32.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cross-env": "^10.1.0",
@@ -30,9 +36,13 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.11.2",
     "multer": "^2.4.0",
+    "sanitize-html": "^2.18.1",
     "toastify-js": "^1.12.0"
   },
   "allowScripts": {
     "bcrypt@6.0.0": true
+  },
+  "devDependencies": {
+    "vite": "^8.3.5"
   }
 }

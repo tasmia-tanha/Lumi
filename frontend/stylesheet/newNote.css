@@ -187,3 +187,77 @@ h1 {
     width: 100%;
   }
 }
+
+
+
+.richTextToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  background: #f6e2e9;
+  border: 1px solid #e8cbd6;
+  border-radius: 12px 12px 0 0;
+}
+
+.richTextToolbar button {
+  min-width: 36px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid #d9b9c7;
+  border-radius: 8px;
+  background: #fefaf3;
+  color: #49654a;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.richTextToolbar button:hover {
+  background: #b8cfb3;
+}
+
+.richTextEditor {
+  min-height: 280px;
+  padding: 16px;
+  border: 1px solid #d9b9c7;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  background: #fefaf3;
+  color: #344c35;
+}
+
+.richTextEditor:focus-within {
+  outline: 2px solid #84a282;
+  outline-offset: 1px;
+}
+
+.richTextContent {
+  min-height: 250px;
+  outline: none;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.richTextContent p {
+  margin: 0 0 10px;
+}
+
+.richTextContent ul,
+.richTextContent ol {
+  padding-left: 24px;
+  margin: 8px 0;
+}
+
+.richTextContent h1,
+.richTextContent h2,
+.richTextContent h3 {
+  margin: 12px 0 8px;
+  color: #49654a;
+}
+
+.richTextContent mark {
+  background: #f6e2a0;
+  border-radius: 3px;
+  padding: 1px 3px;
+}

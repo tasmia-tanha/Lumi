@@ -38,12 +38,25 @@
         />
 
         <label for="noteContent">Your note</label>
-        <textarea
-          id="noteContent"
-          name="content"
-          placeholder="Start writing here..."
-          required
-        ><%= note.content || '' %></textarea>
+
+<div class="richTextToolbar">
+  <button type="button" data-command="bold"><b>B</b></button>
+  <button type="button" data-command="italic"><i>I</i></button>
+  <button type="button" data-command="underline"><u>U</u></button>
+  <button type="button" data-command="strike"><s>S</s></button>
+  <button type="button" data-command="bulletList">• List</button>
+  <button type="button" data-command="orderedList">1. List</button>
+  <button type="button" data-command="undo">↶</button>
+  <button type="button" data-command="redo">↷</button>
+</div>
+
+<div id="noteContent" class="richTextEditor"></div>
+<input
+  type="hidden"
+  id="initialNoteContent"
+  value="<%= note.content ? JSON.stringify(note.content).slice(1, -1) : '' %>"
+/>
+<input type="hidden" id="noteContentInput" name="content" />
 
         <label for="noteTags">Tags <span>(optional)</span></label>
         <input
@@ -62,5 +75,6 @@
       </form>
     </section>
   </main>
+  <script type="module" src="/dist/noteEditor.js"></script>
 </body>
 </html>

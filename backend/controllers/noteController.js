@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Note } from "../models/note.js";
+import sanitizeHtml from "sanitize-html";
 
 export async function getNotes(req, res, next) {
   try {
@@ -7,9 +8,9 @@ export async function getNotes(req, res, next) {
       .sort({ pinned: -1, updatedAt: -1 })
       .lean();
 
-    const tags = [
-      ...new Set(notes.flatMap((note) => note.tags || [])),
-    ].sort((a, b) => a.localeCompare(b));
+    const tags = [...new Set(notes.flatMap((note) => note.tags || []))].sort(
+      (a, b) => a.localeCompare(b),
+    );
 
     res.render("notes", {
       notes,
@@ -33,7 +34,29 @@ export async function createNote(req, res, next) {
     const { title, content, tags } = req.body;
 
     const cleanedTitle = title?.trim();
-    const cleanedContent = content?.trim();
+    const cleanedContent = sanitizeHtml(content || "", {
+      allowedTags: [
+        "p",
+        "br",
+        "strong",
+        "b",
+        "em",
+        "i",
+        "u",
+        "s",
+        "ul",
+        "ol",
+        "li",
+        "h1",
+        "h2",
+        "h3",
+        "blockquote",
+        "pre",
+        "code",
+        "mark",
+      ],
+      allowedAttributes: {},
+    }).trim();
 
     if (!cleanedTitle || !cleanedContent) {
       return res.status(400).render("newNote", {
@@ -50,7 +73,7 @@ export async function createNote(req, res, next) {
         (Array.isArray(tags) ? tags : (tags || "").split(","))
           .map((tag) => tag.trim().replace(/^#/, ""))
           .filter(Boolean)
-          .map((tag) => tag.slice(0, 30))
+          .map((tag) => tag.slice(0, 30)),
       ),
     ];
 
@@ -149,7 +172,29 @@ export async function updateNote(req, res, next) {
     const { title, content, tags } = req.body;
 
     const cleanedTitle = title?.trim();
-    const cleanedContent = content?.trim();
+    const cleanedContent = sanitizeHtml(content || "", {
+      allowedTags: [
+        "p",
+        "br",
+        "strong",
+        "b",
+        "em",
+        "i",
+        "u",
+        "s",
+        "ul",
+        "ol",
+        "li",
+        "h1",
+        "h2",
+        "h3",
+        "blockquote",
+        "pre",
+        "code",
+        "mark",
+      ],
+      allowedAttributes: {},
+    }).trim();
 
     if (!cleanedTitle || !cleanedContent) {
       return res.status(400).send("Title and content are required.");
@@ -160,7 +205,7 @@ export async function updateNote(req, res, next) {
         (Array.isArray(tags) ? tags : (tags || "").split(","))
           .map((tag) => tag.trim().replace(/^#/, ""))
           .filter(Boolean)
-          .map((tag) => tag.slice(0, 30))
+          .map((tag) => tag.slice(0, 30)),
       ),
     ];
 
@@ -175,9 +220,9 @@ export async function updateNote(req, res, next) {
         tags: cleanedTags,
       },
       {
-        returnDocument:"after",
+        returnDocument: "after",
         runValidators: true,
-      }
+      },
     );
 
     if (!updatedNote) {
