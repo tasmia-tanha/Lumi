@@ -1,14 +1,3 @@
-/**{
-    box-sizing: border-box;
-    font-family: 'Nunito',sans-serif;
-}
-
-body{
-    min-height: 100vh;
-    margin: 0px;
-    background-color: #FEFAF3;
-}
-*/
 
 :root {
   --green: #b8cfb3;
@@ -37,14 +26,7 @@ body{
     "box-1 box-6 box-7 box-8";
     
 }
-/*
-.navbar{
-    background-color:#B8CFB3 ;
-    padding: 1rem;
-    border-radius: 10px;
 
-}
-*/
 .greeting,.quote,.date,.schedule,.analytics,.tasks,.note{
     background-color:#F6E2E9 ;
     border: 1px solid #F6E2E9;
@@ -54,59 +36,6 @@ body{
 .navbar, .greeting,.quote, .date, .schedule, .analytics, .tasks ,.note{
     margin: 0; 
 }
-
-/*
-.navbar{
-    display: flex;
-    justify-content:flex-start;
-    align-items: center;
-    flex-direction: column;
-}
-
-#nameLogo{
-    height: 10vh;
-    border-radius: 25px;
-    margin-bottom: 50px;
-    margin-top: 20px;
-
-}
-
-
-
-.navBtn{
-    width: 180px;
-    height: 60px;
-    background-color: #B8CFB3;
-    border:1px solid #FEFAF3;
-    
-    
-}
-.navBtn:hover{
-    background-color: #8caf85;
-    cursor: pointer;
-}
-.navLinks{
-    font-weight: bold;
-    font-size: 16px;
-    text-decoration: none;
-    color:#3A4F41 ;
-}
-
-.logout{
-    width: 85px;
-    height: 35px;
-    background-color: #F6E2E9;
-    color:#8caf85 ;
-    font-weight: bold;
-    border: 0px solid #F6E2E9 ;
-    margin-top: 5px;
-    margin-left: 2px;
-}
-.logout:hover{
-    background-color: #eac3d1;
-}
-*/
-
 
 * {
   box-sizing: border-box;

@@ -1,140 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="../stylesheet/notes.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheet/notes.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body>
-    <div class="main">
-        
-        <div class="navbar" style="grid-area: box-1">
-        <img id="nameLogo" src="../images/Lumi Sprout Heart Logo.png" alt="Lumi Sprout Logo" />
-        <ul id="list" style="list-style-type: none; padding: 0px">
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/dashboard">Dashboard</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/task">Tasks</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/calendar">Calendar</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/notes">Note</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/lessons">Lessons</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/dailyHabits">Daily Habits</a>
-            </button>
-          </li>
-          <li class="items">
-            <button class="navBtn">
-              <a class="navLinks" href="/focusSession">Focus Session</a>
-            </button>
-          </li>
-        </ul>
+  <div class="main">
+    <aside class="sidebar">
+      <a href="/dashboard" class="brand"><span>Lumi</span></a>
+      <p class="navLabel">WORKSPACE</p>
 
-        <button class="logout">Log Out</button>
+      <nav class="navigation">
+        <a href="/dashboard" class="navLink"><span>🏡</span> Dashboard</a>
+        <a href="/task" class="navLink"><span>🌱</span> My Tasks</a>
+        <a href="/calendar" class="navLink"><span>📅</span> Calendar</a>
+        <a href="/notes" class="navLink active"><span>📝</span> Notes</a>
+        <a href="/lessons" class="navLink"><span>📚</span> Lessons</a>
+        <a href="/dailyHabits" class="navLink"><span>🌷</span> Daily Habits</a>
+        <a href="/focusSession" class="navLink"><span>⏳</span> Focus Session</a>
+      </nav>
+
+      <div class="sidebarBottom">
+        <button id="logoutBtn" class="logoutButton" type="button">Log out</button>
+      </div>
+    </aside>
+
+    <main class="notesWorkspace">
+      <div class="notesHeading">
+        <div>
+          <p class="eyebrow">YOUR THOUGHTS, YOUR SPACE</p>
+          <h1>My Notes <span>🌷</span></h1>
+          
+        </div>
+        <a href="/notes/new" class="newNoteBtn">+ New Note</a>
       </div>
 
+      <div class="notesTopBar">
+        <input
+          type="search"
+          id="searchNotes"
+          class="searchNotes"
+          placeholder="Search titles, content, or tags..."
+          aria-label="Search notes"
+        />
+        <button type="button" id="clearTagFilter" class="clearFilterBtn" hidden>
+          Clear tag filter
+        </button>
+      </div>
+
+      <p id="activeTagLabel" class="activeTagLabel" hidden></p>
+
+      <div class="notesList" id="notesList">
+        <% if (notes.length === 0) { %>
+          <div class="emptyNotes" id="emptyNotes">
+            <span class="emptyIcon">🪴</span>
+            <h2>Your notebook is waiting!</h2>
+            <p>Create your first note and keep your thoughts in one place.</p>
+            <a href="/notes/new" class="emptyCreateBtn">Create a note</a>
+          </div>
+        <% } else { %>
+          <% notes.forEach((note) => { %>
+            <article
+              class="noteCard"
+              data-note-id="<%= note._id %>"
+              data-edit-url="/notes/<%= note._id %>/edit"
+              data-title="<%= note.title.toLowerCase() %>"
+              data-content="<%= note.content.toLowerCase() %>"
+              data-tags="<%= (note.tags || []).join(' ').toLowerCase() %>"
+            >
+              <div class="noteHeader">
+                <div class="noteTitleArea">
+                  <% if (note.pinned) { %>
+                    <span class="pinMark" title="Pinned note">📌</span>
+                  <% } %>
+                  <h2><%= note.title %></h2>
+                </div>
+
+                <div class="noteActions">
+                  <button
+                    type="button"
+                    class="pinNoteBtn"
+                    aria-label="<%= note.pinned ? 'Unpin' : 'Pin' %> note"
+                    title="<%= note.pinned ? 'Unpin note' : 'Pin note' %>"
+                  ><%= note.pinned ? "📌" : "📍" %></button>
+                  <button
+                    type="button"
+                    class="deleteNoteBtn"
+                    aria-label="Delete note"
+                    title="Delete note"
+                  >🗑️</button>
+                </div>
+              </div>
+
+              <p class="notePreview"><%= note.content %></p>
+
+              <% if (note.tags && note.tags.length > 0) { %>
+                <div class="noteTags">
+                  <% note.tags.forEach((tag) => { %>
+                    <button type="button" class="noteTag" data-tag="<%= tag %>">
+                      #<%= tag %>
+                    </button>
+                  <% }) %>
+                </div>
+              <% } %>
+
+              <div class="noteFooter">
+                <span class="noteDate">
+                  Updated <%= new Date(note.updatedAt).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                  }) %>
+                </span>
+              </div>
+            </article>
+          <% }) %>
+          <p id="noSearchResults" class="noSearchResults" hidden>
+            No notes match your search.
+          </p>
+        <% } %>
+      </div>
+    </main>
+
+    <aside class="rightSidebar">
+      <section class="sidebarCard pinnedCard">
+        <h2>📌 Pinned Notes</h2>
+        <ul class="pinnedList" id="pinnedList">
+          <% const pinnedNotes = notes.filter((note) => note.pinned); %>
+          <% if (pinnedNotes.length === 0) { %>
+            <li class="sideEmpty">Pin notes to find them here.</li>
+          <% } else { %>
+            <% pinnedNotes.forEach((note) => { %>
+              <li>
+                <button
+                  type="button"
+                  class="pinnedNoteLink"
+                  data-target-note="<%= note._id %>"
+                ><%= note.title %></button>
+              </li>
+            <% }) %>
+          <% } %>
+        </ul>
+      </section>
+
       
-      <main class="notesWorkspace">
-        
-        <div class="notesTopBar">
-          <input type="text" class="searchNotes" placeholder="Search Notes..." />
-          <button class="newNoteBtn">+ New Note</button>
+
+      <section class="sidebarCard tagsCard">
+        <h2>🏷️ Browse by tag</h2>
+        <div class="tagCloud" id="tagCloud">
+          <% if (tags.length === 0) { %>
+            <p class="sideEmpty">Your note tags will appear here.</p>
+          <% } else { %>
+            <% tags.forEach((tag) => { %>
+              <button type="button" class="tagBadge" data-tag="<%= tag %>">
+                #<%= tag %>
+              </button>
+            <% }) %>
+          <% } %>
         </div>
+      </section>
+    </aside>
+  </div>
 
-        
-        <div class="filterTabs">
-          <button class="filterBtn active">All</button>
-          <button class="filterBtn">Lectures</button>
-          <button class="filterBtn">Personal</button>
-          <button class="filterBtn">Ideas</button>
-        </div>
+  <script>const notesList = document.querySelector("#notesList");
+const searchInput = document.querySelector("#searchNotes");
+const clearTagFilterBtn = document.querySelector("#clearTagFilter");
+const activeTagLabel = document.querySelector("#activeTagLabel");
+const noSearchResults = document.querySelector("#noSearchResults");
 
-        
-        <div class="notesList">
-          <div class="noteCard">
-            <div class="noteHeader">
-              <h3>📌 Data Structures - Trees</h3>
-              <span class="noteTag">#CS101</span>
-            </div>
-            <p class="notePreview">Binary tree traversals (Pre-order, In-order, Post-order), BST insertion, and deletion algorithms...</p>
-            <span class="noteDate">Oct 15</span>
-          </div>
 
-          <div class="noteCard">
-            <div class="noteHeader">
-              <h3>Digital Logic - K-Maps</h3>
-              <span class="noteTag">#Hardware</span>
-            </div>
-            <p class="notePreview">Simplified Boolean expressions using 4-variable Karnaugh maps, grouping prime implicants...</p>
-            <span class="noteDate">Oct 12</span>
-          </div>
+let selectedTag = "";
 
-          <div class="noteCard">
-            <div class="noteHeader">
-              <h3>Codeforces Strategy</h3>
-              <span class="noteTag">#Coding</span>
-            </div>
-            <p class="notePreview">Practice two Div-3 problems daily, focus on binary search and two pointers before contests...</p>
-            <span class="noteDate">Oct 10</span>
-          </div>
-        </div>
-      </main>
+function getNoteCards() {
+  return [...document.querySelectorAll(".noteCard")];
+}
 
-      
-      <aside class="rightSidebar">
-        
-        <div class="sidebarCard pinnedCard">
-          <h3>📌 Pinned Notes</h3>
-          <ul class="pinnedList">
-            <li>• CS101 Syllabus & Exam Rules</li>
-            <li>• Office Hours Zoom Link</li>
-            <li>• Project Group Members</li>
-          </ul>
-        </div>
+function filterNotes() {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
 
-        
-        <div class="sidebarCard scratchpadCard">
-          <h3>📝 Quick Scratchpad</h3>
-          <textarea class="scratchpadArea" placeholder="Type temporary notes here..."></textarea>
-        </div>
+  getNoteCards().forEach((card) => {
+    const matchesSearch =
+      card.dataset.title.includes(searchTerm) ||
+      card.dataset.content.includes(searchTerm) ||
+      card.dataset.tags.includes(searchTerm);
 
-       
-        <div class="sidebarCard tagsCard">
-          <h3>🏷️ Tags</h3>
-          <div class="tagCloud">
-            <span class="tagBadge">#ExamPrep</span>
-            <span class="tagBadge">#CS101</span>
-            <span class="tagBadge">#Coding</span>
-            <span class="tagBadge">#Project</span>
-            <span class="tagBadge">#Hardware</span>
-          </div>
-        </div>
-      </aside>
-    </div>
+    const tags = card.dataset.tags
+      .split(" ")
+      .filter(Boolean);
+
+    const matchesTag = !selectedTag || tags.includes(selectedTag.toLowerCase());
+
+    const visible = matchesSearch && matchesTag;
+    card.hidden = !visible;
+
+    if (visible) visibleCount++;
+  });
+
+  clearTagFilterBtn.hidden = !selectedTag;
+  activeTagLabel.hidden = !selectedTag;
+  activeTagLabel.textContent = selectedTag
+    ? `Showing notes tagged #${selectedTag}`
+    : "";
+
+  document.querySelectorAll(".tagBadge").forEach((button) => {
+    button.classList.toggle(
+      "selected",
+      button.dataset.tag.toLowerCase() === selectedTag.toLowerCase() &&
+        selectedTag !== ""
+    );
+  });
+
+  if (noSearchResults) {
+    noSearchResults.hidden = visibleCount !== 0;
+  }
+}
+
+searchInput?.addEventListener("input", filterNotes);
+
+function selectTag(tag) {
+  selectedTag = selectedTag.toLowerCase() === tag.toLowerCase() ? "" : tag;
+  filterNotes();
+}
+
+document.querySelectorAll(".tagBadge, .noteTag").forEach((button) => {
+  button.addEventListener("click", () => {
+    selectTag(button.dataset.tag);
+  });
+});
+
+clearTagFilterBtn?.addEventListener("click", () => {
+  selectedTag = "";
+  filterNotes();
+});
+
+document.querySelectorAll(".pinnedNoteLink").forEach((button) => {
+  button.addEventListener("click", () => {
+    const card = document.querySelector(
+      `[data-note-id="${button.dataset.targetNote}"]`
+    );
+
+    if (card) {
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("highlightNote");
+
+      setTimeout(() => {
+        card.classList.remove("highlightNote");
+      }, 1200);
+    }
+  });
+});
+
+notesList?.addEventListener("click", async (event) => {
+  const deleteButton = event.target.closest(".deleteNoteBtn");
+  const pinButton = event.target.closest(".pinNoteBtn");
+  const tagButton = event.target.closest(".noteTag");
+
+  const card = event.target.closest(".noteCard");
+  if (!card) return;
+
+  // Clicking a tag should only filter notes.
+  if (tagButton) return;
+
+  // Clicking anywhere else on the note opens its editor.
+  if (!deleteButton && !pinButton) {
+    window.location.href = card.dataset.editUrl;
+    return;
+  }
+
+  const noteId = card.dataset.noteId;
+
+  if (deleteButton) {
+    if (!confirm("Delete this note permanently?")) return;
+
+    deleteButton.disabled = true;
+
+    try {
+      const response = await fetch(`/notes/${noteId}`, {
+        method: "DELETE",
+        headers: { Accept: "application/json" },
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Could not delete the note.");
+      }
+
+      window.location.reload();
+    } catch (error) {
+      alert(error.message);
+      deleteButton.disabled = false;
+    }
+  }
+
+  if (pinButton) {
+    pinButton.disabled = true;
+
+    try {
+      const response = await fetch(`/notes/${noteId}/pin`, {
+        method: "PATCH",
+        headers: { Accept: "application/json" },
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Could not update the pin.");
+      }
+
+      window.location.reload();
+    } catch (error) {
+      alert(error.message);
+      pinButton.disabled = false;
+    }
+  }
+});
+
+
+
+// Existing logout route uses DELETE /logout.
+document.querySelector("#logoutBtn")?.addEventListener("click", async () => {
+  try {
+    const response = await fetch("/logout", {
+      method: "DELETE",
+      headers: { Accept: "text/html" },
+    });
+
+    if (response.ok || response.redirected) {
+      window.location.href = "/";
+    } else {
+      alert("Could not log out. Please try again.");
+    }
+  } catch {
+    alert("Could not log out. Check your connection and try again.");
+  }
+});
+
+filterNotes();
+</script>
 </body>
 </html>

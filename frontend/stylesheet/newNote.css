@@ -1,0 +1,189 @@
+:root {
+  --green: #b8cfb3;
+  --green-dark: #84a282;
+  --green-deep: #587b59;
+  --pink: #f6e2e9;
+  --cream: #fefaf3;
+  --text: #3e493d;
+  --muted: #899185;
+  --border: #e7e9df;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 30px 18px;
+  background:
+    radial-gradient(circle at top left, #f6e2e9 0, transparent 35%),
+    var(--cream);
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.editorPage {
+  width: min(720px, 100%);
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--green-deep);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.editorCard {
+  padding: clamp(20px, 5vw, 42px);
+  border: 1px solid #dce5d7;
+  border-radius: 22px;
+  background: #fffefa;
+  box-shadow: 0 12px 35px rgba(86, 112, 80, 0.09);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--green-deep);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+h1 {
+  margin: 0;
+  color: #344c35;
+  font-size: clamp(27px, 5vw, 36px);
+}
+
+.subtitle {
+  margin: 9px 0 28px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#noteForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#noteForm label {
+  margin: 17px 0 8px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+#noteForm label span {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+#noteForm input,
+#noteForm textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #d6e1d1;
+  border-radius: 11px;
+  outline: none;
+  background: #fff;
+  color: var(--text);
+  font-size: 14px;
+}
+
+#noteForm input:focus,
+#noteForm textarea:focus {
+  border-color: var(--green-dark);
+  box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.15);
+}
+
+#noteContent {
+  min-height: 260px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.fieldHint {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.editorActions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.cancelBtn,
+.saveBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 19px;
+  border-radius: 11px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.cancelBtn {
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--text);
+}
+
+.saveBtn {
+  border: 1px solid var(--green-dark);
+  background: var(--green);
+  color: #263b27;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background: #f4f3e9;
+}
+
+.saveBtn:hover {
+  background: var(--green-dark);
+  color: white;
+}
+
+.errorMessage {
+  padding: 11px 13px;
+  border: 1px solid #e9c1cb;
+  border-radius: 10px;
+  background: #fff2f5;
+  color: #8b4d63;
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 18px 12px;
+  }
+
+  .editorActions {
+    flex-direction: column-reverse;
+  }
+
+  .cancelBtn,
+  .saveBtn {
+    width: 100%;
+  }
+}

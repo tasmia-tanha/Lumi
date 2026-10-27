@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | Lumi</title>
+  <link rel="stylesheet" href="/stylesheet/newNote.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <main class="editorPage">
+    <a href="/notes" class="backLink">← Back to Notes</a>
+
+    <section class="editorCard">
+      <p class="eyebrow">A LITTLE SPACE FOR YOUR THOUGHTS</p>
+      <h1>Create a note 🌷</h1>
+      <p class="subtitle">Save an idea, a lecture summary, or anything you want to remember.</p>
+
+      <% if (errors && errors.message) { %>
+        <p class="errorMessage"><%= errors.message %></p>
+      <% } %>
+
+      <form action="/notes" method="POST" id="noteForm">
+        <label for="noteTitle">Title</label>
+        <input
+          id="noteTitle"
+          name="title"
+          type="text"
+          maxlength="150"
+          placeholder="Give your note a title..."
+          value="<%= note.title || '' %>"
+          required
+        />
+
+        <label for="noteContent">Your note</label>
+        <textarea
+          id="noteContent"
+          name="content"
+          placeholder="Start writing here..."
+          required
+        ><%= note.content || '' %></textarea>
+
+        <label for="noteTags">Tags <span>(optional)</span></label>
+        <input
+          id="noteTags"
+          name="tags"
+          type="text"
+          placeholder="e.g. DS, ExamPrep, Ideas"
+          value="<%= Array.isArray(note.tags) ? note.tags.join(', ') : (note.tags || '') %>"
+        />
+        <p class="fieldHint">Separate multiple tags with commas.</p>
+
+        <div class="editorActions">
+          <a href="/notes" class="cancelBtn">Cancel</a>
+          <button type="submit" class="saveBtn">Save Note ✨</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
