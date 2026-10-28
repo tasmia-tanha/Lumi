@@ -1,0 +1,622 @@
+:root {
+  --green: #b8cfb3;
+  --green-dark: #84a282;
+  --green-deep: #587b59;
+  --pink: #f6e2e9;
+  --pink-dark: #eec0d0;
+  --cream: #fefaf3;
+  --text: #3e493d;
+  --muted: #899185;
+  --border: #e7e9df;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--green);
+  font-family: "Nunito", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.noteEditorPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px 20px;
+  background:
+    radial-gradient(circle at top left, #f6e2e9 0, transparent 30%),
+    var(--cream);
+}
+
+.editorTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+
+.backLink {
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.editorTopActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.editorLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 18px;
+  flex: 1;
+  min-height: 0;
+}
+
+.writingPane,
+.aiPanel {
+  min-width: 0;
+  border: 1px solid #dce5d7;
+  border-radius: 18px;
+  background: #fffefa;
+  box-shadow: 0 8px 25px rgba(86, 112, 80, 0.06);
+}
+
+.writingPane {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 28px;
+}
+
+
+.noteForm {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.noteForm label {
+  margin: 12px 0 6px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.noteForm label span {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.noteForm input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 13px;
+  border: 1px solid #d6e1d1;
+  border-radius: 10px;
+  outline: none;
+  background: white;
+  color: var(--text);
+}
+
+.noteForm input[type="text"]:focus {
+  border-color: var(--green-dark);
+  box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.15);
+}
+
+.richTextToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 9px;
+  border: 1px solid #e8cbd6;
+  border-radius: 11px 11px 0 0;
+  background: var(--pink);
+}
+
+.richTextToolbar button {
+  min-width: 35px;
+  min-height: 34px;
+  padding: 5px 9px;
+  border: 1px solid #d9b9c7;
+  border-radius: 7px;
+  background: var(--cream);
+  color: #49654a;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.richTextToolbar button:hover,
+.richTextToolbar button.isActive {
+  background: var(--green);
+}
+
+.richTextEditor {
+  flex: 1;
+  min-height: 260px;
+  padding: 18px 20px;
+  border: 1px solid #d9b9c7;
+  border-top: none;
+  border-radius: 0 0 11px 11px;
+  background: #fffefa;
+}
+
+.richTextEditor:focus-within {
+  outline: 2px solid var(--green-dark);
+  outline-offset: 1px;
+}
+
+.richTextContent {
+  min-height: 230px;
+  outline: none;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.richTextContent p {
+  margin: 0 0 12px;
+}
+
+.richTextContent ul,
+.richTextContent ol {
+  padding-left: 24px;
+  margin: 8px 0;
+}
+
+.richTextContent h1,
+.richTextContent h2,
+.richTextContent h3 {
+  margin: 12px 0 8px;
+  color: var(--green-deep);
+}
+
+.richTextContent blockquote {
+  margin: 12px 0;
+  padding-left: 14px;
+  border-left: 3px solid var(--green);
+}
+
+.richTextContent mark {
+  padding: 1px 3px;
+  border-radius: 3px;
+  background: #f6e2a0;
+}
+
+.fieldHint {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.editorActions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 15px;
+}
+
+.cancelBtn,
+.saveBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--text);
+}
+
+.saveBtn {
+  border: 1px solid var(--green-dark);
+  background: var(--green);
+  color: #263b27;
+}
+
+.errorMessage {
+  padding: 10px 12px;
+  border: 1px solid #e9c1cb;
+  border-radius: 10px;
+  background: #fff2f5;
+  color: #8b4d63;
+  font-size: 13px;
+}
+
+.aiPanel {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  padding: 18px;
+  overflow-wrap: anywhere;
+}
+
+.aiPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.aiPanelHeader h2 {
+  margin: 0;
+  color: var(--green-deep);
+  font-size: 17px;
+}
+
+.aiSubtitle {
+  margin: 6px 0 18px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.aiPrompt {
+  width: 100%;
+  min-height: 210px;
+  padding: 11px;
+  border: 1px solid #e5cbd5;
+  border-radius: 11px;
+  outline: none;
+  background: #fff9fb;
+  color: var(--text);
+  resize: vertical;
+}
+
+.aiPrompt:focus {
+  border-color: var(--green-dark);
+  box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.12);
+}
+
+.aiActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.aiActionBtn {
+  min-height: 72px;
+  padding: 10px;
+  border: 1px solid #e5dcd7;
+  border-radius: 11px;
+  background: #fffefa;
+  color: var(--text);
+  text-align: left;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.aiActionBtn span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.aiActionBtn:hover,
+.aiActionBtn.isActive {
+  border-color: var(--green-dark);
+  background: #f2f7ef;
+}
+
+.aiSubmitBtn {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 10px;
+  border: 1px solid var(--green-dark);
+  border-radius: 10px;
+  background: var(--green);
+  color: #263b27;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.aiStatus {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.aiResult {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: #f8faf6;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.aiResult[hidden] {
+  display: none;
+}
+
+.aiResultActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.aiResultActions button {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.mobileAiToggle {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .noteForm {
+    flex: 1;
+  }
+
+  .richTextEditor {
+    min-height: 0;
+  }
+
+  .richTextContent {
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .noteEditorPage {
+    padding: 14px;
+  }
+
+  .editorLayout {
+    grid-template-columns: minmax(0, 1fr) 270px;
+    gap: 12px;
+  }
+
+  .writingPane {
+    padding: 18px;
+  }
+
+  .aiPanel {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .noteEditorPage {
+    padding: 12px;
+  }
+
+  .editorTopBar {
+    margin-bottom: 10px;
+  }
+
+  .editorLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .writingPane {
+    padding: 15px;
+  }
+
+  .richTextEditor {
+    min-height: 300px;
+  }
+
+  .aiPanel {
+    display: none;
+  }
+
+  .aiPanel.mobileOpen {
+    display: flex;
+  }
+
+  .mobileAiToggle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid #e5cbd5;
+    border-radius: 10px;
+    background: var(--pink);
+    color: var(--green-deep);
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .editorActions > * {
+    flex: 1;
+  }
+}
+
+
+
+/* Give the writing area priority */
+.editorLayout {
+  grid-template-columns: minmax(0, 1fr) 300px;
+  min-height: 0;
+}
+
+.writingPane {
+  padding: 16px 22px;
+}
+
+.noteForm {
+  flex: 1;
+  min-height: 0;
+}
+
+.noteForm > label[for="noteTitle"] {
+  margin-top: 4px;
+}
+
+#noteTitle {
+  padding: 8px 12px;
+}
+
+/* Compact formatting toolbar */
+.richTextToolbar {
+  gap: 4px;
+  padding: 6px;
+}
+
+.richTextToolbar button {
+  min-height: 29px;
+  min-width: 30px;
+  padding: 3px 7px;
+  font-size: 12px;
+}
+
+/* Let the note editor occupy the remaining space */
+.richTextEditor {
+  flex: 1;
+  min-height: 420px;
+}
+
+.richTextContent {
+  min-height: 390px;
+}
+
+/* Tags and save controls share one row */
+.noteBottomRow {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.tagsField {
+  flex: 0 1 50%;
+  min-width: 0;
+}
+
+.tagsField label {
+  display: block;
+  margin: 0 0 6px;
+}
+
+.tagsField input {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 11px;
+  border: 1px solid #d6e1d1;
+  border-radius: 10px;
+  outline: none;
+  background: white;
+  color: var(--text);
+}
+
+.noteBottomRow .editorActions {
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.noteBottomRow + .fieldHint {
+  margin-top: 5px;
+}
+
+@media (min-width: 1000px) {
+  .noteForm {
+    flex: 1;
+  }
+
+  .richTextEditor {
+    flex: 1;
+    min-height: 420px;
+  }
+
+  .richTextContent {
+    min-height: 390px;
+  }
+}
+
+@media (max-width: 700px) {
+  .noteBottomRow {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tagsField {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .noteBottomRow .editorActions {
+    justify-content: flex-end;
+  }
+
+  .richTextEditor {
+    min-height: 320px;
+  }
+}
+
+.noteEditorPage {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.editorLayout {
+  flex: 1;
+  min-height: 0;
+}
+
+.writingPane {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.noteForm {
+  overflow: hidden;
+}
+
+.richTextEditor {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.richTextContent {
+  min-height: 100%;
+}

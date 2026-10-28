@@ -1,121 +1,157 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | Lumi</title>
 
-    <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheet/noteEditor.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet"
+  />
+</head>
 
-    <link rel="stylesheet" href="/stylesheet/notes.css" />
+<body>
+  <main class="noteEditorPage">
+    <header class="editorTopBar">
+      <div class="editorTopActions">
+        <button type="button" class="mobileAiToggle" id="mobileAiToggle">
+          ✨ Ask Lumi
+        </button>
+        <a href="/notes" class="backLink">← Back to Notes</a>
+      </div>
+    </header>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <% if (errors && errors.message) { %>
+      <p class="errorMessage"><%= errors.message %></p>
+    <% } %>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    <div class="editorLayout">
+      <section class="writingPane">
+        <form
+          action="/notes/<%= note._id %>"
+          method="POST"
+          id="noteForm"
+          class="noteForm editNoteForm"
+        >
+          <label for="noteTitle">Note title</label>
+          <input
+            id="noteTitle"
+            name="title"
+            type="text"
+            maxlength="150"
+            placeholder="Give your note a title..."
+            value="<%= note.title %>"
+            required
+          />
 
-  <body>
-    <div class="main">
-      <aside class="sidebar">
-        <a href="/dashboard" class="brand">
-          <span>Lumi</span>
-        </a>
+          <label for="noteContent">Your note</label>
 
-        <p class="navLabel">WORKSPACE</p>
-
-        <nav class="navigation">
-          <a href="/dashboard" class="navLink"> <span>🏡</span> Dashboard </a>
-
-          <a href="/task" class="navLink"> <span>🌱</span> My Tasks </a>
-
-          <a href="/calendar" class="navLink"> <span>📅</span> Calendar </a>
-
-          <a href="/notes" class="navLink active"> <span>📝</span> Notes </a>
-
-          <a href="/lessons" class="navLink"> <span>📚</span> Lessons </a>
-
-          <a href="/dailyHabits" class="navLink">
-            <span>🌷</span> Daily Habits
-          </a>
-
-          <a href="/focusSession" class="navLink">
-            <span>⏳</span> Focus Session
-          </a>
-        </nav>
-
-        <div class="sidebarBottom">
-          <button id="logoutBtn" class="logoutButton" type="button">
-            Log out
-          </button>
-        </div>
-      </aside>
-
-      <main class="notesWorkspace">
-        <div class="notesTopBar">
-          <a href="/notes" class="newNoteBtn"> ← Back to Notes </a>
-        </div>
-
-        <div class="editNoteCard">
-          <div class="editNoteHeader">
-            <h2>Edit Note</h2>
+          <div class="richTextToolbar">
+            <button type="button" data-command="bold" aria-label="Bold"><b>B</b></button>
+            <button type="button" data-command="italic" aria-label="Italic"><i>I</i></button>
+            <button type="button" data-command="underline" aria-label="Underline"><u>U</u></button>
+            <button type="button" data-command="strike" aria-label="Strikethrough"><s>S</s></button>
+            <button type="button" data-command="bulletList">• List</button>
+            <button type="button" data-command="orderedList">1. List</button>
+            <button type="button" data-command="undo" aria-label="Undo">↶</button>
+            <button type="button" data-command="redo" aria-label="Redo">↷</button>
           </div>
 
-          <form
-            class="editNoteForm"
-            method="POST"
-            action="/notes/<%= note._id %>"
-          >
-            <label for="title">Title</label>
+          <div id="noteContent" class="richTextEditor"></div>
+          <input type="hidden" id="noteContentInput" name="content" />
 
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value="<%= note.title %>"
-              maxlength="150"
-              required
-            />
-
-            <label for="content">Content</label>
-
-            <div class="richTextToolbar">
-              <button type="button" data-command="bold"><b>B</b></button>
-              <button type="button" data-command="italic"><i>I</i></button>
-              <button type="button" data-command="underline"><u>U</u></button>
-              <button type="button" data-command="strike"><s>S</s></button>
-              <button type="button" data-command="bulletList">• List</button>
-              <button type="button" data-command="orderedList">1. List</button>
-              <button type="button" data-command="undo">↶</button>
-              <button type="button" data-command="redo">↷</button>
+          <div class="noteBottomRow">
+            <div class="tagsField">
+              <label for="noteTags">Tags <span>(optional)</span></label>
+              <input
+                id="noteTags"
+                name="tags"
+                type="text"
+                placeholder="DS, ExamPrep, Ideas"
+                value="<%= Array.isArray(note.tags) ? note.tags.join(', ') : (note.tags || '') %>"
+              />
             </div>
 
-            <div id="noteContent" class="richTextEditor"></div>
-
-            <input type="hidden" id="noteContentInput" name="content" />
-
-            <label for="tags">Tags</label>
-
-            <input
-              type="text"
-              id="tags"
-              name="tags"
-              value="<%= (note.tags || []).join(', ') %>"
-              placeholder="Example: CS101, Coding, ExamPrep"
-            />
-
-            <div class="editNoteActions">
-              <button type="submit" class="newNoteBtn">Save Changes</button>
-
-              <a href="/notes" class="cancelNoteBtn"> Cancel </a>
+            <div class="editorActions">
+              <a href="/notes" class="cancelBtn">Cancel</a>
+              <button type="submit" class="saveBtn">Save Changes ✨</button>
             </div>
-          </form>
+          </div>
+
+          <p class="fieldHint">Separate multiple tags with commas.</p>
+        </form>
+      </section>
+
+      <aside class="aiPanel" id="aiPanel">
+        <div class="aiPanelHeader">
+          <h2>✨ Ask me anything</h2>
         </div>
-      </main>
+
+        <p class="aiSubtitle">
+          Your study companion, ready to help you understand and remember.
+        </p>
+
+        <label for="aiPrompt">What would you like help with?</label>
+        <textarea
+          id="aiPrompt"
+          class="aiPrompt"
+          placeholder="Ask about a topic, or select an action below..."
+        ></textarea>
+
+        <div class="aiActions">
+          <button type="button" class="aiActionBtn" data-ai-action="explain">
+            💡 Explain topic<span>Understand concepts</span>
+          </button>
+          <button type="button" class="aiActionBtn" data-ai-action="summarize">
+            ✨ Summarize<span>Find key points</span>
+          </button>
+          <button type="button" class="aiActionBtn" data-ai-action="flashcards">
+            🗂 Flashcards<span>Practice recall</span>
+          </button>
+          <button type="button" class="aiActionBtn" data-ai-action="questions">
+            ❔ Questions<span>Test your knowledge</span>
+          </button>
+        </div>
+
+        <button type="button" class="aiSubmitBtn" id="askLumiBtn">
+          Ask Lumi →
+        </button>
+
+        <p class="aiStatus" id="aiStatus" aria-live="polite">
+          Choose an action or type a question to get started.
+        </p>
+
+        <div class="aiResult" id="aiResult" hidden>
+          <strong id="aiResultTitle">AI response</strong>
+          <p id="aiResultContent"></p>
+          <div class="aiResultActions">
+            <button type="button" id="insertAiResult">Insert into note</button>
+            <button type="button" id="dismissAiResult">Dismiss</button>
+          </div>
+        </div>
+      </aside>
     </div>
-    <script id="initialNoteContent" type="application/json"><%- JSON.stringify(note.content || '').replace(/</g, '\\u003c') %></script>
-<script type="module" src="/dist/noteEditor.js"></script>
-  </body>
+  </main>
+
+  <script id="initialNoteContent" type="application/json"><%- JSON.stringify(note.content || '').replace(/</g, '\\u003c') %></script>
+  <script type="module" src="/dist/noteEditor.js"></script>
+
+  <script>
+    const mobileAiToggle = document.getElementById("mobileAiToggle");
+    const aiPanel = document.getElementById("aiPanel");
+
+    mobileAiToggle.addEventListener("click", () => {
+      aiPanel.classList.toggle("mobileOpen");
+
+      if (aiPanel.classList.contains("mobileOpen")) {
+        aiPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  </script>
+</body>
 </html>
