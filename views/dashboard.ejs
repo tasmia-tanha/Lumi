@@ -1,331 +1,162 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-    <link rel="stylesheet" href="../stylesheet/dashboard.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  </head>
-  <body>
-    <div class="main">
-    
-      <aside class="sidebar">
-      <a href="/dashboard" class="brand">
-  <span>Lumi</span>
-</a>
-
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | Lumi</title>
+  <link rel="stylesheet" href="/stylesheet/dashboard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body>
+  <div class="main">
+    <aside class="sidebar">
+      <a href="/dashboard" class="brand"><span>Lumi</span></a>
       <p class="navLabel">WORKSPACE</p>
-
       <nav class="navigation">
-        <a href="/dashboard" class="navLink active">
-          <span>🏡</span> Dashboard
-        </a>
-        <a href="/task" class="navLink">
-          <span>🌱</span> My Tasks
-        </a>
-        <a href="/calendar" class="navLink">
-          <span>📅</span> Calendar
-        </a>
-        <a href="/notes" class="navLink">
-          <span>📝</span> Notes
-        </a>
-        <a href="/lessons" class="navLink">
-          <span>📚</span> Lessons
-        </a>
-        <a href="/dailyHabits" class="navLink">
-          <span>🌷</span> Daily Habits
-        </a>
-        <a href="/focusSession" class="navLink">
-          <span>⏳</span> Focus Session
-        </a>
+        <a href="/dashboard" class="navLink active"><span>🏡</span> Dashboard</a>
+        <a href="/task" class="navLink"><span>🌱</span> My Tasks</a>
+        <a href="/calendar" class="navLink"><span>📅</span> Calendar</a>
+        <a href="/notes" class="navLink"><span>📝</span> Notes</a>
+        <a href="/lessons" class="navLink"><span>📚</span> Lessons</a>
+        <a href="/dailyHabits" class="navLink"><span>🌷</span> Daily Habits</a>
+        <a href="/focusSession" class="navLink"><span>⏳</span> Focus Session</a>
       </nav>
-
-      <div class="sidebarBottom">
-        
-        
-        <button id="logoutBtn" class="logoutButton" type="button">
-          Log out
-        </button>
-      </div>
+      <div class="sidebarBottom"><button id="logoutBtn" class="logoutButton" type="button">Log out</button></div>
     </aside>
 
-      <div class="greeting" style="grid-area: box-2">
-        <img id="greetLogo" src="../images/Kawaii Capybara With Flower.png" />
-        <h2 id="greetMsg">
-          Welcome Back <br />
-          Tanha!
-        </h2>
-      </div>
-
-      <div class="quote" style="grid-area: box-3">
-        <div class="layer">
-          <p id="quoteText">
-            "Small steps every day add up to big achievements. Keep growing at
-            your own pace! 🌱✨"
-          </p>
+    <main class="dashboardContent">
+      <section class="greeting panel">
+        <img id="greetLogo" src="/images/Kawaii Capybara With Flower.png" alt="Capybara holding a flower" />
+        <div class="greetingText">
+          <p class="eyebrow">YOUR LITTLE STUDY SPACE</p>
+          <h1 id="greetMsg">Welcome back,<br />Tanha!</h1>
+          <p class="greetingSubtext">Let's make a little progress today. 🌱</p>
         </div>
-      </div>
+      </section>
 
-      <div class="date" style="grid-area: box-4">
-        <div class="deadlineHeading">
-          <h4 id="deadLineHead">Deadlines</h4>
-          <p id="deadlineCount">4 deadlines within a week</p>
+      <section class="date panel" aria-labelledby="deadLineHead">
+        <div class="sectionHeading">
+          <div><p class="eyebrow">COMING UP</p><h2 id="deadLineHead">Deadlines</h2></div>
+          <span class="headingIcon" aria-hidden="true">📅</span>
         </div>
-
+        <p class="sectionDescription" id="deadlineCount">Within the next 7 days</p>
         <ul class="listDeadLine">
-          <li class="deadLineItems">
-            <span class="deadlineName">DS Lab report</span>
-            <span class="badge urgent">2 days</span>
-          </li>
-
-          <li class="deadLineItems">
-            <span class="deadlineName">ME Lab report</span>
-            <span class="badge">3 days</span>
-          </li>
-
-          <li class="deadLineItems">
-            <span class="deadlineName">DLD Lab report</span>
-            <span class="badge">3 days</span>
-          </li>
-
-          <li class="deadLineItems">
-            <span class="deadlineName">Math assignment</span>
-            <span class="badge">6 days</span>
-          </li>
+          <li class="deadLineItems"><span class="deadlineName">DS Lab report</span><span class="badge urgent">2 days</span></li>
+          <li class="deadLineItems"><span class="deadlineName">ME Lab report</span><span class="badge">3 days</span></li>
+          <li class="deadLineItems"><span class="deadlineName">DLD Lab report</span><span class="badge">3 days</span></li>
+          <li class="deadLineItems"><span class="deadlineName">Math assignment</span><span class="badge">6 days</span></li>
         </ul>
+        <a class="textLink" href="/calendar">View calendar <span aria-hidden="true">→</span></a>
+      </section>
 
-        <div class="deadlineActions">
-          <button class="deadlineViewBtn">View more</button>
+      <section class="tasks panel" aria-labelledby="taskHeader">
+        <div class="sectionHeading">
+          <div><p class="eyebrow">ONE STEP AT A TIME</p><h2 id="taskHeader">My tasks</h2></div>
+          <span class="headingIcon" aria-hidden="true">🌱</span>
         </div>
-      </div>
-
-      <div class="schedule" style="grid-area: box-5">
-        <div class="scheduleHeader">
-          <span class="routineLabel">Today's Routine:</span>
-          <div class="dateTimeWrapper">
-            <span class="mainDate">13th Oct, 2026</span>
-            <span class="subTime">10:30 PM</span>
-          </div>
-        </div>
-
-        <table class="tableSchedule">
-          <thead>
-            <tr class="row">
-              <th class="data">Day</th>
-              <th class="data">9.00-9.45</th>
-              <th class="data">9.45-10.30</th>
-              <th class="data">10.45-11.30</th>
-              <th class="data">11.30-12.15</th>
-              <th class="data">12.15-1.00</th>
-              <th class="data">2.00-4.00</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="row">
-              <td class="data">Sun</td>
-              <td class="data">CSE-142</td>
-              <td class="data">CSE-231</td>
-              <td class="data">CSE-141</td>
-              <td class="data">MATH-241</td>
-              <td class="data">HUM-142</td>
-              <td class="data">CSE-141</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="analytics" style="grid-area: box-6">
-        <div class="analyticsHeader">
-          <h3>Studied Time This Week</h3>
-          <span>This week ▾</span>
-        </div>
-
-        <div class="chartArea">
-          <p class="chartTitle">Study hours</p>
-
-          
-          <div class="chartPlaceholder">
-            <span>Chart</span>
-          </div>
-        </div>
-
-        <div class="analyticsStats">
-          <div class="stat">
-            <strong>18h 32m</strong>
-            <span>Studied this week</span>
-          </div>
-
-          <div class="stat">
-            <strong>4h 20m</strong>
-            <span>Studied today</span>
-          </div>
-
-          <div class="stat">
-            <strong>82%</strong>
-            <span>Tasks completed today</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="note" style="grid-area: box-7">
-        <div class="stickyNote">
-          <div class="noteTape"></div>
-          <h4 class="noteTitle">Quick Notes 📌</h4>
-
-          <textarea
-            class="noteArea"
-            placeholder="Write a quick note here..."
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="tasks" style="grid-area: box-8">
-        <div class="taskHeading">
-          <h3 id="taskHeader">Today's Tasks</h3>
-          <p id="taskCount" data-count="<%= activeTasks.length %>" ><%= activeTasks.length %> tasks remaining</p>
-        </div>
-
+        <p id="taskCount" class="sectionDescription" data-count="<%= activeTasks.length %>"><%= activeTasks.length %> tasks remaining</p>
         <ul class="taskList">
-         <% fourActiveTasks.forEach((task)=>{ %>
-          <li class="todo" data-task-id="<%= task._id%>">
-            <input type="checkbox" class="taskCheckbox" data-task-id="<%= task._id%>"/>
-
-            <span class="taskName"><%= task.title %></span>
-
-            <span class="priority <%=task.priority%>"> <%=task.priority%></span>
-          </li>
-          <%})%>
-          <li class="emptyTasks" style="display: none;">
+          <% fourActiveTasks.forEach((task) => { %>
+            <li class="todo" data-task-id="<%= task._id %>">
+              <input type="checkbox" class="taskCheckbox" data-task-id="<%= task._id %>" aria-label="Complete <%= task.title %>" />
+              <span class="taskName"><%= task.title %></span>
+              <span class="priority <%= task.priority %>"><%= task.priority %></span>
+            </li>
+          <% }) %>
+          <li class="emptyTasks">
             🌸 All done, little capybara! Time to rest.
           </li>
         </ul>
+        <a class="textLink taskLink" id="viewAllTasks" href="/task">View all tasks <span aria-hidden="true">→</span></a>
+      </section>
 
-        <div class="taskActions">
-          <button class="viewMoreBtn"><a id="viewAllTasks" href="/task" target="_self">View All Tasks</a></button>
-          
+      <section class="analytics panel" aria-labelledby="studyTimeHeading">
+        <div class="sectionHeading">
+          <div><p class="eyebrow">YOUR PROGRESS</p><h2 id="studyTimeHeading">Studied time this week</h2></div>
+          <span class="headingIcon" aria-hidden="true">⏳</span>
         </div>
-      </div>
-    </div>
-  </body>
+        <div class="studyTimeSummary">
+          <div><strong class="studyTimeValue">— h — m</strong><span class="sectionDescription">Focused time this week</span></div>
+          <span class="studyTimeCaption">Keep going at your own pace</span>
+        </div>
+        <div class="progressTrack" role="img" aria-label="Weekly study time progress"><div class="progressFill"></div></div>
+        <p class="progressHint">Your study time will appear here.</p>
+        <div class="capybaraNote">
+          <img src="/images/Kawaii Capybara With Flower.png" alt="" />
+          <p>Little by little, your effort adds up. 🌷</p>
+        </div>
+      </section>
+    </main>
+  </div>
   <script>
-      document.getElementById("logoutBtn").addEventListener("click", async () => {
+    function showToast(message, isError = false) {
+      if (window.Toastify) {
+        Toastify({ text: message, duration: 3000, gravity: "top", position: "right",
+          style: { background: isError ? "#b85f73" : "#84a282" } }).showToast();
+      } else alert(message);
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
       try {
-        const response = await fetch("/logout", {
-          method: "DELETE",
-        });
-
-        if (!response.ok) {
-          throw new Error("Could not log out. Please try again.");
-        }
-
+        const response = await fetch("/logout", { method: "DELETE" });
+        if (!response.ok) throw new Error("Could not log out. Please try again.");
         window.location.href = "/";
+      } catch (error) { showToast(error.message, true); }
+    });
+
+    document.querySelector(".taskList").addEventListener("change", async (event) => {
+      if (!event.target.matches("input[type='checkbox']")) return;
+      const checkbox = event.target;
+      const taskId = checkbox.dataset.taskId;
+      const taskItem = checkbox.closest(".todo");
+      try {
+        const response = await fetch(`/task/${taskId}`, {
+          method: "PATCH", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ completed: checkbox.checked })
+        });
+        if (!response.ok) throw new Error("Failed to update task");
+        taskItem.remove();
+        const activeTasks = await loadActiveTasks();
+        const displayedIds = [...document.querySelectorAll(".todo")].map(item => item.dataset.taskId);
+        const nextTask = activeTasks.find(task => !displayedIds.includes(task._id.toString()));
+        if (nextTask) {
+          const li = document.createElement("li");
+          li.className = "todo"; li.dataset.taskId = nextTask._id;
+          const input = document.createElement("input");
+          input.type = "checkbox"; input.className = "taskCheckbox"; input.dataset.taskId = nextTask._id;
+          input.setAttribute("aria-label", `Complete ${nextTask.title}`);
+          const title = document.createElement("span"); title.className = "taskName"; title.textContent = nextTask.title;
+          const priority = document.createElement("span"); priority.className = `priority ${nextTask.priority}`; priority.textContent = nextTask.priority;
+          li.append(input, title, priority);
+          document.querySelector(".taskList").insertBefore(li, document.querySelector(".emptyTasks"));
+        }
+        const taskCount = document.querySelector("#taskCount");
+        const remaining = Math.max(0, Number(taskCount.dataset.count) - 1);
+        taskCount.dataset.count = remaining;
+        taskCount.textContent = `${remaining} tasks remaining`;
+        const emptyText = document.querySelector(".emptyTasks");
+        const displayedTasks = document.querySelectorAll(".taskList .todo").length;
+        emptyText.style.display = displayedTasks === 0 ? "" : "none";
+        if (displayedTasks === 0) taskCount.textContent = "0 tasks remaining";
       } catch (error) {
-        showToast(error.message, true);
+        checkbox.checked = !checkbox.checked;
+        showToast("Failed to update task. Please try again.", true);
+        console.error(error);
       }
     });
-    
-      document.querySelector(".taskList").addEventListener("change", async function (event) {
-          if (!event.target.matches("input[type='checkbox']")) return;
 
-          const checkbox = event.target;
-          console.log("Checkbox changed");
-          const taskId=checkbox.dataset.taskId;
-          const taskItem=checkbox.closest(".todo");
-          const taskTitle=taskItem.querySelector(".taskName");
-          taskTitle.classList.toggle("completed",checkbox.checked);
-          try {
-          const response = await fetch(`/task/${taskId}`, {
-                method: "PATCH",
-                headers: {
-                            "Content-Type": "application/json",
-                        },
-                body: JSON.stringify({
-                            completed: checkbox.checked,
-                            }),
-          });
-
-          if (!response.ok) {
-              throw new Error("Failed to update task");
-          }
-          taskItem.remove();
-          const activeTasks = await loadActiveTasks();
-          console.log(activeTasks);
-          const displayedIds = [...document.querySelectorAll(".todo")].map(
-                  (item) => item.dataset.taskId
-          );
-
-          const nextTask = activeTasks.find(
-                (task) => !displayedIds.includes(task._id.toString())
-            );
-          if (nextTask) {
-              const li = document.createElement("li");
-              li.className = "todo";
-              li.dataset.taskId = nextTask._id;
-
-              li.innerHTML = `
-                  <input type="checkbox" class="taskCheckbox" data-task-id="${nextTask._id}">
-                  <span class="taskName">${nextTask.title}</span>
-                  <span class="priority ${nextTask.priority}">${nextTask.priority}</span>
-                  `;
-
-              document.querySelector(".taskList").appendChild(li);
-          }
-
-          const taskCount = document.querySelector("#taskCount");
-          const remaining = Number(taskCount.dataset.count) - 1;
-
-          taskCount.dataset.count = remaining;
-          taskCount.textContent = `${remaining} tasks remaining`;
-
-          const emptyText = document.querySelector(".emptyTasks");
-          const displayedTasks = document.querySelectorAll(".taskList .todo").length;
-
-          if (displayedTasks === 0) {
-              emptyText.style.display = "";
-              taskCount.textContent = "0 tasks remaining";
-          } else {
-              emptyText.style.display = "none";
-          }
-
-          } catch (error) {
-              console.error(error);
-              checkbox.checked=!checkbox.checked;
-              taskTitle.classList.toggle("completed",checkbox.checked);
-              alert("Failed to update task!Please try again");
-          }
-        })
-    
-
-
-      async function loadActiveTasks() {
-        try {
-          const response=await fetch("/dashboard/tasks-data",{
-            method:"GET"
-          })
-
-          if(!response.ok){
-            throw new Error("Cannot load the tasks!")
-          }
-
-          const result=await response.json();
-          return result.activeTasks;
-
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
-    
+    async function loadActiveTasks() {
+      try {
+        const response = await fetch("/dashboard/tasks-data");
+        if (!response.ok) throw new Error("Cannot load the tasks");
+        const result = await response.json();
+        return result.activeTasks || [];
+      } catch (error) { console.error(error); return []; }
+    }
   </script>
+</body>
 </html>

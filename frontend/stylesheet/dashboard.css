@@ -1,868 +1,516 @@
-
 :root {
   --green: #b8cfb3;
   --green-dark: #84a282;
   --green-deep: #587b59;
   --pink: #f6e2e9;
   --pink-dark: #eec0d0;
-  --cream: #fefaF3;
-  --white: #ffffff;
+  --cream: #fefaf3;
   --text: #3e493d;
   --muted: #899185;
   --border: #e7e9df;
-  --shadow: 0 8px 25px rgba(86, 112, 80, 0.08);
 }
-
-
 * {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
   color: var(--text);
   background: var(--cream);
 }
-
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
 button,
-input,
-select {
+input {
   font: inherit;
 }
-
-button {
-  cursor: pointer;
-}
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
-
-.navbar{
-    background-color:#B8CFB3 ;
-    padding: 1rem;
-    border-radius: 10px;
-
+.main {
+  min-height: 100vh;
 }
-
-.navbar{
-    display: flex;
-    justify-content:flex-start;
-    align-items: center;
-    flex-direction: column;
-    margin: 0;
-}
-
-#nameLogo{
-    height: 10vh;
-    border-radius: 25px;
-    margin-bottom: 50px;
-    margin-top: 20px;
-
-}
-
-
-
-.navBtn{
-    width: 180px;
-    height: 60px;
-    background-color: #B8CFB3;
-    border:1px solid #FEFAF3;
-    
-    
-}
-.navBtn:hover{
-    background-color: #8caf85;
-    cursor: pointer;
-}
-.navLinks{
-    font-weight: bold;
-    font-size: 16px;
-    text-decoration: none;
-    color:#3A4F41 ;
-}
-
-.logout{
-    width: 85px;
-    height: 35px;
-    background-color: #F6E2E9;
-    color:#8caf85 ;
-    font-weight: bold;
-    border: 0px solid #F6E2E9 ;
-    margin-top: 5px;
-    margin-left: 2px;
-}
-.logout:hover{
-    background-color: #eac3d1;
-}
-
-
-.main{
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns:245px 1fr 1fr 1fr;
-    grid-template-rows: 180px 1fr 1fr 1fr;
-    gap:0.5em;
-    padding: 8px;
-    grid-template-areas: 
-    "box-1 box-2 box-3 box-4"
-    "box-1 box-6 box-5 box-5"
-    "box-1 box-6 box-7 box-8"
-    "box-1 box-6 box-7 box-8";
-    
-}
-
-.greeting,.quote,.date,.schedule,.analytics,.tasks,.note{
-    background-color:#F6E2E9 ;
-    border: 1px solid #F6E2E9;
-    border-radius: 10px;
-    padding: 1rem;
-}
-.greeting,.quote, .date, .schedule, .analytics, .tasks ,.note{
-    margin: 0; 
-}
-
-
-/* Sidebar */
-
 .sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 5;
   width: 245px;
-  min-width: 245px;
   display: flex;
   flex-direction: column;
   padding: 28px 18px 20px;
   background: #f4f3e9;
   border-right: 1px solid var(--border);
 }
-
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
   padding: 0 12px;
   margin-bottom: 38px;
-  font-size: 27px;
-  font-weight: 800;
+  font-size: 30px;
+  font-weight: 900;
   color: var(--green-deep);
 }
-
-.brand img {
-  width: 43px;
-  height: 43px;
-  object-fit: contain;
-}
-
 .navLabel,
 .eyebrow {
+  margin: 0;
   color: var(--green-deep);
-  font-size: 11px;
-  font-weight: 800;
+  font-size: 10px;
+  font-weight: 900;
   letter-spacing: 1.5px;
 }
-
 .navLabel {
   margin: 0 12px 13px;
 }
-
 .navigation {
   display: flex;
   flex-direction: column;
   gap: 7px;
 }
-
 .navLink {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 14px;
+  padding: 13px 14px;
   border-radius: 13px;
   color: #737d70;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
-
 .navLink span {
   font-size: 18px;
 }
-
 .navLink:hover {
   background: #e8eee2;
   color: var(--green-deep);
 }
-
 .navLink.active {
   background: var(--green);
   color: #344c35;
 }
-
 .sidebarBottom {
   margin-top: auto;
   padding-top: 35px;
   text-align: center;
 }
-
-.sidebarCapybara {
-  display: block;
-  width: 125px;
-  height: 115px;
-  margin: 0 auto 8px;
-  object-fit: contain;
-}
-
-.sidebarBottom p {
-  margin: 5px 0 18px;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-}
-
 .logoutButton {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #e5cbd4;
   border-radius: 12px;
   background: #fff8fa;
   color: #8c6471;
-  font-weight: 700;
+  font-weight: 800;
+  cursor: pointer;
 }
-
 .logoutButton:hover {
   background: var(--pink);
 }
 
-/*greeting*/
-
-.greeting{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-evenly;
-    color: #8caf85;
+.dashboardContent {
+  margin-left: 245px;
+  height: 100vh;
+  overflow: hidden;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: "greeting deadlines" "tasks study";
+  align-content: start;
+  gap: 14px;
 }
-
-
-
+.panel {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #f0dce3;
+  border-radius: 18px;
+  background: var(--pink);
+}
+.greeting {
+  grid-area: greeting;
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 30px);
+  min-height: 220px;
+  padding: 24px clamp(18px, 2vw, 32px);
+}
 #greetLogo {
-  width: 150px;
-  height: auto;
- 
-  transition: transform 0.3s ease, filter 0.3s ease;
-  cursor: pointer;
+  width: clamp(105px, 13vw, 155px);
+  max-height: 170px;
+  object-fit: contain;
+  flex: 0 0 auto;
+  transition: transform 0.25s ease;
 }
-
-
-
 #greetLogo:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
-
-/*Quote*/
-
-.quote{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    
+.greetingText {
+  min-width: 0;
 }
-.layer{
-    width: 95%;
-    height: 150px;
-    border-radius: 10px;
-    background-color: #B8CFB3;
-    padding: 1rem;
-    box-sizing: border-box;
-    
+.greetingText .eyebrow {
+  margin-bottom: 10px;
 }
-
-#quoteText{
-    
-    text-align: center;
-    font-weight: bold;
-    font-style: italic;
-    font-size: 15px;
-    color: #222B22;   
-    
+#greetMsg {
+  margin: 0;
+  color: var(--green-dark);
+  font-family: "Quicksand", sans-serif;
+  font-size: clamp(25px, 2.4vw, 35px);
+  line-height: 1.25;
+  font-weight: 800;
 }
-/*date*/
+.greetingSubtext {
+  margin: 12px 0 0;
+  color: #6f7e6b;
+  font-size: 14px;
+}
 .date {
-    display: flex;
-    flex-direction: column;
-
-    background-color: #B8CFB3;
-    border-radius: 12px;
-
-    padding: 0.5rem;
-    box-sizing: border-box;
+  grid-area: deadlines;
+  background: var(--green);
+  border-color: var(--green);
 }
-
-
-.deadlineHeading {
-    text-align: center;
-    margin-bottom: 0.5rem;
+.tasks {
+  grid-area: tasks;
+  background: #fffaf4;
+  border-color: var(--green);
 }
-
-#deadLineHead {
-    margin: 0;
-
-    color: #222B22;
-
-    font-size: 1rem;
-    font-weight: 800;
-
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.analytics {
+  grid-area: study;
+  background: #fffaf4;
+  border-color: #f0dce3;
 }
-
-#deadlineCount {
-    margin: 2px 0 0;
-
-    color: #222B22;
-
-    font-size: 0.7rem;
-    font-weight: 700;
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
-
-
-
+.sectionHeading .eyebrow {
+  margin-bottom: 4px;
+}
+.sectionHeading h2 {
+  margin: 0;
+  color: var(--text);
+  font-family: "Quicksand", sans-serif;
+  font-size: clamp(19px, 1.7vw, 24px);
+  font-weight: 900;
+}
+.headingIcon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.48);
+  font-size: 21px;
+}
+.sectionDescription {
+  margin: 8px 0 12px;
+  color: #778173;
+  font-size: 13px;
+  font-weight: 700;
+}
+.listDeadLine,
+.taskList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .listDeadLine {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 0.45rem;
-
-    list-style: none;
-
-    margin: 0;
-    padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
 }
-
-
+.deadLineItems {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(88, 123, 89, 0.22);
+  border-radius: 12px;
+  background: rgba(254, 250, 243, 0.92);
+}
+.deadlineName {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 800;
+}
+.badge {
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: #dce8d7;
+  color: #4d6849;
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.badge.urgent {
+  background: #f8dce6;
+  color: #8b4d63;
+}
 
 .deadLineItems {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    gap: 2px;
-
-    min-width: 0;
-
-    padding: 0.2rem;
-
-    background-color: #FEFAF3;
-
-    border: 2px solid #222B22;
-    border-radius: 8px;
-
-    color: #222B22;
-
-    font-size: 0.7rem;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: 0.15s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .deadLineItems:hover {
-    transform: translate(2px, 2px);
-
-    background-color: #F6E2E9;
-
-    box-shadow: 1px 1px 0 #222B22;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(132, 162, 130, 0.18);
 }
-
-
-
-.deadlineName {
-    width: 100%;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 900;
 }
-
-
-
-.badge {
-    padding: 0.15rem 0.4rem;
-
-    background-color: #B8CFB3;
-
-    border: 1px solid #84A282;
-    border-radius: 20px;
-
-    color: #222B22;
-
-    font-size: 0.6rem;
-    font-weight: 800;
-
-    white-space: nowrap;
+.textLink:hover {
+  text-decoration: underline;
 }
-
-
-
-.badge.urgent {
-    background-color: #F6E2E9;
-
-    border-color: #222B22;
+.taskLink {
+  margin-top: 14px;
 }
-
-
-
-.deadlineActions {
-    display: flex;
-    justify-content: center;
-
-    margin-top: 0.35rem;
-}
-
-.deadlineViewBtn {
-    padding: 3px 10px;
-
-    border: none;
-
-    background: transparent;
-
-    color: #222B22;
-
-    font-size: 0.7rem;
-    font-weight: 800;
-
-    cursor: pointer;
-}
-
-.deadlineViewBtn:hover {
-    text-decoration: underline;
-}
-
-
-
-/*schedule*/
-
-
-
-.scheduleHeader {
-    width: 100%;
-    background-color: #FEFAF3;          
-    border: 2px solid #222B22;          
-    border-radius: 10px;
-    padding: 0rem 1rem;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.routineLabel {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #3A4F41;                    
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-
-.dateTimeWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;             
-    text-align: right;
-}
-
-.mainDate {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #222B22;
-    letter-spacing: -0.5px;
-}
-
-.subTime {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #3A4F41;
-    margin-top: 0.1rem;
-}
-.tableSchedule {
-    width: 100%;
-    border: 2px solid #222B22;
-    border-collapse: collapse;
-    background-color: #FEFAF3;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.data {
-    padding: 8px 6px;
-    text-align: center;
-    border: 1.5px solid #222B22;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #222B22;
-}
-
-th.data {
-    background-color: #aac5a4; 
-    font-weight: 800;
-}
-
-/*task*/
-.tasks {
-    display: flex;
-    flex-direction: column;
-}
-
-.taskHeading {
-    background-color: #B8CFB3;
-    border: 3px solid #FEFAF3;
-    border-radius: 6px;
-    margin-top: 2px;
-    padding: 6px 10px;
-    text-align: center;
-}
-
-#taskHeader {
-    letter-spacing: 1px;
-    font-weight: 900;
-    margin: 0;
-}
-
-#taskCount {
-    margin: 2px 0 0;
-    color: #222B22;
-    font-size: 0.8rem;
-    font-weight: 700;
-}
-
-.taskList {
-    list-style-type: none;
-    padding: 0;
-    margin: 8px 0 0;
-}
-
-
 .todo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    padding: 7px 8px;
-
-    background-color: #FEFAF3;
-    border-radius: 6px;
-    border: 2px solid #B8CFB3;
-
-    margin-bottom: 4px;
-
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: 0.15 ease-in;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 10px;
+  margin-bottom: 8px;
+  border: 1px solid #c9d9c3;
+  border-radius: 11px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
 }
-
-.todo:hover{
-    transform: translate(2px, 2px);
-    border: 2 px solid black;
-    background-color: #eac3d1;
+.todo:hover {
+  background: #f9f5ef;
 }
-
 .taskName {
-    flex: 1;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
-
-/* Priority badge */
-.priority {
-    padding: 3px 7px;
-    border-radius: 10px;
-    font-size: 0.65rem;
-    font-weight: 800;
-}
-
-
-.priority.high {
-    background-color: #F6E2E9;
-    color: #8B4D63;
-}
-
-
-.priority.medium {
-    background-color: #B8CFB3;
-    color: #384D38;
-}
-
-.priority.low {
-    background-color: #FEFAF3;
-    color: #84A282;
-    border: 1px solid #B8CFB3;
-}
-
-
-
 .taskCheckbox {
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    accent-color: #84A282;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  cursor: pointer;
+  accent-color: var(--green-dark);
 }
-
-
-
-.taskActions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 4px;
-    gap: 8px;
-}
-
 .completed {
   text-decoration: line-through;
+  color: var(--muted);
 }
-
-.viewMoreBtn {
-    flex: 1;
-    border: none;
-    background-color: transparent;
-    color: #84A282;
-
-    font-size: 0.75rem;
-    font-weight: 800;
-
-    cursor: pointer;
-    padding: 6px;
+.priority {
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: lowercase;
 }
-
-.viewMoreBtn:hover {
-    text-decoration: underline;
+.priority.high {
+  background: var(--pink);
+  color: #8b4d63;
 }
-
-
-
-.addTaskBtn {
-    border: 2px solid #84A282;
-    background-color: #B8CFB3;
-    color: #222B22;
-
-    border-radius: 6px;
-    padding: 6px 10px;
-
-    font-size: 0.75rem;
-    font-weight: 800;
-
-    cursor: pointer;
+.priority.medium {
+  background: var(--green);
+  color: #384d38;
 }
-
-.addTaskBtn:hover {
-    background-color: #84A282;
-    color: #FEFAF3;
+.priority.low {
+  background: var(--cream);
+  color: var(--green-deep);
+  border: 1px solid var(--green);
 }
-.taskCheckbox {
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    accent-color: #84A282;
+.emptyTasks {
+  padding: 20px 8px;
+  text-align: center;
+  color: var(--green-deep);
+  font-size: 14px;
+  font-weight: 800;
 }
-
-/*note*/
-
-.note {
-    background-color: #F6E2E9; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-    box-sizing: border-box;
+.studyTimeSummary {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 22px 0 15px;
 }
-
-.stickyNote {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: #FFF9E6;          
-    border: 2px solid #222B22;          
-    border-radius: 8px;
-    padding: 1rem;
-    box-sizing: border-box;
-      
-    display: flex;
-    flex-direction: column;
+.studyTimeSummary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-
-
-.noteTape {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 16px;
-    background-color: #B8CFB3;          
-    border: 1.5px solid #222B22;
-    border-radius: 3px;
-    opacity: 0.85;
+.studyTimeValue {
+  color: var(--green-deep);
+  font-family: "Quicksand", sans-serif;
+  font-size: clamp(25px, 2.6vw, 36px);
+  font-weight: 900;
 }
-
-.noteTitle {
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: #222B22;
-    margin: 0 0 0.5rem 0;
-    text-align: center;
+.studyTimeCaption {
+  max-width: 130px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
 }
-
-
-.noteArea {
-    width: 100%;
-    flex-grow: 1;
-    background: transparent;
-    border: none;
-    resize: none;                       
-    outline: none;
-    
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #222B22;
-    line-height: 1.6;                  
-    
-    
-    background-image: linear-gradient(to bottom, transparent 95%, #E5DEC9 95%);
-    background-size: 100% 1.6rem;       
+.progressTrack {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e8ede3;
 }
-
-.noteArea::placeholder {
-    color: #A6A090;
-    font-style: italic;
+.progressFill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--green-dark);
 }
-
-/*analytics*/
-.analytics {
-    display: flex;
-    flex-direction: column;
-    background-color: #FEFAF3;
-    border: 3px solid #B8CFB3;
-    border-radius: 10px;
-    padding: 12px;
-    box-sizing: border-box;
+.progressHint {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
 }
-
-.analyticsHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+.capybaraNote {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 15px;
+  border-top: 1px solid #e9e7dc;
 }
-
-.analyticsHeader h3 {
-    margin: 0;
-    color: #84A282;
-    font-size: 1rem;
-    font-weight: 900;
-    letter-spacing: 0.5px;
+.capybaraNote img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
 }
-
-.analyticsHeader span {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #84A282;
-    background-color: #F6E2E9;
-    padding: 4px 8px;
-    border-radius: 6px;
-}
-
-.chartArea {
-    flex: 1;
-}
-
-.chartTitle {
-    margin: 2px 0 5px;
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #84A282;
-}
-
-.chartPlaceholder {
-    height: 130px;
-    border: 2px dashed #B8CFB3;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #F6E2E9;
-    color: #84A282;
-    font-size: 0.8rem;
-    font-weight: 700;
-}
-
-.analyticsStats {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 2px solid #B8CFB3;
-}
-
-.stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    flex: 1;
-}
-
-.stat strong {
-    color: #84A282;
-    font-size: 1rem;
-    font-weight: 900;
-}
-
-.stat span {
-    color: #555;
-    font-size: 0.68rem;
-    font-weight: 600;
-}
-
-@media (max-width: 1024px) {
-    .main {
-        grid-template-columns: 180px 1fr 1fr;
-        grid-template-areas: 
-            "box-1 box-2 box-3"
-            "box-1 box-4 box-4"
-            "box-1 box-5 box-6"
-            "box-1 box-5 box-6";
-    }
-}
-
-@media (max-width: 768px) {
-    .main {
-        
-        grid-template-columns: 1fr;
-        grid-template-areas: 
-            "box-1"
-            "box-2"
-            "box-3"
-            "box-4"
-            "box-5"
-            "box-6";
-        height: auto; 
-    }
-}
-
-.sidebar {
+.capybaraNote p {
   margin: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  border-radius: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
+  color: #71816c;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+@media (min-width: 1450px) {
+  .dashboardContent {
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .greeting,
+  .date {
+    min-height: 220px;
+  }
+
+  .tasks,
+  .analytics {
+    min-height: 210px;
+  }
+}
+@media (max-width: 1100px) {
+  .sidebar {
+    width: 205px;
+    padding-inline: 13px;
+  }
+  .dashboardContent {
+    margin-left: 205px;
+    padding: 14px;
+    gap: 12px;
+  }
+  .greeting {
+    gap: 12px;
+    padding: 18px;
+  }
+  #greetLogo {
+    width: 100px;
+  }
+  .listDeadLine {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .sidebar {
+    position: static;
+    width: auto;
+    min-height: auto;
+    padding: 12px;
+  }
+  .brand {
+    margin: 0 0 10px;
+    padding: 0 8px;
+  }
+  .navLabel,
+  .sidebarBottom {
+    display: none;
+  }
+  .navigation {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .navLink {
+    flex: 0 0 auto;
+    padding: 10px;
+    font-size: 12px;
+  }
+  .dashboardContent {
+    margin-left: 0;
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "greeting" "deadlines" "tasks" "study";
+    padding: 12px;
+  }
+  .greeting {
+    min-height: 175px;
+  }
+  #greetLogo {
+    width: 105px;
+  }
+  .listDeadLine {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 420px) {
+  .panel {
+    padding: 15px;
+    border-radius: 15px;
+  }
+  .greeting {
+    gap: 10px;
+    padding: 14px;
+  }
+  #greetLogo {
+    width: 82px;
+  }
+  #greetMsg {
+    font-size: 23px;
+  }
+  .greetingSubtext {
+    font-size: 12px;
+  }
+  .listDeadLine {
+    grid-template-columns: 1fr;
+  }
+  .studyTimeSummary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .studyTimeCaption {
+    max-width: none;
+    text-align: left;
+  }
 }

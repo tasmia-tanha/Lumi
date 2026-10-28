@@ -171,7 +171,23 @@
     </aside>
   </div>
 
-  <script>const notesList = document.querySelector("#notesList");
+  <script>
+     document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        const response = await fetch("/logout", {
+          method: "DELETE",
+        });
+
+        if (!response.ok) {
+          throw new Error("Could not log out. Please try again.");
+        }
+
+        window.location.href = "/";
+      } catch (error) {
+        showToast(error.message, true);
+      }
+    });
+  const notesList = document.querySelector("#notesList");
 const searchInput = document.querySelector("#searchNotes");
 const clearTagFilterBtn = document.querySelector("#clearTagFilter");
 const activeTagLabel = document.querySelector("#activeTagLabel");
