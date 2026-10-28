@@ -6,7 +6,8 @@ import {
   deleteNote,
   togglePinNote,
   getEditNote,
-  updateNote
+  updateNote,
+  autoSaveNote
 } from "../controllers/noteController.js";
 import { decorateHtml } from "../middlewares/common/decorateHtml.js";
 import { authGuard } from "../middlewares/common/checkLogin.js";
@@ -22,6 +23,8 @@ router.get("/:id/edit", decorateHtml("Edit Note"), authGuard, getEditNote);
 router.post("/", authGuard, createNote);
 
 router.post("/:id", authGuard, updateNote);
+
+router.patch("/:id/autosave", authGuard, autoSaveNote);
 
 router.delete("/:id", authGuard, deleteNote);
 

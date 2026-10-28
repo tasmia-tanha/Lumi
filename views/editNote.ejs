@@ -18,12 +18,9 @@
 <body>
   <main class="noteEditorPage">
     <header class="editorTopBar">
-      <div class="editorTopActions">
-        <button type="button" class="mobileAiToggle" id="mobileAiToggle">
-          ✨ Ask Lumi
-        </button>
+      
         <a href="/notes" class="backLink">← Back to Notes</a>
-      </div>
+      
     </header>
 
     <% if (errors && errors.message) { %>
@@ -36,6 +33,7 @@
           action="/notes/<%= note._id %>"
           method="POST"
           id="noteForm"
+          data-note-id="<%= note._id %>"
           class="noteForm editNoteForm"
         >
           <label for="noteTitle">Note title</label>
@@ -52,12 +50,16 @@
           <label for="noteContent">Your note</label>
 
           <div class="richTextToolbar">
+            <button type="button" data-command="heading" data-level="2">H2</button>
+            <button type="button" data-command="heading" data-level="3">H3</button>
             <button type="button" data-command="bold" aria-label="Bold"><b>B</b></button>
             <button type="button" data-command="italic" aria-label="Italic"><i>I</i></button>
             <button type="button" data-command="underline" aria-label="Underline"><u>U</u></button>
             <button type="button" data-command="strike" aria-label="Strikethrough"><s>S</s></button>
-            <button type="button" data-command="bulletList">• List</button>
-            <button type="button" data-command="orderedList">1. List</button>
+            <button type="button" data-command="highlight">🖍️</button>
+            
+            <button type="button" data-command="bulletList">•</button>
+            <button type="button" data-command="orderedList">1.</button>
             <button type="button" data-command="undo" aria-label="Undo">↶</button>
             <button type="button" data-command="redo" aria-label="Redo">↷</button>
           </div>
@@ -87,71 +89,12 @@
         </form>
       </section>
 
-      <aside class="aiPanel" id="aiPanel">
-        <div class="aiPanelHeader">
-          <h2>✨ Ask me anything</h2>
-        </div>
-
-        <p class="aiSubtitle">
-          Your study companion, ready to help you understand and remember.
-        </p>
-
-        <label for="aiPrompt">What would you like help with?</label>
-        <textarea
-          id="aiPrompt"
-          class="aiPrompt"
-          placeholder="Ask about a topic, or select an action below..."
-        ></textarea>
-
-        <div class="aiActions">
-          <button type="button" class="aiActionBtn" data-ai-action="explain">
-            💡 Explain topic<span>Understand concepts</span>
-          </button>
-          <button type="button" class="aiActionBtn" data-ai-action="summarize">
-            ✨ Summarize<span>Find key points</span>
-          </button>
-          <button type="button" class="aiActionBtn" data-ai-action="flashcards">
-            🗂 Flashcards<span>Practice recall</span>
-          </button>
-          <button type="button" class="aiActionBtn" data-ai-action="questions">
-            ❔ Questions<span>Test your knowledge</span>
-          </button>
-        </div>
-
-        <button type="button" class="aiSubmitBtn" id="askLumiBtn">
-          Ask Lumi →
-        </button>
-
-        <p class="aiStatus" id="aiStatus" aria-live="polite">
-          Choose an action or type a question to get started.
-        </p>
-
-        <div class="aiResult" id="aiResult" hidden>
-          <strong id="aiResultTitle">AI response</strong>
-          <p id="aiResultContent"></p>
-          <div class="aiResultActions">
-            <button type="button" id="insertAiResult">Insert into note</button>
-            <button type="button" id="dismissAiResult">Dismiss</button>
-          </div>
-        </div>
-      </aside>
+     
     </div>
   </main>
 
   <script id="initialNoteContent" type="application/json"><%- JSON.stringify(note.content || '').replace(/</g, '\\u003c') %></script>
   <script type="module" src="/dist/noteEditor.js"></script>
 
-  <script>
-    const mobileAiToggle = document.getElementById("mobileAiToggle");
-    const aiPanel = document.getElementById("aiPanel");
-
-    mobileAiToggle.addEventListener("click", () => {
-      aiPanel.classList.toggle("mobileOpen");
-
-      if (aiPanel.classList.contains("mobileOpen")) {
-        aiPanel.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  </script>
 </body>
 </html>

@@ -12,30 +12,7 @@
   --border: #e7e9df;
   --shadow: 0 8px 25px rgba(86, 112, 80, 0.08);
 }
-.main{
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns:180px 1fr 1fr 1fr;
-    grid-template-rows: 180px 1fr 1fr 1fr;
-    gap:0.5em;
-    padding: 8px;
-    grid-template-areas: 
-    "box-1 box-2 box-3 box-4"
-    "box-1 box-6 box-5 box-5"
-    "box-1 box-6 box-7 box-8"
-    "box-1 box-6 box-7 box-8";
-    
-}
 
-.greeting,.quote,.date,.schedule,.analytics,.tasks,.note{
-    background-color:#F6E2E9 ;
-    border: 1px solid #F6E2E9;
-    border-radius: 10px;
-    padding: 1rem;
-}
-.navbar, .greeting,.quote, .date, .schedule, .analytics, .tasks ,.note{
-    margin: 0; 
-}
 
 * {
   box-sizing: border-box;
@@ -63,10 +40,91 @@ a {
   text-decoration: none;
 }
 
-.appLayout {
-  display: flex;
-  min-height: 100vh;
+
+.navbar{
+    background-color:#B8CFB3 ;
+    padding: 1rem;
+    border-radius: 10px;
+
 }
+
+.navbar{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+#nameLogo{
+    height: 10vh;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+}
+
+
+
+.navBtn{
+    width: 180px;
+    height: 60px;
+    background-color: #B8CFB3;
+    border:1px solid #FEFAF3;
+    
+    
+}
+.navBtn:hover{
+    background-color: #8caf85;
+    cursor: pointer;
+}
+.navLinks{
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color:#3A4F41 ;
+}
+
+.logout{
+    width: 85px;
+    height: 35px;
+    background-color: #F6E2E9;
+    color:#8caf85 ;
+    font-weight: bold;
+    border: 0px solid #F6E2E9 ;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.logout:hover{
+    background-color: #eac3d1;
+}
+
+
+.main{
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns:245px 1fr 1fr 1fr;
+    grid-template-rows: 180px 1fr 1fr 1fr;
+    gap:0.5em;
+    padding: 8px;
+    grid-template-areas: 
+    "box-1 box-2 box-3 box-4"
+    "box-1 box-6 box-5 box-5"
+    "box-1 box-6 box-7 box-8"
+    "box-1 box-6 box-7 box-8";
+    
+}
+
+.greeting,.quote,.date,.schedule,.analytics,.tasks,.note{
+    background-color:#F6E2E9 ;
+    border: 1px solid #F6E2E9;
+    border-radius: 10px;
+    padding: 1rem;
+}
+.greeting,.quote, .date, .schedule, .analytics, .tasks ,.note{
+    margin: 0; 
+}
+
 
 /* Sidebar */
 
@@ -798,3 +856,13 @@ th.data {
     }
 }
 
+.sidebar {
+  margin: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

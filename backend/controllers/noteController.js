@@ -242,3 +242,47 @@ export async function updateNote(req, res, next) {
     next(error);
   }
 }
+
+export const autoSaveNote = async (req, res, next) => {
+  try {
+    const { title, content, tags } = req.body;
+
+    const sanitizedTitle = sanitizeHtml(title || "").trim();
+
+    const sanitizedContent = sanitizeHtml(content || "", {
+      allowedTags: [
+        "p", "br", "strong", "b", "em", "i", "u", "s",
+        "ul", "ol", "li", "h1", "h2", "h3", "blockquote",
+        "pre", "code", "mark",
+      ],
+      allowedAttributes: {},
+    }).trim();
+
+    const cleanedTags = [
+      ...new Set(
+        (Array.isArray(tags) ? tags : (tags || "").split(","))
+          .map((tag) => tag.trim().replace(/^#/, ""))
+          .filter(Boolean)
+          .map((tag) => tag.slice(0, 30)),
+      ),
+    ];
+
+    const note = await Note.findOneAndUpdate(
+      { _id: req.params.id, user: req.user._id },
+      {
+        title: sanitizedTitle,
+        content: sanitizedContent,
+        tags: cleanedTags,
+      },
+      { returnDocument: "after", runValidators: true },
+    );
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    res.json({ message: "Auto-saved", updatedAt: note.updatedAt });
+  } catch (error) {
+    next(error);
+  }
+};
