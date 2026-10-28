@@ -8,12 +8,20 @@ export async function getNotes(req, res, next) {
       .sort({ pinned: -1, updatedAt: -1 })
       .lean();
 
+    const notesWithPlainText = notes.map((note) => ({
+      ...note,
+      plainText: sanitizeHtml(note.content, {
+        allowedTags: [],
+        allowedAttributes: {},
+      }),
+    }));
+
     const tags = [...new Set(notes.flatMap((note) => note.tags || []))].sort(
       (a, b) => a.localeCompare(b),
     );
 
     res.render("notes", {
-      notes,
+      notes: notesWithPlainText,
       tags,
     });
   } catch (error) {

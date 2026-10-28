@@ -73,7 +73,7 @@
               data-note-id="<%= note._id %>"
               data-edit-url="/notes/<%= note._id %>/edit"
               data-title="<%= note.title.toLowerCase() %>"
-              data-content="<%= note.content.toLowerCase() %>"
+              data-content="<%= (note.plainText || '').toLowerCase() %>"
               data-tags="<%= (note.tags || []).join(' ').toLowerCase() %>"
             >
               <div class="noteHeader">
@@ -100,7 +100,8 @@
                 </div>
               </div>
 
-              <p class="notePreview"><%= note.content %></p>
+              
+              <div class="notePreview"><%- note.content %></div>
 
               <% if (note.tags && note.tags.length > 0) { %>
                 <div class="noteTags">

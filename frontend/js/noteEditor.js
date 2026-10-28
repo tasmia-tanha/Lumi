@@ -1,4 +1,3 @@
-
 import { Editor } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -6,17 +5,15 @@ import Highlight from "@tiptap/extension-highlight";
 
 const editorElement = document.querySelector("#noteContent");
 const contentInput = document.querySelector("#noteContentInput");
-const noteForm = document.querySelector("#noteForm");
+const noteForm = document.querySelector("#noteForm, .editNoteForm");
 
 if (editorElement && contentInput && noteForm) {
   const editor = new Editor({
     element: editorElement,
-    extensions: [
-      StarterKit,
-      Underline,
-      Highlight,
-    ],
-    content: "",
+    extensions: [StarterKit, Underline, Highlight],
+    content: JSON.parse(
+      document.querySelector("#initialNoteContent")?.textContent || '""',
+    ),
     editorProps: {
       attributes: {
         class: "richTextContent",
