@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
     <link rel="stylesheet" href="../stylesheet/login.css" />
+    <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,49 +15,69 @@
     />
   </head>
 
-  <body>
-    <div class="main-img">
-      <img id="background" src="../images/Pastel Capybara Study Nook.png" />
-    </div>
+<body>
+  <main class="loginPage">
+    <img
+      id="background"
+      src="../images/Cozy Pastel Study Nook.png"
+      alt=""
+    />
 
-    <div class="box">
-      <div class="info">
+    <section class="formPanel">
+      <div class="loginCard">
         <img
           id="logo"
           src="../images/Lumi Capybara Study Planner.png"
-          height="150px"
-          width="auto"
+          alt="Lumi"
         />
-        <br />
+
+        <p class="welcomeLabel">WELCOME BACK</p>
+        <h2>Let's get cozy.</h2>
+        <p class="subtitle">Your little corner of productivity awaits.</p>
+
         <form id="loginForm" action="/" method="POST" novalidate>
+          <label for="username">Username or email</label>
           <input
             id="username"
             type="text"
-            placeholder="Username or Email"
+            placeholder="Enter your username or email"
             name="username"
-            value="<%= data.username%>"
+            value="<%= data.username %>"
+            spellcheck="false"
             required
           />
 
+          <label for="key">Password</label>
           <input
             id="key"
             type="password"
-            placeholder="Password"
+            placeholder="Enter your password"
             name="password"
             required
           />
-           <% if (errors && errors.common) { %>
+
+          <% if (errors && errors.common) { %>
             <p class="error visible"><%= errors.common.msg %></p>
-            <% } else { %>
+          <% } else { %>
             <p class="error"></p>
-            <% } %>
-          <button id="loginBtn">Login</button>
+          <% } %>
+
+          <button id="loginBtn" type="submit">
+            Log in to Lumi <span>→</span>
+          </button>
         </form>
 
         <p id="signUp">
-          Don't have an account?<a id="signUPLink" href="/signup">Create One</a>
+          New to Lumi?
+          <a id="signUPLink" href="/signup">Create an account</a>
+        </p>
+
+        <p class="bottomNote">
+          Made for your little everyday wins <span>♡</span>
         </p>
       </div>
-    </div>
-  </body>
+    </section>
+  </main>
+</body>
+
 </html>

@@ -1,118 +1,218 @@
-*{
-    box-sizing: border-box;
-    font-family: 'Nunito',sans-serif;
+
+:root {
+  --green: #b8cfb3;
+  --green-dark: #84a282;
+  --green-deep: #587b59;
+  --pink: #f6e2e9;
+  --pink-dark: #eec0d0;
+  --cream: #fefaf3;
+  --text: #3e493d;
+  --muted: #899185;
 }
 
+* {
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  color: var(--text);
+  overflow: hidden;
+}
+
+.main-img {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+#background {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: calc(100% - 32px);
+  max-width: 440px;
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+
+  margin: 0;
+  padding: 20px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 26px;
+  background: rgba(254, 250, 243, 0.95);
+  box-shadow: 0 12px 40px rgba(65, 92, 62, 0.13);
+  backdrop-filter: blur(8px);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#logo {
+  display: block;
+  width: 140px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 0 auto 8px;
+}
+
+.user_info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
+
+#username,
+#key,
+#email,
+#confirmKey {
+  width: 100%;
+  height: 44px;
+  margin: 0 0 4px;
+  padding: 0 13px;
+  border: 1.5px solid #dce5d7;
+  border-radius: 12px;
+  outline: none;
+  background: #fffefa;
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#username::placeholder,
+#key::placeholder,
+#email::placeholder,
+#confirmKey::placeholder {
+  color: #a4aa9f;
+}
+
+#username:focus,
+#email:focus,
+#key:focus,
+#confirmKey:focus {
+  border-color: var(--green-dark);
+  box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.16);
+}
+
+/* Preserve your existing validation error styling */
 p.error {
-    visibility: hidden;
-    color: red;
-    font-size: 12px;
-    margin: 3px 0;
-    height: 30px;
-    line-height: 15px;
-    border: none;
-    white-space: normal;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-    text-align: center;
+  visibility: hidden;
+  color: #c34d60;
+  font-size: 12px;
+  margin: 2px 0 7px;
+  min-height: 15px;
+  height: auto;
+  line-height: 15px;
+  border: none;
+  white-space: normal;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  text-align: left;
 }
 
 p.error.visible {
-    visibility: visible;
-}
-input.error{
-    border: 2px solid red !important;
-    
-}
-body{
-    background-color: #B8CFB3;
-    min-height: 100vh;
-    display: flex;
-    justify-content:flex-start;
-    align-items: center;
-    align-content: center;
-    margin: 0px;
+  visibility: visible;
 }
 
-
-#background{
-    height: 100vh;
-    width: 100%;
-    display: block;
-    object-fit: cover;
-    
+input.error {
+  border: 2px solid #c34d60 !important;
 }
 
-.box{
-    
-    background-color: #FEFAF3;
-    min-height: 70vh;
-    height: auto;
-    width: 60vh;
-    border-radius: 25px;
-    border-width: 5px;
-    border-style: none;
-    margin-right: 80px;
-    margin-left: 80px;
-    
-    
+#signUpBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 46px;
+  margin: 4px 0 0;
+  border: none;
+  border-radius: 12px;
+  background: var(--green-dark);
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
-.info{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
+#signUpBtn:hover {
+  background: var(--green-deep);
 }
 
-.user_info{
-    text-align: center;
-    margin-bottom: 5px;
+#login {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
 }
 
-#logo{
+#loginLink {
+  color: var(--green-deep);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+#loginLink:hover {
+  color: var(--green-dark);
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .box {
+    padding: 18px 20px;
+    border-radius: 22px;
+  }
+
+  #logo {
+    width: 120px;
+  }
+}
+
+@media (max-height: 650px) {
+  .box {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #logo {
+    width: 95px;
+    margin-bottom: 4px;
+  }
+
+  #username,
+  #key,
+  #email,
+  #confirmKey {
+    height: 38px;
+  }
+
+  p.error {
+    margin-bottom: 4px;
+  }
+
+  #login {
     margin-top: 10px;
-    margin-bottom: 5px;
-}
-#username,#key,#email,#confirmKey{
-    height: 40px;
-    width: 20vw;
-    margin-bottom: 5px;
-    
-    border-radius: 10px;
-    border: 2px solid #84A282;
-}
-
-#username:focus,#email:focus,
-#key:focus,#confirmKey:focus{
-    border:2px solid #84A282;
-    outline: 2px solid #B8CFB3;
-}
-#signUpBtn{
-    background-color: #F6E2E9;
-    color:#84A282;
-    border-style: none;
-    border-radius: 15px;
-    width: 100px;
-    height: 30px;
-    margin-top:0px;
-    margin-bottom: 0px;
-    font-size: 20px;
-    
-}
-#signUpBtn:hover{
-    width: 105px;
-    background-color: #eec0d0;
-}
-
-#login{
-    font-size: 20px;
-    color:#96ae94
-}
-
-#loginLink{
-    font-weight: bold;
-    color: #84A282;
-}
-#loginLink:hover{
-    color: #5c805a;
+  }
 }
