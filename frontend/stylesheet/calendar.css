@@ -137,14 +137,15 @@ a {
 }
 
 .main {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 340px;
-    grid-template-areas: "calendar right";
-    gap: 20px;
-    margin-left: 245px;
-    padding: 8px;
-    overflow: hidden;
+  height: 100vh;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-areas: "calendar right";
+  gap: 20px;
+  margin-left: 245px;
+  padding: 8px;
+  overflow: hidden;
 }
 .calendarSection {
     grid-area: calendar;
@@ -271,12 +272,14 @@ a {
 
 
 .rightPanel {
-    grid-area: right;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    height: 100%;
-    padding: 5px 0;
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 5px 0;
 }
 
 .panelCard {
@@ -288,13 +291,14 @@ a {
     flex-direction: column;
 }
 
-.todaysAgenda {
-    flex: 1;
+.todaysAgenda,
+.upcomingAgenda {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
-.upcomingAgenda {
-    flex: 1.2;
-}
+
 
 .panelCard h3 {
     margin: 0 0 4px 0;
@@ -568,4 +572,28 @@ a {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+
+.upcomingAgenda {
+  min-height: 0;
+  overflow: hidden;
+}
+
+#upcomingEventsList {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.todaysAgenda {
+  min-height: 0;
+  overflow: hidden;
+}
+
+#todayAgendaList,
+#upcomingEventsList {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
 }
