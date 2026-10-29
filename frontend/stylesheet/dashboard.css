@@ -295,7 +295,7 @@ a {
   font-weight: 700;
 }
 .todo:hover {
-  background: #f9f5ef;
+  background:var(--pink)
 }
 .taskName {
   flex: 1;
@@ -513,4 +513,137 @@ a {
     max-width: none;
     text-align: left;
   }
+}
+
+.deadlineLoading {
+  grid-column: 1 / -1;
+  padding: 12px;
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+}
+
+.listDeadLine {
+  min-height: 132px;
+  align-content: start;
+}
+
+.date > .textLink {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 14px;
+}
+.date {
+  min-height: 320px;
+}
+
+
+.tasks {
+  padding-top: 10px;
+}
+
+.tasks .sectionDescription {
+  margin-top: 4px;
+  margin-bottom: 3px;
+}
+
+.taskLink {
+  margin-top: 0px;
+}
+
+
+.analytics .sectionHeading {
+  margin-top: -6px;
+}
+
+.studyTimeSummary {
+  margin-top: 14px;
+}
+
+.weeklyChart {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 10px;
+  height: 110px;
+  margin-top: 14px;
+}
+
+.weeklyBar {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.weeklyBarTrack {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  
+  border-radius: 7px;
+  background: #edf1e9;
+}
+
+.weeklyBarFill {
+  width: 100%;
+  height: 0;
+  border-radius: 7px;
+  background: #b8cfb3;
+  transition: height 0.35s ease;
+}
+
+.weeklyBarFill.today {
+  background: #84a282;
+}
+
+.studyTimeValue {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--green-deep);
+}
+
+.capybaraNote { margin-top: 5px; }
+
+.weeklyBarTrack {
+  position: relative;
+}
+
+.barTooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: var(--green-deep);
+  color: white;
+  font-size: 11px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.weeklyBarTrack:hover .barTooltip {
+  display: block;
+}
+
+.weeklyBarTrack {
+  overflow: visible;
+}
+
+.barTooltip {
+  z-index: 10;
 }

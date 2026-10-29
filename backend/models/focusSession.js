@@ -10,7 +10,7 @@ const sessionSchema = new mongoose.Schema(
       index: true,
     },
 
-    // Duration is stored in milliseconds.
+    
     duration: {
       type: Number,
       required: true,

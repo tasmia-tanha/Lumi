@@ -33,7 +33,7 @@
         <img id="greetLogo" src="/images/Kawaii Capybara With Flower.png" alt="Capybara holding a flower" />
         <div class="greetingText">
           <p class="eyebrow">YOUR LITTLE STUDY SPACE</p>
-          <h1 id="greetMsg">Welcome back,<br />Tanha!</h1>
+          <h1 id="greetMsg">Welcome back,<br />little capybara!</h1>
           <p class="greetingSubtext">Let's make a little progress today. 🌱</p>
         </div>
       </section>
@@ -44,18 +44,15 @@
           <span class="headingIcon" aria-hidden="true">📅</span>
         </div>
         <p class="sectionDescription" id="deadlineCount">Within the next 7 days</p>
-        <ul class="listDeadLine">
-          <li class="deadLineItems"><span class="deadlineName">DS Lab report</span><span class="badge urgent">2 days</span></li>
-          <li class="deadLineItems"><span class="deadlineName">ME Lab report</span><span class="badge">3 days</span></li>
-          <li class="deadLineItems"><span class="deadlineName">DLD Lab report</span><span class="badge">3 days</span></li>
-          <li class="deadLineItems"><span class="deadlineName">Math assignment</span><span class="badge">6 days</span></li>
+        <ul class="listDeadLine" id="deadlineList">
+            <li class="deadlineLoading">Loading deadlines... 🌱</li>
         </ul>
-        <a class="textLink" href="/calendar">View calendar <span aria-hidden="true">→</span></a>
+        <a class="textLink" href="/calendar">View all deadlines<span aria-hidden="true">→</span></a>
       </section>
 
       <section class="tasks panel" aria-labelledby="taskHeader">
         <div class="sectionHeading">
-          <div><p class="eyebrow">ONE STEP AT A TIME</p><h2 id="taskHeader">My tasks</h2></div>
+          <div><h2 id="taskHeader">My tasks</h2></div>
           <span class="headingIcon" aria-hidden="true">🌱</span>
         </div>
         <p id="taskCount" class="sectionDescription" data-count="<%= activeTasks.length %>"><%= activeTasks.length %> tasks remaining</p>
@@ -67,29 +64,63 @@
               <span class="priority <%= task.priority %>"><%= task.priority %></span>
             </li>
           <% }) %>
-          <li class="emptyTasks">
-            🌸 All done, little capybara! Time to rest.
-          </li>
+          
         </ul>
         <a class="textLink taskLink" id="viewAllTasks" href="/task">View all tasks <span aria-hidden="true">→</span></a>
       </section>
 
       <section class="analytics panel" aria-labelledby="studyTimeHeading">
-        <div class="sectionHeading">
-          <div><p class="eyebrow">YOUR PROGRESS</p><h2 id="studyTimeHeading">Studied time this week</h2></div>
-          <span class="headingIcon" aria-hidden="true">⏳</span>
-        </div>
-        <div class="studyTimeSummary">
-          <div><strong class="studyTimeValue">— h — m</strong><span class="sectionDescription">Focused time this week</span></div>
-          <span class="studyTimeCaption">Keep going at your own pace</span>
-        </div>
-        <div class="progressTrack" role="img" aria-label="Weekly study time progress"><div class="progressFill"></div></div>
-        <p class="progressHint">Your study time will appear here.</p>
-        <div class="capybaraNote">
-          <img src="/images/Kawaii Capybara With Flower.png" alt="" />
-          <p>Little by little, your effort adds up. 🌷</p>
-        </div>
-      </section>
+  <div class="sectionHeading">
+    <div>
+      <h2 id="studyTimeHeading">Studied time this week</h2>
+    </div>
+    <span class="headingIcon" aria-hidden="true">⏳</span>
+  </div>
+
+  <div class="studyTimeSummary">
+    <div>
+      <strong class="studyTimeValue" id="weeklyStudyTotal">0h 0m</strong>
+      <span class="sectionDescription">Focused time this week</span>
+    </div>
+    <span class="studyTimeCaption">Keep going at your own pace</span>
+  </div>
+
+  <div class="weeklyChart" id="weeklyStudyChart">
+    <div class="weeklyBar">
+      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="0"></div></div>
+      <span>Sun</span>
+    </div>
+    <div class="weeklyBar">
+      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="1"></div></div>
+      <span>Mon</span>
+    </div>
+    <div class="weeklyBar">
+      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="2"></div></div>
+      <span>Tue</span>
+    </div>
+    <div class="weeklyBar">
+      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="3"></div></div>
+      <span>Wed</span>
+    </div>
+    <div class="weeklyBar">
+      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="4"></div></div>
+      <span>Thu</span>
+    </div>
+    <div class="weeklyBar">
+      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="5"></div></div>
+      <span>Fri</span>
+    </div>
+    <div class="weeklyBar">
+      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="6"></div></div>
+      <span>Sat</span>
+    </div>
+  </div>
+
+  <div class="capybaraNote">
+    
+    <p>Little by little, your effort adds up. 🌷</p>
+  </div>
+</section>
     </main>
   </div>
   <script>
@@ -157,6 +188,136 @@
         return result.activeTasks || [];
       } catch (error) { console.error(error); return []; }
     }
+    async function loadDashboardDeadlines() {
+  const deadlineList = document.querySelector("#deadlineList");
+  const deadlineCount = document.querySelector("#deadlineCount");
+
+  try {
+    const response = await fetch("/calendar/dashboard-deadlines");
+
+    if (!response.ok) {
+      throw new Error("Could not load deadlines");
+    }
+
+    const result = await response.json();
+    const deadlines = result.data || [];
+    const totalDeadlines = deadlines.length;
+    const visibleDeadlines = deadlines.slice(0, 4);
+
+    deadlineList.replaceChildren();
+
+    if (deadlines.length === 0) {
+      const emptyMessage = document.createElement("li");
+      emptyMessage.className = "deadlineLoading";
+      emptyMessage.textContent = "🌸 No upcoming deadlines. Enjoy your time!";
+      deadlineList.appendChild(emptyMessage);
+      deadlineCount.textContent = "Nothing due in the next 7 days";
+      return;
+    }
+
+    deadlineCount.textContent =
+  `${totalDeadlines} upcoming within the next 7 days`;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    visibleDeadlines.forEach((deadline) => {
+      const deadlineDate = new Date(deadline.date);
+      const daysLeft = Math.round(
+        (Date.UTC(deadlineDate.getFullYear(), deadlineDate.getMonth(), deadlineDate.getDate()) -
+         Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())) /
+        (1000 * 60 * 60 * 24)
+      );
+
+      const item = document.createElement("li");
+      item.className = "deadLineItems";
+
+      const name = document.createElement("span");
+      name.className = "deadlineName";
+      name.textContent = deadline.title;
+
+      const badge = document.createElement("span");
+      badge.className = daysLeft <= 2 ? "badge urgent" : "badge";
+
+      if (daysLeft === 0) {
+        badge.textContent = "Today";
+      } else if (daysLeft === 1) {
+        badge.textContent = "Tomorrow";
+      } else {
+        badge.textContent = `${daysLeft} days`;
+      }
+
+      item.append(name, badge);
+      deadlineList.appendChild(item);
+    });
+  } catch (error) {
+    console.error("Failed to load dashboard deadlines:", error);
+
+    deadlineList.replaceChildren();
+
+    const errorMessage = document.createElement("li");
+    errorMessage.className = "deadlineLoading";
+    errorMessage.textContent = "Couldn't load deadlines. Please try again.";
+    deadlineList.appendChild(errorMessage);
+  }
+}
+async function loadWeeklyStudyTime() {
+  const totalElement = document.querySelector("#weeklyStudyTotal");
+  const bars = document.querySelectorAll(".weeklyBarFill");
+
+  try {
+    const response = await fetch("/focusSession/weekly");
+
+    if (!response.ok) {
+      throw new Error("Failed to load weekly study time");
+    }
+
+    const data = await response.json();
+    const dailyTotals = data.dailyTotals;
+    const totalMinutes = Math.floor(data.totalMilliseconds / 60000);
+
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    totalElement.textContent = `${hours}h ${minutes}m`;
+
+    const dailyScale = 4 * 60 * 60 * 1000; // 4 hours
+
+bars.forEach((bar) => {
+  const dayIndex = Number(bar.dataset.day);
+  const duration = dailyTotals[dayIndex];
+  const tooltip = bar.parentElement.querySelector(".barTooltip");
+
+const totalMinutes = Math.floor(duration / 60000);
+const hours = Math.floor(totalMinutes / 60);
+const minutes = totalMinutes % 60;
+
+tooltip.textContent = `${hours}h ${minutes}m`;
+
+  const height = Math.min(
+    (duration / dailyScale) * 100,
+    100
+  );
+
+  bar.style.height = `${height}%`;
+
+      
+      bar.classList.toggle(
+        "today",
+        dayIndex === new Date(
+          Date.now() + 6 * 60 * 60 * 1000
+        ).getUTCDay()
+      );
+    });
+  } catch (error) {
+    console.error("Failed to load weekly study time:", error);
+    totalElement.textContent = "Unavailable";
+  }
+}
+
+loadWeeklyStudyTime();
+
+loadDashboardDeadlines();
   </script>
 </body>
 </html>

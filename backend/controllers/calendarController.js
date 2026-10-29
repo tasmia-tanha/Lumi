@@ -116,3 +116,31 @@ export async function getTodayAgenda(req, res, next) {
     next(error);
   }
 }
+
+export async function getDashboardDeadlines(req, res, next) {
+  try {
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+
+    const nextWeek = new Date(today);
+    nextWeek.setUTCDate(nextWeek.getUTCDate() + 7);
+
+    const deadlines = await calendar.find({
+      user: req.user._id,
+      pinned: true,
+      title: { $exists: true, $ne: "" },
+      date: {
+        $gte: today,
+        $lte: nextWeek,
+      },
+    })
+      .sort({ date: 1 })
+      .select("date title");
+
+    res.json({
+      data: deadlines,
+    });
+  } catch (error) {
+    next(error);
+  }
+}

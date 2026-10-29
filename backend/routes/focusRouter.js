@@ -6,6 +6,7 @@ import {
   saveFocusSession,
   getTotalStudyTime,
   updateDailyGoal,
+  getWeeklyStudyTime
 } from "../controllers/sessionController.js";
 
 import { decorateHtml } from "../middlewares/common/decorateHtml.js";
@@ -21,6 +22,7 @@ router.get(
 );
 
 router.get("/total", authGuard, getTotalStudyTime);
+router.get("/weekly", authGuard, getWeeklyStudyTime);
 
 router.post("/", authGuard, saveFocusSession);
 

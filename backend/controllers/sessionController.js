@@ -1,4 +1,3 @@
-
 import { FocusSession } from "../models/focusSession.js";
 import People from "../models/people.js";
 
@@ -43,7 +42,7 @@ export function getFocusSession(req, res) {
 
 export async function saveFocusSession(req, res, next) {
   try {
-    // Duration is stored in milliseconds.
+    
     const duration = Number(req.body.duration);
     const allowedModes = ["free", "pomodoro", "deep"];
     const mode = allowedModes.includes(req.body.mode)
@@ -76,7 +75,7 @@ export async function getTotalStudyTime(req, res, next) {
   try {
     const { start, end } = getTodayBounds();
 
-    // Always fetch the latest saved goal from MongoDB.
+    
     const user = await People.findById(req.user._id)
       .select("dailyGoalMinutes")
       .lean();
@@ -149,6 +148,57 @@ export async function getTotalStudyTime(req, res, next) {
   }
 }
 
+export async function getWeeklyStudyTime(req, res, next) {
+  try {
+    const now = new Date();
+
+    // Get today's date in Bangladesh time
+    const bdNow = new Date(
+      now.getTime() + BANGLADESH_OFFSET_MS,
+    );
+
+    // Find Sunday at the start of this week
+    const daysSinceSunday = bdNow.getUTCDay();
+    bdNow.setUTCDate(bdNow.getUTCDate() - daysSinceSunday);
+    bdNow.setUTCHours(0, 0, 0, 0);
+
+    // Convert Sunday midnight back to UTC
+    const start = new Date(
+      bdNow.getTime() - BANGLADESH_OFFSET_MS,
+    );
+
+    const end = new Date(start.getTime() + 7 * DAY_IN_MS);
+
+    const sessions = await FocusSession.find({
+      user: req.user._id,
+      createdAt: { $gte: start, $lt: end },
+    })
+      .select("duration createdAt")
+      .lean();
+
+    const dailyTotals = Array(7).fill(0);
+
+    for (const session of sessions) {
+      const dayKey = getBangladeshDateKey(session.createdAt);
+      const date = new Date(`${dayKey}T00:00:00.000Z`);
+      const dayIndex = date.getUTCDay();
+
+      dailyTotals[dayIndex] += session.duration;
+    }
+
+    const totalMilliseconds = dailyTotals.reduce(
+      (sum, duration) => sum + duration,
+      0,
+    );
+
+    res.json({
+      totalMilliseconds,
+      dailyTotals,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
 
 export async function updateDailyGoal(req, res, next) {
   try {
