@@ -4,7 +4,7 @@
   --green-deep: #587b59;
   --pink: #f6e2e9;
   --pink-dark: #eec0d0;
-  --cream: #fefaF3;
+  --cream: #fefaf3;
   --white: #ffffff;
   --text: #3e493d;
   --muted: #899185;
@@ -92,7 +92,9 @@ a {
   color: #737d70;
   font-size: 14px;
   font-weight: 700;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .navLink span {
@@ -148,128 +150,124 @@ a {
   overflow: hidden;
 }
 .calendarSection {
-    grid-area: calendar;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 5px 0;
-    min-width: 0;
+  grid-area: calendar;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 5px 0;
+  min-width: 0;
 }
 
 .calendarHeaderArea {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .calendarHeaderArea h2 {
-    margin: 0;
-    color: #84A282;
-    font-size: 2rem;
-    font-weight: 900;
+  margin: 0;
+  color: #84a282;
+  font-size: 2rem;
+  font-weight: 900;
 }
 
 .calendarControls {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
 
 .calSelect {
-    padding: 6px 12px;
-    border: 2px solid #84A282;
-    border-radius: 8px;
-    background-color: #B8CFB3;
-    color: #222B22;
-    font-weight: 800;
-    font-size: 0.85rem;
-    cursor: pointer;
+  padding: 6px 12px;
+  border: 2px solid #84a282;
+  border-radius: 8px;
+  background-color: #b8cfb3;
+  color: #222b22;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 
 .calendarCard {
-    background-color: #FEFAF3;
-    border: 2px solid #B8CFB3;
-    border-radius: 15px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    box-shadow: 0 4px 10px rgba(132, 162, 130, 0.1);
+  background-color: #fefaf3;
+  border: 2px solid #b8cfb3;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  box-shadow: 0 4px 10px rgba(132, 162, 130, 0.1);
 }
 
 .weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    font-weight: 800;
-    color: #84A282;
-    font-size: 0.85rem;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #B8CFB3;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 800;
+  color: #84a282;
+  font-size: 0.85rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #b8cfb3;
 }
 
 .calendarGrid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(6, minmax(0, 1fr));
-    gap: 6px;
-    flex-grow: 1;
-    padding-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+  flex-grow: 1;
+  padding-top: 8px;
 }
 
 .calDay {
-    background-color: #FEFAF3;
-    border: 1px solid #e0ebd8;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #3A4F41;
-    position: relative;
-    cursor: pointer;
-    transition: 0.15s ease;
+  background-color: #fefaf3;
+  border: 1px solid #e0ebd8;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #3a4f41;
+  position: relative;
+  cursor: pointer;
+  transition: 0.15s ease;
 }
 
 .calDay:hover {
-    background-color: #e0ebd8;
-    border-color: #84A282;
+  background-color: #e0ebd8;
+  border-color: #84a282;
 }
 
 .calDay.prevMonth {
-    color: #bbb;
-    background-color: rgba(254, 250, 243, 0.5);
+  color: #bbb;
+  background-color: rgba(254, 250, 243, 0.5);
 }
-
 
 .calDay.currentDay {
-    background-color: #B8CFB3;
-    color: #222B22;
-    border: 2px solid #84A282;
-    font-weight: 900;
+  background-color: #b8cfb3;
+  color: #222b22;
+  border: 2px solid #84a282;
+  font-weight: 900;
 }
-
 
 .calDay.hasEvent {
-    background-color: #F6E2E9; 
-    color: #8B4D63;            
-    font-weight: 800;
-    border-color: #E2B3C1;
+  background-color: #f6e2e9;
+  color: #8b4d63;
+  font-weight: 800;
+  border-color: #e2b3c1;
 }
-
 
 .calDay.hasEvent::after {
-    content: "📌";
-    font-size: 1rem;
-    line-height: 0;
-    position: absolute;
-    right: -10px;
-    top: 3px;
-    color: #8B4D63;
+  content: "📌";
+  font-size: 1rem;
+  line-height: 0;
+  position: absolute;
+  right: -10px;
+  top: 3px;
+  color: #8b4d63;
 }
-
 
 .rightPanel {
   grid-area: right;
@@ -283,12 +281,12 @@ a {
 }
 
 .panelCard {
-    background-color: #FEFAF3;
-    border: 2px solid #B8CFB3;
-    border-radius: 15px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
+  background-color: #fefaf3;
+  border: 2px solid #b8cfb3;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .todaysAgenda,
@@ -298,77 +296,72 @@ a {
   overflow: hidden;
 }
 
-
-
 .panelCard h3 {
-    margin: 0 0 4px 0;
-    color: #84A282;
-    font-size: 1.1rem;
-    font-weight: 900;
+  margin: 0 0 4px 0;
+  color: #84a282;
+  font-size: 1.1rem;
+  font-weight: 900;
 }
 
 .dateSub {
-    margin: 0 0 10px 0;
-    color: #777;
-    font-size: 0.75rem;
-    font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #777;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 .eventList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
 }
 
 .eventItem {
-    background-color: #f7f9f5;
-    border: 1px solid #B8CFB3;
-    border-radius: 8px;
-    padding: 8px 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  background-color: #f7f9f5;
+  border: 1px solid #b8cfb3;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .eventTime {
-    font-size: 0.7rem;
-    font-weight: 800;
-    color: #84A282;
-    background-color: #FEFAF3;
-    padding: 3px 6px;
-    border-radius: 4px;
-    border: 1px solid #B8CFB3;
-    white-space: nowrap;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #84a282;
+  background-color: #fefaf3;
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: 1px solid #b8cfb3;
+  white-space: nowrap;
 }
 
 .eventDateBadge {
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: #8B4D63;
-    background-color: #F6E2E9;
-    padding: 3px 6px;
-    border-radius: 4px;
-    white-space: nowrap;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #8b4d63;
+  background-color: #f6e2e9;
+  padding: 3px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
 .eventDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .eventTitle {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #222B22;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #222b22;
 }
-
-
-
 
 .datePopupOverlay {
   position: absolute;
@@ -396,7 +389,7 @@ a {
   box-sizing: border-box;
   padding: 28px;
   border-radius: 20px;
-  background: #FEFAF3;
+  background: #fefaf3;
   box-shadow: 0 12px 35px rgba(50, 60, 50, 0.18);
   color: #405140;
 }
@@ -428,11 +421,11 @@ a {
   width: 100%;
   box-sizing: border-box;
   padding: 11px 12px;
-  border: 1px solid #B8CFB3;
+  border: 1px solid #b8cfb3;
   border-radius: 10px;
   background: white;
   font: inherit;
-  outline-color: #84A282;
+  outline-color: #84a282;
 }
 
 .pinLabel {
@@ -457,7 +450,7 @@ a {
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
-  background: #B8CFB3;
+  background: #b8cfb3;
   color: #304630;
   font: inherit;
   cursor: pointer;
@@ -466,7 +459,7 @@ a {
 #saveDateDetails {
   width: 100%;
   margin-top: 22px;
-  background: #84A282;
+  background: #84a282;
   color: white;
   font-weight: 700;
 }
@@ -485,7 +478,7 @@ a {
   box-sizing: border-box;
   height: 40px;
   padding: 8px 10px;
-  border: 1px solid #B8CFB3;
+  border: 1px solid #b8cfb3;
   border-radius: 9px;
   background: #fff;
   color: #405140;
@@ -498,7 +491,7 @@ a {
 }
 
 .timeEntryRow input:focus {
-  outline: 2px solid #84A282;
+  outline: 2px solid #84a282;
   outline-offset: 1px;
 }
 
@@ -510,7 +503,7 @@ a {
   justify-content: center;
   border: none;
   border-radius: 50%;
-  background: #F6E2E9;
+  background: #f6e2e9;
   color: #795765;
   font-size: 20px;
   line-height: 1;
@@ -523,23 +516,23 @@ a {
 }
 
 .timeEntryRow input[type="time"] {
-  border: 1px solid #B8CFB3;
+  border: 1px solid #b8cfb3;
   border-radius: 9px;
-  background-color: #F6E2E9;
+  background-color: #f6e2e9;
   color: #526f50;
-  accent-color: #84A282;
+  accent-color: #84a282;
   padding: 8px;
   cursor: pointer;
 }
 
 .timeEntryRow input[type="time"]:focus {
-  outline: 2px solid #84A282;
+  outline: 2px solid #84a282;
   outline-offset: 1px;
-  background-color: #FEFAF3;
+  background-color: #fefaf3;
 }
 
 .pinnedDay {
-  background-color: #F6E2E9;
+  background-color: #f6e2e9;
   color: #526f50;
   border: 2px solid #eec0d0;
   border-radius: 12px;
@@ -549,9 +542,9 @@ a {
 .emptyAgenda {
   padding: 16px 12px;
   text-align: center;
-  color: #84A282;
-  background: #FEFAF3;
-  border: 1px dashed #B8CFB3;
+  color: #84a282;
+  background: #fefaf3;
+  border: 1px dashed #b8cfb3;
   border-radius: 12px;
   font-size: 13px;
   line-height: 1.6;
@@ -581,11 +574,7 @@ a {
   overflow-x: hidden;
 
   scrollbar-width: thin;
-  
 }
-
-
-
 
 .upcomingAgenda {
   min-height: 0;
@@ -670,31 +659,28 @@ a {
     overflow: visible;
   }
   .sidebar {
-  width: 205px;
-  min-width: 0;
-  padding: 28px 13px 20px;
-}
+    width: 205px;
+    min-width: 0;
+    padding: 28px 13px 20px;
+  }
 
-.main {
-  margin-left: 205px;
-}
+  .main {
+    margin-left: 205px;
+  }
 }
 
 @media (max-width: 760px) {
-   
-  
-
   .sidebar {
-  position: static;
-  width: 100%;
-  min-width: 0;
-  height: auto;
-  margin: 0;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  overflow: visible;
-}
+    position: static;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    margin: 0;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
 
   .brand {
     margin: 0 0 10px;
@@ -712,10 +698,7 @@ a {
     overflow-y: hidden;
     padding-bottom: 4px;
     scrollbar-width: thin;
-    
   }
-
-  
 
   .navLink {
     flex: 0 0 auto;
@@ -746,9 +729,9 @@ a {
     overflow: visible;
   }
   .calendarSection,
-.rightPanel {
-  padding: 12px;
-}
+  .rightPanel {
+    padding: 12px;
+  }
   .todaysAgenda,
   .upcomingAgenda {
     flex: none;
@@ -756,34 +739,29 @@ a {
     overflow: visible;
   }
 
-  
-
-
-
   .sidebar {
-  gap: 0;
-}
+    gap: 0;
+  }
 
-.brand {
-  margin: 0 0 10px;
-}
+  .brand {
+    margin: 0 0 10px;
+  }
 
-.sidebarBottom {
-  display: block;
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  margin: 0;
-  padding: 0;
-}
+  .sidebarBottom {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    margin: 0;
+    padding: 0;
+  }
 
-.logoutButton {
-  width: auto;
-  padding: 5px 9px;
-  font-size: 12px;
+  .logoutButton {
+    width: auto;
+    padding: 5px 9px;
+    font-size: 12px;
+  }
 }
-}
-
 
 /* Global scrollbar styling */
 html,
