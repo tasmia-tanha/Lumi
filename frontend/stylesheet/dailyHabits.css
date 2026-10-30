@@ -762,23 +762,22 @@ a {
   color: #a85f77;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1100px) and (min-width: 751px) {
   .main {
-    grid-template-columns: 160px minmax(0, 1fr);
-    grid-template-areas:
-      "box-1 habits"
-      "box-1 habits";
+    grid-template-columns: minmax(0, 1fr) 230px;
+    grid-template-areas: "habits right";
+    gap: 14px;
   }
 
   .rightPanel {
-    display: none;
+    display: flex;
+    min-width: 0;
   }
 
   .navBtn {
     height: 46px;
   }
 }
-
 @media (max-width: 750px) {
   .main {
     display: flex;
@@ -816,8 +815,9 @@ a {
   }
 
   .habitSection {
-    min-height: 650px;
-  }
+  height: auto;
+  min-height: 0;
+}
 
   .habitHeaderArea h1 {
     font-size: 1.5rem;
@@ -826,11 +826,371 @@ a {
 
 .sidebar {
   margin: 0;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   border-radius: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+@media (max-width: 1300px) and (min-width: 761px) {
+  .sidebar {
+    width: 205px;
+    min-width: 205px;
+    padding: 28px 13px 20px;
+  }
+
+  .main {
+    margin-left: 205px;
+  }
+}
+@media (max-width: 900px) {
+  
+  .habitNameCol,
+  .habitLabel {
+    min-width: 135px !important;
+    width: 135px;
+  }
+
+  .habitColHeader {
+    gap: 4px;
+  }
+
+  .habitColHeader span {
+    font-size: 0.7rem;
+  }
+
+  .addHabitBtn {
+    padding: 4px 5px;
+    font-size: 0.62rem;
+  }
+
+  
+  .habitHeaderArea {
+    margin-bottom: 9px;
+  }
+
+  .habitHeaderArea h1 {
+    font-size: 1.5rem;
+  }
+
+  .headerSubtitle {
+    font-size: 0.68rem;
+  }
+
+  .dateDisplay {
+    padding: 6px 10px;
+    font-size: 0.72rem;
+  }
+
+  
+  .habitCard {
+    padding: 8px;
+  }
+
+  
+  .rightPanel {
+    gap: 9px;
+  }
+
+  .statCard {
+    padding: 11px;
+    border-radius: 14px;
+  }
+
+  .streakFire {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+
+  .streakTop {
+    gap: 8px;
+  }
+
+  .streakTop h3 {
+    font-size: 0.65rem;
+  }
+
+  .streakNumber {
+    font-size: 1.4rem;
+  }
+
+  .streakTop span,
+  .streakBottom {
+    font-size: 0.62rem;
+  }
+
+  .cardHeading {
+    margin-bottom: 9px;
+  }
+
+  .cardHeading h3 {
+    font-size: 0.82rem;
+  }
+
+  .progressCircle {
+    width: 65px;
+    height: 65px;
+  }
+
+  .progressCircle::before {
+    width: 49px;
+    height: 49px;
+  }
+
+  .progressPercent {
+    font-size: 0.85rem;
+  }
+
+  .todayProgress {
+    gap: 9px;
+  }
+
+  .todayInfo strong {
+    font-size: 1.05rem;
+  }
+
+  .todayInfo span {
+    font-size: 0.6rem;
+  }
+
+  .progressBar {
+    margin-top: 10px;
+  }
+
+  .monthlyStat {
+    min-width: 0;
+  }
+
+  .monthlyStat strong {
+    font-size: 1.2rem;
+  }
+
+  .monthlyStat span,
+  .monthlyMessage {
+    font-size: 0.6rem;
+  }
+
+  .monthlyMessage {
+    padding: 7px;
+  }
+}
+@media (max-width: 800px) and (min-width: 751px) {
+  .monthlyCard {
+  flex-grow: 0;
+}
+  .main {
+    grid-template-columns: minmax(0, 1fr) 150px;
+    
+    gap: 10px;
+    padding: 7px;
+  }
+
+  
+  .habitNameCol,
+  .habitLabel {
+    min-width: 150px !important;
+    width: 150px;
+  }
+
+  
+  .rightPanel {
+    gap: 7px;
+  }
+
+  .statCard {
+    padding: 8px;
+    border-width: 1px;
+    border-radius: 12px;
+  }
+
+  
+  .streakFire {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  .streakTop {
+    gap: 6px;
+  }
+
+  .streakTop h3 {
+    font-size: 0.58rem;
+  }
+
+  .streakNumber {
+    font-size: 1.2rem;
+  }
+
+  .streakTop span,
+  .streakBottom {
+    font-size: 0.55rem;
+  }
+
+  .streakBottom {
+    margin-top: 9px;
+    padding-top: 7px;
+  }
+
+  
+  .cardHeading {
+    margin-bottom: 7px;
+  }
+
+  .cardHeading h3 {
+    font-size: 0.72rem;
+  }
+
+  .progressCircle {
+    width: 52px;
+    height: 52px;
+  }
+
+  .progressCircle::before {
+    width: 40px;
+    height: 40px;
+  }
+
+  .progressPercent {
+    font-size: 0.7rem;
+  }
+
+  .todayProgress {
+    gap: 6px;
+  }
+
+  .todayInfo strong {
+    font-size: 0.9rem;
+  }
+
+  .todayInfo span {
+    font-size: 0.52rem;
+  }
+
+  .progressBar {
+    height: 6px;
+    margin-top: 8px;
+  }
+
+  
+  .monthlyStat strong {
+    font-size: 1rem;
+  }
+
+  .monthlyStat span {
+    font-size: 0.52rem;
+  }
+
+  .monthlyDivider {
+    height: 27px;
+  }
+
+  .monthlyMessage {
+    padding: 6px;
+    font-size: 0.52rem;
+  }
+}
+@media (max-width: 760px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    height: auto;
+    min-height: 100vh;
+    padding: 110px 12px 12px;
+    overflow: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    padding: 12px;
+    gap: 0;
+    overflow: visible;
+    z-index: 100;
+  }
+
+  .brand {
+    margin: 0 0 10px;
+    padding: 0 8px;
+    font-size: 27px;
+  }
+
+  .navLabel {
+    display: none;
+  }
+
+  .navigation {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 7px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 4px;
+  }
+
+  .navLink {
+    flex: 0 0 auto;
+    padding: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .navLink span {
+    font-size: 18px;
+  }
+
+  .sidebarBottom {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebarBottom p {
+    display: none;
+  }
+
+  .logoutButton {
+    width: auto;
+    padding: 5px 9px;
+    font-size: 12px;
+  }
+}
+/* Global scrollbar styling */
+html,
+body,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b8cfb3 #f4f3e9;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f4f3e9;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #b8cfb3;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #84a282;
+}
+
