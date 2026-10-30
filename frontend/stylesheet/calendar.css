@@ -762,7 +762,24 @@ a {
     font-size: 12px;
   }
 }
+@media (max-width: 420px) {
+  .calendarHeaderArea {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+  }
 
+  .calendarControls {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(90px, 0.65fr);
+  }
+
+  .calSelect {
+    width: 100%;
+    min-width: 0;
+  }
+}
 /* Global scrollbar styling */
 html,
 body,

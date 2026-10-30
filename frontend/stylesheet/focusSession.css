@@ -1174,6 +1174,67 @@ a {
     grid-column: 1 / -1;
   }
 }
+
+
+/* Desktop: responsive Focus Session layout */
+@media (min-width: 1051px) {
+  .studyWorkspace {
+    padding: clamp(20px, 2.3vw, 45px);
+  }
+
+  .focusLayout {
+    width: 100%;
+    max-width: none;
+    grid-template-columns:
+      minmax(0, 1.65fr)
+      minmax(clamp(260px, 25vw, 380px), 0.9fr);
+    gap: clamp(18px, 2vw, 32px);
+  }
+
+  .timerSection {
+    gap: clamp(16px, 1.6vw, 26px);
+  }
+
+  .timerOverlayCard {
+    padding: clamp(28px, 3vw, 48px) clamp(22px, 2.5vw, 40px);
+  }
+
+  .timerDisplay {
+    font-size: clamp(4rem, 5vw, 6rem);
+  }
+
+  .lastSessionCard {
+    padding: clamp(17px, 1.5vw, 25px);
+  }
+
+  .overviewGrid {
+    gap: clamp(12px, 1.2vw, 20px);
+  }
+
+  .overviewCard {
+    padding: clamp(16px, 1.5vw, 25px);
+  }
+
+  .overviewCard h2 {
+    font-size: clamp(1.3rem, 1.6vw, 1.9rem);
+  }
+
+  .focusSidebar {
+    gap: clamp(16px, 1.5vw, 24px);
+  }
+
+  .sideCard {
+    padding: clamp(19px, 1.6vw, 27px);
+  }
+}
+@media (max-width: 450px) {
+  .pomodoroCard,
+  .dailyGoalCard {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: auto;
+  }
+}
 /* Global scrollbar styling */
 html,
 body,

@@ -65,7 +65,7 @@ a {
   left: 0;
   bottom: 0;
   z-index: 5;
-    height: 100vh;
+  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -107,7 +107,9 @@ a {
   color: #737d70;
   font-size: 14px;
   font-weight: 700;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .navLink span {
@@ -151,7 +153,7 @@ a {
   flex-direction: column;
   gap: 18px;
   overflow: hidden;
-   box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
 }
 
@@ -263,10 +265,12 @@ a {
   border-radius: 15px;
   background: white;
   box-shadow: var(--shadow);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
   width: 100%;
-max-width: 100%;
-overflow-wrap: anywhere;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .noteCard:hover {
@@ -587,28 +591,23 @@ overflow-wrap: anywhere;
   }
 
   .pinnedCard,
-.scratchpadCard {
-  height: 300px;
-  min-height: 300px;
-  max-height: 300px;
-  flex: none;
-  overflow: hidden;
+  .scratchpadCard {
+    height: 300px;
+    min-height: 300px;
+    max-height: 300px;
+    flex: none;
+    overflow: hidden;
+  }
+
+  .scratchpadCard {
+    grid-row: auto;
+  }
 }
-
-.scratchpadCard {
-  grid-row: auto;
-}
-}
-
-
-
-
 
 .highlightNote {
   outline: 3px solid var(--pink-dark);
   outline-offset: 3px;
 }
-
 
 /*edit note*/
 /* ===== EDIT NOTE PAGE ===== */
@@ -661,7 +660,9 @@ overflow-wrap: anywhere;
   font: inherit;
   font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .editNoteForm input:focus,
@@ -815,13 +816,13 @@ body:has(.editNoteCard) .main {
 
 @media (max-width: 900px) {
   .sidebar {
-  width: 205px;
-  padding: 28px 13px 20px;
-}
+    width: 205px;
+    padding: 28px 13px 20px;
+  }
 
-.main {
-  padding-left: 225px;
-}
+  .main {
+    padding-left: 225px;
+  }
   body:has(.editNoteCard) .notesWorkspace {
     grid-template-columns: 1fr;
     overflow-y: auto;
@@ -831,7 +832,6 @@ body:has(.editNoteCard) .main {
     overflow: hidden;
   }
 }
-
 
 /* Global scrollbar styling */
 html,
@@ -860,20 +860,19 @@ body,
 }
 
 @media (max-width: 760px) {
-  
   .sidebar {
-  position: static;
-  width: 100%;
-  min-width: 0;
-  height: auto;
-  margin: 0;
-  padding: 12px;
-  border-radius: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  overflow: visible;
-}
+    position: static;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    margin: 0;
+    padding: 12px;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+  }
 
   .brand {
     margin: 0 0 10px;
@@ -915,24 +914,24 @@ body,
   }
 
   .main {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  gap: 16px;
-  padding: 0 ;
-}
-.notesWorkspace {
-  margin: 0 12px 16px;
-  width: calc(100% - 24px);
-  box-sizing: border-box;
-}
-.rightSidebar {
-  margin: 0 12px 16px;
-  width: calc(100% - 24px);
-  box-sizing: border-box;
-}
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    gap: 16px;
+    padding: 0;
+  }
+  .notesWorkspace {
+    margin: 0 12px 16px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+  }
+  .rightSidebar {
+    margin: 0 12px 16px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+  }
 }

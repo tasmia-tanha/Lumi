@@ -815,9 +815,9 @@ a {
   }
 
   .habitSection {
-  height: auto;
-  min-height: 0;
-}
+    height: auto;
+    min-height: 0;
+  }
 
   .habitHeaderArea h1 {
     font-size: 1.5rem;
@@ -846,7 +846,6 @@ a {
   }
 }
 @media (max-width: 900px) {
-  
   .habitNameCol,
   .habitLabel {
     min-width: 135px !important;
@@ -866,7 +865,6 @@ a {
     font-size: 0.62rem;
   }
 
-  
   .habitHeaderArea {
     margin-bottom: 9px;
   }
@@ -884,12 +882,10 @@ a {
     font-size: 0.72rem;
   }
 
-  
   .habitCard {
     padding: 8px;
   }
 
-  
   .rightPanel {
     gap: 9px;
   }
@@ -979,23 +975,21 @@ a {
 }
 @media (max-width: 800px) and (min-width: 751px) {
   .monthlyCard {
-  flex-grow: 0;
-}
+    flex-grow: 0;
+  }
   .main {
     grid-template-columns: minmax(0, 1fr) 150px;
-    
+
     gap: 10px;
     padding: 7px;
   }
 
-  
   .habitNameCol,
   .habitLabel {
     min-width: 150px !important;
     width: 150px;
   }
 
-  
   .rightPanel {
     gap: 7px;
   }
@@ -1006,7 +1000,6 @@ a {
     border-radius: 12px;
   }
 
-  
   .streakFire {
     width: 32px;
     height: 32px;
@@ -1035,7 +1028,6 @@ a {
     padding-top: 7px;
   }
 
-  
   .cardHeading {
     margin-bottom: 7px;
   }
@@ -1075,7 +1067,6 @@ a {
     margin-top: 8px;
   }
 
-  
   .monthlyStat strong {
     font-size: 1rem;
   }
@@ -1166,6 +1157,84 @@ a {
     width: auto;
     padding: 5px 9px;
     font-size: 12px;
+  }
+}
+/* Desktop and tablet: habit table first, summary cards below */
+@media (min-width: 761px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    gap: 14px;
+  }
+
+  .habitSection {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  flex: none;
+}
+
+.habitCard {
+  flex: none;
+  min-height: 0;
+  height: auto;
+}
+
+.tableWrapper {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+  .rightPanel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  gap: 14px;
+}
+
+.statCard {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.habitTable {
+  min-width: 900px;
+}
+  
+}
+
+/* Tablet portrait: give the habit table less height */
+@media (min-width: 761px) and (max-width: 800px) {
+  
+
+  .rightPanel {
+    gap: 8px;
+  }
+
+  .statCard {
+    padding: 9px;
+  }
+
+  .monthlyStat strong {
+    font-size: 1rem;
+  }
+
+  .monthlyStat span {
+    font-size: 0.58rem;
+  }
+
+  .monthlyMessage {
+    font-size: 0.58rem;
+    padding: 7px;
   }
 }
 /* Global scrollbar styling */

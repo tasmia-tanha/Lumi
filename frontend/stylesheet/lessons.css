@@ -4,7 +4,7 @@
   --green-deep: #587b59;
   --pink: #f6e2e9;
   --pink-dark: #eec0d0;
-  --cream: #fefaF3;
+  --cream: #fefaf3;
   --white: #ffffff;
   --text: #3e493d;
   --muted: #899185;
@@ -42,8 +42,6 @@ a {
   display: flex;
   min-height: 100vh;
 }
-
-
 
 .sidebar {
   width: 245px;
@@ -99,7 +97,9 @@ a {
   color: #737d70;
   font-size: 14px;
   font-weight: 700;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .navLink span {
@@ -142,8 +142,6 @@ a {
 .logoutButton:hover {
   background: var(--pink);
 }
-
-
 
 .mainContent {
   position: fixed;
@@ -207,7 +205,9 @@ a {
   font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
-  transition: transform 0.2s, background 0.2s;
+  transition:
+    transform 0.2s,
+    background 0.2s;
 }
 
 .primaryButton {
@@ -235,7 +235,6 @@ a {
   width: 100%;
   margin-top: 8px;
 }
-
 
 .overviewCard {
   position: relative;
@@ -318,8 +317,6 @@ a {
   font-weight: 800;
 }
 
-
-
 .subjectSection {
   margin-bottom: 28px;
 }
@@ -390,8 +387,6 @@ input[type="url"]:focus {
   box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.13);
 }
 
-
-
 .contentGrid {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.85fr);
@@ -425,7 +420,9 @@ input[type="url"]:focus {
   border: 1px solid #edf0e8;
   border-radius: 14px;
   background: #fffefa;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .lessonItem:hover {
@@ -590,8 +587,6 @@ input[type="url"]:focus {
   background: var(--green);
 }
 
-
-
 .emptyState {
   padding: 30px 12px;
   text-align: center;
@@ -619,8 +614,6 @@ input[type="url"]:focus {
 .hidden {
   display: none !important;
 }
-
-
 
 .modalOverlay {
   position: fixed;
@@ -711,8 +704,6 @@ input[type="url"]:focus {
   margin-top: 13px;
 }
 
-
-
 .toast {
   position: fixed;
   z-index: 2000;
@@ -730,7 +721,9 @@ input[type="url"]:focus {
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
-  transition: opacity 0.2s, transform 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
 }
 
 .toast.show {
@@ -937,8 +930,6 @@ input[type="url"]:focus {
   }
 }
 
-
-
 html,
 body {
   width: 100%;
@@ -954,7 +945,6 @@ body {
   min-height: 0;
   overflow: hidden;
 }
-
 
 .sidebar {
   position: fixed;
@@ -983,13 +973,11 @@ body {
   display: none;
 }
 
-
 .sidebarBottom {
   margin-top: auto;
   padding-top: 15px;
   flex-shrink: 0;
 }
-
 
 .pageHeader {
   flex-shrink: 0;
@@ -1003,7 +991,6 @@ body {
 .pageSubtitle {
   margin-top: 4px;
 }
-
 
 .overviewCard {
   flex-shrink: 0;
@@ -1042,7 +1029,6 @@ body {
   margin-bottom: 12px;
 }
 
-
 .subjectControls {
   padding: 9px 12px;
 }
@@ -1079,7 +1065,6 @@ body {
   scrollbar-color: #b8cfb3 #f4f3e9;
 }
 
-
 .lessonList::-webkit-scrollbar,
 .materialList::-webkit-scrollbar,
 .sidebar::-webkit-scrollbar {
@@ -1099,7 +1084,6 @@ body {
   background: #b8cfb3;
   border-radius: 10px;
 }
-
 
 @media (max-width: 1100px) {
   .sidebar {
@@ -1163,23 +1147,23 @@ body {
   }
 
   .sidebarBottom {
-  display: block;
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  margin: 0;
-  padding: 0;
-}
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    margin: 0;
+    padding: 0;
+  }
 
-.sidebarBottom p {
-  display: none;
-}
+  .sidebarBottom p {
+    display: none;
+  }
 
-.logoutButton {
-  width: auto;
-  padding: 5px 9px;
-  font-size: 12px;
-}
+  .logoutButton {
+    width: auto;
+    padding: 5px 9px;
+    font-size: 12px;
+  }
 
   .mainContent {
     top: 115px;
@@ -1265,7 +1249,6 @@ body {
   overflow: hidden;
 }
 
-
 .lessonList,
 .materialList {
   flex: 1;
@@ -1273,8 +1256,6 @@ body {
   overflow-y: auto;
   padding-right: 8px;
 }
-
-
 
 .subjectSection {
   flex-shrink: 0;
@@ -1311,17 +1292,30 @@ body {
 
 .lessonList,
 .materialList {
-  flex: none;
-  height: 225px;
-  min-height: 225px;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 8px;
 }
 
+/* 1440 × 900 */
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .lessonsPanel,
+  .materialsPanel {
+    height: 570px;
+  }
+}
+
+/* 1920 × 1080 */
+@media (min-width: 1600px) {
+  .lessonsPanel,
+  .materialsPanel {
+    height: 850px;
+  }
+}
 
 @media (max-width: 900px) {
-  
   .lessonItem {
     padding: 10px 12px;
     gap: 9px;
@@ -1346,7 +1340,6 @@ body {
     font-size: 10px;
   }
 
-  
   .materialItem {
     padding: 10px 12px;
     gap: 9px;
@@ -1354,11 +1347,10 @@ body {
 
   .materialItem .materialIcon {
     width: 30px;
-  height: 30px;
-  min-width: 30px;
-  padding: 0;
-  font-size: 14px;
-    
+    height: 30px;
+    min-width: 30px;
+    padding: 0;
+    font-size: 14px;
   }
 
   .openMaterial {
@@ -1367,7 +1359,6 @@ body {
     height: 25px;
   }
 
-  
   .deleteItemBtn {
     font-size: 12px;
     padding: 5px;
@@ -1386,21 +1377,21 @@ body {
 }
 @media (max-width: 760px) {
   .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
 
-  width: 100%;
-  min-width: 0;
-  height: auto;
+    width: 100%;
+    min-width: 0;
+    height: auto;
 
-  padding: 12px;
-  gap: 0;
+    padding: 12px;
+    gap: 0;
 
-  overflow: visible;
-}
+    overflow: visible;
+  }
 
   .brand {
     margin: 0 0 10px;
@@ -1444,16 +1435,14 @@ body {
     display: none;
   }
   .mainContent {
-  top: 100px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: auto;
-  padding: 26px;
-  
-}
- 
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    padding: 26px;
+  }
 }
 
 /* Global scrollbar styling */

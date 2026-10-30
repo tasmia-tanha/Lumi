@@ -18,6 +18,30 @@ body {
   color: var(--text);
   background: var(--cream);
 }
+body {
+  background:
+    radial-gradient(
+      ellipse at 8% 12%,
+      rgba(184, 207, 179, 0.55),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 90% 20%,
+      rgba(246, 226, 233, 0.75),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 15% 90%,
+      rgba(246, 226, 233, 0.55),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 85% 85%,
+      rgba(184, 207, 179, 0.5),
+      transparent 45%
+    ),
+    #f4f8f1;
+}
 html,
 body {
   min-height: 100%;
@@ -124,7 +148,7 @@ a {
 
 .dashboardContent {
   margin-left: 0;
-min-width: 0;
+  min-width: 0;
   min-height: 100vh;
   height: auto;
   overflow: visible;
@@ -473,21 +497,20 @@ min-width: 0;
     width: 100px;
   }
 
-  
   .date {
-  min-height: 320px;
-}
+    min-height: 320px;
+  }
 
-.listDeadLine {
-  max-height: 150px;
-  grid-template-columns: 1fr;
-  overflow-y: auto;
-}
+  .listDeadLine {
+    max-height: 150px;
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
 }
 @media (max-width: 760px) {
   .main {
-  grid-template-columns: minmax(0, 1fr);
-}
+    grid-template-columns: minmax(0, 1fr);
+  }
   .sidebar {
     position: static;
     width: auto;
@@ -498,7 +521,7 @@ min-width: 0;
     margin: 0 0 10px;
     padding: 0 8px;
   }
-  .navLabel{
+  .navLabel {
     display: none;
   }
   .navigation {
@@ -529,29 +552,29 @@ min-width: 0;
   .listDeadLine {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
- 
-.sidebar {
-  gap: 0;
-}
 
-.brand {
-  margin: 0 0 10px;
-}
+  .sidebar {
+    gap: 0;
+  }
 
-.sidebarBottom {
-  display: block;
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  margin: 0;
-  padding: 0;
-}
+  .brand {
+    margin: 0 0 10px;
+  }
 
-.logoutButton {
-  width: auto;
-  padding: 5px 9px;
-  font-size: 12px;
-}
+  .sidebarBottom {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .logoutButton {
+    width: auto;
+    padding: 5px 9px;
+    font-size: 12px;
+  }
 }
 @media (max-width: 420px) {
   .panel {
@@ -769,4 +792,83 @@ body,
 
 *::-webkit-scrollbar-thumb:hover {
   background: #84a282;
+}
+
+/* Dashboard: tablet portrait */
+@media (min-width: 761px) and (max-width: 800px) {
+  .dashboardContent {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "greeting"
+      "deadlines"
+      "tasks"
+      "study";
+    grid-template-rows: auto;
+    align-content: start;
+  }
+}
+
+@media (min-width: 761px) {
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .main {
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+  }
+
+  .sidebar {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .dashboardContent {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+}
+
+/* Larger tablets and desktops */
+@media (min-width: 801px) {
+  .dashboardContent {
+    width: 100%;
+    max-width: 1240px;
+    justify-self: center;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "greeting deadlines"
+      "tasks study";
+
+    /* Center cards without stretching their heights */
+    align-items: start;
+    align-content: center;
+
+    padding: 24px;
+    gap: 18px;
+  }
+}
+
+/* Tablet portrait: retain single-column layout */
+@media (min-width: 761px) and (max-width: 800px) {
+  .dashboardContent {
+    width: 100%;
+    max-width: none;
+    align-items: stretch;
+    align-content: start;
+  }
+}
+@media (min-width: 801px) {
+  .greeting,
+  .date {
+    min-height: 320px;
+  }
 }

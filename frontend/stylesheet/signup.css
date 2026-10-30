@@ -1,4 +1,3 @@
-
 :root {
   --green: #b8cfb3;
   --green-dark: #84a282;
@@ -98,7 +97,9 @@ body {
   background: #fffefa;
   color: var(--text);
   font-size: 14px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 #username::placeholder,
@@ -154,7 +155,9 @@ input.error {
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s;
 }
 
 #signUpBtn:hover {
