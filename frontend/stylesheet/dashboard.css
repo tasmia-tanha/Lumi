@@ -473,9 +473,16 @@ min-width: 0;
     width: 100px;
   }
 
-  .listDeadLine {
-    grid-template-columns: 1fr;
-  }
+  
+  .date {
+  min-height: 320px;
+}
+
+.listDeadLine {
+  max-height: 150px;
+  grid-template-columns: 1fr;
+  overflow-y: auto;
+}
 }
 @media (max-width: 760px) {
   .main {
@@ -591,8 +598,11 @@ min-width: 0;
 }
 
 .listDeadLine {
-  min-height: 132px;
+  min-height: 0;
+  max-height: 150px;
+  overflow-y: auto;
   align-content: start;
+  padding-right: 5px;
 }
 
 .date > .textLink {
