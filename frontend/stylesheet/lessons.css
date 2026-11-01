@@ -1445,6 +1445,108 @@ body {
   }
 }
 
+.deleteModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(45, 58, 44, 0.35);
+  backdrop-filter: blur(3px);
+}
+
+.deleteModalOverlay[hidden] {
+  display: none;
+}
+
+.deleteModalCard {
+  width: 100%;
+  max-width: 360px;
+  padding: 28px 25px;
+  background: var(--cream);
+  border: 1px solid #efdde0;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(58, 79, 65, 0.18);
+  text-align: center;
+  animation: modalAppear 0.25s ease-out;
+}
+
+.deleteModalIcon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  border-radius: 16px;
+  background: var(--pink);
+  font-size: 26px;
+}
+
+.deleteModalCard h2 {
+  margin: 0 0 10px;
+  color: var(--green-deep);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.deleteModalCard p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.deleteModalButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.deleteModalButtons button {
+  flex: 1;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  transition: 0.2s ease;
+}
+
+#cancelDeleteItem {
+  background: #eaf1de;
+  color: var(--green-deep);
+}
+
+#cancelDeleteItem:hover {
+  background: #dce8d3;
+}
+
+#confirmDeleteItem {
+  background: var(--pink-dark);
+  color: #884e61;
+}
+
+#confirmDeleteItem:hover {
+  background: #e5aabd;
+  transform: translateY(-1px);
+}
+
+#confirmDeleteItem:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .deleteModalCard {
+    max-width: 330px;
+    padding: 24px 18px;
+  }
+}
 /* Global scrollbar styling */
 html,
 body,

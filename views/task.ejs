@@ -167,6 +167,24 @@
         />
       </div>
     </div>
+    <div class="deleteModalOverlay" id="deleteModal" hidden>
+  <div class="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+
+    <div class="deleteModalIcon">🌸</div>
+
+    <h2 id="deleteModalTitle">Delete this task?</h2>
+
+    <p id="deleteModalMessage">
+      Are you sure you want to delete this task?
+    </p>
+
+    <div class="deleteModalButtons">
+      <button type="button" id="cancelDelete">Cancel</button>
+      <button type="button" id="confirmDelete">Yes, Delete</button>
+    </div>
+
+  </div>
+</div>
   </body>
 
   <script>
@@ -214,51 +232,99 @@
     })
     //delete
     
-    document.querySelectorAll(".deleteTask").forEach((button) => {
-    button.addEventListener("click", async function () {
-    const taskId = this.dataset.taskId;
+    const deleteModal = document.querySelector("#deleteModal");
+const deleteModalMessage = document.querySelector("#deleteModalMessage");
+const cancelDelete = document.querySelector("#cancelDelete");
+const confirmDelete = document.querySelector("#confirmDelete");
+
+let taskToDelete = null;
+
+document.querySelectorAll(".deleteTask").forEach((button) => {
+  button.addEventListener("click", function () {
     const taskItem = this.closest(".taskItem");
+    const taskId = this.dataset.taskId;
+    const taskTitle = taskItem.querySelector(".taskInfo h3").textContent.trim();
 
-    const confirmed = confirm("Are you sure you want to delete this task?");
+    taskToDelete = {
+      taskId,
+      taskItem
+    };
 
-    if (!confirmed) {
-      return;
-    }
+    deleteModalMessage.textContent =
+      `Are you sure you want to delete "${taskTitle}"?`;
 
-    try {
-      const response = await fetch(`/task/${taskId}`, {
-        method: "DELETE",
-      });
+    deleteModal.hidden = false;
 
-      if (!response.ok) {
-        throw new Error("Failed to delete task");
-      }
-
-      
-      taskItem.remove();
-      const remainingTasks = [...document.querySelectorAll(".taskItem")];
-
-      const activeCount = remainingTasks.filter(
-        item => !item.querySelector("input[type='checkbox']").checked
-        ).length;
-
-      const completedCount = remainingTasks.length - activeCount;
-
-      document.querySelector("#activeCount").textContent = activeCount;
-      updateCapybaraImage();
-      document.querySelector("#completedCount").textContent = completedCount;
-
-        document.querySelector("#noActiveTasks").hidden = activeCount !== 0;
-      document.querySelector("#noCompletedTasks").hidden = completedCount !== 0;
-
-
-    } catch (error) {
-      console.error(error);
-      alert("Failed to delete task. Please try again.");
-    }
+    cancelDelete.focus();
   });
 });
 
+cancelDelete.addEventListener("click", () => {
+  deleteModal.hidden = true;
+  taskToDelete = null;
+});
+
+deleteModal.addEventListener("click", (event) => {
+  if (event.target === deleteModal) {
+    deleteModal.hidden = true;
+    taskToDelete = null;
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !deleteModal.hidden) {
+    deleteModal.hidden = true;
+    taskToDelete = null;
+  }
+});
+
+confirmDelete.addEventListener("click", async () => {
+  if (!taskToDelete) return;
+
+  const { taskId, taskItem } = taskToDelete;
+
+  confirmDelete.disabled = true;
+  confirmDelete.textContent = "Deleting...";
+
+  try {
+    const response = await fetch(`/task/${taskId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete task");
+    }
+
+    taskItem.remove();
+
+    const remainingTasks = [...document.querySelectorAll(".taskItem")];
+
+    const activeCount = remainingTasks.filter(
+      item => !item.querySelector("input[type='checkbox']").checked
+    ).length;
+
+    const completedCount = remainingTasks.length - activeCount;
+
+    document.querySelector("#activeCount").textContent = activeCount;
+    document.querySelector("#completedCount").textContent = completedCount;
+
+    updateCapybaraImage();
+
+    document.querySelector("#noActiveTasks").hidden = activeCount !== 0;
+    document.querySelector("#noCompletedTasks").hidden = completedCount !== 0;
+
+    deleteModal.hidden = true;
+    taskToDelete = null;
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete task. Please try again.");
+
+  } finally {
+    confirmDelete.disabled = false;
+    confirmDelete.textContent = "Yes, Delete";
+  }
+});
     
 
 

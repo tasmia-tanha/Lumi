@@ -1237,6 +1237,120 @@ a {
     padding: 7px;
   }
 }
+/* ===== DELETE CONFIRMATION MODAL ===== */
+
+.deleteModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(45, 58, 44, 0.35);
+  backdrop-filter: blur(3px);
+}
+
+.deleteModalOverlay[hidden] {
+  display: none;
+}
+
+.deleteModalCard {
+  width: 100%;
+  max-width: 360px;
+  padding: 28px 25px;
+  background: var(--cream);
+  border: 1px solid #efdde0;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(58, 79, 65, 0.18);
+  text-align: center;
+  animation: modalAppear 0.25s ease-out;
+}
+
+.deleteModalIcon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  border-radius: 16px;
+  background: var(--pink);
+  font-size: 26px;
+}
+
+.deleteModalCard h2 {
+  margin: 0 0 10px;
+  color: var(--green-deep);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.deleteModalCard p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.deleteModalButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.deleteModalButtons button {
+  flex: 1;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  transition: 0.2s ease;
+}
+
+#cancelDeleteHabit {
+  background: #eaf1de;
+  color: var(--green-deep);
+}
+
+#cancelDeleteHabit:hover {
+  background: #dce8d3;
+}
+
+#confirmDeleteHabit {
+  background: var(--pink-dark);
+  color: #884e61;
+}
+
+#confirmDeleteHabit:hover {
+  background: #e5aabd;
+  transform: translateY(-1px);
+}
+
+#confirmDeleteHabit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .deleteModalCard {
+    max-width: 330px;
+    padding: 24px 18px;
+  }
+}
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 /* Global scrollbar styling */
 html,
 body,
@@ -1263,3 +1377,127 @@ body,
   background: #84a282;
 }
 
+
+/* Add Habit Modal */
+.addHabitModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(45, 65, 45, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.addHabitModalOverlay[hidden] {
+  display: none;
+}
+
+.addHabitModalCard {
+  width: 100%;
+  max-width: 400px;
+  background: var(--cream, #fefaf3);
+  border: 1px solid #e5eadf;
+  border-radius: 20px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 12px 35px rgba(50, 75, 50, 0.15);
+  animation: addHabitPop 0.2s ease;
+}
+
+.addHabitModalIcon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.addHabitModalCard h2 {
+  color: #587b59;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.addHabitModalCard p {
+  color: #71816d;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+#newHabitName {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #dce5d5;
+  border-radius: 12px;
+  background: white;
+  color: #435d45;
+  font: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#newHabitName:focus {
+  border-color: #84a282;
+  box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.15);
+}
+
+.addHabitModalButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.addHabitModalButtons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#cancelAddHabit {
+  background: #f0eee7;
+  color: #71816d;
+}
+
+#cancelAddHabit:hover {
+  background: #e6e4dc;
+}
+
+#confirmAddHabit {
+  background: #84a282;
+  color: white;
+}
+
+#confirmAddHabit:hover {
+  background: #6f916d;
+}
+
+#confirmAddHabit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes addHabitPop {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 450px) {
+  .addHabitModalCard {
+    padding: 24px 20px;
+  }
+}

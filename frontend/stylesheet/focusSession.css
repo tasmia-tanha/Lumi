@@ -1260,3 +1260,14 @@ body,
 *::-webkit-scrollbar-thumb:hover {
   background: #84a282;
 }
+
+@media (max-width: 800px) {
+  .dailyGoalCard .goalInputs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dailyGoalCard .goalInputs select {
+    width: 100%;
+    min-width: 0;
+  }
+}

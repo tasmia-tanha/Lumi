@@ -56,18 +56,18 @@
 
           <div class="calendarControls">
             <select id="monthSelect" class="calSelect">
-              <option value="0">January</option>
-              <option value="1">February</option>
-              <option value="2">March</option>
-              <option value="3">April</option>
-              <option value="4">May</option>
-              <option value="5">June</option>
-              <option value="6">July</option>
-              <option value="7">August</option>
-              <option value="8">September</option>
-              <option value="9" selected>October</option>
-              <option value="10">November</option>
-              <option value="11">December</option>
+              <option value="0" <%= new Date().getMonth() === 0 ? "selected" : "" %>>January</option>
+              <option value="1" <%= new Date().getMonth() === 1 ? "selected" : "" %>>February</option>
+              <option value="2" <%= new Date().getMonth() === 2 ? "selected" : "" %>>March</option>
+              <option value="3" <%= new Date().getMonth() === 3 ? "selected" : "" %>>April</option>
+              <option value="4" <%= new Date().getMonth() === 4 ? "selected" : "" %>>May</option>
+              <option value="5" <%= new Date().getMonth() === 5 ? "selected" : "" %>>June</option>
+              <option value="6" <%= new Date().getMonth() === 6 ? "selected" : "" %>>July</option>
+              <option value="7" <%= new Date().getMonth() === 7 ? "selected" : "" %>>August</option>
+              <option value="8" <%= new Date().getMonth() === 8 ? "selected" : "" %>>September</option>
+              <option value="9" <%= new Date().getMonth() === 9 ? "selected" : "" %>>October</option>
+              <option value="10" <%= new Date().getMonth() === 10 ? "selected" : "" %>>November</option>
+              <option value="11" <%= new Date().getMonth() === 11 ? "selected" : "" %>>December</option>
             </select>
             <select id="yearSelect" class="calSelect"></select>
           </div>

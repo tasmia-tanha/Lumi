@@ -872,3 +872,75 @@ body,
     min-height: 320px;
   }
 }
+
+/* Desktop and larger screens */
+@media (min-width: 801px) {
+  .tasks {
+    min-height: 330px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 761px) and (max-width: 800px) {
+  .tasks {
+    min-height: 330px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+  .tasks {
+    min-height: 0;
+  }
+
+  .taskList {
+    min-height: 0;
+  }
+}
+.tasks {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks .taskList {
+  flex: 1;
+}
+
+.tasks .taskLink {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+@media (max-width: 760px) {
+  .sidebar {
+    position: relative;
+  }
+
+  .date {
+    min-height: 0;
+  }
+}
+@media (min-width: 761px) and (max-width: 800px) {
+  .main {
+    height: 100vh;
+    overflow: hidden;
+    grid-template-columns: 205px minmax(0, 1fr);
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 0;
+    overflow-y: auto;
+    align-self: start;
+  }
+
+  .dashboardContent {
+    height: 100vh;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

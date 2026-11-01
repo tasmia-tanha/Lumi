@@ -8,7 +8,11 @@
     <title><%= title %></title>
 
     <link rel="stylesheet" href="../stylesheet/dailyHabits.css" />
-    <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../images/Lumi Capybara Study Planner.png"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
@@ -23,44 +27,32 @@
   <body>
     <div class="main">
       <aside class="sidebar">
-      <a href="/dashboard" class="brand">
-  <span>Lumi</span>
-</a>
+        <a href="/dashboard" class="brand">
+          <span>Lumi</span>
+        </a>
 
-      <p class="navLabel">WORKSPACE</p>
+        <p class="navLabel">WORKSPACE</p>
 
-      <nav class="navigation">
-        <a href="/dashboard" class="navLink">
-          <span>🏡</span> Dashboard
-        </a>
-        <a href="/task" class="navLink">
-          <span>🌱</span> My Tasks
-        </a>
-        <a href="/calendar" class="navLink">
-          <span>📅</span> Calendar
-        </a>
-        <a href="/notes" class="navLink">
-          <span>📝</span> Notes
-        </a>
-        <a href="/lessons" class="navLink">
-          <span>📚</span> Lessons
-        </a>
-        <a href="/dailyHabits" class="navLink active">
-          <span>🌷</span> Daily Habits
-        </a>
-        <a href="/focusSession" class="navLink">
-          <span>⏳</span> Focus Session
-        </a>
-      </nav>
+        <nav class="navigation">
+          <a href="/dashboard" class="navLink"> <span>🏡</span> Dashboard </a>
+          <a href="/task" class="navLink"> <span>🌱</span> My Tasks </a>
+          <a href="/calendar" class="navLink"> <span>📅</span> Calendar </a>
+          <a href="/notes" class="navLink"> <span>📝</span> Notes </a>
+          <a href="/lessons" class="navLink"> <span>📚</span> Lessons </a>
+          <a href="/dailyHabits" class="navLink active">
+            <span>🌷</span> Daily Habits
+          </a>
+          <a href="/focusSession" class="navLink">
+            <span>⏳</span> Focus Session
+          </a>
+        </nav>
 
-      <div class="sidebarBottom">
-        
-        
-        <button id="logoutBtn" class="logoutButton" type="button">
-          Log out
-        </button>
-      </div>
-    </aside>
+        <div class="sidebarBottom">
+          <button id="logoutBtn" class="logoutButton" type="button">
+            Log out
+          </button>
+        </div>
+      </aside>
 
       <main class="habitSection">
         <div class="habitHeaderArea">
@@ -179,6 +171,56 @@
       </aside>
     </div>
 
+    <div class="deleteModalOverlay" id="deleteHabitModal" hidden>
+      <div
+        class="deleteModalCard"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="deleteHabitModalTitle"
+      >
+        <div class="deleteModalIcon">🌸</div>
+
+        <h2 id="deleteHabitModalTitle">Delete this habit?</h2>
+
+        <p id="deleteHabitModalMessage">
+          Are you sure you want to delete this habit?
+        </p>
+
+        <div class="deleteModalButtons">
+          <button type="button" id="cancelDeleteHabit">Cancel</button>
+          <button type="button" id="confirmDeleteHabit">Yes, Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="addHabitModalOverlay" id="addHabitModal" hidden>
+      <div
+        class="addHabitModalCard"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="addHabitModalTitle"
+      >
+        <div class="addHabitModalIcon">🌱</div>
+
+        <h2 id="addHabitModalTitle">Grow a new habit!</h2>
+
+        <p>What little habit would you like to grow?</p>
+
+        <input
+          type="text"
+          id="newHabitName"
+          placeholder="e.g. Read for 20 minutes"
+          maxlength="50"
+          autocomplete="off"
+        />
+
+        <div class="addHabitModalButtons">
+          <button type="button" id="cancelAddHabit">Cancel</button>
+          <button type="button" id="confirmAddHabit">Add Habit</button>
+        </div>
+      </div>
+    </div>
+
     <script id="habits-data" type="application/json">
             <%- JSON.stringify(
               habits.map(habit => ({
@@ -199,21 +241,23 @@
     </script>
 
     <script>
-      document.getElementById("logoutBtn").addEventListener("click", async () => {
-      try {
-        const response = await fetch("/logout", {
-          method: "DELETE",
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", async () => {
+          try {
+            const response = await fetch("/logout", {
+              method: "DELETE",
+            });
+
+            if (!response.ok) {
+              throw new Error("Could not log out. Please try again.");
+            }
+
+            window.location.href = "/";
+          } catch (error) {
+            showToast(error.message, true);
+          }
         });
-
-        if (!response.ok) {
-          throw new Error("Could not log out. Please try again.");
-        }
-
-        window.location.href = "/";
-      } catch (error) {
-        showToast(error.message, true);
-      }
-    });
       const today = new Date();
 
       const currentYear = today.getFullYear();
@@ -313,35 +357,13 @@
 
         deleteButton.title = "Remove habit";
 
-        deleteButton.addEventListener("click", async function () {
-          const confirmed = confirm(
-            `Are you sure you want to delete "${habit.name}"?`,
-          );
+        deleteButton.addEventListener("click", function () {
+          habitToDelete = habit;
 
-          if (!confirmed) {
-            return;
-          }
+          deleteHabitModalMessage.textContent = `Are you sure you want to permanently delete "${habit.name}"?`;
 
-          try {
-            const response = await fetch(`/dailyHabits/${habit.id}`, {
-              method: "DELETE",
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-              throw new Error(data.message || "Could not delete habit");
-            }
-
-            habits = habits.filter((item) => item.id !== habit.id);
-
-            delete savedData[habit.id];
-
-            renderHabits();
-          } catch (error) {
-            console.error("Delete habit failed:", error);
-            alert("Could not delete the habit. Please try again.");
-          }
+          deleteHabitModal.hidden = false;
+          cancelDeleteHabit.focus();
         });
 
         nameWrapper.appendChild(nameText);
@@ -416,7 +438,104 @@
 
         return row;
       }
+      const deleteHabitModal = document.getElementById("deleteHabitModal");
+      const deleteHabitModalMessage = document.getElementById(
+        "deleteHabitModalMessage",
+      );
+      const cancelDeleteHabit = document.getElementById("cancelDeleteHabit");
+      const confirmDeleteHabit = document.getElementById("confirmDeleteHabit");
 
+      let habitToDelete = null;
+
+      // Cancel button
+      cancelDeleteHabit.addEventListener("click", () => {
+        deleteHabitModal.hidden = true;
+        habitToDelete = null;
+      });
+
+      // Close when clicking outside the modal
+      deleteHabitModal.addEventListener("click", (event) => {
+        if (event.target === deleteHabitModal) {
+          deleteHabitModal.hidden = true;
+          habitToDelete = null;
+        }
+      });
+
+      // Close with Escape
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !deleteHabitModal.hidden) {
+          deleteHabitModal.hidden = true;
+          habitToDelete = null;
+        }
+      });
+
+      // Confirm deletion
+      confirmDeleteHabit.addEventListener("click", async () => {
+        if (!habitToDelete) return;
+
+        const habit = habitToDelete;
+
+        confirmDeleteHabit.disabled = true;
+        confirmDeleteHabit.textContent = "Deleting...";
+
+        try {
+          const response = await fetch(`/dailyHabits/${habit.id}`, {
+            method: "DELETE",
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || "Could not delete habit");
+          }
+
+          habits = habits.filter((item) => item.id !== habit.id);
+          delete savedData[habit.id];
+
+          deleteHabitModal.hidden = true;
+          habitToDelete = null;
+
+          renderHabits();
+          await loadHabitStats();
+        } catch (error) {
+          console.error("Delete habit failed:", error);
+          alert("Could not delete the habit. Please try again.");
+        } finally {
+          confirmDeleteHabit.disabled = false;
+          confirmDeleteHabit.textContent = "Yes, Delete";
+        }
+      });
+
+      const addHabitModal = document.getElementById("addHabitModal");
+      const newHabitName = document.getElementById("newHabitName");
+      const cancelAddHabit = document.getElementById("cancelAddHabit");
+      const confirmAddHabit = document.getElementById("confirmAddHabit");
+      document.getElementById("addHabitBtn").addEventListener("click", () => {
+        if (habits.length >= 10) {
+          alert("You can have a maximum of 10 habits.");
+          return;
+        }
+
+        addHabitModal.hidden = false;
+        newHabitName.value = "";
+        newHabitName.focus();
+      });
+
+      cancelAddHabit.addEventListener("click", () => {
+        addHabitModal.hidden = true;
+      });
+
+      addHabitModal.addEventListener("click", (event) => {
+        if (event.target === addHabitModal) {
+          addHabitModal.hidden = true;
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !addHabitModal.hidden) {
+          addHabitModal.hidden = true;
+        }
+      });
       function renderHabits() {
         const body = document.getElementById("habitTableBody");
 
@@ -591,50 +710,57 @@
           console.error("Failed to load habit statistics:", error);
         }
       }
-      document
-        .getElementById("addHabitBtn")
-        .addEventListener("click", async function () {
-          if (habits.length >= 10) {
-            alert("You can have a maximum of 10 habits.");
-            return;
+      confirmAddHabit.addEventListener("click", async () => {
+        const habitName = newHabitName.value.trim();
+
+        if (!habitName) {
+          newHabitName.focus();
+          return;
+        }
+
+        if (habits.length >= 10) {
+          alert("You can have a maximum of 10 habits.");
+          addHabitModal.hidden = true;
+          return;
+        }
+
+        confirmAddHabit.disabled = true;
+        confirmAddHabit.textContent = "Adding...";
+
+        try {
+          const response = await fetch("/dailyHabits", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: habitName,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || "Could not add habit.");
           }
 
-          const habitName = prompt("What habit would you like to add?");
+          habits.push({
+            id: data.habit._id,
+            name: data.habit.name,
+            createdAt: data.habit.createdAt,
+          });
 
-          if (!habitName || !habitName.trim()) {
-            return;
-          }
-
-          try {
-            const response = await fetch("/dailyHabits", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                name: habitName.trim(),
-              }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-              alert(data.message || "Could not add habit.");
-              return;
-            }
-
-            habits.push({
-              id: data.habit._id,
-              name: data.habit.name,
-              createdAt: data.habit.createdAt,
-            });
-
-            renderHabits();
-          } catch (error) {
-            console.error("Failed to add habit:", error);
-            alert("Could not connect to the server.");
-          }
-        });
+          addHabitModal.hidden = true;
+          renderHabits();
+          await loadHabitStats();
+        } catch (error) {
+          console.error("Failed to add habit:", error);
+          alert(error.message || "Could not connect to the server.");
+        } finally {
+          confirmAddHabit.disabled = false;
+          confirmAddHabit.textContent = "Add Habit";
+        }
+      });
 
       document
         .getElementById("logoutBtn")

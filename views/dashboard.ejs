@@ -59,15 +59,25 @@
         </div>
         <p id="taskCount" class="sectionDescription" data-count="<%= activeTasks.length %>"><%= activeTasks.length %> tasks remaining</p>
         <ul class="taskList">
-          <% fourActiveTasks.forEach((task) => { %>
-            <li class="todo" data-task-id="<%= task._id %>">
-              <input type="checkbox" class="taskCheckbox" data-task-id="<%= task._id %>" aria-label="Complete <%= task.title %>" />
-              <span class="taskName"><%= task.title %></span>
-              <span class="priority <%= task.priority %>"><%= task.priority %></span>
-            </li>
-          <% }) %>
-          
-        </ul>
+  <% if (activeTasks.length === 0) { %>
+    <li class="emptyTasks">
+      🌸 No active tasks. Time to relax!
+    </li>
+  <% } else { %>
+    <% fourActiveTasks.forEach((task) => { %>
+      <li class="todo" data-task-id="<%= task._id %>">
+        <input
+          type="checkbox"
+          class="taskCheckbox"
+          data-task-id="<%= task._id %>"
+          aria-label="Complete <%= task.title %>"
+        />
+        <span class="taskName"><%= task.title %></span>
+        <span class="priority <%= task.priority %>"><%= task.priority %></span>
+      </li>
+    <% }) %>
+  <% } %>
+</ul>
         <a class="textLink taskLink" id="viewAllTasks" href="/task">View all tasks <span aria-hidden="true">→</span></a>
       </section>
 
@@ -156,25 +166,50 @@
         const activeTasks = await loadActiveTasks();
         const displayedIds = [...document.querySelectorAll(".todo")].map(item => item.dataset.taskId);
         const nextTask = activeTasks.find(task => !displayedIds.includes(task._id.toString()));
-        if (nextTask) {
-          const li = document.createElement("li");
-          li.className = "todo"; li.dataset.taskId = nextTask._id;
-          const input = document.createElement("input");
-          input.type = "checkbox"; input.className = "taskCheckbox"; input.dataset.taskId = nextTask._id;
-          input.setAttribute("aria-label", `Complete ${nextTask.title}`);
-          const title = document.createElement("span"); title.className = "taskName"; title.textContent = nextTask.title;
-          const priority = document.createElement("span"); priority.className = `priority ${nextTask.priority}`; priority.textContent = nextTask.priority;
-          li.append(input, title, priority);
-          document.querySelector(".taskList").insertBefore(li, document.querySelector(".emptyTasks"));
-        }
+        const taskList = document.querySelector(".taskList");
+
+if (nextTask) {
+  const li = document.createElement("li");
+  li.className = "todo";
+  li.dataset.taskId = nextTask._id;
+
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.className = "taskCheckbox";
+  input.dataset.taskId = nextTask._id;
+  input.setAttribute("aria-label", `Complete ${nextTask.title}`);
+
+  const title = document.createElement("span");
+  title.className = "taskName";
+  title.textContent = nextTask.title;
+
+  const priority = document.createElement("span");
+  priority.className = `priority ${nextTask.priority}`;
+  priority.textContent = nextTask.priority;
+
+  li.append(input, title, priority);
+
+  taskList.appendChild(li);
+}
+
+// Show empty message when no tasks remain
+const emptyText = taskList.querySelector(".emptyTasks");
+
+if (taskList.querySelectorAll(".todo").length === 0) {
+  if (!emptyText) {
+    const message = document.createElement("li");
+    message.className = "emptyTasks";
+    message.textContent = "🌸 No active tasks. Time to relax!";
+    taskList.appendChild(message);
+  }
+} else if (emptyText) {
+  emptyText.remove();
+}
         const taskCount = document.querySelector("#taskCount");
         const remaining = Math.max(0, Number(taskCount.dataset.count) - 1);
         taskCount.dataset.count = remaining;
         taskCount.textContent = `${remaining} tasks remaining`;
-        const emptyText = document.querySelector(".emptyTasks");
-        const displayedTasks = document.querySelectorAll(".taskList .todo").length;
-        emptyText.style.display = displayedTasks === 0 ? "" : "none";
-        if (displayedTasks === 0) taskCount.textContent = "0 tasks remaining";
+        
       } catch (error) {
         checkbox.checked = !checkbox.checked;
         showToast("Failed to update task. Please try again.", true);

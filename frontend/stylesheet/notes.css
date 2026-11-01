@@ -935,3 +935,114 @@ body,
     box-sizing: border-box;
   }
 }
+
+
+.deleteModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(45, 58, 44, 0.35);
+  backdrop-filter: blur(3px);
+}
+
+.deleteModalOverlay[hidden] {
+  display: none;
+}
+
+.deleteModal {
+  width: 100%;
+  max-width: 360px;
+  padding: 28px 25px;
+  background: var(--cream);
+  border: 1px solid #efdde0;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(58, 79, 65, 0.18);
+  text-align: center;
+  animation: modalAppear 0.25s ease-out;
+}
+
+.deleteModalIcon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  border-radius: 16px;
+  background: var(--pink);
+  font-size: 26px;
+}
+
+.deleteModal h2 {
+  margin: 0 0 10px;
+  color: var(--green-deep);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.deleteModal p {
+  margin: 0 0 24px;
+  color: #899185;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.deleteModalButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.deleteModalButtons button {
+  flex: 1;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  transition: 0.2s ease;
+}
+
+#cancelDelete {
+  background: #eaf1de;
+  color: var(--green-deep);
+}
+
+#cancelDelete:hover {
+  background: #dce8d3;
+}
+
+#confirmDelete {
+  background: #eec0d0;
+  color: #884e61;
+}
+
+#confirmDelete:hover {
+  background: #e5aabd;
+  transform: translateY(-1px);
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .deleteModal {
+    max-width: 330px;
+    padding: 24px 18px;
+  }
+}
