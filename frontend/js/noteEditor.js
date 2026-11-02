@@ -151,12 +151,32 @@ const scheduleAutoSave = () => {
 editor.on("update", scheduleAutoSave);
 titleInput?.addEventListener("input", scheduleAutoSave);
 tagsInput?.addEventListener("input", scheduleAutoSave);
-  noteForm.addEventListener("submit", (event) => {
-    contentInput.value = editor.getHTML();
+const contentError = document.querySelector("#noteContentError");
 
-    if (!editor.getText().trim()) {
-      event.preventDefault();
-      alert("Please write something in your note.");
-    }
-  });
+noteForm.addEventListener("submit", (event) => {
+  contentInput.value = editor.getHTML();
+
+  if (!editor.getText().trim()) {
+    event.preventDefault();
+    contentError.hidden = false;
+    editor.commands.focus();
+    return;
+  }
+
+  contentError.hidden = true;
+
+  const saveBtn = noteForm.querySelector(".saveBtn");
+
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = `
+    <span class="loadingSpinner"></span>
+    Saving Note...
+  `;
+});
+
+editor.on("update", () => {
+  if (editor.getText().trim()) {
+    contentError.hidden = true;
+  }
+});
 }

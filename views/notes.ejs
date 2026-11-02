@@ -331,7 +331,10 @@ confirmDeleteNote.addEventListener("click", async () => {
   const { noteId, deleteButton } = noteToDelete;
 
   confirmDeleteNote.disabled = true;
-  confirmDeleteNote.textContent = "Deleting...";
+confirmDeleteNote.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Deleting...
+`;
 
   try {
     const response = await fetch(`/notes/${noteId}`, {
@@ -397,9 +400,14 @@ notesList?.addEventListener("click", async (event) => {
 }
 
   if (pinButton) {
-    pinButton.disabled = true;
+  const originalHTML = pinButton.innerHTML;
 
-    try {
+  pinButton.disabled = true;
+  pinButton.innerHTML = `
+    <span class="loadingSpinner"></span>
+  `;
+
+  try {
       const response = await fetch(`/notes/${noteId}/pin`, {
         method: "PATCH",
         headers: { Accept: "application/json" },
@@ -413,9 +421,10 @@ notesList?.addEventListener("click", async (event) => {
 
       window.location.reload();
     } catch (error) {
-      alert(error.message);
-      pinButton.disabled = false;
-    }
+  alert(error.message);
+  pinButton.disabled = false;
+  pinButton.innerHTML = originalHTML;
+}
   }
 });
 

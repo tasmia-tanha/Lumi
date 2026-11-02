@@ -731,6 +731,15 @@ article.append(label, info, deleteButton, status);
 
     document.getElementById("subjectForm").addEventListener("submit", async event => {
       event.preventDefault();
+      const subjectForm = event.target;
+const submitBtn = subjectForm.querySelector("button[type='submit']");
+const originalHTML = submitBtn.innerHTML;
+
+submitBtn.disabled = true;
+submitBtn.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Saving Subject...
+`;
 
       const name = document.getElementById("subjectName").value.trim();
 
@@ -757,12 +766,24 @@ article.append(label, info, deleteButton, status);
 
         showToast(result.message || "Subject added!");
       } catch (error) {
-        showToast(error.message, true);
-      }
+  showToast(error.message, true);
+} finally {
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = originalHTML;
+}
     });
 
     document.getElementById("lessonForm").addEventListener("submit", async event => {
       event.preventDefault();
+      const lessonForm = event.target;
+const submitBtn = lessonForm.querySelector("button[type='submit']");
+const originalHTML = submitBtn.innerHTML;
+
+submitBtn.disabled = true;
+submitBtn.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Saving Lesson...
+`;
 
       const title = document.getElementById("lessonTitleInput").value.trim();
       const subjectId = lessonSubjectSelect.value;
@@ -785,12 +806,24 @@ article.append(label, info, deleteButton, status);
 
         showToast(result.message || "Lesson added!");
       } catch (error) {
-        showToast(error.message, true);
-      }
+  showToast(error.message, true);
+} finally {
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = originalHTML;
+}
     });
 
     document.getElementById("materialForm").addEventListener("submit", async event => {
       event.preventDefault();
+      const materialForm = event.target;
+const submitBtn = materialForm.querySelector("button[type='submit']");
+const originalHTML = submitBtn.innerHTML;
+
+submitBtn.disabled = true;
+submitBtn.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Saving Material...
+`;
 
       const title = document.getElementById("materialTitleInput").value.trim();
       const url = document.getElementById("materialUrlInput").value.trim();
@@ -814,8 +847,11 @@ article.append(label, info, deleteButton, status);
 
         showToast(result.message || "Course material added!");
       } catch (error) {
-        showToast(error.message, true);
-      }
+  showToast(error.message, true);
+} finally {
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = originalHTML;
+}
     });
 
     lessonList.addEventListener("change", async event => {
@@ -839,6 +875,7 @@ article.append(label, info, deleteButton, status);
       const newStatus = checkbox.checked ? "completed" : "inProgress";
 
       checkbox.disabled = true;
+      article.classList.add("is-updating");
 
       try {
         await apiRequest(`/lessons/lessons/${lessonId}`, {
@@ -860,8 +897,9 @@ article.append(label, info, deleteButton, status);
         checkbox.checked = previousStatus === "completed";
         showToast(error.message, true);
       } finally {
-        checkbox.disabled = false;
-      }
+  checkbox.disabled = false;
+  article.classList.remove("is-updating");
+}
     });
 
     document.getElementById("logoutBtn").addEventListener("click", async () => {
@@ -942,7 +980,10 @@ confirmDeleteItem.addEventListener("click", async () => {
   const { type, id } = itemToDelete;
 
   confirmDeleteItem.disabled = true;
-  confirmDeleteItem.textContent = "Deleting...";
+confirmDeleteItem.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Deleting...
+`;
 
   try {
     const result = await apiRequest(`/lessons/${type}/${id}`, {

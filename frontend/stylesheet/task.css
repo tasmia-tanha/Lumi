@@ -877,3 +877,53 @@ body,
 *::-webkit-scrollbar-thumb:hover {
   background: #84a282;
 }
+
+/* ===== TASK LOADING STATES ===== */
+
+/* Add task button */
+.addTask:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.addTask:disabled:hover {
+  background: #84a282;
+}
+
+/* Shared loading spinner */
+.loadingSpinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: taskSpin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes taskSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Delete confirmation button */
+#confirmDelete:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Clear completed button */
+.clearButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Task being updated */
+.taskItem.is-updating {
+  opacity: 0.65;
+  
+}

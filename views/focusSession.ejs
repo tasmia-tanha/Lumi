@@ -496,8 +496,14 @@
       return;
     }
 
-    goalSettingsMessage.textContent = "Saving...";
-    saveGoalBtn.disabled = true;
+    const originalHTML = saveGoalBtn.innerHTML;
+
+goalSettingsMessage.textContent = "Saving...";
+saveGoalBtn.disabled = true;
+saveGoalBtn.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Saving...
+`;
     try {
       const response = await fetch("/focusSession/goal", {
         method: "PATCH",
@@ -511,8 +517,9 @@
     } catch (error) {
       goalSettingsMessage.textContent = error.message;
     } finally {
-      saveGoalBtn.disabled = false;
-    }
+  saveGoalBtn.disabled = false;
+  saveGoalBtn.innerHTML = originalHTML;
+}
   });
 
   goalHoursInput.addEventListener("change", () => {
@@ -656,10 +663,24 @@ timerMessage.textContent = currentMode === "pomodoro"
     persistTimerState();
 
     if (durationMs >= 1000 && !sessionSaved) {
-      const saved = await saveStudySession(durationMs);
-      if (saved) sessionSaved = true;
-      persistTimerState();
-    }
+  const stopBtn = document.querySelector("#stopBtn");
+  const originalHTML = stopBtn.innerHTML;
+
+  stopBtn.disabled = true;
+  stopBtn.innerHTML = `
+    <span class="loadingSpinner"></span>
+    Saving...
+  `;
+
+  try {
+    const saved = await saveStudySession(durationMs);
+    if (saved) sessionSaved = true;
+    persistTimerState();
+  } finally {
+    stopBtn.disabled = false;
+    stopBtn.innerHTML = originalHTML;
+  }
+}
     timerMessage.textContent = durationMs >= 1000
       ? "Session stopped. Your study time has been logged 🌱"
       : "No study time to save yet.";

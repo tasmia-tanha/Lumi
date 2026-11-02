@@ -67,14 +67,16 @@
           
         </div>
 
-        <form action="/task" method="POST">
+        <form id="addTaskForm" action="/task" method="POST">
           <input type="text" name="title" placeholder="Enter a new task" required>
           <select name="priority">
             <option value="high">High</option>
             <option value="medium" selected>Medium</option>
             <option value="low">Low</option>
           </select>
-          <button class="addTask" type="submit">+ Add Task</button>
+          <button class="addTask" id="addTaskBtn" type="submit">
+  + Add Task
+</button>
         </form>
         
         <h4 class="filterText">Filter by:</h4>
@@ -123,7 +125,7 @@
           Completed Tasks <span id="completedCount"><%= completedTasks.length %></span>
           <button type="button" id="toggleCompleted">Hide</button>
           </h2>
-          <button class="clearButton"><span class="clearCompleted">Clear Completed Tasks</span></button>
+          <button  type="button"   class="clearButton"><span class="clearCompleted">Clear Completed Tasks</span></button>
 
           <div id="completedList">
           
@@ -188,6 +190,19 @@
   </body>
 
   <script>
+    // Add task loading state
+const addTaskForm = document.querySelector("#addTaskForm");
+const addTaskBtn = document.querySelector("#addTaskBtn");
+
+addTaskForm.addEventListener("submit", function (event) {
+  if (!addTaskForm.checkValidity()) return;
+
+  addTaskBtn.disabled = true;
+  addTaskBtn.innerHTML = `
+    <span class="loadingSpinner"></span>
+    Adding task...
+  `;
+});
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       try {
         const response = await fetch("/logout", {
@@ -203,36 +218,62 @@
         showToast(error.message, true);
       }
     });
-    //clear complted tasks
-    const btn=document.querySelector(".clearButton");
-    btn.addEventListener("click",async function() {
-      const Tasks = [...document.querySelectorAll(".taskItem")];
-      Tasks.forEach(async(task)=>{
-        
-        const isCompleted=task.querySelector("input[type='checkbox']").checked;
+    // Clear completed tasks
+const btn = document.querySelector(".clearButton");
+
+btn.addEventListener("click", async function () {
+  const completedTasks = [
+    ...document.querySelectorAll(".taskItem")
+  ].filter(task =>
+    task.querySelector("input[type='checkbox']").checked
+  );
+
+  if (completedTasks.length === 0) return;
+
+  btn.disabled = true;
+  const originalHTML = btn.innerHTML;
+
+  btn.innerHTML = `
+    <span class="loadingSpinner"></span>
+    Clearing...
+  `;
+
+  try {
+    const results = await Promise.all(
+      completedTasks.map(async (task) => {
         const id = task.querySelector("input[type='checkbox']").dataset.taskId;
-        if(isCompleted){
-          try{
-            const response=await fetch(`/task/${id}`,{
-              method:"DELETE"
-            })
 
-            if(!response.ok){
-              throw new Error("Failed to clear the completed tasks!")
-            }
+        const response = await fetch(`/task/${id}`, {
+          method: "DELETE"
+        });
 
-            task.remove();
-            document.querySelector("#completedCount").textContent =0;
-          }catch(error){
-            console.log(error);
-            alert("Failed to clear the completed tasks!")
-          }
+        if (!response.ok) {
+          throw new Error("Failed to delete a completed task.");
         }
+
+        return task;
       })
-    })
-    //delete
+    );
+
+    results.forEach(task => task.remove());
+
+    updateTaskFilter();
+    updateCapybaraImage();
+
+  } catch (error) {
+    console.error(error);
+    alert("Some tasks could not be cleared. Please try again.");
+
+    // Refresh the page to show the actual server state.
+    window.location.reload();
+
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalHTML;
+  }
+});
     
-    const deleteModal = document.querySelector("#deleteModal");
+const deleteModal = document.querySelector("#deleteModal");
 const deleteModalMessage = document.querySelector("#deleteModalMessage");
 const cancelDelete = document.querySelector("#cancelDelete");
 const confirmDelete = document.querySelector("#confirmDelete");
@@ -284,7 +325,10 @@ confirmDelete.addEventListener("click", async () => {
   const { taskId, taskItem } = taskToDelete;
 
   confirmDelete.disabled = true;
-  confirmDelete.textContent = "Deleting...";
+confirmDelete.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Deleting...
+`;
 
   try {
     const response = await fetch(`/task/${taskId}`, {
@@ -369,63 +413,50 @@ confirmDelete.addEventListener("click", async () => {
     priorityFilter.addEventListener("change", updateTaskFilter);
    
     //checkbox change
-    document.querySelectorAll(".taskItem input[type='checkbox']").forEach((checkbox)=>{
+    document.querySelectorAll(".taskItem input[type='checkbox']").forEach((checkbox) => {
+  checkbox.addEventListener("change", async function () {
+    const taskItem = this.closest(".taskItem");
+    const taskId = this.dataset.taskId;
+    const title = taskItem.querySelector(".taskInfo h3");
+    const originalStatus = !this.checked;
+    const newStatus = this.checked;
 
-      checkbox.addEventListener("change",async function () {
-        const taskId=this.dataset.taskId;
-        const taskItem = this.closest(".taskItem");
-        const taskTitle = taskItem.querySelector(".taskInfo h3");
-        const taskList = document.querySelector(".taskList");
-        const activeHeading = [...taskList.querySelectorAll("h2")]
-          .find(heading => heading.textContent.includes("Active Tasks"));
-        const completedHeading = [...taskList.querySelectorAll("h2")]
-          .find(heading => heading.textContent.includes("Completed Tasks"));
+    this.disabled = true;
+    taskItem.classList.add("is-updating");
 
-        taskTitle.classList.toggle("completed",this.checked);
-        
-        const targetList = this.checked
-          ? document.querySelector("#completedList")
-          : document.querySelector("#activeList");
-
-          if (targetList) {
-            targetList.appendChild(taskItem);
-          }
-
-        const taskItems = [...document.querySelectorAll(".taskItem")];
-
-        const completedCount = taskItems.filter(
-          item => item.querySelector("input[type='checkbox']").checked
-          ).length;
-
-        const activeCount = taskItems.length - completedCount;
-
-        updateTaskFilter();
-        
-        updateCapybaraImage();
-       
-
-        try{
-          const response=await fetch(`/task/${taskId}`,{
-            method:"PATCH",
-            headers:{
-              "Content-Type":"application/json",
-            },
-            body:JSON.stringify({
-              completed:this.checked
-            }),
-          })
-          if(!response.ok){
-            throw new Error("Failed to update task!")
-          }
-
-        }catch(error){
-          console.log(error);
-          this.checked=!this.checked;
-          taskTitle.classList.toggle("completed",this.checked);
-          alert("Failed to update task!Please try again");
-        }
+    try {
+      const response = await fetch(`/task/${taskId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ completed: newStatus }),
       });
-    });
+
+      if (!response.ok) {
+        throw new Error("Failed to update task.");
+      }
+
+      title.classList.toggle("completed", newStatus);
+
+      const targetList = newStatus
+        ? document.querySelector("#completedList")
+        : document.querySelector("#activeList");
+
+      targetList.appendChild(taskItem);
+
+      updateTaskFilter();
+      updateCapybaraImage();
+
+    } catch (error) {
+      this.checked = originalStatus;
+      alert("Failed to update task. Please try again.");
+    } finally {
+      this.disabled = false;
+      taskItem.classList.remove("is-updating");
+    }
+  });
+});
 
     //hide completed list
     const toggleBtn = document.querySelector("#toggleCompleted");

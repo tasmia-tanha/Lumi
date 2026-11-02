@@ -130,6 +130,21 @@
   </body>
 
   <script>
+    function showToast(message, isError = false) {
+  if (window.Toastify) {
+    Toastify({
+      text: message,
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      style: {
+        background: isError ? "#b85f73" : "#84a282",
+      },
+    }).showToast();
+  } else {
+    console.error(message);
+  }
+}
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       try {
         const response = await fetch("/logout", {
@@ -319,11 +334,17 @@
       );
 
       if (hasIncompleteEntry) {
-        alert(
-          "Please enter both a time and a description for every time entry.",
-        );
-        return;
-      }
+  showToast(
+    "Please enter both a time and a description for every time entry.",
+    true,
+  );
+  return;
+}
+      saveDateDetails.disabled = true;
+saveDateDetails.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Saving...
+`;
       try {
         const response = await fetch(`/calendar/${selectedDate}`, {
           method: "POST",
@@ -349,11 +370,12 @@
         await loadUpcomingEvents();
         await loadTodayAgenda();
       } catch (error) {
-        console.error("Error saving date:", error);
-        alert("Could not save date details. Please try again.");
-      }
-
-      datePopupOverlay.hidden = true;
+  console.error("Error saving date:", error);
+  showToast("Could not save date details. Please try again.", true);
+} finally {
+  saveDateDetails.disabled = false;
+  saveDateDetails.textContent = "Save";
+}
     });
     let selectedDate = null;
 
@@ -404,6 +426,8 @@
         day.style.cursor = "pointer";
         day.addEventListener("click", async function () {
           selectedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
+          day.classList.add("is-loading");
+day.style.pointerEvents = "none";
 
           popupDateTitle.textContent = selectedDate;
 
@@ -457,8 +481,12 @@
             datePopupOverlay.hidden = false;
           } catch (error) {
             console.error("Error loading date details:", error);
-            alert("Could not load this date's details. Please try again.");
+            showToast("Could not load this date's details. Please try again.", true);
           }
+          finally {
+  day.classList.remove("is-loading");
+  day.style.pointerEvents = "auto";
+}
         });
         calendarGrid.appendChild(day);
       }

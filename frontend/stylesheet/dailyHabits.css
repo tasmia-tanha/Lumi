@@ -1501,3 +1501,24 @@ body,
     padding: 24px 20px;
   }
 }
+/* Loading spinner */
+.loadingSpinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: loadingSpin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes loadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.habitTable td.is-updating {
+  opacity: 0.5;
+}

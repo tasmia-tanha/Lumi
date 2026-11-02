@@ -140,7 +140,9 @@
       if (window.Toastify) {
         Toastify({ text: message, duration: 3000, gravity: "top", position: "right",
           style: { background: isError ? "#b85f73" : "#84a282" } }).showToast();
-      } else alert(message);
+      } else {
+        console.error(message);
+      }
     }
 
     document.getElementById("logoutBtn").addEventListener("click", async () => {
@@ -156,6 +158,8 @@
       const checkbox = event.target;
       const taskId = checkbox.dataset.taskId;
       const taskItem = checkbox.closest(".todo");
+      checkbox.disabled = true;
+taskItem.classList.add("is-updating");
       try {
         const response = await fetch(`/task/${taskId}`, {
           method: "PATCH", headers: { "Content-Type": "application/json" },
@@ -211,10 +215,13 @@ if (taskList.querySelectorAll(".todo").length === 0) {
         taskCount.textContent = `${remaining} tasks remaining`;
         
       } catch (error) {
-        checkbox.checked = !checkbox.checked;
-        showToast("Failed to update task. Please try again.", true);
-        console.error(error);
-      }
+  checkbox.checked = !checkbox.checked;
+  showToast("Failed to update task. Please try again.", true);
+  console.error(error);
+} finally {
+  checkbox.disabled = false;
+  taskItem.classList.remove("is-updating");
+}
     });
 
     async function loadActiveTasks() {

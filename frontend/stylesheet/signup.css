@@ -219,3 +219,32 @@ input.error {
     margin-top: 10px;
   }
 }
+
+/* Signup loading state */
+#signUpBtn:disabled {
+  opacity: 0.85;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#signUpBtn:disabled:hover {
+  background: var(--green-dark);
+}
+
+.loadingSpinner {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  margin-right: 9px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

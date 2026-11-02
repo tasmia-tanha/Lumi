@@ -22,6 +22,11 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
       rel="stylesheet"
     />
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </head>
 
   <body>
@@ -241,6 +246,21 @@
     </script>
 
     <script>
+      function showToast(message, isError = false) {
+  if (window.Toastify) {
+    Toastify({
+      text: message,
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      style: {
+        background: isError ? "#b85f73" : "#84a282",
+      },
+    }).showToast();
+  } else {
+    console.error(message);
+  }
+}
       document
         .getElementById("logoutBtn")
         .addEventListener("click", async () => {
@@ -393,7 +413,8 @@
 
           checkbox.addEventListener("change", async function () {
             const date = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-
+            checkbox.disabled = true;
+            cell.classList.add("is-updating");
             try {
               const response = await fetch(
                 `/dailyHabits/${habit.id}/check-in`,
@@ -427,8 +448,12 @@
             } catch (error) {
               console.error("Check-in failed:", error);
               checkbox.checked = !checkbox.checked;
-              alert("Could not save the check-in. Please try again.");
+              showToast("Could not save the check-in. Please try again.", true);
             }
+            finally {
+  checkbox.disabled = false;
+  cell.classList.remove("is-updating");
+}
           });
 
           cell.appendChild(checkbox);
@@ -476,7 +501,10 @@
         const habit = habitToDelete;
 
         confirmDeleteHabit.disabled = true;
-        confirmDeleteHabit.textContent = "Deleting...";
+confirmDeleteHabit.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Deleting...
+`;
 
         try {
           const response = await fetch(`/dailyHabits/${habit.id}`, {
@@ -499,7 +527,7 @@
           await loadHabitStats();
         } catch (error) {
           console.error("Delete habit failed:", error);
-          alert("Could not delete the habit. Please try again.");
+          showToast("Could not delete the habit. Please try again.", true);
         } finally {
           confirmDeleteHabit.disabled = false;
           confirmDeleteHabit.textContent = "Yes, Delete";
@@ -512,7 +540,7 @@
       const confirmAddHabit = document.getElementById("confirmAddHabit");
       document.getElementById("addHabitBtn").addEventListener("click", () => {
         if (habits.length >= 10) {
-          alert("You can have a maximum of 10 habits.");
+          showToast("You can have a maximum of 10 habits.", true);
           return;
         }
 
@@ -719,13 +747,16 @@
         }
 
         if (habits.length >= 10) {
-          alert("You can have a maximum of 10 habits.");
+          showToast("You can have a maximum of 10 habits.", true);
           addHabitModal.hidden = true;
           return;
         }
 
         confirmAddHabit.disabled = true;
-        confirmAddHabit.textContent = "Adding...";
+confirmAddHabit.innerHTML = `
+  <span class="loadingSpinner"></span>
+  Adding...
+`;
 
         try {
           const response = await fetch("/dailyHabits", {
@@ -755,7 +786,7 @@
           await loadHabitStats();
         } catch (error) {
           console.error("Failed to add habit:", error);
-          alert(error.message || "Could not connect to the server.");
+          showToast(error.message || "Could not connect to the server.", true);
         } finally {
           confirmAddHabit.disabled = false;
           confirmAddHabit.textContent = "Add Habit";

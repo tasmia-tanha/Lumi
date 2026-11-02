@@ -171,7 +171,7 @@ a {
   display: flex;
   align-items: center;
   gap: clamp(14px, 2vw, 30px);
-  min-height: 220px;
+  min-height: 350px;
   padding: 24px clamp(18px, 2vw, 32px);
 }
 #greetLogo {
@@ -371,10 +371,14 @@ a {
   border: 1px solid var(--green);
 }
 .emptyTasks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 190px;
   padding: 20px 8px;
   text-align: center;
   color: var(--green-deep);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 800;
 }
 .studyTimeSummary {
@@ -455,7 +459,7 @@ a {
 
   .tasks,
   .analytics {
-    min-height: 210px;
+    min-height: 220px;
   }
 }
 @media (max-width: 1300px) and (min-width: 761px) {
@@ -609,11 +613,18 @@ a {
 
 .deadlineLoading {
   grid-column: 1 / -1;
-  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  width: 100%;
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
   color: var(--green-deep);
-  font-size: 13px;
-  font-weight: 700;
 }
+
 
 .date {
   display: flex;
@@ -622,8 +633,8 @@ a {
 
 .listDeadLine {
   min-height: 0;
-  max-height: 150px;
-  overflow-y: auto;
+   max-height: none;
+  overflow: visible;
   align-content: start;
   padding-right: 5px;
 }
@@ -868,17 +879,23 @@ body,
 }
 @media (min-width: 801px) {
   .greeting,
-  .date {
-    min-height: 320px;
+  .date ,
+  .tasks,
+  .analytics{
+    height: 350px;
+    max-height: 350px;
+    min-height: 350px;
   }
 }
 
-/* Desktop and larger screens */
-@media (min-width: 801px) {
-  .tasks {
-    min-height: 330px;
+@media (min-width: 801px) and (max-width: 1300px) {
+  .listDeadLine {
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
+
 
 /* Tablet */
 @media (min-width: 761px) and (max-width: 800px) {
@@ -943,4 +960,33 @@ body,
     overflow-y: auto;
     overflow-x: hidden;
   }
+}
+
+@media (min-width: 801px) and (max-width: 850px) {
+  .dashboardContent {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "greeting"
+      "deadlines"
+      "tasks"
+      "study";
+  }
+}
+
+@media (min-width: 761px) and (max-width: 850px) {
+  .date {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .listDeadLine {
+    min-height: 0;
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+.todo.is-updating {
+  opacity: 0.6;
 }
