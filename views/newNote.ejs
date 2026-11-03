@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,45 +11,34 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
   <main class="noteEditorPage">
-  
-  <header class="editorTopBar">
-  <a href="/notes" class="backLink">← Back to Notes</a>
-  </header>
 
-  <% if (errors && errors.message) { %>
-  <p class="errorMessage"><%= errors.message %></p>
-  <% } %>
+    <header class="editorTopBar">
+      <a href="/notes" class="backLink">← Back to Notes</a>
+    </header>
+
+    <% if (errors && errors.message) { %>
+    <p class="errorMessage"><%= errors.message %></p>
+    <% } %>
 
     <div class="editorLayout">
 
-      
+
       <section class="writingPane">
 
         <form action="/notes" method="POST" id="noteForm" class="noteForm">
 
           <label for="noteTitle">Note title</label>
-          <input
-            id="noteTitle"
-            name="title"
-            type="text"
-            maxlength="150"
-            placeholder="Give your note a title..."
-            value="<%= note.title || '' %>"
-            required
-          />
+          <input id="noteTitle" name="title" type="text" maxlength="150" placeholder="Give your note a title..." value="<%= note.title || '' %>" required />
 
           <label for="noteContent">Your note</label>
 
           <div class="richTextToolbar">
-            
+
             <button type="button" data-command="heading" data-level="2">H2</button>
             <button type="button" data-command="heading" data-level="3">H3</button>
             <button type="button" data-command="bold" aria-label="Bold"><b>B</b></button>
@@ -65,41 +54,31 @@
 
           <div id="noteContent" class="richTextEditor"></div>
           <p id="noteContentError" class="errorMessage" hidden>
-  Please write something in your note.
-</p>
-          <input
-            type="hidden"
-            id="noteContentInput"
-            name="content"
-          />
+            Please write something in your note.
+          </p>
+          <input type="hidden" id="noteContentInput" name="content" />
 
-          
+
           <div class="noteBottomRow">
             <div class="tagsField">
               <label for="noteTags">Tags <span>(optional)</span></label>
-              <input
-                id="noteTags"
-                name="tags"
-                type="text"
-                placeholder="DS, ExamPrep, Ideas"
-                value="<%= Array.isArray(note.tags) ? note.tags.join(', ') : (note.tags || '') %>"
-              />
+              <input id="noteTags" name="tags" type="text" placeholder="DS, ExamPrep, Ideas" value="<%= Array.isArray(note.tags) ? note.tags.join(', ') : (note.tags || '') %>" />
+            </div>
+
+            <div class="editorActions">
+              <a href="/notes" class="cancelBtn">Cancel</a>
+              <button type="submit" class="saveBtn">Save Note ✨</button>
+            </div>
           </div>
 
-        <div class="editorActions">
-            <a href="/notes" class="cancelBtn">Cancel</a>
-            <button type="submit" class="saveBtn">Save Note ✨</button>
-        </div>
-        </div>
-
-        <p class="fieldHint">Separate multiple tags with commas.</p>
+          <p class="fieldHint">Separate multiple tags with commas.</p>
 
 
         </form>
       </section>
 
-      
-      
+
+
 
     </div>
   </main>
@@ -107,4 +86,5 @@
   <script type="module" src="/dist/noteEditor.js"></script>
 
 </body>
+
 </html>

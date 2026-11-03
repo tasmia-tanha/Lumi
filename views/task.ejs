@@ -1,29 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-    <link rel="stylesheet" href="../stylesheet/task.css" />
-    <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  
-  </head>
-  <body>
-    <div class="main">
-      
-      <aside class="sidebar">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="../stylesheet/task.css" />
+  <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+</head>
+
+<body>
+  <div class="main">
+
+    <aside class="sidebar">
       <a href="/dashboard" class="brand">
-  <span>Lumi</span>
-</a>
+        <span>Lumi</span>
+      </a>
 
       <p class="navLabel">WORKSPACE</p>
 
@@ -52,338 +51,334 @@
       </nav>
 
       <div class="sidebarBottom">
-        
-        
+
+
         <button id="logoutBtn" class="logoutButton" type="button">
           Log out
         </button>
       </div>
     </aside>
 
-      <main class="taskPage" style="grid-area: box-2">
-        <div class="taskTop">
-          <h1>Tasks</h1>
+    <main class="taskPage" style="grid-area: box-2">
+      <div class="taskTop">
+        <h1>Tasks</h1>
 
-          
-        </div>
 
-        <form id="addTaskForm" action="/task" method="POST">
-          <input type="text" name="title" placeholder="Enter a new task" required>
-          <select name="priority">
-            <option value="high">High</option>
-            <option value="medium" selected>Medium</option>
-            <option value="low">Low</option>
-          </select>
-          <button class="addTask" id="addTaskBtn" type="submit">
-  + Add Task
-</button>
-        </form>
-        
-        <h4 class="filterText">Filter by:</h4>
-        <select id="priorityFilter">
-          <option value="all" selected>All</option>
+      </div>
+
+      <form id="addTaskForm" action="/task" method="POST">
+        <input type="text" name="title" placeholder="Enter a new task" required>
+        <select name="priority">
           <option value="high">High</option>
-          <option value="medium">Medium</option>
+          <option value="medium" selected>Medium</option>
           <option value="low">Low</option>
         </select>
+        <button class="addTask" id="addTaskBtn" type="submit">
+          + Add Task
+        </button>
+      </form>
 
-        <div class="taskList">
-          <h2 id="activeHeading">
-              Active Tasks <span id="activeCount"><%= activeTasks.length %></span>
-          </h2>
+      <h4 class="filterText">Filter by:</h4>
+      <select id="priorityFilter">
+        <option value="all" selected>All</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
 
-          <div id="activeList">
-          
-          <p
-            id="noActiveTasks"
-            class="emptyMessage"
-            <%= activeTasks.length === 0 ? "" : 'hidden' %>
-          >
-          No active tasks. Time to relax! 🌱
+      <div class="taskList">
+        <h2 id="activeHeading">
+          Active Tasks <span id="activeCount"><%= activeTasks.length %></span>
+        </h2>
+
+        <div id="activeList">
+
+          <p id="noActiveTasks" class="emptyMessage" <%= activeTasks.length === 0 ? "" : 'hidden' %>>
+            No active tasks. Time to relax! 🌱
           </p>
-          
+
           <% activeTasks.forEach((task)=>{ %>
-            <div class="taskItem">
+          <div class="taskItem">
             <input type="checkbox" data-task-id="<%= task._id%>" <%= task.completed? "checked":"" %> />
             <div class="taskInfo">
               <h3 class="<%= task.completed? 'completed':'' %>"><%=task.title%></h3>
-              
+
             </div>
             <span class="priority <%=task.priority%>"><%= task.priority%></span>
-             <button
-              type="button"
-              class="deleteTask"
-              data-task-id="<%= task._id %>"
-              aria-label="Delete <%= task.title %>"
-              >
+            <button type="button" class="deleteTask" data-task-id="<%= task._id %>" aria-label="Delete <%= task.title %>">
               🗑
             </button>
           </div>
-         <% }) %>
-          </div>
-         <h2 id="completedHeading">
+          <% }) %>
+        </div>
+        <h2 id="completedHeading">
           Completed Tasks <span id="completedCount"><%= completedTasks.length %></span>
           <button type="button" id="toggleCompleted">Hide</button>
-          </h2>
-          <button  type="button"   class="clearButton"><span class="clearCompleted">Clear Completed Tasks</span></button>
+        </h2>
+        <button type="button" class="clearButton"><span class="clearCompleted">Clear Completed Tasks</span></button>
 
-          <div id="completedList">
-          
-          <p
-          id="noCompletedTasks"
-          class="emptyMessage"
-          <%= completedTasks.length === 0 ? "" : 'hidden' %>
-          >
-          No completed tasks yet.
+        <div id="completedList">
+
+          <p id="noCompletedTasks" class="emptyMessage" <%= completedTasks.length === 0 ? "" : 'hidden' %>>
+            No completed tasks yet.
           </p>
-          
+
           <% completedTasks.forEach((task)=>{ %>
-            <div class="taskItem">
+          <div class="taskItem">
             <input type="checkbox" data-task-id="<%= task._id%>" <%= task.completed? "checked":"" %> />
             <div class="taskInfo">
               <h3 class="<%= task.completed? 'completed':'' %>"><%=task.title%></h3>
-              
+
             </div>
-            
+
             <span class="priority <%=task.priority%>"><%= task.priority%></span>
-            <button
-            type="button"
-            class="deleteTask"
-            data-task-id="<%= task._id %>"
-            aria-label="Delete <%= task.title %>"
-            >
+            <button type="button" class="deleteTask" data-task-id="<%= task._id %>" aria-label="Delete <%= task.title %>">
               🗑
             </button>
           </div>
-         <% }) %>
-          </div>
+          <% }) %>
         </div>
-      </main>
-
-      <div class="capyArea" style="grid-area: box-3">
-        <img
-        id="capybaraImage"
-          class="capyImage"
-          src="/images/Cozy Capybara’s All Done Bedtime.png"
-          alt="Sleeping capybara after completing tasks"
-        />
       </div>
+    </main>
+
+    <div class="capyArea" style="grid-area: box-3">
+      <img id="capybaraImage" class="capyImage" src="/images/Cozy Capybara’s All Done Bedtime.png" alt="Sleeping capybara after completing tasks" />
     </div>
-    <div class="deleteModalOverlay" id="deleteModal" hidden>
-  <div class="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
-
-    <div class="deleteModalIcon">🌸</div>
-
-    <h2 id="deleteModalTitle">Delete this task?</h2>
-
-    <p id="deleteModalMessage">
-      Are you sure you want to delete this task?
-    </p>
-
-    <div class="deleteModalButtons">
-      <button type="button" id="cancelDelete">Cancel</button>
-      <button type="button" id="confirmDelete">Yes, Delete</button>
-    </div>
-
   </div>
-</div>
-  </body>
+  <div class="deleteModalOverlay" id="deleteModal" hidden>
+    <div class="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
 
-  <script>
-    // Add task loading state
-const addTaskForm = document.querySelector("#addTaskForm");
-const addTaskBtn = document.querySelector("#addTaskBtn");
+      <div class="deleteModalIcon">🌸</div>
 
-addTaskForm.addEventListener("submit", function (event) {
-  if (!addTaskForm.checkValidity()) return;
+      <h2 id="deleteModalTitle">Delete this task?</h2>
 
-  addTaskBtn.disabled = true;
-  addTaskBtn.innerHTML = `
+      <p id="deleteModalMessage">
+        Are you sure you want to delete this task?
+      </p>
+
+      <div class="deleteModalButtons">
+        <button type="button" id="cancelDelete">Cancel</button>
+        <button type="button" id="confirmDelete">Yes, Delete</button>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+<script>
+  function showToast(message, isError = false) {
+    if (window.Toastify) {
+      Toastify({
+        text: message,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        style: {
+          background: isError ? "#b85f73" : "#84a282",
+        },
+      }).showToast();
+    } else {
+      console.error(message);
+    }
+  }
+  // Add task loading state
+  const addTaskForm = document.querySelector("#addTaskForm");
+  const addTaskBtn = document.querySelector("#addTaskBtn");
+
+  addTaskForm.addEventListener("submit", function(event) {
+    if (!addTaskForm.checkValidity()) return;
+
+    addTaskBtn.disabled = true;
+    addTaskBtn.innerHTML = `
     <span class="loadingSpinner"></span>
     Adding task...
   `;
-});
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      try {
-        const response = await fetch("/logout", {
-          method: "DELETE",
-        });
+  });
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    try {
+      const response = await fetch("/logout", {
+        method: "DELETE",
+      });
 
-        if (!response.ok) {
-          throw new Error("Could not log out. Please try again.");
-        }
-
-        window.location.href = "/";
-      } catch (error) {
-        showToast(error.message, true);
+      if (!response.ok) {
+        throw new Error("Could not log out. Please try again.");
       }
-    });
-    // Clear completed tasks
-const btn = document.querySelector(".clearButton");
 
-btn.addEventListener("click", async function () {
-  const completedTasks = [
-    ...document.querySelectorAll(".taskItem")
-  ].filter(task =>
-    task.querySelector("input[type='checkbox']").checked
-  );
+      window.location.href = "/";
+    } catch (error) {
+      showToast(error.message, true);
+    }
+  });
+  // Clear completed tasks
+  const btn = document.querySelector(".clearButton");
 
-  if (completedTasks.length === 0) return;
+  btn.addEventListener("click", async function() {
+    const completedTasks = [
+      ...document.querySelectorAll(".taskItem")
+    ].filter(task =>
+      task.querySelector("input[type='checkbox']").checked
+    );
 
-  btn.disabled = true;
-  const originalHTML = btn.innerHTML;
+    if (completedTasks.length === 0) return;
 
-  btn.innerHTML = `
+    btn.disabled = true;
+    const originalHTML = btn.innerHTML;
+
+    btn.innerHTML = `
     <span class="loadingSpinner"></span>
     Clearing...
   `;
 
-  try {
-    const results = await Promise.all(
-      completedTasks.map(async (task) => {
-        const id = task.querySelector("input[type='checkbox']").dataset.taskId;
+    try {
+      const results = await Promise.all(
+        completedTasks.map(async (task) => {
+          const id = task.querySelector("input[type='checkbox']").dataset.taskId;
 
-        const response = await fetch(`/task/${id}`, {
-          method: "DELETE"
-        });
+          const response = await fetch(`/task/${id}`, {
+            method: "DELETE"
+          });
 
-        if (!response.ok) {
-          throw new Error("Failed to delete a completed task.");
-        }
+          if (!response.ok) {
+            throw new Error("Failed to delete a completed task.");
+          }
 
-        return task;
-      })
-    );
+          return task;
+        })
+      );
 
-    results.forEach(task => task.remove());
+      results.forEach(task => task.remove());
 
-    updateTaskFilter();
-    updateCapybaraImage();
+      updateTaskFilter();
+      updateCapybaraImage();
 
-  } catch (error) {
-    console.error(error);
-    alert("Some tasks could not be cleared. Please try again.");
+    } catch (error) {
+      console.error(error);
+      showToast("Some tasks could not be cleared. Please try again.", true);
 
-    // Refresh the page to show the actual server state.
-    window.location.reload();
+      // Refresh the page to show the actual server state.
+      window.location.reload();
 
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = originalHTML;
-  }
-});
-    
-const deleteModal = document.querySelector("#deleteModal");
-const deleteModalMessage = document.querySelector("#deleteModalMessage");
-const cancelDelete = document.querySelector("#cancelDelete");
-const confirmDelete = document.querySelector("#confirmDelete");
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = originalHTML;
+    }
+  });
 
-let taskToDelete = null;
+  const deleteModal = document.querySelector("#deleteModal");
+  const deleteModalMessage = document.querySelector("#deleteModalMessage");
+  const cancelDelete = document.querySelector("#cancelDelete");
+  const confirmDelete = document.querySelector("#confirmDelete");
 
-document.querySelectorAll(".deleteTask").forEach((button) => {
-  button.addEventListener("click", function () {
-    const taskItem = this.closest(".taskItem");
-    const taskId = this.dataset.taskId;
-    const taskTitle = taskItem.querySelector(".taskInfo h3").textContent.trim();
+  let taskToDelete = null;
 
-    taskToDelete = {
+  document.querySelectorAll(".deleteTask").forEach((button) => {
+    button.addEventListener("click", function() {
+      const taskItem = this.closest(".taskItem");
+      const taskId = this.dataset.taskId;
+      const taskTitle = taskItem.querySelector(".taskInfo h3").textContent.trim();
+
+      taskToDelete = {
+        taskId,
+        taskItem
+      };
+
+      deleteModalMessage.textContent =
+        `Are you sure you want to delete "${taskTitle}"?`;
+
+      deleteModal.hidden = false;
+
+      cancelDelete.focus();
+    });
+  });
+
+  cancelDelete.addEventListener("click", () => {
+    deleteModal.hidden = true;
+    taskToDelete = null;
+  });
+
+  deleteModal.addEventListener("click", (event) => {
+    if (event.target === deleteModal) {
+      deleteModal.hidden = true;
+      taskToDelete = null;
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !deleteModal.hidden) {
+      deleteModal.hidden = true;
+      taskToDelete = null;
+    }
+  });
+
+  confirmDelete.addEventListener("click", async () => {
+    if (!taskToDelete) return;
+
+    const {
       taskId,
       taskItem
-    };
+    } = taskToDelete;
 
-    deleteModalMessage.textContent =
-      `Are you sure you want to delete "${taskTitle}"?`;
-
-    deleteModal.hidden = false;
-
-    cancelDelete.focus();
-  });
-});
-
-cancelDelete.addEventListener("click", () => {
-  deleteModal.hidden = true;
-  taskToDelete = null;
-});
-
-deleteModal.addEventListener("click", (event) => {
-  if (event.target === deleteModal) {
-    deleteModal.hidden = true;
-    taskToDelete = null;
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !deleteModal.hidden) {
-    deleteModal.hidden = true;
-    taskToDelete = null;
-  }
-});
-
-confirmDelete.addEventListener("click", async () => {
-  if (!taskToDelete) return;
-
-  const { taskId, taskItem } = taskToDelete;
-
-  confirmDelete.disabled = true;
-confirmDelete.innerHTML = `
+    confirmDelete.disabled = true;
+    confirmDelete.innerHTML = `
   <span class="loadingSpinner"></span>
   Deleting...
 `;
 
-  try {
-    const response = await fetch(`/task/${taskId}`, {
-      method: "DELETE",
-    });
+    try {
+      const response = await fetch(`/task/${taskId}`, {
+        method: "DELETE",
+      });
 
-    if (!response.ok) {
-      throw new Error("Failed to delete task");
+      if (!response.ok) {
+        throw new Error("Failed to delete task");
+      }
+
+      taskItem.remove();
+
+      const remainingTasks = [...document.querySelectorAll(".taskItem")];
+
+      const activeCount = remainingTasks.filter(
+        item => !item.querySelector("input[type='checkbox']").checked
+      ).length;
+
+      const completedCount = remainingTasks.length - activeCount;
+
+      document.querySelector("#activeCount").textContent = activeCount;
+      document.querySelector("#completedCount").textContent = completedCount;
+
+      updateCapybaraImage();
+
+      document.querySelector("#noActiveTasks").hidden = activeCount !== 0;
+      document.querySelector("#noCompletedTasks").hidden = completedCount !== 0;
+
+      deleteModal.hidden = true;
+      taskToDelete = null;
+
+    } catch (error) {
+      console.error(error);
+      showToast("Failed to delete task. Please try again.", true);
+
+    } finally {
+      confirmDelete.disabled = false;
+      confirmDelete.textContent = "Yes, Delete";
     }
-
-    taskItem.remove();
-
-    const remainingTasks = [...document.querySelectorAll(".taskItem")];
-
-    const activeCount = remainingTasks.filter(
-      item => !item.querySelector("input[type='checkbox']").checked
-    ).length;
-
-    const completedCount = remainingTasks.length - activeCount;
-
-    document.querySelector("#activeCount").textContent = activeCount;
-    document.querySelector("#completedCount").textContent = completedCount;
-
-    updateCapybaraImage();
-
-    document.querySelector("#noActiveTasks").hidden = activeCount !== 0;
-    document.querySelector("#noCompletedTasks").hidden = completedCount !== 0;
-
-    deleteModal.hidden = true;
-    taskToDelete = null;
-
-  } catch (error) {
-    console.error(error);
-    alert("Failed to delete task. Please try again.");
-
-  } finally {
-    confirmDelete.disabled = false;
-    confirmDelete.textContent = "Yes, Delete";
-  }
-});
-    
+  });
 
 
-    //filter
-    const priorityFilter=document.querySelector("#priorityFilter");
-    function updateTaskFilter() {
-      let visibleActive = 0;
-      let visibleCompleted = 0;
-      const selectedPriority = priorityFilter.value;
 
-      document.querySelectorAll(".taskItem").forEach((taskItem) => {
+  //filter
+  const priorityFilter = document.querySelector("#priorityFilter");
+
+  function updateTaskFilter() {
+    let visibleActive = 0;
+    let visibleCompleted = 0;
+    const selectedPriority = priorityFilter.value;
+
+    document.querySelectorAll(".taskItem").forEach((taskItem) => {
       const priority = taskItem.querySelector(".priority").textContent.trim();
       const isCompleted = taskItem.querySelector("input[type='checkbox']").checked;
       const matches =
-              selectedPriority === "all" || selectedPriority === priority;
+        selectedPriority === "all" || selectedPriority === priority;
 
       taskItem.style.display = matches ? "" : "none";
 
@@ -409,88 +404,90 @@ confirmDelete.innerHTML = `
     document.querySelector("#completedCount").textContent = visibleCompleted;
     msgActive.hidden = visibleActive !== 0;
     msgCompleted.hidden = visibleCompleted !== 0;
-    }
-    priorityFilter.addEventListener("change", updateTaskFilter);
-   
-    //checkbox change
-    document.querySelectorAll(".taskItem input[type='checkbox']").forEach((checkbox) => {
-  checkbox.addEventListener("change", async function () {
-    const taskItem = this.closest(".taskItem");
-    const taskId = this.dataset.taskId;
-    const title = taskItem.querySelector(".taskInfo h3");
-    const originalStatus = !this.checked;
-    const newStatus = this.checked;
+  }
+  priorityFilter.addEventListener("change", updateTaskFilter);
 
-    this.disabled = true;
-    taskItem.classList.add("is-updating");
+  //checkbox change
+  document.querySelectorAll(".taskItem input[type='checkbox']").forEach((checkbox) => {
+    checkbox.addEventListener("change", async function() {
+      const taskItem = this.closest(".taskItem");
+      const taskId = this.dataset.taskId;
+      const title = taskItem.querySelector(".taskInfo h3");
+      const originalStatus = !this.checked;
+      const newStatus = this.checked;
 
-    try {
-      const response = await fetch(`/task/${taskId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ completed: newStatus }),
-      });
+      this.disabled = true;
+      taskItem.classList.add("is-updating");
 
-      if (!response.ok) {
-        throw new Error("Failed to update task.");
+      try {
+        const response = await fetch(`/task/${taskId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            completed: newStatus
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update task.");
+        }
+
+        title.classList.toggle("completed", newStatus);
+
+        const targetList = newStatus ?
+          document.querySelector("#completedList") :
+          document.querySelector("#activeList");
+
+        targetList.appendChild(taskItem);
+
+        updateTaskFilter();
+        updateCapybaraImage();
+
+      } catch (error) {
+        this.checked = originalStatus;
+        showToast("Failed to update task. Please try again.", true);
+      } finally {
+        this.disabled = false;
+        taskItem.classList.remove("is-updating");
       }
-
-      title.classList.toggle("completed", newStatus);
-
-      const targetList = newStatus
-        ? document.querySelector("#completedList")
-        : document.querySelector("#activeList");
-
-      targetList.appendChild(taskItem);
-
-      updateTaskFilter();
-      updateCapybaraImage();
-
-    } catch (error) {
-      this.checked = originalStatus;
-      alert("Failed to update task. Please try again.");
-    } finally {
-      this.disabled = false;
-      taskItem.classList.remove("is-updating");
-    }
+    });
   });
-});
 
-    //hide completed list
-    const toggleBtn = document.querySelector("#toggleCompleted");
-    const completedList = document.querySelector("#completedList");
+  //hide completed list
+  const toggleBtn = document.querySelector("#toggleCompleted");
+  const completedList = document.querySelector("#completedList");
 
-    console.log("Button:", toggleBtn);
-    console.log("Completed list:", completedList);
+  console.log("Button:", toggleBtn);
+  console.log("Completed list:", completedList);
 
-    toggleBtn.addEventListener("click", function () {
+  toggleBtn.addEventListener("click", function() {
     console.log("Toggle clicked");
 
     completedList.style.display =
-    completedList.style.display === "none" ? "flex" : "none";
-    toggleBtn.textContent = completedList.style.display==="none" ? "Show" : "Hide";
-});
-    
-    function updateCapybaraImage() {
-      console.log("Active count:", document.querySelector("#activeCount").textContent);
-      const activeCount = Number(
+      completedList.style.display === "none" ? "flex" : "none";
+    toggleBtn.textContent = completedList.style.display === "none" ? "Show" : "Hide";
+  });
+
+  function updateCapybaraImage() {
+    console.log("Active count:", document.querySelector("#activeCount").textContent);
+    const activeCount = Number(
       document.querySelector("#activeCount").textContent
-      );
+    );
 
-      const capybaraImage = document.querySelector("#capybaraImage");
+    const capybaraImage = document.querySelector("#capybaraImage");
 
-      if (activeCount > 0) {
-        capybaraImage.src = "/images/Sleepy Capybara’s Midnight Tasks.png";
-        capybaraImage.alt = "Capybara studying with unfinished tasks";
-      } else {
-        capybaraImage.src = "/images/Cozy Capybara’s All Done Bedtime.png";
-        capybaraImage.alt = "Sleeping capybara after completing tasks";
-      }
+    if (activeCount > 0) {
+      capybaraImage.src = "/images/Sleepy Capybara’s Midnight Tasks.png";
+      capybaraImage.alt = "Capybara studying with unfinished tasks";
+    } else {
+      capybaraImage.src = "/images/Cozy Capybara’s All Done Bedtime.png";
+      capybaraImage.alt = "Sleeping capybara after completing tasks";
+    }
   }
 
   updateCapybaraImage();
-  
-  </script>
+</script>
+
 </html>

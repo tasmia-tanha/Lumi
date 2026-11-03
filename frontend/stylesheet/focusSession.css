@@ -1289,3 +1289,60 @@ body,
     transform: rotate(360deg);
   }
 }
+
+
+/* Focus session statistics skeleton loading */
+.focusSkeleton {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 6px;
+  background: rgba(132, 162, 130, 0.2);
+}
+
+.focusSkeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  animation: focusShimmer 1.4s infinite;
+}
+
+@keyframes focusShimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.skeletonStatNumber {
+  width: 55px;
+  height: 27px;
+}
+
+.skeletonGoalNumber {
+  width: 65px;
+  height: 22px;
+}
+
+.skeletonLastSessionTitle {
+  width: 130px;
+  height: 19px;
+}
+
+.skeletonLastSessionDetails {
+  width: 190px;
+  max-width: 100%;
+  height: 15px;
+}
+
+.skeletonGoalProgress {
+  width: 100%;
+  height: 10px;
+  border-radius: 20px;
+}

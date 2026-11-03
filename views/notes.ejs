@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,11 +9,11 @@
   <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
+
 <body>
   <div class="main">
     <aside class="sidebar">
@@ -39,19 +40,13 @@
         <div>
           <p class="eyebrow">YOUR THOUGHTS, YOUR SPACE</p>
           <h1>My Notes <span>🌷</span></h1>
-          
+
         </div>
         <a href="/notes/new" class="newNoteBtn">+ New Note</a>
       </div>
 
       <div class="notesTopBar">
-        <input
-          type="search"
-          id="searchNotes"
-          class="searchNotes"
-          placeholder="Search titles, content, or tags..."
-          aria-label="Search notes"
-        />
+        <input type="search" id="searchNotes" class="searchNotes" placeholder="Search titles, content, or tags..." aria-label="Search notes" />
         <button type="button" id="clearTagFilter" class="clearFilterBtn" hidden>
           Clear tag filter
         </button>
@@ -61,73 +56,56 @@
 
       <div class="notesList" id="notesList">
         <% if (notes.length === 0) { %>
-          <div class="emptyNotes" id="emptyNotes">
-            <span class="emptyIcon">🪴</span>
-            <h2>Your notebook is waiting!</h2>
-            <p>Create your first note and keep your thoughts in one place.</p>
-            <a href="/notes/new" class="emptyCreateBtn">Create a note</a>
-          </div>
+        <div class="emptyNotes" id="emptyNotes">
+          <span class="emptyIcon">🪴</span>
+          <h2>Your notebook is waiting!</h2>
+          <p>Create your first note and keep your thoughts in one place.</p>
+          <a href="/notes/new" class="emptyCreateBtn">Create a note</a>
+        </div>
         <% } else { %>
-          <% notes.forEach((note) => { %>
-            <article
-              class="noteCard"
-              data-note-id="<%= note._id %>"
-              data-edit-url="/notes/<%= note._id %>/edit"
-              data-title="<%= note.title.toLowerCase() %>"
-              data-content="<%= (note.plainText || '').toLowerCase() %>"
-              data-tags="<%= (note.tags || []).join(' ').toLowerCase() %>"
-            >
-              <div class="noteHeader">
-                <div class="noteTitleArea">
-                  <% if (note.pinned) { %>
-                    <span class="pinMark" title="Pinned note">📌</span>
-                  <% } %>
-                  <h2><%= note.title %></h2>
-                </div>
-
-                <div class="noteActions">
-                  <button
-                    type="button"
-                    class="pinNoteBtn"
-                    aria-label="<%= note.pinned ? 'Unpin' : 'Pin' %> note"
-                    title="<%= note.pinned ? 'Unpin note' : 'Pin note' %>"
-                  ><%= note.pinned ? "📌" : "📍" %></button>
-                  <button
-                    type="button"
-                    class="deleteNoteBtn"
-                    aria-label="Delete note"
-                    title="Delete note"
-                  >🗑️</button>
-                </div>
-              </div>
-
-              
-              <div class="notePreview"><%- note.content %></div>
-
-              <% if (note.tags && note.tags.length > 0) { %>
-                <div class="noteTags">
-                  <% note.tags.forEach((tag) => { %>
-                    <button type="button" class="noteTag" data-tag="<%= tag %>">
-                      #<%= tag %>
-                    </button>
-                  <% }) %>
-                </div>
+        <% notes.forEach((note) => { %>
+        <article class="noteCard" data-note-id="<%= note._id %>" data-edit-url="/notes/<%= note._id %>/edit" data-title="<%= note.title.toLowerCase() %>" data-content="<%= (note.plainText || '').toLowerCase() %>" data-tags="<%= (note.tags || []).join(' ').toLowerCase() %>">
+          <div class="noteHeader">
+            <div class="noteTitleArea">
+              <% if (note.pinned) { %>
+              <span class="pinMark" title="Pinned note">📌</span>
               <% } %>
+              <h2><%= note.title %></h2>
+            </div>
 
-              <div class="noteFooter">
-                <span class="noteDate">
-                  Updated <%= new Date(note.updatedAt).toLocaleDateString("en-GB", {
+            <div class="noteActions">
+              <button type="button" class="pinNoteBtn" aria-label="<%= note.pinned ? 'Unpin' : 'Pin' %> note" title="<%= note.pinned ? 'Unpin note' : 'Pin note' %>"><%= note.pinned ? "📌" : "📍" %></button>
+              <button type="button" class="deleteNoteBtn" aria-label="Delete note" title="Delete note">🗑️</button>
+            </div>
+          </div>
+
+
+          <div class="notePreview"><%- note.content %></div>
+
+          <% if (note.tags && note.tags.length > 0) { %>
+          <div class="noteTags">
+            <% note.tags.forEach((tag) => { %>
+            <button type="button" class="noteTag" data-tag="<%= tag %>">
+              #<%= tag %>
+            </button>
+            <% }) %>
+          </div>
+          <% } %>
+
+          <div class="noteFooter">
+            <span class="noteDate">
+              Updated <%= new Date(note.updatedAt).toLocaleDateString("en-GB", {
                     day: "numeric",
                     month: "short",
                     year: "numeric"
                   }) %>
-                </span>
-              </div>
-            </article>
-          <% }) %>
-          <p id="noSearchResults" class="noSearchResults" hidden>
-            No notes match your search.
-          </p>
+            </span>
+          </div>
+        </article>
+        <% }) %>
+        <p id="noSearchResults" class="noSearchResults" hidden>
+          No notes match your search.
+        </p>
         <% } %>
       </div>
     </main>
@@ -138,63 +116,69 @@
         <ul class="pinnedList" id="pinnedList">
           <% const pinnedNotes = notes.filter((note) => note.pinned); %>
           <% if (pinnedNotes.length === 0) { %>
-            <li class="sideEmpty">Pin notes to find them here.</li>
+          <li class="sideEmpty">Pin notes to find them here.</li>
           <% } else { %>
-            <% pinnedNotes.forEach((note) => { %>
-              <li>
-                <button
-                  type="button"
-                  class="pinnedNoteLink"
-                  data-target-note="<%= note._id %>"
-                ><%= note.title %></button>
-              </li>
-            <% }) %>
+          <% pinnedNotes.forEach((note) => { %>
+          <li>
+            <button type="button" class="pinnedNoteLink" data-target-note="<%= note._id %>"><%= note.title %></button>
+          </li>
+          <% }) %>
           <% } %>
         </ul>
       </section>
 
-      
+
 
       <section class="sidebarCard tagsCard">
         <h2>🏷️ Browse by tag</h2>
         <div class="tagCloud" id="tagCloud">
           <% if (tags.length === 0) { %>
-            <p class="sideEmpty">Your note tags will appear here.</p>
+          <p class="sideEmpty">Your note tags will appear here.</p>
           <% } else { %>
-            <% tags.forEach((tag) => { %>
-              <button type="button" class="tagBadge" data-tag="<%= tag %>">
-                #<%= tag %>
-              </button>
-            <% }) %>
+          <% tags.forEach((tag) => { %>
+          <button type="button" class="tagBadge" data-tag="<%= tag %>">
+            #<%= tag %>
+          </button>
+          <% }) %>
           <% } %>
         </div>
       </section>
     </aside>
   </div>
   <div class="deleteModalOverlay" id="deleteNoteModal" hidden>
-  <div
-    class="deleteModal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="deleteNoteModalTitle"
-  >
-    <div class="deleteModalIcon">🌸</div>
+    <div class="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteNoteModalTitle">
+      <div class="deleteModalIcon">🌸</div>
 
-    <h2 id="deleteNoteModalTitle">Delete this note?</h2>
+      <h2 id="deleteNoteModalTitle">Delete this note?</h2>
 
-    <p id="deleteNoteModalMessage">
-      Are you sure you want to delete this note?
-    </p>
+      <p id="deleteNoteModalMessage">
+        Are you sure you want to delete this note?
+      </p>
 
-    <div class="deleteModalButtons">
-      <button type="button" id="cancelDeleteNote">Cancel</button>
-      <button type="button" id="confirmDeleteNote">Yes, Delete</button>
+      <div class="deleteModalButtons">
+        <button type="button" id="cancelDeleteNote">Cancel</button>
+        <button type="button" id="confirmDeleteNote">Yes, Delete</button>
+      </div>
     </div>
   </div>
-</div>
 
   <script>
-     document.getElementById("logoutBtn").addEventListener("click", async () => {
+    function showToast(message, isError = false) {
+      if (window.Toastify) {
+        Toastify({
+          text: message,
+          duration: 3000,
+          gravity: "top",
+          position: "right",
+          style: {
+            background: isError ? "#b85f73" : "#84a282",
+          },
+        }).showToast();
+      } else {
+        console.error(message);
+      }
+    }
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
       try {
         const response = await fetch("/logout", {
           method: "DELETE",
@@ -209,246 +193,237 @@
         showToast(error.message, true);
       }
     });
-  const notesList = document.querySelector("#notesList");
-const searchInput = document.querySelector("#searchNotes");
-const clearTagFilterBtn = document.querySelector("#clearTagFilter");
-const activeTagLabel = document.querySelector("#activeTagLabel");
-const noSearchResults = document.querySelector("#noSearchResults");
+    const notesList = document.querySelector("#notesList");
+    const searchInput = document.querySelector("#searchNotes");
+    const clearTagFilterBtn = document.querySelector("#clearTagFilter");
+    const activeTagLabel = document.querySelector("#activeTagLabel");
+    const noSearchResults = document.querySelector("#noSearchResults");
 
 
-let selectedTag = "";
+    let selectedTag = "";
 
-function getNoteCards() {
-  return [...document.querySelectorAll(".noteCard")];
-}
-
-function filterNotes() {
-  const searchTerm = searchInput.value.trim().toLowerCase();
-  let visibleCount = 0;
-
-  getNoteCards().forEach((card) => {
-    const matchesSearch =
-      card.dataset.title.includes(searchTerm) ||
-      card.dataset.content.includes(searchTerm) ||
-      card.dataset.tags.includes(searchTerm);
-
-    const tags = card.dataset.tags
-      .split(" ")
-      .filter(Boolean);
-
-    const matchesTag = !selectedTag || tags.includes(selectedTag.toLowerCase());
-
-    const visible = matchesSearch && matchesTag;
-    card.hidden = !visible;
-
-    if (visible) visibleCount++;
-  });
-
-  clearTagFilterBtn.hidden = !selectedTag;
-  activeTagLabel.hidden = !selectedTag;
-  activeTagLabel.textContent = selectedTag
-    ? `Showing notes tagged #${selectedTag}`
-    : "";
-
-  document.querySelectorAll(".tagBadge").forEach((button) => {
-    button.classList.toggle(
-      "selected",
-      button.dataset.tag.toLowerCase() === selectedTag.toLowerCase() &&
-        selectedTag !== ""
-    );
-  });
-
-  if (noSearchResults) {
-    noSearchResults.hidden = visibleCount !== 0;
-  }
-}
-
-searchInput?.addEventListener("input", filterNotes);
-
-function selectTag(tag) {
-  selectedTag = selectedTag.toLowerCase() === tag.toLowerCase() ? "" : tag;
-  filterNotes();
-}
-
-document.querySelectorAll(".tagBadge, .noteTag").forEach((button) => {
-  button.addEventListener("click", () => {
-    selectTag(button.dataset.tag);
-  });
-});
-
-clearTagFilterBtn?.addEventListener("click", () => {
-  selectedTag = "";
-  filterNotes();
-});
-
-document.querySelectorAll(".pinnedNoteLink").forEach((button) => {
-  button.addEventListener("click", () => {
-    const card = document.querySelector(
-      `[data-note-id="${button.dataset.targetNote}"]`
-    );
-
-    if (card) {
-      card.scrollIntoView({ behavior: "smooth", block: "center" });
-      card.classList.add("highlightNote");
-
-      setTimeout(() => {
-        card.classList.remove("highlightNote");
-      }, 1200);
+    function getNoteCards() {
+      return [...document.querySelectorAll(".noteCard")];
     }
-  });
-});
 
-// Delete note modal
-const deleteNoteModal = document.querySelector("#deleteNoteModal");
-const deleteNoteModalMessage = document.querySelector("#deleteNoteModalMessage");
-const cancelDeleteNote = document.querySelector("#cancelDeleteNote");
-const confirmDeleteNote = document.querySelector("#confirmDeleteNote");
+    function filterNotes() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
 
-let noteToDelete = null;
+      getNoteCards().forEach((card) => {
+        const matchesSearch =
+          card.dataset.title.includes(searchTerm) ||
+          card.dataset.content.includes(searchTerm) ||
+          card.dataset.tags.includes(searchTerm);
 
-cancelDeleteNote.addEventListener("click", () => {
-  deleteNoteModal.hidden = true;
-  noteToDelete = null;
-});
+        const tags = card.dataset.tags
+          .split(" ")
+          .filter(Boolean);
 
-deleteNoteModal.addEventListener("click", (event) => {
-  if (event.target === deleteNoteModal) {
-    deleteNoteModal.hidden = true;
-    noteToDelete = null;
-  }
-});
+        const matchesTag = !selectedTag || tags.includes(selectedTag.toLowerCase());
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !deleteNoteModal.hidden) {
-    deleteNoteModal.hidden = true;
-    noteToDelete = null;
-  }
-});
+        const visible = matchesSearch && matchesTag;
+        card.hidden = !visible;
 
-confirmDeleteNote.addEventListener("click", async () => {
-  if (!noteToDelete) return;
+        if (visible) visibleCount++;
+      });
 
-  const { noteId, deleteButton } = noteToDelete;
+      clearTagFilterBtn.hidden = !selectedTag;
+      activeTagLabel.hidden = !selectedTag;
+      activeTagLabel.textContent = selectedTag ?
+        `Showing notes tagged #${selectedTag}` :
+        "";
 
-  confirmDeleteNote.disabled = true;
-confirmDeleteNote.innerHTML = `
+      document.querySelectorAll(".tagBadge").forEach((button) => {
+        button.classList.toggle(
+          "selected",
+          button.dataset.tag.toLowerCase() === selectedTag.toLowerCase() &&
+          selectedTag !== ""
+        );
+      });
+
+      if (noSearchResults) {
+        noSearchResults.hidden = visibleCount !== 0;
+      }
+    }
+
+    searchInput?.addEventListener("input", filterNotes);
+
+    function selectTag(tag) {
+      selectedTag = selectedTag.toLowerCase() === tag.toLowerCase() ? "" : tag;
+      filterNotes();
+    }
+
+    document.querySelectorAll(".tagBadge, .noteTag").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectTag(button.dataset.tag);
+      });
+    });
+
+    clearTagFilterBtn?.addEventListener("click", () => {
+      selectedTag = "";
+      filterNotes();
+    });
+
+    document.querySelectorAll(".pinnedNoteLink").forEach((button) => {
+      button.addEventListener("click", () => {
+        const card = document.querySelector(
+          `[data-note-id="${button.dataset.targetNote}"]`
+        );
+
+        if (card) {
+          card.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+          card.classList.add("highlightNote");
+
+          setTimeout(() => {
+            card.classList.remove("highlightNote");
+          }, 1200);
+        }
+      });
+    });
+
+    // Delete note modal
+    const deleteNoteModal = document.querySelector("#deleteNoteModal");
+    const deleteNoteModalMessage = document.querySelector("#deleteNoteModalMessage");
+    const cancelDeleteNote = document.querySelector("#cancelDeleteNote");
+    const confirmDeleteNote = document.querySelector("#confirmDeleteNote");
+
+    let noteToDelete = null;
+
+    cancelDeleteNote.addEventListener("click", () => {
+      deleteNoteModal.hidden = true;
+      noteToDelete = null;
+    });
+
+    deleteNoteModal.addEventListener("click", (event) => {
+      if (event.target === deleteNoteModal) {
+        deleteNoteModal.hidden = true;
+        noteToDelete = null;
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !deleteNoteModal.hidden) {
+        deleteNoteModal.hidden = true;
+        noteToDelete = null;
+      }
+    });
+
+    confirmDeleteNote.addEventListener("click", async () => {
+      if (!noteToDelete) return;
+
+      const {
+        noteId,
+        deleteButton
+      } = noteToDelete;
+
+      confirmDeleteNote.disabled = true;
+      confirmDeleteNote.innerHTML = `
   <span class="loadingSpinner"></span>
   Deleting...
 `;
 
-  try {
-    const response = await fetch(`/notes/${noteId}`, {
-      method: "DELETE",
-      headers: { Accept: "application/json" },
+      try {
+        const response = await fetch(`/notes/${noteId}`, {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json"
+          },
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Could not delete the note.");
+        }
+
+        deleteNoteModal.hidden = true;
+        noteToDelete = null;
+
+        window.location.reload();
+
+      } catch (error) {
+        showToast(error.message, true);
+        deleteButton.disabled = false;
+
+      } finally {
+        confirmDeleteNote.disabled = false;
+        confirmDeleteNote.textContent = "Yes, Delete";
+      }
     });
+    notesList?.addEventListener("click", async (event) => {
+      const deleteButton = event.target.closest(".deleteNoteBtn");
+      const pinButton = event.target.closest(".pinNoteBtn");
+      const tagButton = event.target.closest(".noteTag");
 
-    const result = await response.json();
+      const card = event.target.closest(".noteCard");
+      if (!card) return;
 
-    if (!response.ok) {
-      throw new Error(result.message || "Could not delete the note.");
-    }
+      // Clicking a tag should only filter notes.
+      if (tagButton) return;
 
-    deleteNoteModal.hidden = true;
-    noteToDelete = null;
+      // Clicking anywhere else on the note opens its editor.
+      if (!deleteButton && !pinButton) {
+        window.location.href = card.dataset.editUrl;
+        return;
+      }
 
-    window.location.reload();
+      const noteId = card.dataset.noteId;
 
-  } catch (error) {
-    alert(error.message);
-    deleteButton.disabled = false;
+      if (deleteButton) {
+        const noteTitle = card.querySelector(".noteTitleArea h2").textContent.trim();
 
-  } finally {
-    confirmDeleteNote.disabled = false;
-    confirmDeleteNote.textContent = "Yes, Delete";
-  }
-});
-notesList?.addEventListener("click", async (event) => {
-  const deleteButton = event.target.closest(".deleteNoteBtn");
-  const pinButton = event.target.closest(".pinNoteBtn");
-  const tagButton = event.target.closest(".noteTag");
+        noteToDelete = {
+          noteId,
+          deleteButton
+        };
 
-  const card = event.target.closest(".noteCard");
-  if (!card) return;
+        deleteNoteModalMessage.textContent =
+          `Are you sure you want to permanently delete "${noteTitle}"?`;
 
-  // Clicking a tag should only filter notes.
-  if (tagButton) return;
+        deleteNoteModal.hidden = false;
 
-  // Clicking anywhere else on the note opens its editor.
-  if (!deleteButton && !pinButton) {
-    window.location.href = card.dataset.editUrl;
-    return;
-  }
+        cancelDeleteNote.focus();
 
-  const noteId = card.dataset.noteId;
+        return;
+      }
 
-  if (deleteButton) {
-  const noteTitle = card.querySelector(".noteTitleArea h2").textContent.trim();
+      if (pinButton) {
+        const originalHTML = pinButton.innerHTML;
 
-  noteToDelete = {
-    noteId,
-    deleteButton
-  };
-
-  deleteNoteModalMessage.textContent =
-    `Are you sure you want to permanently delete "${noteTitle}"?`;
-
-  deleteNoteModal.hidden = false;
-
-  cancelDeleteNote.focus();
-
-  return;
-}
-
-  if (pinButton) {
-  const originalHTML = pinButton.innerHTML;
-
-  pinButton.disabled = true;
-  pinButton.innerHTML = `
+        pinButton.disabled = true;
+        pinButton.innerHTML = `
     <span class="loadingSpinner"></span>
   `;
 
-  try {
-      const response = await fetch(`/notes/${noteId}/pin`, {
-        method: "PATCH",
-        headers: { Accept: "application/json" },
-      });
+        try {
+          const response = await fetch(`/notes/${noteId}/pin`, {
+            method: "PATCH",
+            headers: {
+              Accept: "application/json"
+            },
+          });
 
-      const result = await response.json();
+          const result = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result.message || "Could not update the pin.");
+          if (!response.ok) {
+            throw new Error(result.message || "Could not update the pin.");
+          }
+
+          window.location.reload();
+        } catch (error) {
+          showToast(error.message, true);
+          pinButton.disabled = false;
+          pinButton.innerHTML = originalHTML;
+        }
       }
-
-      window.location.reload();
-    } catch (error) {
-  alert(error.message);
-  pinButton.disabled = false;
-  pinButton.innerHTML = originalHTML;
-}
-  }
-});
-
-
-
-// Existing logout route uses DELETE /logout.
-document.querySelector("#logoutBtn")?.addEventListener("click", async () => {
-  try {
-    const response = await fetch("/logout", {
-      method: "DELETE",
-      headers: { Accept: "text/html" },
     });
 
-    if (response.ok || response.redirected) {
-      window.location.href = "/";
-    } else {
-      alert("Could not log out. Please try again.");
-    }
-  } catch {
-    alert("Could not log out. Check your connection and try again.");
-  }
-});
-
-filterNotes();
-</script>
+    filterNotes();
+  </script>
 </body>
+
 </html>

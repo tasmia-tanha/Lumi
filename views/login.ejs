@@ -1,35 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-    <link rel="stylesheet" href="../stylesheet/login.css" />
-    <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="../stylesheet/login.css" />
+  <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+</head>
 
 <body>
   <main class="loginPage">
-    <img
-      id="background"
-      src="../images/Cozy Pastel Study Nook.png"
-      alt=""
-    />
+    <img id="background" src="../images/Cozy Pastel Study Nook.png" alt="" />
 
     <section class="formPanel">
       <div class="loginCard">
-        <img
-          id="logo"
-          src="../images/Lumi Capybara Study Planner.png"
-          alt="Lumi"
-        />
+        <img id="logo" src="../images/Lumi Capybara Study Planner.png" alt="Lumi" />
 
         <p class="welcomeLabel">WELCOME BACK</p>
         <h2>Let's get cozy.</h2>
@@ -37,29 +26,15 @@
 
         <form id="loginForm" action="/" method="POST" novalidate>
           <label for="username">Username or email</label>
-          <input
-            id="username"
-            type="text"
-            placeholder="Enter your username or email"
-            name="username"
-            value="<%= data.username %>"
-            spellcheck="false"
-            required
-          />
+          <input id="username" type="text" placeholder="Enter your username or email" name="username" value="<%= data.username %>" spellcheck="false" required />
 
           <label for="key">Password</label>
-          <input
-            id="key"
-            type="password"
-            placeholder="Enter your password"
-            name="password"
-            required
-          />
+          <input id="key" type="password" placeholder="Enter your password" name="password" required />
 
           <% if (errors && errors.common) { %>
-            <p class="error visible"><%= errors.common.msg %></p>
+          <p class="error visible"><%= errors.common.msg %></p>
           <% } else { %>
-            <p class="error"></p>
+          <p class="error"></p>
           <% } %>
 
           <button id="loginBtn" type="submit">
@@ -79,19 +54,19 @@
     </section>
   </main>
   <script>
-  const loginForm = document.getElementById("loginForm");
-  const loginBtn = document.getElementById("loginBtn");
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
 
-  loginForm.addEventListener("submit", () => {
-    if (!loginForm.checkValidity()) return;
+    loginForm.addEventListener("submit", () => {
+      if (!loginForm.checkValidity()) return;
 
-    loginBtn.disabled = true;
-    loginBtn.innerHTML = `
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = `
       <span class="loadingSpinner"></span>
       Logging in...
     `;
-  });
-</script>
+    });
+  </script>
 </body>
 
 </html>

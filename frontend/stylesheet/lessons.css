@@ -1234,10 +1234,10 @@ body {
 }
 
 .contentGrid {
-  flex: none;
+  flex: 0 0 auto;
   min-height: 0;
   overflow: visible;
-  align-items: start;
+  align-items: stretch;
 }
 
 .lessonsPanel,
@@ -1292,18 +1292,23 @@ body {
 
 .lessonList,
 .materialList {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 8px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #b8cfb3 #f4f3e9;
 }
 
 /* 1440 × 900 */
 @media (min-width: 1200px) and (max-width: 1599px) {
   .lessonsPanel,
   .materialsPanel {
-    height: 570px;
+    height: 480px;
   }
 }
 
@@ -1311,7 +1316,7 @@ body {
 @media (min-width: 1600px) {
   .lessonsPanel,
   .materialsPanel {
-    height: 850px;
+    height: 620px;
   }
 }
 
@@ -1594,4 +1599,106 @@ body,
 
 .lessonItem.is-updating {
   opacity: 0.65;
+}
+
+
+@media (max-width: 760px) {
+  .contentGrid {
+    height: clamp(420px, 58dvh, 520px);
+    min-height: 0;
+    flex: 0 0 auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 0.8fr);
+    overflow: hidden;
+    align-items: stretch;
+  }
+
+  .lessonsPanel,
+  .materialsPanel {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+
+/* Skeleton Loading */
+.listSkeleton {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 4px;
+}
+
+.skeletonItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8f7f0;
+}
+
+.skeletonCircle,
+.skeletonLine {
+  position: relative;
+  overflow: hidden;
+  background: #e8e9df;
+}
+
+.skeletonCircle {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.skeletonText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.skeletonLine {
+  height: 12px;
+  border-radius: 6px;
+}
+
+.skeletonLineLong {
+  width: 75%;
+}
+
+.skeletonLineShort {
+  width: 45%;
+}
+
+.skeletonCircle::after,
+.skeletonLine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  animation: skeletonShimmer 1.4s infinite;
+}
+
+@keyframes skeletonShimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+#lessonList.is-loading .listSkeleton,
+#materialList.is-loading .listSkeleton {
+  display: flex;
+}
+
+#lessonList.is-loading > :not(.listSkeleton),
+#materialList.is-loading > :not(.listSkeleton) {
+  display: none;
 }

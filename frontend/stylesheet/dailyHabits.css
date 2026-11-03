@@ -1522,3 +1522,66 @@ body,
 .habitTable td.is-updating {
   opacity: 0.5;
 }
+
+
+/* Daily habits statistics skeleton loading */
+.habitStatSkeleton {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 6px;
+  background: rgba(132, 162, 130, 0.2);
+}
+
+.habitStatSkeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  animation: habitStatShimmer 1.4s infinite;
+}
+
+@keyframes habitStatShimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.skeletonStreak {
+  width: 35px;
+  height: 27px;
+}
+
+.skeletonBestStreak {
+  width: 55px;
+  height: 16px;
+}
+
+.skeletonProgressNumber {
+  width: 45px;
+  height: 25px;
+}
+
+.skeletonMonthlyNumber {
+  width: 48px;
+  height: 27px;
+}
+
+.skeletonProgressCircle {
+  background: conic-gradient(
+    #dbe6d8 0%,
+    #dbe6d8 100%
+  );
+}
+
+.skeletonProgressBar {
+  width: 100%;
+  height: 8px;
+  border-radius: 20px;
+}

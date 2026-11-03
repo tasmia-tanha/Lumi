@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= title %></title>
   <link rel="stylesheet" href="/stylesheet/dashboard.css" />
-  
+
   <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,6 +14,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
+
 <body>
   <div class="main">
     <aside class="sidebar">
@@ -42,104 +44,139 @@
 
       <section class="date panel" aria-labelledby="deadLineHead">
         <div class="sectionHeading">
-          <div><p class="eyebrow">COMING UP</p><h2 id="deadLineHead">Deadlines</h2></div>
+          <div>
+            <p class="eyebrow">COMING UP</p>
+            <h2 id="deadLineHead">Deadlines</h2>
+          </div>
           <span class="headingIcon" aria-hidden="true">📅</span>
         </div>
         <p class="sectionDescription" id="deadlineCount">Within the next 7 days</p>
         <ul class="listDeadLine" id="deadlineList">
-            <li class="deadlineLoading">Loading deadlines... 🌱</li>
+          <% for (let i = 0; i < 4; i++) { %>
+          <li class="deadlineSkeleton">
+            <div class="skeleton skeletonDeadlineName"></div>
+            <div class="skeleton skeletonDeadlineBadge"></div>
+          </li>
+          <% } %>
         </ul>
         <a class="textLink" href="/calendar">View all deadlines<span aria-hidden="true">→</span></a>
       </section>
 
       <section class="tasks panel" aria-labelledby="taskHeader">
         <div class="sectionHeading">
-          <div><h2 id="taskHeader">My tasks</h2></div>
+          <div>
+            <h2 id="taskHeader">My tasks</h2>
+          </div>
           <span class="headingIcon" aria-hidden="true">🌱</span>
         </div>
         <p id="taskCount" class="sectionDescription" data-count="<%= activeTasks.length %>"><%= activeTasks.length %> tasks remaining</p>
         <ul class="taskList">
-  <% if (activeTasks.length === 0) { %>
-    <li class="emptyTasks">
-      🌸 No active tasks. Time to relax!
-    </li>
-  <% } else { %>
-    <% fourActiveTasks.forEach((task) => { %>
-      <li class="todo" data-task-id="<%= task._id %>">
-        <input
-          type="checkbox"
-          class="taskCheckbox"
-          data-task-id="<%= task._id %>"
-          aria-label="Complete <%= task.title %>"
-        />
-        <span class="taskName"><%= task.title %></span>
-        <span class="priority <%= task.priority %>"><%= task.priority %></span>
-      </li>
-    <% }) %>
-  <% } %>
-</ul>
+          <% if (activeTasks.length === 0) { %>
+          <li class="emptyTasks">
+            🌸 No active tasks. Time to relax!
+          </li>
+          <% } else { %>
+          <% fourActiveTasks.forEach((task) => { %>
+          <li class="todo" data-task-id="<%= task._id %>">
+            <input type="checkbox" class="taskCheckbox" data-task-id="<%= task._id %>" aria-label="Complete <%= task.title %>" />
+            <span class="taskName"><%= task.title %></span>
+            <span class="priority <%= task.priority %>"><%= task.priority %></span>
+          </li>
+          <% }) %>
+          <% } %>
+        </ul>
         <a class="textLink taskLink" id="viewAllTasks" href="/task">View all tasks <span aria-hidden="true">→</span></a>
       </section>
 
       <section class="analytics panel" aria-labelledby="studyTimeHeading">
-  <div class="sectionHeading">
-    <div>
-      <h2 id="studyTimeHeading">Studied time this week</h2>
-    </div>
-    <span class="headingIcon" aria-hidden="true">⏳</span>
-  </div>
+        <div class="sectionHeading">
+          <div>
+            <h2 id="studyTimeHeading">Studied time this week</h2>
+          </div>
+          <span class="headingIcon" aria-hidden="true">⏳</span>
+        </div>
 
-  <div class="studyTimeSummary">
-    <div>
-      <strong class="studyTimeValue" id="weeklyStudyTotal">0h 0m</strong>
-      <span class="sectionDescription">Focused time this week</span>
-    </div>
-    <span class="studyTimeCaption">Keep going at your own pace</span>
-  </div>
+        <div class="studyTimeSummary">
+          <div>
+            <strong class="studyTimeValue" id="weeklyStudyTotal">
+              <span class="skeleton skeletonStudyTotal"></span>
+            </strong>
+            <span class="sectionDescription">Focused time this week</span>
+          </div>
+          <span class="studyTimeCaption">Keep going at your own pace</span>
+        </div>
 
-  <div class="weeklyChart" id="weeklyStudyChart">
-    <div class="weeklyBar">
-      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="0"></div></div>
-      <span>Sun</span>
-    </div>
-    <div class="weeklyBar">
-      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="1"></div></div>
-      <span>Mon</span>
-    </div>
-    <div class="weeklyBar">
-      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="2"></div></div>
-      <span>Tue</span>
-    </div>
-    <div class="weeklyBar">
-      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="3"></div></div>
-      <span>Wed</span>
-    </div>
-    <div class="weeklyBar">
-      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="4"></div></div>
-      <span>Thu</span>
-    </div>
-    <div class="weeklyBar">
-      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="5"></div></div>
-      <span>Fri</span>
-    </div>
-    <div class="weeklyBar">
-      <div class="weeklyBarTrack"><span class="barTooltip"></span><div class="weeklyBarFill" data-day="6"></div></div>
-      <span>Sat</span>
-    </div>
-  </div>
+        <div class="weeklyChart is-loading" id="weeklyStudyChart">
+          <div class="weeklyBar">
+            <div class="weeklyBarTrack"><span class="barTooltip"></span>
+              <div class="skeletonBar" style="height: 35%;"></div>
+              <div class="weeklyBarFill" data-day="0"></div>
+            </div>
+            <span>Sun</span>
+          </div>
+          <div class="weeklyBar">
+            <div class="weeklyBarTrack"><span class="barTooltip"></span>
+              <div class="skeletonBar" style="height: 65%;"></div>
+              <div class="weeklyBarFill" data-day="1"></div>
+            </div>
+            <span>Mon</span>
+          </div>
+          <div class="weeklyBar">
+            <div class="weeklyBarTrack"><span class="barTooltip"></span>
+              <div class="skeletonBar" style="height: 45%;"></div>
+              <div class="weeklyBarFill" data-day="2"></div>
+            </div>
+            <span>Tue</span>
+          </div>
+          <div class="weeklyBar">
+            <div class="weeklyBarTrack"><span class="barTooltip"></span>
+              <div class="skeletonBar" style="height: 80%;"></div>
+              <div class="weeklyBarFill" data-day="3"></div>
+            </div>
+            <span>Wed</span>
+          </div>
+          <div class="weeklyBar">
+            <div class="weeklyBarTrack"><span class="barTooltip"></span>
+              <div class="skeletonBar" style="height: 55%;"></div>
+              <div class="weeklyBarFill" data-day="4"></div>
+            </div>
+            <span>Thu</span>
+          </div>
+          <div class="weeklyBar">
+            <div class="weeklyBarTrack"><span class="barTooltip"></span>
+              <div class="skeletonBar" style="height: 70%;"></div>
+              <div class="weeklyBarFill" data-day="5"></div>
+            </div>
+            <span>Fri</span>
+          </div>
+          <div class="weeklyBar">
+            <div class="weeklyBarTrack"><span class="barTooltip"></span>
+              <div class="skeletonBar" style="height: 40%;"></div>
+              <div class="weeklyBarFill" data-day="6"></div>
+            </div>
+            <span>Sat</span>
+          </div>
+        </div>
 
-  <div class="capybaraNote">
-    
-    <p>Little by little, your effort adds up. 🌷</p>
-  </div>
-</section>
+        <div class="capybaraNote">
+
+          <p>Little by little, your effort adds up. 🌷</p>
+        </div>
+      </section>
     </main>
   </div>
   <script>
     function showToast(message, isError = false) {
       if (window.Toastify) {
-        Toastify({ text: message, duration: 3000, gravity: "top", position: "right",
-          style: { background: isError ? "#b85f73" : "#84a282" } }).showToast();
+        Toastify({
+          text: message,
+          duration: 3000,
+          gravity: "top",
+          position: "right",
+          style: {
+            background: isError ? "#b85f73" : "#84a282"
+          }
+        }).showToast();
       } else {
         console.error(message);
       }
@@ -147,10 +184,14 @@
 
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       try {
-        const response = await fetch("/logout", { method: "DELETE" });
+        const response = await fetch("/logout", {
+          method: "DELETE"
+        });
         if (!response.ok) throw new Error("Could not log out. Please try again.");
         window.location.href = "/";
-      } catch (error) { showToast(error.message, true); }
+      } catch (error) {
+        showToast(error.message, true);
+      }
     });
 
     document.querySelector(".taskList").addEventListener("change", async (event) => {
@@ -159,11 +200,16 @@
       const taskId = checkbox.dataset.taskId;
       const taskItem = checkbox.closest(".todo");
       checkbox.disabled = true;
-taskItem.classList.add("is-updating");
+      taskItem.classList.add("is-updating");
       try {
         const response = await fetch(`/task/${taskId}`, {
-          method: "PATCH", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ completed: checkbox.checked })
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            completed: checkbox.checked
+          })
         });
         if (!response.ok) throw new Error("Failed to update task");
         taskItem.remove();
@@ -172,56 +218,56 @@ taskItem.classList.add("is-updating");
         const nextTask = activeTasks.find(task => !displayedIds.includes(task._id.toString()));
         const taskList = document.querySelector(".taskList");
 
-if (nextTask) {
-  const li = document.createElement("li");
-  li.className = "todo";
-  li.dataset.taskId = nextTask._id;
+        if (nextTask) {
+          const li = document.createElement("li");
+          li.className = "todo";
+          li.dataset.taskId = nextTask._id;
 
-  const input = document.createElement("input");
-  input.type = "checkbox";
-  input.className = "taskCheckbox";
-  input.dataset.taskId = nextTask._id;
-  input.setAttribute("aria-label", `Complete ${nextTask.title}`);
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.className = "taskCheckbox";
+          input.dataset.taskId = nextTask._id;
+          input.setAttribute("aria-label", `Complete ${nextTask.title}`);
 
-  const title = document.createElement("span");
-  title.className = "taskName";
-  title.textContent = nextTask.title;
+          const title = document.createElement("span");
+          title.className = "taskName";
+          title.textContent = nextTask.title;
 
-  const priority = document.createElement("span");
-  priority.className = `priority ${nextTask.priority}`;
-  priority.textContent = nextTask.priority;
+          const priority = document.createElement("span");
+          priority.className = `priority ${nextTask.priority}`;
+          priority.textContent = nextTask.priority;
 
-  li.append(input, title, priority);
+          li.append(input, title, priority);
 
-  taskList.appendChild(li);
-}
+          taskList.appendChild(li);
+        }
 
-// Show empty message when no tasks remain
-const emptyText = taskList.querySelector(".emptyTasks");
+        // Show empty message when no tasks remain
+        const emptyText = taskList.querySelector(".emptyTasks");
 
-if (taskList.querySelectorAll(".todo").length === 0) {
-  if (!emptyText) {
-    const message = document.createElement("li");
-    message.className = "emptyTasks";
-    message.textContent = "🌸 No active tasks. Time to relax!";
-    taskList.appendChild(message);
-  }
-} else if (emptyText) {
-  emptyText.remove();
-}
+        if (taskList.querySelectorAll(".todo").length === 0) {
+          if (!emptyText) {
+            const message = document.createElement("li");
+            message.className = "emptyTasks";
+            message.textContent = "🌸 No active tasks. Time to relax!";
+            taskList.appendChild(message);
+          }
+        } else if (emptyText) {
+          emptyText.remove();
+        }
         const taskCount = document.querySelector("#taskCount");
         const remaining = Math.max(0, Number(taskCount.dataset.count) - 1);
         taskCount.dataset.count = remaining;
         taskCount.textContent = `${remaining} tasks remaining`;
-        
+
       } catch (error) {
-  checkbox.checked = !checkbox.checked;
-  showToast("Failed to update task. Please try again.", true);
-  console.error(error);
-} finally {
-  checkbox.disabled = false;
-  taskItem.classList.remove("is-updating");
-}
+        checkbox.checked = !checkbox.checked;
+        showToast("Failed to update task. Please try again.", true);
+        console.error(error);
+      } finally {
+        checkbox.disabled = false;
+        taskItem.classList.remove("is-updating");
+      }
     });
 
     async function loadActiveTasks() {
@@ -230,138 +276,149 @@ if (taskList.querySelectorAll(".todo").length === 0) {
         if (!response.ok) throw new Error("Cannot load the tasks");
         const result = await response.json();
         return result.activeTasks || [];
-      } catch (error) { console.error(error); return []; }
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
     }
     async function loadDashboardDeadlines() {
-  const deadlineList = document.querySelector("#deadlineList");
-  const deadlineCount = document.querySelector("#deadlineCount");
+      const deadlineList = document.querySelector("#deadlineList");
+      const deadlineCount = document.querySelector("#deadlineCount");
 
-  try {
-    const response = await fetch("/calendar/dashboard-deadlines");
+      try {
+        const response = await fetch("/calendar/dashboard-deadlines");
 
-    if (!response.ok) {
-      throw new Error("Could not load deadlines");
-    }
+        if (!response.ok) {
+          throw new Error("Could not load deadlines");
+        }
 
-    const result = await response.json();
-    const deadlines = result.data || [];
-    const totalDeadlines = deadlines.length;
-    const visibleDeadlines = deadlines.slice(0, 4);
+        const result = await response.json();
+        const deadlines = result.data || [];
+        const totalDeadlines = deadlines.length;
+        const visibleDeadlines = deadlines.slice(0, 4);
 
-    deadlineList.replaceChildren();
+        deadlineList.replaceChildren();
 
-    if (deadlines.length === 0) {
-      const emptyMessage = document.createElement("li");
-      emptyMessage.className = "deadlineLoading";
-      emptyMessage.textContent = "🌸 No upcoming deadlines. Enjoy your time!";
-      deadlineList.appendChild(emptyMessage);
-      deadlineCount.textContent = "Nothing due in the next 7 days";
-      return;
-    }
+        if (deadlines.length === 0) {
+          const emptyMessage = document.createElement("li");
+          emptyMessage.className = "deadlineLoading";
+          emptyMessage.textContent = "🌸 No upcoming deadlines. Enjoy your time!";
+          deadlineList.appendChild(emptyMessage);
+          deadlineCount.textContent = "Nothing due in the next 7 days";
+          return;
+        }
 
-    deadlineCount.textContent =
-  `${totalDeadlines} upcoming within the next 7 days`;
+        deadlineCount.textContent =
+          `${totalDeadlines} upcoming within the next 7 days`;
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-    visibleDeadlines.forEach((deadline) => {
-      const deadlineDate = new Date(deadline.date);
-      const daysLeft = Math.round(
-        (Date.UTC(deadlineDate.getFullYear(), deadlineDate.getMonth(), deadlineDate.getDate()) -
-         Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())) /
-        (1000 * 60 * 60 * 24)
-      );
+        visibleDeadlines.forEach((deadline) => {
+          const deadlineDate = new Date(deadline.date);
+          const daysLeft = Math.round(
+            (Date.UTC(deadlineDate.getFullYear(), deadlineDate.getMonth(), deadlineDate.getDate()) -
+              Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())) /
+            (1000 * 60 * 60 * 24)
+          );
 
-      const item = document.createElement("li");
-      item.className = "deadLineItems";
+          const item = document.createElement("li");
+          item.className = "deadLineItems";
 
-      const name = document.createElement("span");
-      name.className = "deadlineName";
-      name.textContent = deadline.title;
+          const name = document.createElement("span");
+          name.className = "deadlineName";
+          name.textContent = deadline.title;
 
-      const badge = document.createElement("span");
-      badge.className = daysLeft <= 2 ? "badge urgent" : "badge";
+          const badge = document.createElement("span");
+          badge.className = daysLeft <= 2 ? "badge urgent" : "badge";
 
-      if (daysLeft === 0) {
-        badge.textContent = "Today";
-      } else if (daysLeft === 1) {
-        badge.textContent = "Tomorrow";
-      } else {
-        badge.textContent = `${daysLeft} days`;
+          if (daysLeft === 0) {
+            badge.textContent = "Today";
+          } else if (daysLeft === 1) {
+            badge.textContent = "Tomorrow";
+          } else {
+            badge.textContent = `${daysLeft} days`;
+          }
+
+          item.append(name, badge);
+          deadlineList.appendChild(item);
+        });
+      } catch (error) {
+        console.error("Failed to load dashboard deadlines:", error);
+
+        deadlineList.replaceChildren();
+
+        const errorMessage = document.createElement("li");
+        errorMessage.className = "deadlineLoading";
+        errorMessage.textContent = "Couldn't load deadlines. Please try again.";
+        deadlineList.appendChild(errorMessage);
       }
-
-      item.append(name, badge);
-      deadlineList.appendChild(item);
-    });
-  } catch (error) {
-    console.error("Failed to load dashboard deadlines:", error);
-
-    deadlineList.replaceChildren();
-
-    const errorMessage = document.createElement("li");
-    errorMessage.className = "deadlineLoading";
-    errorMessage.textContent = "Couldn't load deadlines. Please try again.";
-    deadlineList.appendChild(errorMessage);
-  }
-}
-async function loadWeeklyStudyTime() {
-  const totalElement = document.querySelector("#weeklyStudyTotal");
-  const bars = document.querySelectorAll(".weeklyBarFill");
-
-  try {
-    const response = await fetch("/focusSession/weekly");
-
-    if (!response.ok) {
-      throw new Error("Failed to load weekly study time");
     }
 
-    const data = await response.json();
-    const dailyTotals = data.dailyTotals;
-    const totalMinutes = Math.floor(data.totalMilliseconds / 60000);
+    async function loadWeeklyStudyTime() {
+      const totalElement = document.querySelector("#weeklyStudyTotal");
+      const chart = document.querySelector("#weeklyStudyChart");
+      const bars = document.querySelectorAll(".weeklyBarFill");
 
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
+      try {
+        const response = await fetch("/focusSession/weekly");
 
-    totalElement.textContent = `${hours}h ${minutes}m`;
+        if (!response.ok) {
+          throw new Error("Failed to load weekly study time");
+        }
 
-    const dailyScale = 4 * 60 * 60 * 1000; // 4 hours
+        const data = await response.json();
+        const dailyTotals = data.dailyTotals;
+        const totalMinutes = Math.floor(data.totalMilliseconds / 60000);
 
-bars.forEach((bar) => {
-  const dayIndex = Number(bar.dataset.day);
-  const duration = dailyTotals[dayIndex];
-  const tooltip = bar.parentElement.querySelector(".barTooltip");
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
 
-const totalMinutes = Math.floor(duration / 60000);
-const hours = Math.floor(totalMinutes / 60);
-const minutes = totalMinutes % 60;
+        // Replace the total skeleton with the actual study time
+        totalElement.textContent = `${hours}h ${minutes}m`;
 
-tooltip.textContent = `${hours}h ${minutes}m`;
+        const dailyScale = 4 * 60 * 60 * 1000; // 4 hours
 
-  const height = Math.min(
-    (duration / dailyScale) * 100,
-    100
-  );
+        bars.forEach((bar) => {
+          const dayIndex = Number(bar.dataset.day);
+          const duration = dailyTotals[dayIndex] || 0;
+          const tooltip = bar.parentElement.querySelector(".barTooltip");
 
-  bar.style.height = `${height}%`;
+          const dayMinutes = Math.floor(duration / 60000);
+          const dayHours = Math.floor(dayMinutes / 60);
+          const remainingMinutes = dayMinutes % 60;
 
-      
-      bar.classList.toggle(
-        "today",
-        dayIndex === new Date(
-          Date.now() + 6 * 60 * 60 * 1000
-        ).getUTCDay()
-      );
-    });
-  } catch (error) {
-    console.error("Failed to load weekly study time:", error);
-    totalElement.textContent = "Unavailable";
-  }
-}
+          tooltip.textContent = `${dayHours}h ${remainingMinutes}m`;
 
-loadWeeklyStudyTime();
+          const height = Math.min(
+            (duration / dailyScale) * 100,
+            100
+          );
 
-loadDashboardDeadlines();
+          bar.style.height = `${height}%`;
+
+          bar.classList.toggle(
+            "today",
+            dayIndex === new Date(
+              Date.now() + 6 * 60 * 60 * 1000
+            ).getUTCDay()
+          );
+        });
+
+      } catch (error) {
+        console.error("Failed to load weekly study time:", error);
+        totalElement.textContent = "Unavailable";
+
+      } finally {
+        // Remove chart skeletons whether loading succeeds or fails
+        chart.classList.remove("is-loading");
+      }
+    }
+
+    loadWeeklyStudyTime();
+
+    loadDashboardDeadlines();
   </script>
 </body>
+
 </html>

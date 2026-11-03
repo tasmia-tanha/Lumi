@@ -990,3 +990,119 @@ body,
 .todo.is-updating {
   opacity: 0.6;
 }
+
+
+
+
+
+/* Skeleton loading */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(132, 162, 130, 0.18);
+  border-radius: 8px;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  animation: skeletonShimmer 1.4s infinite;
+}
+
+@keyframes skeletonShimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Deadline skeletons */
+.deadlineSkeleton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  min-height: 76px;
+  padding: 12px;
+  border: 1px solid rgba(88, 123, 89, 0.15);
+  border-radius: 12px;
+  background: rgba(254, 250, 243, 0.65);
+}
+
+.skeletonDeadlineName {
+  width: 75%;
+  height: 13px;
+}
+
+.skeletonDeadlineBadge {
+  width: 55px;
+  height: 19px;
+  border-radius: 20px;
+}
+
+/* Weekly study summary skeleton */
+.skeletonStudyTotal {
+  width: 105px;
+  height: 34px;
+  border-radius: 8px;
+}
+
+/* Weekly chart skeleton */
+.skeletonBar {
+  width: 100%;
+  border-radius: 7px;
+  background: rgba(132, 162, 130, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeletonBar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  animation: skeletonShimmer 1.4s infinite;
+}
+
+/* Keep the chart skeleton responsive */
+.weeklyChart.is-loading .weeklyBarTrack {
+  background: transparent;
+}
+
+.weeklyChart.is-loading .weeklyBarFill {
+  display: none;
+}
+
+.weeklyChart.is-loading .skeletonBar {
+  display: block;
+}
+
+.weeklyChart .skeletonBar {
+  display: none;
+}
+
+@media (max-width: 420px) {
+  .deadlineSkeleton {
+    min-height: 72px;
+    padding: 10px;
+  }
+
+  .skeletonStudyTotal {
+    width: 95px;
+    height: 30px;
+  }
+}
