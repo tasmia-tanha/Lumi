@@ -6,6 +6,7 @@ const subjectSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      maxlength:20,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

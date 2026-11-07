@@ -1,31 +1,27 @@
-import { check, validationResult } from "express-validator"
-export const loginValidation=[
-    check("username")
+import { check, validationResult } from "express-validator";
+export const loginValidation = [
+  check("username")
     .trim()
-    .isLength({
-        min:1
-    })
-    .withMessage("Name or email is required!"),
+    .isEmail()
+    .withMessage("Please enter a valid email address."),
 
-    check("password")
-    .trim()
-    .isLength({min:1})
-    .withMessage("Password is required")
+  check("password")
+    .isLength({ min: 1 })
+    .withMessage("Password is required"),
+];
 
-]
+export const loginValidatorHandler = function (req, res, next) {
+  const errors = validationResult(req);
+  const mappedErrors = errors.mapped();
 
-export const loginValidatorHandler=function (req,res,next){
-    const errors=validationResult(req);
-    const mappedErrors=errors.mapped();
-
-    if(Object.keys(mappedErrors).length===0){
-        next();
-    }else{
-        res.render("login",{
-            data:{
-                username:req.body.username
-            },
-            errors:mappedErrors
-        })
-    }
-}
+  if (Object.keys(mappedErrors).length === 0) {
+    next();
+  } else {
+    res.render("login", {
+      data: {
+        username: req.body.username,
+      },
+      errors: mappedErrors,
+    });
+  }
+};

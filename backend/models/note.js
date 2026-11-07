@@ -12,10 +12,15 @@ const noteSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      maxlength: 20000,
     },
     tags: {
       type: [String],
       default: [],
+      validate: {
+    validator: (tags) => tags.length <= 10,
+    message: "A note can have a maximum of 10 tags.",
+  },
     },
     pinned: {
       type: Boolean,

@@ -13,8 +13,7 @@ export async function addTasks(req, res, next) {
 
     res.redirect("/task");
   } catch (error) {
-        console.log(error.message);
-        return res.status(500).send("Internal Sever Error");
+        next(error);
   }
 }
 

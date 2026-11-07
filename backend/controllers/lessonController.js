@@ -245,36 +245,56 @@ function escapeRegex(value) {
 
 
 
-export async function deleteLesson(req, res) {
+export async function deleteLesson(req, res, next) {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid lesson ID.",
+      });
+    }
+
     const deleted = await Lesson.findOneAndDelete({
       _id: req.params.id,
       user: req.user._id,
     });
 
     if (!deleted) {
-      return res.status(404).json({ message: "Lesson not found" });
+      return res.status(404).json({
+        message: "Lesson not found",
+      });
     }
 
-    res.json({ message: "Lesson deleted successfully" });
+    res.json({
+      message: "Lesson deleted successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: "Failed to delete lesson" });
+    next(error);
   }
 }
 
-export async function deleteCourseMaterial(req, res) {
+export async function deleteCourseMaterial(req, res, next) {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid material ID.",
+      });
+    }
+
     const deleted = await CourseMaterial.findOneAndDelete({
       _id: req.params.id,
       user: req.user._id,
     });
 
     if (!deleted) {
-      return res.status(404).json({ message: "Material not found" });
+      return res.status(404).json({
+        message: "Material not found",
+      });
     }
 
-    res.json({ message: "Material deleted successfully" });
+    res.json({
+      message: "Material deleted successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: "Failed to delete material" });
+    next(error);
   }
 }

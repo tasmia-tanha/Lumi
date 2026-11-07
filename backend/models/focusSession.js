@@ -15,6 +15,7 @@ const sessionSchema = new mongoose.Schema(
       type: Number,
       required: true,
       min: 1,
+      max: 86400000,
     },
 
     mode: {

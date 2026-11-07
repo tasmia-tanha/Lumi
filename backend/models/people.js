@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const peopleSchema = new mongoose.Schema(
@@ -14,11 +13,13 @@ const peopleSchema = new mongoose.Schema(
       required: true,
       lowercase: true,
       trim: true,
+      unique:true,
     },
 
     password: {
       type: String,
       required: true,
+      select: false,
     },
 
     dailyGoalMinutes: {
@@ -36,4 +37,3 @@ const peopleSchema = new mongoose.Schema(
 const People = mongoose.model("People", peopleSchema);
 
 export default People;
-

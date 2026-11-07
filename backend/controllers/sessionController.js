@@ -18,9 +18,7 @@ function getTodayBounds() {
 }
 
 function getBangladeshDateKey(date) {
-  return new Date(
-    new Date(date).getTime() + BANGLADESH_OFFSET_MS,
-  )
+  return new Date(new Date(date).getTime() + BANGLADESH_OFFSET_MS)
     .toISOString()
     .slice(0, 10);
 }
@@ -42,16 +40,17 @@ export function getFocusSession(req, res) {
 
 export async function saveFocusSession(req, res, next) {
   try {
-    
     const duration = Number(req.body.duration);
     const allowedModes = ["free", "pomodoro", "deep"];
-    const mode = allowedModes.includes(req.body.mode)
-      ? req.body.mode
-      : "free";
+    const mode = allowedModes.includes(req.body.mode) ? req.body.mode : "free";
 
-    if (!Number.isFinite(duration) || duration < 1000) {
+    if (
+      !Number.isFinite(duration) ||
+      duration < 1000 ||
+      duration > 24 * 60 * 60 * 1000
+    ) {
       return res.status(400).json({
-        message: "Study duration must be at least one second.",
+        message: "Study duration must be between 1 second and 24 hours.",
       });
     }
 
@@ -70,12 +69,10 @@ export async function saveFocusSession(req, res, next) {
   }
 }
 
-
 export async function getTotalStudyTime(req, res, next) {
   try {
     const { start, end } = getTodayBounds();
 
-    
     const user = await People.findById(req.user._id)
       .select("dailyGoalMinutes")
       .lean();
@@ -114,10 +111,7 @@ export async function getTotalStudyTime(req, res, next) {
 
     for (const session of sessions) {
       const day = getBangladeshDateKey(session.createdAt);
-      dailyTotals.set(
-        day,
-        (dailyTotals.get(day) || 0) + session.duration,
-      );
+      dailyTotals.set(day, (dailyTotals.get(day) || 0) + session.duration);
     }
 
     const todayKey = getBangladeshDateKey(new Date());
@@ -153,9 +147,7 @@ export async function getWeeklyStudyTime(req, res, next) {
     const now = new Date();
 
     // Get today's date in Bangladesh time
-    const bdNow = new Date(
-      now.getTime() + BANGLADESH_OFFSET_MS,
-    );
+    const bdNow = new Date(now.getTime() + BANGLADESH_OFFSET_MS);
 
     // Find Sunday at the start of this week
     const daysSinceSunday = bdNow.getUTCDay();
@@ -163,9 +155,7 @@ export async function getWeeklyStudyTime(req, res, next) {
     bdNow.setUTCHours(0, 0, 0, 0);
 
     // Convert Sunday midnight back to UTC
-    const start = new Date(
-      bdNow.getTime() - BANGLADESH_OFFSET_MS,
-    );
+    const start = new Date(bdNow.getTime() - BANGLADESH_OFFSET_MS);
 
     const end = new Date(start.getTime() + 7 * DAY_IN_MS);
 
@@ -225,7 +215,7 @@ export async function updateDailyGoal(req, res, next) {
     const updatedUser = await People.findByIdAndUpdate(
       req.user._id,
       { $set: { dailyGoalMinutes } },
-      { returnDocument:"after", runValidators: true },
+      { returnDocument: "after", runValidators: true },
     );
 
     if (!updatedUser) {

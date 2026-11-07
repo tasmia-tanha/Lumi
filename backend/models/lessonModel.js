@@ -6,6 +6,7 @@ const lessonSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      maxlength:30
     },
     status: {
       type: String,

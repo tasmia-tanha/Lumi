@@ -25,7 +25,7 @@ const habitCheckInSchema = new mongoose.Schema(
 );
 
 habitCheckInSchema.index(
-  { habit: 1, date: 1 },
+  {user:1, habit: 1, date: 1 },
   { unique: true },
 );
 

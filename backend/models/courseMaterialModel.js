@@ -6,6 +6,7 @@ const courseMaterialSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      maxlength:20,
     },
     url: {
       type: String,

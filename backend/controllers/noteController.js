@@ -65,7 +65,9 @@ export async function createNote(req, res, next) {
       ],
       allowedAttributes: {},
     }).trim();
-
+    if (cleanedContent.length > 20000) {
+      return res.status(400).send("Note content is too long.");
+    }
     if (!cleanedTitle || !cleanedContent) {
       return res.status(400).render("newNote", {
         title: "New Note",
@@ -203,7 +205,9 @@ export async function updateNote(req, res, next) {
       ],
       allowedAttributes: {},
     }).trim();
-
+    if (cleanedContent.length > 20000) {
+      return res.status(400).send("Note content is too long.");
+    }
     if (!cleanedTitle || !cleanedContent) {
       return res.status(400).send("Title and content are required.");
     }
@@ -251,13 +255,40 @@ export const autoSaveNote = async (req, res, next) => {
 
     const sanitizedContent = sanitizeHtml(content || "", {
       allowedTags: [
-        "p", "br", "strong", "b", "em", "i", "u", "s",
-        "ul", "ol", "li", "h1", "h2", "h3", "blockquote",
-        "pre", "code", "mark",
+        "p",
+        "br",
+        "strong",
+        "b",
+        "em",
+        "i",
+        "u",
+        "s",
+        "ul",
+        "ol",
+        "li",
+        "h1",
+        "h2",
+        "h3",
+        "blockquote",
+        "pre",
+        "code",
+        "mark",
       ],
       allowedAttributes: {},
     }).trim();
-
+    if (sanitizedContent.length > 20000) {
+      return res.status(400).json({
+        message: "Note content is too long.",
+      });
+    }
+    if (
+      !sanitizedTitle ||
+      !sanitizeHtml(sanitizedContent, { allowedTags: [] }).trim()
+    ) {
+      return res.status(400).json({
+        message: "Note title and content cannot be empty.",
+      });
+    }
     const cleanedTags = [
       ...new Set(
         (Array.isArray(tags) ? tags : (tags || "").split(","))

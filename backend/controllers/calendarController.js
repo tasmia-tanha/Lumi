@@ -1,10 +1,23 @@
  import {calendar} from "../models/calendarEvent.js";
  
+ function isValidDate(date) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+
+  const parsedDate = new Date(`${date}T00:00:00.000Z`);
+
+  return (
+    !Number.isNaN(parsedDate.getTime()) &&
+    parsedDate.toISOString().slice(0, 10) === date
+  );
+}
  export function getCalendar(req,res,next){
     res.render("calendar")
 }
 
 export function getCalendarDate(req, res, next) {
+  if (!isValidDate(req.params.date)) {
+  return res.status(400).send("Invalid date.");
+}
   res.render("calendarDate", {
     date: req.params.date,
   });
@@ -12,6 +25,9 @@ export function getCalendarDate(req, res, next) {
 
 export async function saveCalendarDate(req, res, next) {
   try {
+    if (!isValidDate(req.params.date)) {
+    return res.status(400).json({ message: "Invalid date." });
+}
     const date=req.params.date;
     const {title, pinned, timeEntries } = req.body;
 
@@ -45,6 +61,9 @@ export async function saveCalendarDate(req, res, next) {
 
 export async function getCalendarDateDetails(req, res, next) {
   try {
+    if (!isValidDate(req.params.date)) {
+      return res.status(400).json({ message: "Invalid date." });
+}
     const date = req.params.date;
 
     const calendarDate = await calendar.findOne({

@@ -27,15 +27,25 @@ export async function createUser(req, res, next) {
     });
 
     return res.status(201).json({
-    message: "User registered successfully",
+      message: "User registered successfully",
     });
-
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(409).json({
+        errors: {
+          email: {
+            msg: "This email is already registered.",
+          },
+        },
+      });
+    }
+
     console.error(error);
+
     return res.status(500).json({
       errors: {
         common: {
-          msg: "unknown error occured",
+          msg: "An unexpected error occurred.",
         },
       },
     });
