@@ -195,14 +195,15 @@
     </div>
   </div>
 
+
   <script id="habits-data" type="application/json">
     <%- JSON.stringify(
-              habits.map(habit => ({
-        id: habit._id.toString(),
-        name: habit.name,
-        createdAt: habit.createdAt
-      }))
-            ) %>
+    habits.map(habit => ({
+      id: habit._id.toString(),
+      name: habit.name,
+      createdAt: habit.createdAt
+    }))
+  ).replace(/</g, "\\u003c") %>
   </script>
 
   <script id="checkins-data" type="application/json">
@@ -794,21 +795,7 @@
       }
     });
 
-    document
-      .getElementById("logoutBtn")
-      .addEventListener("click", async function() {
-        try {
-          const response = await fetch("/logout", {
-            method: "DELETE",
-          });
 
-          if (response.ok) {
-            window.location.href = "/";
-          }
-        } catch (error) {
-          console.error("Logout failed:", error);
-        }
-      });
 
     renderHabits();
     loadHabitStats();

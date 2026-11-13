@@ -22,7 +22,7 @@ export async function getLessons(req, res, next) {
       .lean();
 
     const completedCount = lessons.filter(
-      (lesson) => lesson.status === "completed"
+      (lesson) => lesson.status === "completed",
     ).length;
 
     const progress =
@@ -52,6 +52,11 @@ export async function addSubject(req, res, next) {
       });
     }
 
+    if (name.length > 20) {
+      return res.status(400).json({
+        message: "Subject name cannot exceed 20 characters.",
+      });
+    }
     const existingSubject = await Subject.findOne({
       user: req.user._id,
       name: { $regex: `^${escapeRegex(name)}$`, $options: "i" },
@@ -88,6 +93,11 @@ export async function addLesson(req, res, next) {
       });
     }
 
+    if (title.length > 30) {
+      return res.status(400).json({
+        message: "Lesson title cannot exceed 30 characters.",
+      });
+    }
     if (!mongoose.isValidObjectId(subjectId)) {
       return res.status(400).json({
         message: "Invalid subject.",
@@ -152,7 +162,7 @@ export async function toggleLesson(req, res, next) {
         user: req.user._id,
       },
       { status },
-      { returnDocument:"after", runValidators: true }
+      { returnDocument: "after", runValidators: true },
     );
 
     if (!lesson) {
@@ -181,7 +191,11 @@ export async function addCourseMaterial(req, res, next) {
         message: "Enter a title, URL, and select a subject.",
       });
     }
-
+    if (title.length > 20) {
+      return res.status(400).json({
+        message: "Lesson title cannot exceed 30 characters.",
+      });
+    }
     if (!mongoose.isValidObjectId(subjectId)) {
       return res.status(400).json({
         message: "Invalid subject.",
@@ -203,7 +217,11 @@ export async function addCourseMaterial(req, res, next) {
         message: "Only HTTP and HTTPS links are allowed.",
       });
     }
-
+    if (parsedUrl.href.length > 2048) {
+  return res.status(400).json({
+    message: "URL cannot exceed 2048 characters.",
+  });
+}
     const subject = await Subject.findOne({
       _id: subjectId,
       user: req.user._id,
@@ -242,8 +260,6 @@ export async function addCourseMaterial(req, res, next) {
 function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
-
-
 
 export async function deleteLesson(req, res, next) {
   try {

@@ -20,7 +20,7 @@ const sessionSchema = new mongoose.Schema(
 
     mode: {
       type: String,
-      enum: ["free", "pomodoro", "deep"],
+      enum: ["free", "pomodoro"],
       default: "free",
     },
   },

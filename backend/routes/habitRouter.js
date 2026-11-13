@@ -10,7 +10,10 @@ import {
 
 import { decorateHtml } from "../middlewares/common/decorateHtml.js";
 import { authGuard } from "../middlewares/common/checkLogin.js";
-
+import {
+  habitIdValidation,
+  habitValidatorHandler,
+} from "../middlewares/validators/habitValidator.js";
 const router = express.Router();
 
 
@@ -32,6 +35,8 @@ router.post(
 router.delete(
   "/:id",
   authGuard,
+  habitIdValidation,
+  habitValidatorHandler,
   deleteHabit,
 );
 
@@ -39,6 +44,8 @@ router.delete(
 router.patch(
   "/:id/check-in",
   authGuard,
+  habitIdValidation,
+  habitValidatorHandler,
   toggleHabitCheckIn,
 );
 

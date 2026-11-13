@@ -30,6 +30,21 @@ export async function addHabit(req, res, next) {
       });
     }
 
+    if (name.trim().length > 20) {
+      return res.status(400).json({
+        message: "Habit name cannot exceed 20 characters.",
+      });
+    }
+
+    const habitCount = await Habit.countDocuments({
+      user: req.user._id,
+    });
+
+    if (habitCount >= 10) {
+      return res.status(400).json({
+        message: "You can have a maximum of 10 habits.",
+      });
+    }
     const habit = await Habit.create({
       name: name.trim(),
       user: req.user._id,
@@ -238,20 +253,19 @@ export async function getHabitStats(req, res, next) {
     };
 
     const isSuccessfulDay = (key) => {
-  const requiredHabits = habits.filter(
-    (habit) => createdDateKey(habit.createdAt) <= key
-  );
+      const requiredHabits = habits.filter(
+        (habit) => createdDateKey(habit.createdAt) <= key,
+      );
 
-  if (requiredHabits.length === 0) return false;
+      if (requiredHabits.length === 0) return false;
 
-  const completed = completedByDate.get(key) || new Set();
+      const completed = completedByDate.get(key) || new Set();
 
-  return requiredHabits.every((habit) =>
-    completed.has(habit._id.toString())
-  );
-};
-    
-    
+      return requiredHabits.every((habit) =>
+        completed.has(habit._id.toString()),
+      );
+    };
+
     const previousDateKey = (key) => {
       const [y, m, d] = key.split("-").map(Number);
       return new Date(Date.UTC(y, m - 1, d - 1)).toISOString().slice(0, 10);

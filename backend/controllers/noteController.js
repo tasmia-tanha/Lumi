@@ -41,7 +41,7 @@ export async function createNote(req, res, next) {
   try {
     const { title, content, tags } = req.body;
 
-    const cleanedTitle = title?.trim();
+    const cleanedTitle = sanitizeHtml(title || "").trim();
     const cleanedContent = sanitizeHtml(content || "", {
       allowedTags: [
         "p",
@@ -68,7 +68,10 @@ export async function createNote(req, res, next) {
     if (cleanedContent.length > 20000) {
       return res.status(400).send("Note content is too long.");
     }
-    if (!cleanedTitle || !cleanedContent) {
+    if (
+      !cleanedTitle ||
+      !sanitizeHtml(cleanedContent, { allowedTags: [] }).trim()
+    ) {
       return res.status(400).render("newNote", {
         title: "New Note",
         errors: {
@@ -181,7 +184,7 @@ export async function updateNote(req, res, next) {
 
     const { title, content, tags } = req.body;
 
-    const cleanedTitle = title?.trim();
+    const cleanedTitle = sanitizeHtml(title || "").trim();
     const cleanedContent = sanitizeHtml(content || "", {
       allowedTags: [
         "p",
@@ -208,7 +211,10 @@ export async function updateNote(req, res, next) {
     if (cleanedContent.length > 20000) {
       return res.status(400).send("Note content is too long.");
     }
-    if (!cleanedTitle || !cleanedContent) {
+    if (
+      !cleanedTitle ||
+      !sanitizeHtml(cleanedContent, { allowedTags: [] }).trim()
+    ) {
       return res.status(400).send("Title and content are required.");
     }
 

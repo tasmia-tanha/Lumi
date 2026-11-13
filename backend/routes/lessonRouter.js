@@ -9,21 +9,66 @@ import {
   deleteCourseMaterial,
   deleteLesson
 } from "../controllers/lessonController.js";
-
+import {
+  subjectValidation,
+  lessonValidation,
+  lessonUpdateValidation,
+  materialValidation,
+  lessonIdValidation,
+  materialIdValidation,
+  lessonValidatorHandler,
+} from "../middlewares/validators/lessonValidator.js";
 const router = express.Router();
 
 router.get("/", authGuard, getLessons);
 
-router.post("/subjects", authGuard, addSubject);
+router.post(
+  "/subjects",
+  authGuard,
+  subjectValidation,
+  lessonValidatorHandler,
+  addSubject,
+);
 
-router.post("/lessons", authGuard, addLesson);
+router.post(
+  "/lessons",
+  authGuard,
+  lessonValidation,
+  lessonValidatorHandler,
+  addLesson,
+);
 
-router.patch("/lessons/:id", authGuard, toggleLesson);
+router.patch(
+  "/lessons/:id",
+  authGuard,
+  lessonIdValidation,
+  lessonUpdateValidation,
+  lessonValidatorHandler,
+  toggleLesson,
+);
 
-router.post("/materials", authGuard, addCourseMaterial);
+router.post(
+  "/materials",
+  authGuard,
+  materialValidation,
+  lessonValidatorHandler,
+  addCourseMaterial,
+);
 
-router.delete("/lessons/:id", authGuard, deleteLesson);
+router.delete(
+  "/lessons/:id",
+  authGuard,
+  lessonIdValidation,
+  lessonValidatorHandler,
+  deleteLesson,
+);
 
-router.delete("/materials/:id", authGuard, deleteCourseMaterial);
+router.delete(
+  "/materials/:id",
+  authGuard,
+  materialIdValidation,
+  lessonValidatorHandler,
+  deleteCourseMaterial,
+);
 
 export default router;

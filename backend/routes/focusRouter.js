@@ -8,7 +8,11 @@ import {
   updateDailyGoal,
   getWeeklyStudyTime
 } from "../controllers/sessionController.js";
-
+import {
+  focusSessionValidation,
+  dailyGoalValidation,
+  focusSessionValidatorHandler,
+} from "../middlewares/validators/sessionValidator.js";
 import { decorateHtml } from "../middlewares/common/decorateHtml.js";
 import { authGuard } from "../middlewares/common/checkLogin.js";
 
@@ -24,8 +28,22 @@ router.get(
 router.get("/total", authGuard, getTotalStudyTime);
 router.get("/weekly", authGuard, getWeeklyStudyTime);
 
-router.post("/", authGuard, saveFocusSession);
 
-router.patch("/goal", authGuard, updateDailyGoal);
+router.post(
+  "/",
+  authGuard,
+  focusSessionValidation,
+  focusSessionValidatorHandler,
+  saveFocusSession,
+);
+
+
+router.patch(
+  "/goal",
+  authGuard,
+  dailyGoalValidation,
+  focusSessionValidatorHandler,
+  updateDailyGoal,
+);
 
 export default router;

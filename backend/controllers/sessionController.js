@@ -41,7 +41,7 @@ export function getFocusSession(req, res) {
 export async function saveFocusSession(req, res, next) {
   try {
     const duration = Number(req.body.duration);
-    const allowedModes = ["free", "pomodoro", "deep"];
+    const allowedModes = ["free", "pomodoro"];
     const mode = allowedModes.includes(req.body.mode) ? req.body.mode : "free";
 
     if (

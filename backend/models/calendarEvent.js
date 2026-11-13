@@ -27,11 +27,13 @@ const calendarSchema = mongoose.Schema(
             type: String,
             trim: true,
             maxlength: 20,
+            required: true,
           },
           description: {
             type: String,
             trim: true,
             maxlength: 100,
+            required: true,
           },
         },
       ],
