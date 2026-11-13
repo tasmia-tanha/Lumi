@@ -58,3 +58,6 @@ app.use(errorHandler);
 app.listen(process.env.PORT,()=>{
     console.log(`listening on port ${process.env.PORT}`)
 });
+
+
+//after selecting a host remember to add trust proxy

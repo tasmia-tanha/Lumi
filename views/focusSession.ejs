@@ -262,9 +262,9 @@
                 <span>🌧️</span>
                 <small>Rain</small>
               </button>
-              <button type="button" class="ambienceBtn" aria-label="Play lo-fi ambience">
-                <span>🎵</span>
-                <small>Lo-fi</small>
+              <button type="button" class="ambienceBtn" aria-label="Play soft piano ambience">
+                <span>🎹</span>
+                <small>Soft Piano</small>
               </button>
               <button type="button" class="ambienceBtn" aria-label="Play forest ambience">
                 <span>🌳</span>
@@ -898,82 +898,168 @@
     let audioContext = null;
     let ambienceNodes = [];
     let ambienceSource = null;
+    let pianoInterval = null;
 
     function stopAmbience() {
+      if (pianoInterval) {
+        clearInterval(pianoInterval);
+        pianoInterval = null;
+      }
+
       ambienceNodes.forEach((node) => {
         try {
           if (node.stop) node.stop();
         } catch (_) {}
+
         try {
           node.disconnect();
         } catch (_) {}
       });
+
       ambienceNodes = [];
       ambienceSource = null;
+
       if (audioContext && audioContext.state !== "closed") {
         audioContext.suspend().catch(() => {});
       }
     }
 
     function makeNoiseBuffer(ctx) {
-      const buffer = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+      const buffer = ctx.createBuffer(1, ctx.sampleRate * 3, ctx.sampleRate);
       const output = buffer.getChannelData(0);
-      for (let i = 0; i < output.length; i++) output[i] = Math.random() * 2 - 1;
+
+      for (let i = 0; i < output.length; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+
       return buffer;
+    }
+
+    function createMasterGain() {
+      const master = audioContext.createGain();
+      master.gain.value = 0.35;
+      master.connect(audioContext.destination);
+      ambienceNodes.push(master);
+
+      return master;
+    }
+
+    function playRain() {
+      const master = createMasterGain();
+
+      const source = audioContext.createBufferSource();
+      source.buffer = makeNoiseBuffer(audioContext);
+      source.loop = true;
+
+      const filter = audioContext.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.value = 850;
+
+      const gain = audioContext.createGain();
+      gain.gain.value = 0.12;
+
+      source.connect(filter);
+      filter.connect(gain);
+      gain.connect(master);
+
+      source.start();
+
+      ambienceNodes.push(source, filter, gain);
+      ambienceSource = "rain";
+    }
+
+    function playForest() {
+      const master = createMasterGain();
+
+      const wind = audioContext.createBufferSource();
+      wind.buffer = makeNoiseBuffer(audioContext);
+      wind.loop = true;
+
+      const filter = audioContext.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.value = 450;
+
+      const windGain = audioContext.createGain();
+      windGain.gain.value = 0.08;
+
+      wind.connect(filter);
+      filter.connect(windGain);
+      windGain.connect(master);
+
+      wind.start();
+
+      ambienceNodes.push(wind, filter, windGain);
+      ambienceSource = "forest";
+    }
+
+    function playPiano() {
+      const master = createMasterGain();
+
+      const notes = [
+        [261.63, 329.63, 392.00],
+        [293.66, 349.23, 440.00],
+        [261.63, 329.63, 392.00],
+        [220.00, 261.63, 329.63]
+      ];
+
+      let chordIndex = 0;
+
+      function playChord() {
+        if (ambienceSource !== "piano") return;
+
+        const now = audioContext.currentTime;
+
+        notes[chordIndex].forEach((frequency, index) => {
+          const oscillator = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+
+          oscillator.type = "sine";
+          oscillator.frequency.value = frequency;
+
+          gain.gain.setValueAtTime(0, now);
+          gain.gain.linearRampToValueAtTime(0.045, now + 0.25);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
+
+          oscillator.connect(gain);
+          gain.connect(master);
+
+          oscillator.start(now);
+          oscillator.stop(now + 2.5);
+
+          ambienceNodes.push(oscillator, gain);
+        });
+
+        chordIndex = (chordIndex + 1) % notes.length;
+      }
+
+      ambienceSource = "piano";
+      playChord();
+      pianoInterval = setInterval(playChord, 2500);
     }
 
     async function playAmbience(kind) {
       stopAmbience();
+
       if (kind === "none") return;
+
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+
       if (!AudioContextClass) {
         showToast("Audio isn't supported by this browser.");
         return;
       }
-      try {
-        if (!audioContext || audioContext.state === "closed") audioContext = new AudioContextClass();
-        await audioContext.resume();
-        const master = audioContext.createGain();
-        master.gain.value = 0.055;
-        master.connect(audioContext.destination);
-        ambienceNodes.push(master);
 
-        if (kind === "rain" || kind === "forest") {
-          const source = audioContext.createBufferSource();
-          source.buffer = makeNoiseBuffer(audioContext);
-          source.loop = true;
-          const filter = audioContext.createBiquadFilter();
-          filter.type = kind === "rain" ? "lowpass" : "bandpass";
-          filter.frequency.value = kind === "rain" ? 1100 : 1900;
-          filter.Q.value = kind === "rain" ? 0.5 : 0.8;
-          const gain = audioContext.createGain();
-          gain.gain.value = kind === "rain" ? 0.65 : 0.16;
-          source.connect(filter);
-          filter.connect(gain);
-          gain.connect(master);
-          source.start();
-          ambienceNodes.push(source, filter, gain);
-        } else if (kind === "lofi") {
-          const osc1 = audioContext.createOscillator();
-          const osc2 = audioContext.createOscillator();
-          const filter = audioContext.createBiquadFilter();
-          const gain = audioContext.createGain();
-          osc1.type = "triangle";
-          osc2.type = "sine";
-          osc1.frequency.value = 174.61;
-          osc2.frequency.value = 261.63;
-          filter.type = "lowpass";
-          filter.frequency.value = 650;
-          gain.gain.value = 0.28;
-          osc1.connect(filter);
-          osc2.connect(filter);
-          filter.connect(gain);
-          gain.connect(master);
-          osc1.start();
-          osc2.start();
-          ambienceNodes.push(osc1, osc2, filter, gain);
+      try {
+        if (!audioContext || audioContext.state === "closed") {
+          audioContext = new AudioContextClass();
         }
-        ambienceSource = kind;
+
+        await audioContext.resume();
+
+        if (kind === "rain") playRain();
+        else if (kind === "forest") playForest();
+        else if (kind === "piano") playPiano();
+
       } catch (error) {
         console.error("Could not start ambience:", error);
         showToast("Couldn't start ambience. Try clicking the option again.");
@@ -981,10 +1067,14 @@
     }
 
     document.querySelectorAll(".ambienceBtn").forEach((button, index) => {
-      const kinds = ["none", "rain", "lofi", "forest"];
-      button.addEventListener("click", async () => {
-        document.querySelectorAll(".ambienceBtn").forEach((btn) => btn.classList.toggle("active", btn === button));
-        await playAmbience(kinds[index]);
+      const kinds = ["none", "rain", "piano", "forest"];
+
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".ambienceBtn").forEach((btn) => {
+          btn.classList.toggle("active", btn === button);
+        });
+
+        playAmbience(kinds[index]);
       });
     });
 
