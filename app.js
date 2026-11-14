@@ -4,6 +4,7 @@ import path from "node:path";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
+import helmet from "helmet";
 
 
 //internal imports
@@ -17,8 +18,20 @@ import focusSessionRouter from "./backend/routes/focusRouter.js";
 import lessonsRouter from "./backend/routes/lessonRouter.js";
 import notesRouter from "./backend/routes/noteRouter.js";
 import taskRouter from "./backend/routes/taskRouter.js";
-const app=express();
 dotenv.config();
+const app=express();
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
+        styleSrc: ["'self'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      },
+    },
+  })
+);
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -1,4 +1,3 @@
-
 import { Editor } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -11,11 +10,7 @@ const noteForm = document.querySelector("#noteForm, .editNoteForm");
 if (editorElement && contentInput && noteForm) {
   const editor = new Editor({
     element: editorElement,
-    extensions: [
-      StarterKit,
-      Underline,
-      Highlight.configure({ multicolor: true }),
-    ],
+    extensions: [StarterKit, Underline, Highlight],
     content: JSON.parse(
       document.querySelector("#initialNoteContent")?.textContent || '""',
     ),
@@ -55,7 +50,7 @@ if (editorElement && contentInput && noteForm) {
           chain.toggleHeading({ level: Number(button.dataset.level) }).run();
           break;
         case "highlight":
-          chain.toggleHighlight({ color: "#f6e2a0" }).run();
+          chain.toggleHighlight.run();
           break;
         case "undo":
           chain.undo().run();
@@ -111,72 +106,72 @@ if (editorElement && contentInput && noteForm) {
   updateToolbar();
 
   const noteId = noteForm.dataset.noteId;
-const titleInput = document.querySelector("#noteTitle");
-const tagsInput = document.querySelector("#noteTags");
+  const titleInput = document.querySelector("#noteTitle");
+  const tagsInput = document.querySelector("#noteTags");
 
-let autoSaveTimer;
+  let autoSaveTimer;
 
-const autoSave = async () => {
-  if (!noteId) return;
+  const autoSave = async () => {
+    if (!noteId) return;
 
-  const content = editor.getHTML();
-  contentInput.value = content;
+    const content = editor.getHTML();
+    contentInput.value = content;
 
-  try {
-    const response = await fetch(`/notes/${noteId}/autosave`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: titleInput.value,
-        content,
-        tags: tagsInput.value,
-      }),
-    });
+    try {
+      const response = await fetch(`/notes/${noteId}/autosave`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: titleInput.value,
+          content,
+          tags: tagsInput.value,
+        }),
+      });
 
-    if (!response.ok) {
-      console.error("Auto-save failed");
+      if (!response.ok) {
+        console.error("Auto-save failed");
+      }
+    } catch (error) {
+      console.error("Auto-save error:", error);
     }
-  } catch (error) {
-    console.error("Auto-save error:", error);
-  }
-};
+  };
 
-const scheduleAutoSave = () => {
-  clearTimeout(autoSaveTimer);
-  autoSaveTimer = setTimeout(autoSave, 1000);
-};
+  const scheduleAutoSave = () => {
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(autoSave, 1000);
+  };
 
-editor.on("update", scheduleAutoSave);
-titleInput?.addEventListener("input", scheduleAutoSave);
-tagsInput?.addEventListener("input", scheduleAutoSave);
-const contentError = document.querySelector("#noteContentError");
+  editor.on("update", scheduleAutoSave);
+  titleInput?.addEventListener("input", scheduleAutoSave);
+  tagsInput?.addEventListener("input", scheduleAutoSave);
+  const contentError = document.querySelector("#noteContentError");
 
-noteForm.addEventListener("submit", (event) => {
-  contentInput.value = editor.getHTML();
+  noteForm.addEventListener("submit", (event) => {
+    contentInput.value = editor.getHTML();
 
-  if (!editor.getText().trim()) {
-    event.preventDefault();
-    contentError.hidden = false;
-    editor.commands.focus();
-    return;
-  }
+    if (!editor.getText().trim()) {
+      event.preventDefault();
+      contentError.hidden = false;
+      editor.commands.focus();
+      return;
+    }
 
-  contentError.hidden = true;
+    contentError.hidden = true;
 
-  const saveBtn = noteForm.querySelector(".saveBtn");
+    const saveBtn = noteForm.querySelector(".saveBtn");
 
-  saveBtn.disabled = true;
-  saveBtn.innerHTML = `
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = `
     <span class="loadingSpinner"></span>
     Saving Note...
   `;
-});
+  });
 
-editor.on("update", () => {
-  if (editor.getText().trim()) {
-    contentError.hidden = true;
-  }
-});
+  editor.on("update", () => {
+    if (editor.getText().trim()) {
+      contentError.hidden = true;
+    }
+  });
 }

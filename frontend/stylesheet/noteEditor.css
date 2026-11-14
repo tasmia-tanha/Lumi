@@ -219,7 +219,10 @@ a {
   border-radius: 3px;
   background: #f6e2a0;
 }
-
+.richTextContent mark {
+  background-color: #f6e2a0;
+  color: inherit;
+}
 .noteBottomRow {
   display: flex;
   align-items: end;

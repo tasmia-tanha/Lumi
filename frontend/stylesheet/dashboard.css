@@ -1106,3 +1106,12 @@ body,
     height: 30px;
   }
 }
+
+
+.weeklyChart .skeletonMon { height: 35%; }
+.weeklyChart .skeletonTue { height: 85%; }
+.weeklyChart .skeletonWed { height: 60%; }
+.weeklyChart .skeletonThu { height: 55%; }
+.weeklyChart .skeletonFri { height: 70%; }
+.weeklyChart .skeletonSat { height: 40%; }
+.weeklyChart .skeletonSun { height: 50%; }

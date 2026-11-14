@@ -102,7 +102,9 @@ a {
 }
 
 /* ===== MIDDLE TASK SECTION ===== */
-
+.taskPageLayout {
+  grid-area: box-2;
+}
 .taskPage {
   grid-area: box-2;
   display: flex;
@@ -462,7 +464,9 @@ a {
     font-size: 0.62rem;
   }
 }
-
+.capybaraLayout {
+  grid-area: box-3;
+}
 .capyArea {
   grid-area: box-3;
   height: 100%;
