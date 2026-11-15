@@ -26,6 +26,7 @@ export async function login(req, res, next) {
           _id: user._id,
           name: user.name,
           email: user.email,
+          tokenVersion: user.tokenVersion ?? 0,
         };
 
         const token = jwt.sign(userObj, process.env.JWT_SECRET, {

@@ -18,6 +18,7 @@ import focusSessionRouter from "./backend/routes/focusRouter.js";
 import lessonsRouter from "./backend/routes/lessonRouter.js";
 import notesRouter from "./backend/routes/noteRouter.js";
 import taskRouter from "./backend/routes/taskRouter.js";
+import accountRouter from "./backend/routes/accountRouter.js";
 dotenv.config();
 const app=express();
 app.use(
@@ -61,6 +62,7 @@ app.use("/lessons",lessonsRouter);
 app.use("/notes",notesRouter);
 app.use("/task",taskRouter);
 app.use("/signup",signUpRouter);
+app.use("/account", accountRouter);
 
 //error handling
 

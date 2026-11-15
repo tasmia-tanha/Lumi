@@ -20,3 +20,14 @@ export const signupLimiter = rateLimit({
     message: "Too many signup attempts. Please try again after an hour.",
   },
 });
+
+
+export const changePasswordLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    message: "Too many password change attempts. Please try again after 15 minutes.",
+  },
+});

@@ -13,13 +13,17 @@ const peopleSchema = new mongoose.Schema(
       required: true,
       lowercase: true,
       trim: true,
-      unique:true,
+      unique: true,
     },
 
     password: {
       type: String,
       required: true,
       select: false,
+    },
+    tokenVersion: {
+      type: Number,
+      default: 0,
     },
 
     dailyGoalMinutes: {

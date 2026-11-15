@@ -1,0 +1,412 @@
+
+:root {
+  --green: #b8cfb3;
+  --green-dark: #84a282;
+  --green-deep: #587b59;
+  --pink: #f6e2e9;
+  --pink-dark: #eec0d0;
+  --cream: #fefaf3;
+  --white: #ffffff;
+  --text: #3e493d;
+  --muted: #899185;
+  --border: #e7e9df;
+  --shadow: 0 8px 25px rgba(86, 112, 80, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+  radial-gradient(ellipse at 10% 10%, #f6e2e9 0%, transparent 40%),
+  radial-gradient(ellipse at 90% 30%, #e6eee2 0%, transparent 45%),
+  radial-gradient(ellipse at 50% 100%, #f9e9df 0%, transparent 45%),
+  #fefaf3;
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+}
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Main layout */
+
+.main {
+  min-height: 100vh;
+  margin-left: 245px;
+  padding: 30px 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Sidebar */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 245px;
+  min-width: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 18px 20px;
+  background: #f4f3e9;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  margin-bottom: 38px;
+  font-size: 27px;
+  font-weight: 800;
+  color: var(--green-deep);
+}
+
+.navLabel {
+  margin: 0 12px 13px;
+  color: var(--green-deep);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 13px;
+  color: #737d70;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navLink span {
+  font-size: 18px;
+}
+
+.navLink:hover {
+  background: #e8eee2;
+  color: var(--green-deep);
+}
+
+.navLink.active {
+  background: var(--green);
+  color: #344c35;
+}
+
+.sidebarBottom {
+  margin-top: auto;
+  padding-top: 35px;
+  text-align: center;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5cbd4;
+  border-radius: 12px;
+  background: #fff8fa;
+  color: #8c6471;
+  font-weight: 700;
+}
+
+.logoutButton:hover {
+  background: var(--pink);
+}
+
+/* Account header */
+
+.accountSection {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.accountHeader {
+  margin-bottom: 25px;
+}
+
+.accountHeader h2 {
+  margin: 0 0 7px;
+  color: var(--green-dark);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.accountHeader p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Account cards */
+
+.accountCard {
+  margin-bottom: 22px;
+  padding: 25px 28px;
+  background: var(--cream);
+  border: 2px solid var(--green);
+  border-radius: 17px;
+  box-shadow: var(--shadow);
+}
+
+.accountCard h3 {
+  margin: 0 0 18px;
+  color: var(--green-deep);
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.accountInfo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.infoItem {
+  min-width: 0;
+  padding: 15px 17px;
+  border: 1px solid #e0ebd8;
+  border-radius: 12px;
+  background: #f7f9f5;
+}
+
+.infoLabel {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.infoItem p {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+/* Change password form */
+
+.sectionDescription {
+  margin: -10px 0 22px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+#changePasswordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  max-width: 600px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.formGroup label {
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--green);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.formGroup input::placeholder {
+  color: #a7afa2;
+}
+
+.formGroup input:focus {
+  border-color: var(--green-dark);
+  box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.15);
+}
+
+#changePasswordBtn {
+  align-self: flex-start;
+  min-width: 155px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 11px;
+  background: var(--green-dark);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 800;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#changePasswordBtn:hover {
+  background: var(--green-deep);
+  transform: translateY(-1px);
+}
+
+#changePasswordBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#passwordMessage {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Scrollbar */
+
+html,
+body,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--green) #f4f3e9;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f4f3e9;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--green-dark);
+}
+
+/* Responsive layout */
+
+@media (max-width: 1300px) {
+  .sidebar {
+    width: 205px;
+    padding: 28px 13px 20px;
+  }
+
+  .main {
+    margin-left: 205px;
+    padding: 25px;
+  }
+}
+
+@media (max-width: 760px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 12px;
+    overflow: visible;
+  }
+
+  .brand {
+    margin: 0 0 10px;
+    padding: 0 8px;
+  }
+
+  .navLabel {
+    display: none;
+  }
+
+  .navigation {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 4px;
+  }
+
+  .navLink {
+    flex: 0 0 auto;
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 22px 14px;
+  }
+
+  .sidebarBottom {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .logoutButton {
+    width: auto;
+    padding: 5px 9px;
+    font-size: 12px;
+  }
+
+  .accountHeader h2 {
+    font-size: 1.6rem;
+  }
+
+  .accountCard {
+    padding: 20px 17px;
+  }
+
+  .accountInfo {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .accountCard {
+    padding: 17px 13px;
+  }
+
+  #changePasswordBtn {
+    width: 100%;
+  }
+}

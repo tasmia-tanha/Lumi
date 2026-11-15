@@ -1,0 +1,152 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="../stylesheet/account.css" />
+  <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+
+<body>
+  <div class="main">
+
+    <aside class="sidebar">
+      <a href="/dashboard" class="brand">
+        <span>Lumi</span>
+      </a>
+
+      <p class="navLabel">WORKSPACE</p>
+
+      <nav class="navigation">
+        <a href="/dashboard" class="navLink">
+          <span>🏡</span> Dashboard
+        </a>
+
+        <a href="/task" class="navLink">
+          <span>🌱</span> My Tasks
+        </a>
+
+        <a href="/calendar" class="navLink">
+          <span>📅</span> Calendar
+        </a>
+
+        <a href="/notes" class="navLink">
+          <span>📝</span> Notes
+        </a>
+
+        <a href="/lessons" class="navLink">
+          <span>📚</span> Lessons
+        </a>
+
+        <a href="/dailyHabits" class="navLink">
+          <span>🌷</span> Daily Habits
+        </a>
+
+        <a href="/focusSession" class="navLink">
+          <span>⏳</span> Focus Session
+        </a>
+
+        <a href="/account" class="navLink active">
+          <span>⚙️</span> Account
+        </a>
+      </nav>
+
+      <div class="sidebarBottom">
+        <button id="logoutBtn" class="logoutButton" type="button">
+          Log out
+        </button>
+      </div>
+    </aside>
+
+    <section class="accountSection">
+
+      <div class="accountHeader">
+        <h2>Account Settings</h2>
+        <p>Manage your account information and security.</p>
+      </div>
+
+      <div class="accountCard">
+        <h3>Account Information</h3>
+
+        <div class="accountInfo">
+          <div class="infoItem">
+            <span class="infoLabel">Name</span>
+            <p><%= loggedinUser.name %></p>
+          </div>
+
+          <div class="infoItem">
+            <span class="infoLabel">Email Address</span>
+            <p><%= loggedinUser.email %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accountCard">
+        <h3>Change Password</h3>
+        <p class="sectionDescription">
+          Update your password to keep your account secure.
+        </p>
+
+        <form id="changePasswordForm">
+
+          <div class="formGroup">
+            <label for="currentPassword">Current Password</label>
+            <input
+              type="password"
+              id="currentPassword"
+              name="currentPassword"
+              placeholder="Enter your current password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <div class="formGroup">
+            <label for="newPassword">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              placeholder="Enter your new password"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+
+          <div class="formGroup">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm your new password"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+
+          <p id="passwordMessage" role="alert"></p>
+
+          <button type="submit" id="changePasswordBtn">
+            Update Password
+          </button>
+
+        </form>
+      </div>
+
+    </section>
+
+  </div>
+</body>
+
+<script src="/js/account.js" defer></script>
+
+</html>
