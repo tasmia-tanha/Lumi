@@ -1,152 +1,184 @@
-
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="../stylesheet/account.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../images/Lumi Capybara Study Planner.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%= title %></title>
-  <link rel="stylesheet" href="../stylesheet/account.css" />
-  <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-</head>
-
-<body>
-  <div class="main">
-
-    <aside class="sidebar">
-      <a href="/dashboard" class="brand">
-        <span>Lumi</span>
-      </a>
-
-      <p class="navLabel">WORKSPACE</p>
-
-      <nav class="navigation">
-        <a href="/dashboard" class="navLink">
-          <span>🏡</span> Dashboard
+  <body>
+    <div class="main">
+      <aside class="sidebar">
+        <a href="/dashboard" class="brand">
+          <span>Lumi</span>
         </a>
 
-        <a href="/task" class="navLink">
-          <span>🌱</span> My Tasks
-        </a>
+        <p class="navLabel">WORKSPACE</p>
 
-        <a href="/calendar" class="navLink">
-          <span>📅</span> Calendar
-        </a>
+        <nav class="navigation">
+          <a href="/dashboard" class="navLink"> <span>🏡</span> Dashboard </a>
 
-        <a href="/notes" class="navLink">
-          <span>📝</span> Notes
-        </a>
+          <a href="/task" class="navLink"> <span>🌱</span> My Tasks </a>
 
-        <a href="/lessons" class="navLink">
-          <span>📚</span> Lessons
-        </a>
+          <a href="/calendar" class="navLink"> <span>📅</span> Calendar </a>
 
-        <a href="/dailyHabits" class="navLink">
-          <span>🌷</span> Daily Habits
-        </a>
+          <a href="/notes" class="navLink"> <span>📝</span> Notes </a>
 
-        <a href="/focusSession" class="navLink">
-          <span>⏳</span> Focus Session
-        </a>
+          <a href="/lessons" class="navLink"> <span>📚</span> Lessons </a>
 
-        <a href="/account" class="navLink active">
-          <span>⚙️</span> Account
-        </a>
-      </nav>
+          <a href="/dailyHabits" class="navLink">
+            <span>🌷</span> Daily Habits
+          </a>
 
-      <div class="sidebarBottom">
-        <button id="logoutBtn" class="logoutButton" type="button">
-          Log out
-        </button>
-      </div>
-    </aside>
+          <a href="/focusSession" class="navLink">
+            <span>⏳</span> Focus Session
+          </a>
 
-    <section class="accountSection">
+          <a href="/account" class="navLink active">
+            <span>⚙️</span> Account
+          </a>
+        </nav>
 
-      <div class="accountHeader">
-        <h2>Account Settings</h2>
-        <p>Manage your account information and security.</p>
-      </div>
+        <div class="sidebarBottom">
+          <button id="logoutBtn" class="logoutButton" type="button">
+            Log out
+          </button>
+        </div>
+      </aside>
 
-      <div class="accountCard">
-        <h3>Account Information</h3>
+      <section class="accountSection">
+        <div class="accountHeader">
+          <h2>Account Settings</h2>
+          <p>Manage your account information and security.</p>
+        </div>
 
-        <div class="accountInfo">
-          <div class="infoItem">
-            <span class="infoLabel">Name</span>
-            <p><%= loggedinUser.name %></p>
-          </div>
+        <div class="accountCard">
+          <h3>Account Information</h3>
 
-          <div class="infoItem">
-            <span class="infoLabel">Email Address</span>
-            <p><%= loggedinUser.email %></p>
+          <div class="accountInfo">
+            <div class="infoItem">
+              <span class="infoLabel">Name</span>
+              <p><%= loggedinUser.name %></p>
+            </div>
+
+            <div class="infoItem">
+              <span class="infoLabel">Email Address</span>
+              <p><%= loggedinUser.email %></p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="accountCard">
-        <h3>Change Password</h3>
-        <p class="sectionDescription">
-          Update your password to keep your account secure.
-        </p>
+        <div class="accountCard">
+          <h3>Change Password</h3>
+          <p class="sectionDescription">
+            Update your password to keep your account secure.
+          </p>
 
-        <form id="changePasswordForm">
+          <form id="changePasswordForm">
+            <div class="formGroup">
+              <label for="currentPassword">Current Password</label>
+              <input
+                type="password"
+                id="currentPassword"
+                name="currentPassword"
+                placeholder="Enter your current password"
+                autocomplete="current-password"
+                required
+              />
+            </div>
 
-          <div class="formGroup">
-            <label for="currentPassword">Current Password</label>
-            <input
-              type="password"
-              id="currentPassword"
-              name="currentPassword"
-              placeholder="Enter your current password"
-              autocomplete="current-password"
-              required
-            />
+            <div class="formGroup">
+              <label for="newPassword">New Password</label>
+              <input
+                type="password"
+                id="newPassword"
+                name="newPassword"
+                placeholder="Enter your new password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+
+            <div class="formGroup">
+              <label for="confirmPassword">Confirm New Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm your new password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+
+            <p id="passwordMessage" role="alert"></p>
+
+            <button type="submit" id="changePasswordBtn">
+              Update Password
+            </button>
+          </form>
+        </div>
+
+        <div class="accountCard">
+          <h3>Account Recovery</h3>
+
+          <p class="sectionDescription">
+            Generate a recovery code to reset your password if you ever forget
+            it. No email or phone number is required.
+          </p>
+
+          <div class="recoveryWarning">
+            <span>⚠️</span>
+            <p>
+              Your recovery code will only be displayed once. Save it somewhere
+              safe. Generating a new code will invalidate your previous one.
+            </p>
           </div>
 
-          <div class="formGroup">
-            <label for="newPassword">New Password</label>
-            <input
-              type="password"
-              id="newPassword"
-              name="newPassword"
-              placeholder="Enter your new password"
-              autocomplete="new-password"
-              required
-            />
-          </div>
-
-          <div class="formGroup">
-            <label for="confirmPassword">Confirm New Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Confirm your new password"
-              autocomplete="new-password"
-              required
-            />
-          </div>
-
-          <p id="passwordMessage" role="alert"></p>
-
-          <button type="submit" id="changePasswordBtn">
-            Update Password
+          <button type="button" id="generateRecoveryCodeBtn">
+            Generate Recovery Code
           </button>
 
-        </form>
-      </div>
+          <div id="recoveryCodeContainer" hidden>
+            <label for="recoveryCode">Your Recovery Code</label>
 
-    </section>
+            <div class="recoveryCodeWrapper">
+              <input
+                type="text"
+                id="recoveryCode"
+                readonly
+                autocomplete="off"
+              />
 
-  </div>
-</body>
+              <button type="button" id="copyRecoveryCodeBtn">Copy Code</button>
+            </div>
 
-<script src="/js/account.js" defer></script>
+            <p class="sectionDescription">
+              Keep this code private. Anyone with your email and recovery code
+              may be able to reset your password.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
 
+  <script src="/js/account.js" defer></script>
 </html>

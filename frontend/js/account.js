@@ -79,3 +79,58 @@ changePasswordForm.addEventListener("submit", async (event) => {
     changePasswordBtn.textContent = "Update Password";
   }
 });
+
+// Generate recovery code
+const generateRecoveryCodeBtn = document.getElementById(
+  "generateRecoveryCodeBtn",
+);
+
+const recoveryCodeContainer = document.getElementById("recoveryCodeContainer");
+
+const recoveryCodeInput = document.getElementById("recoveryCode");
+
+const copyRecoveryCodeBtn = document.getElementById("copyRecoveryCodeBtn");
+
+generateRecoveryCodeBtn.addEventListener("click", async () => {
+  generateRecoveryCodeBtn.disabled = true;
+  generateRecoveryCodeBtn.textContent = "Generating...";
+
+  try {
+    const response = await fetch("/account/generate-recovery-code", {
+      method: "POST",
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Could not generate recovery code.");
+    }
+
+    // Display the newly generated code.
+    recoveryCodeInput.value = result.recoveryCode;
+    recoveryCodeContainer.hidden = false;
+
+    generateRecoveryCodeBtn.textContent = "Regenerate Recovery Code";
+
+    showToast("Recovery code generated! Save it somewhere safe.");
+  } catch (error) {
+    showToast(error.message);
+  } finally {
+    generateRecoveryCodeBtn.disabled = false;
+
+    if (generateRecoveryCodeBtn.textContent === "Generating...") {
+      generateRecoveryCodeBtn.textContent = "Generate Recovery Code";
+    }
+  }
+});
+
+// Copy recovery code
+copyRecoveryCodeBtn.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(recoveryCodeInput.value);
+
+    showToast("Recovery code copied successfully!");
+  } catch (error) {
+    showToast("Could not copy the code. Please copy it manually.");
+  }
+});

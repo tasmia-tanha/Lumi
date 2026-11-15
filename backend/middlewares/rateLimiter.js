@@ -31,3 +31,24 @@ export const changePasswordLimiter = rateLimit({
     message: "Too many password change attempts. Please try again after 15 minutes.",
   },
 });
+
+export const recoveryCodeLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    message: "Too many recovery code generation attempts. Please try again after 15 minutes.",
+  },
+});
+
+
+export const passwordResetLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    message: "Too many password reset attempts. Please try again after 15 minutes.",
+  },
+});

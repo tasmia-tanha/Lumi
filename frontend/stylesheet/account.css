@@ -1,4 +1,3 @@
-
 :root {
   --green: #b8cfb3;
   --green-dark: #84a282;
@@ -21,10 +20,9 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-  radial-gradient(ellipse at 10% 10%, #f6e2e9 0%, transparent 40%),
-  radial-gradient(ellipse at 90% 30%, #e6eee2 0%, transparent 45%),
-  radial-gradient(ellipse at 50% 100%, #f9e9df 0%, transparent 45%),
-  #fefaf3;
+    radial-gradient(ellipse at 10% 10%, #f6e2e9 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 30%, #e6eee2 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 100%, #f9e9df 0%, transparent 45%), #fefaf3;
   color: var(--text);
   font-family: "Nunito", sans-serif;
 }
@@ -107,7 +105,9 @@ a {
   color: #737d70;
   font-size: 14px;
   font-weight: 700;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .navLink span {
@@ -254,7 +254,9 @@ a {
   color: var(--text);
   font-size: 14px;
   outline: none;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
 }
 
 .formGroup input::placeholder {
@@ -276,7 +278,9 @@ a {
   color: var(--white);
   font-size: 14px;
   font-weight: 800;
-  transition: background 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s;
 }
 
 #changePasswordBtn:hover {
@@ -294,6 +298,112 @@ a {
   margin: 0;
   font-size: 13px;
   font-weight: 700;
+}
+
+/* Account recovery */
+
+.recoveryWarning {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 700px;
+  margin-bottom: 22px;
+  padding: 14px 16px;
+  border: 1px solid #eec0d0;
+  border-radius: 12px;
+  background: #fff5f8;
+}
+
+.recoveryWarning span {
+  font-size: 18px;
+}
+
+.recoveryWarning p {
+  margin: 0;
+  color: #8c6471;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#generateRecoveryCodeBtn,
+#copyRecoveryCodeBtn {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 11px;
+  background: var(--green-dark);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 800;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+#generateRecoveryCodeBtn:hover,
+#copyRecoveryCodeBtn:hover {
+  background: var(--green-deep);
+  transform: translateY(-1px);
+}
+
+#generateRecoveryCodeBtn:disabled,
+#copyRecoveryCodeBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#recoveryCodeContainer {
+  max-width: 700px;
+  margin-top: 22px;
+}
+
+#recoveryCodeContainer[hidden] {
+  display: none;
+}
+
+#recoveryCodeContainer label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.recoveryCodeWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+#recoveryCode {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1.5px solid var(--green);
+  border-radius: 10px;
+  background: #f7f9f5;
+  color: var(--text);
+  font-family: monospace;
+  font-size: 13px;
+  outline: none;
+}
+
+#recoveryCodeContainer .sectionDescription {
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 420px) {
+  #generateRecoveryCodeBtn {
+    width: 100%;
+  }
+
+  .recoveryCodeWrapper {
+    flex-direction: column;
+  }
+
+  #copyRecoveryCodeBtn {
+    width: 100%;
+  }
 }
 
 /* Scrollbar */
@@ -348,7 +458,7 @@ body,
 
   .brand {
     margin: 0 0 10px;
-    padding: 0 8px;
+    padding-left: 8px;
   }
 
   .navLabel {
@@ -361,6 +471,10 @@ body,
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 4px;
+    .navigation {
+      padding-left: 6px;
+      padding-right: 12px;
+    }
   }
 
   .navLink {
@@ -371,7 +485,7 @@ body,
 
   .main {
     margin-left: 0;
-    padding: 22px 14px;
+    padding: 0;
   }
 
   .sidebarBottom {
@@ -398,6 +512,10 @@ body,
 
   .accountInfo {
     grid-template-columns: 1fr;
+  }
+
+  .accountSection {
+    padding: 22px 16px;
   }
 }
 

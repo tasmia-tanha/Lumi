@@ -144,6 +144,21 @@ body {
   box-shadow: 0 0 0 3px rgba(132, 162, 130, 0.16);
 }
 
+#forgotPasswordLink {
+  align-self: flex-start;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  color: var(--green-deep);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+#forgotPasswordLink:hover {
+  color: var(--green-dark);
+  text-decoration: underline;
+}
 p.error {
   visibility: hidden;
   min-height: 0;
@@ -303,3 +318,5 @@ p.error.visible {
     transform: rotate(360deg);
   }
 }
+
+

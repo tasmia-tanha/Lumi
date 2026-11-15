@@ -1,4 +1,4 @@
-
+import { createHash, randomBytes } from "node:crypto";
 import People from "../models/people.js";
 import bcrypt from "bcrypt";
 
@@ -69,6 +69,40 @@ export async function changePassword(req, res, next) {
 
     return res.status(200).json({
       message: "Password changed successfully. Please log in again.",
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}
+
+
+export async function generateRecoveryCode(req, res, next) {
+  try {
+    const user = await People.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Account not found.",
+      });
+    }
+
+    // Generate a cryptographically secure 32-byte recovery code.
+    const recoveryCode = randomBytes(32).toString("hex");
+
+    // Store only the SHA-256 hash, never the original code.
+    user.recoveryCodeHash = createHash("sha256")
+      .update(recoveryCode)
+      .digest("hex");
+
+    user.recoveryCodeCreatedAt = new Date();
+
+    await user.save();
+
+    // Return the original code only once.
+    return res.status(200).json({
+      message: "Recovery code generated successfully.",
+      recoveryCode,
     });
 
   } catch (error) {

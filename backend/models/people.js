@@ -26,6 +26,17 @@ const peopleSchema = new mongoose.Schema(
       default: 0,
     },
 
+    recoveryCodeHash: {
+      type: String,
+      select: false,
+      default: undefined,
+    },
+
+    recoveryCodeCreatedAt: {
+      type: Date,
+      select: false,
+      default: undefined,
+    },
     dailyGoalMinutes: {
       type: Number,
       default: 120,

@@ -30,7 +30,9 @@
 
           <label for="key">Password</label>
           <input id="key" type="password" placeholder="Enter your password" name="password" required />
-
+          <a href="/forgot-password" id="forgotPasswordLink">
+            Forgot password?
+          </a>
           <% if (errors && errors.common) { %>
           <p class="error visible"><%= errors.common.msg %></p>
           <% } else { %>
@@ -53,7 +55,7 @@
       </div>
     </section>
   </main>
- <script src="/js/login.js" defer></script>
+  <script src="/js/login.js" defer></script>
 </body>
 
 </html>
