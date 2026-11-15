@@ -3,14 +3,20 @@ import express from "express";
 import { decorateHtml } from "../middlewares/common/decorateHtml.js";
 import { authGuard } from "../middlewares/common/checkLogin.js";
 
-import { changePassword,generateRecoveryCode } from "../controllers/accountController.js";
+import {
+  changePassword,
+  generateRecoveryCode,
+  deleteAccount,
+} from "../controllers/accountController.js";
 
 import {
   changePasswordValidation,
   changePasswordValidatorHandler,
+  deleteAccountValidation,
+  deleteAccountValidatorHandler,
 } from "../middlewares/user/passwordValidator.js";
 
-import { changePasswordLimiter ,recoveryCodeLimiter} from "../middlewares/rateLimiter.js";
+import { changePasswordLimiter ,recoveryCodeLimiter,deleteAccountLimiter} from "../middlewares/rateLimiter.js";
 
 const router = express.Router();
 
@@ -32,5 +38,14 @@ router.post(
   authGuard,
   recoveryCodeLimiter,
   generateRecoveryCode,
+);
+
+router.delete(
+  "/delete-account",
+  authGuard,
+  deleteAccountLimiter,
+  deleteAccountValidation,
+  deleteAccountValidatorHandler,
+  deleteAccount,
 );
 export default router;

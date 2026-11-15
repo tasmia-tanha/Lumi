@@ -528,3 +528,140 @@ body,
     width: 100%;
   }
 }
+
+
+/* Delete Account */
+
+.deleteAccountCard {
+  border-color: #e7b7c2;
+}
+
+.deleteAccountCard h3 {
+  color: #b65e70;
+}
+
+#deleteAccountBtn {
+  padding: 11px 20px;
+  border: 1px solid #d98b9c;
+  border-radius: 11px;
+  background: #c76f80;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 800;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#deleteAccountBtn:hover {
+  background: #a94f63;
+  transform: translateY(-1px);
+}
+
+#deleteAccountBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Delete Account Modal */
+
+.deleteModal[hidden] {
+  display: none;
+}
+
+.deleteModal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(45, 55, 44, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.deleteModalContent {
+  width: 100%;
+  max-width: 440px;
+  padding: 28px;
+  border: 2px solid #e7b7c2;
+  border-radius: 18px;
+  background: var(--cream);
+  box-shadow: 0 15px 45px rgba(45, 55, 44, 0.2);
+}
+
+.deleteModalContent h3 {
+  margin: 0 0 12px;
+  color: #b65e70;
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+.deleteModalContent > p {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#deleteAccountForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.deleteModalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#cancelDeleteBtn,
+#confirmDeleteBtn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+#cancelDeleteBtn {
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text);
+}
+
+#cancelDeleteBtn:hover {
+  background: #f0f1eb;
+}
+
+#confirmDeleteBtn {
+  border: none;
+  background: #c76f80;
+  color: var(--white);
+}
+
+#confirmDeleteBtn:hover {
+  background: #a94f63;
+}
+
+#cancelDeleteBtn:disabled,
+#confirmDeleteBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+@media (max-width: 420px) {
+  .deleteModalContent {
+    padding: 22px 17px;
+  }
+
+  .deleteModalActions {
+    flex-direction: column-reverse;
+  }
+
+  #cancelDeleteBtn,
+  #confirmDeleteBtn {
+    width: 100%;
+  }
+}

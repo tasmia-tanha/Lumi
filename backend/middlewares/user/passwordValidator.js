@@ -42,3 +42,23 @@ export function changePasswordValidatorHandler(req, res, next) {
 
   next();
 }
+
+
+// Delete account validation
+export const deleteAccountValidation = [
+  check("currentPassword")
+    .notEmpty()
+    .withMessage("Current password is required"),
+];
+
+export function deleteAccountValidatorHandler(req, res, next) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.mapped(),
+    });
+  }
+
+  next();
+}

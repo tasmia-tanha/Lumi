@@ -1,6 +1,17 @@
+import mongoose from "mongoose";
 import { createHash, randomBytes } from "node:crypto";
 import People from "../models/people.js";
 import bcrypt from "bcrypt";
+
+import { calendar } from "../models/calendarEvent.js";
+import { CourseMaterial } from "../models/courseMaterialModel.js";
+import { FocusSession } from "../models/focusSession.js";
+import HabitCheckIn from "../models/habitCheckinModel.js";
+import Habit from "../models/habitModel.js";
+import { Lesson } from "../models/lessonModel.js";
+import { Note } from "../models/note.js";
+import { Subject } from "../models/subjectModel.js";
+import task from "../models/task.js";
 
 export async function changePassword(req, res, next) {
   try {
@@ -22,7 +33,7 @@ export async function changePassword(req, res, next) {
     // Verify the current password.
     const isValidPassword = await bcrypt.compare(
       currentPassword,
-      user.password
+      user.password,
     );
 
     if (!isValidPassword) {
@@ -36,10 +47,7 @@ export async function changePassword(req, res, next) {
     }
 
     // Prevent reusing the current password.
-    const isSamePassword = await bcrypt.compare(
-      newPassword,
-      user.password
-    );
+    const isSamePassword = await bcrypt.compare(newPassword, user.password);
 
     if (isSamePassword) {
       return res.status(400).json({
@@ -70,12 +78,10 @@ export async function changePassword(req, res, next) {
     return res.status(200).json({
       message: "Password changed successfully. Please log in again.",
     });
-
   } catch (error) {
     next(error);
   }
 }
-
 
 export async function generateRecoveryCode(req, res, next) {
   try {
@@ -87,10 +93,8 @@ export async function generateRecoveryCode(req, res, next) {
       });
     }
 
-    // Generate a cryptographically secure 32-byte recovery code.
     const recoveryCode = randomBytes(32).toString("hex");
 
-    // Store only the SHA-256 hash, never the original code.
     user.recoveryCodeHash = createHash("sha256")
       .update(recoveryCode)
       .digest("hex");
@@ -99,13 +103,76 @@ export async function generateRecoveryCode(req, res, next) {
 
     await user.save();
 
-    // Return the original code only once.
     return res.status(200).json({
       message: "Recovery code generated successfully.",
       recoveryCode,
     });
-
   } catch (error) {
     next(error);
+  }
+}
+
+export async function deleteAccount(req, res, next) {
+  const session = await mongoose.startSession();
+
+  try {
+    const userId = req.user._id;
+    const { currentPassword } = req.body;
+
+    // Retrieve the user's password hash.
+    const user = await People.findById(userId).select("+password");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Account not found.",
+      });
+    }
+
+    // Verify the current password before deleting anything.
+    const isValidPassword = await bcrypt.compare(
+      currentPassword,
+      user.password,
+    );
+
+    if (!isValidPassword) {
+      return res.status(400).json({
+        message: "Your current password is incorrect.",
+      });
+    }
+
+    await session.withTransaction(async () => {
+      await HabitCheckIn.deleteMany({ user: userId }).session(session);
+
+      await Lesson.deleteMany({ user: userId }).session(session);
+      await CourseMaterial.deleteMany({ user: userId }).session(session);
+
+      await task.deleteMany({ user: userId }).session(session);
+      await calendar.deleteMany({ user: userId }).session(session);
+      await Note.deleteMany({ user: userId }).session(session);
+      await FocusSession.deleteMany({ user: userId }).session(session);
+      await Habit.deleteMany({ user: userId }).session(session);
+      await Subject.deleteMany({ user: userId }).session(session);
+
+      const result = await People.deleteOne({ _id: userId }).session(session);
+
+      if (result.deletedCount !== 1) {
+        throw new Error("Account could not be found or deleted.");
+      }
+    });
+
+    res.clearCookie(process.env.COOKIE_NAME, {
+      signed: true,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
+
+    return res.status(200).json({
+      message: "Your account and all associated data have been deleted.",
+    });
+  } catch (error) {
+    next(error);
+  } finally {
+    await session.endSession();
   }
 }

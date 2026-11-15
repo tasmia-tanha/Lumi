@@ -134,3 +134,79 @@ copyRecoveryCodeBtn.addEventListener("click", async () => {
     showToast("Could not copy the code. Please copy it manually.");
   }
 });
+
+
+
+// Delete Account
+const deleteAccountBtn = document.getElementById("deleteAccountBtn");
+const deleteAccountModal = document.getElementById("deleteAccountModal");
+const deleteAccountForm = document.getElementById("deleteAccountForm");
+const deleteAccountPassword = document.getElementById("deleteAccountPassword");
+const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
+// Open confirmation modal
+deleteAccountBtn.addEventListener("click", () => {
+  deleteAccountModal.hidden = false;
+  deleteAccountPassword.focus();
+});
+
+// Cancel deletion
+cancelDeleteBtn.addEventListener("click", () => {
+  deleteAccountForm.reset();
+  deleteAccountModal.hidden = true;
+});
+
+// Submit account deletion
+deleteAccountForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const currentPassword = deleteAccountPassword.value;
+
+  confirmDeleteBtn.disabled = true;
+  cancelDeleteBtn.disabled = true;
+  confirmDeleteBtn.textContent = "Deleting...";
+
+  let deletionSuccessful = false;
+
+  try {
+    const response = await fetch("/account/delete-account", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ currentPassword }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      const errorMessage =
+        result.errors?.currentPassword?.msg ||
+        result.message ||
+        "Could not delete your account. Please try again.";
+
+      throw new Error(errorMessage);
+    }
+
+    deletionSuccessful = true;
+
+    deleteAccountForm.reset();
+    deleteAccountModal.hidden = true;
+
+    showToast("Your account has been permanently deleted.");
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1800);
+
+  } catch (error) {
+    showToast(error.message);
+  } finally {
+    if (!deletionSuccessful) {
+      confirmDeleteBtn.disabled = false;
+      cancelDeleteBtn.disabled = false;
+      confirmDeleteBtn.textContent = "Permanently Delete";
+    }
+  }
+});
