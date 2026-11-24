@@ -54,6 +54,7 @@
         <h2>Calendar</h2>
 
         <div class="calendarControls">
+          <label for="monthSelect" class="visuallyHidden">Select month</label>
           <select id="monthSelect" class="calSelect">
             <option value="0" <%= new Date().getMonth() === 0 ? "selected" : "" %>>January</option>
             <option value="1" <%= new Date().getMonth() === 1 ? "selected" : "" %>>February</option>
@@ -68,6 +69,7 @@
             <option value="10" <%= new Date().getMonth() === 10 ? "selected" : "" %>>November</option>
             <option value="11" <%= new Date().getMonth() === 11 ? "selected" : "" %>>December</option>
           </select>
+          <label for="yearSelect" class="visuallyHidden">Select year</label>
           <select id="yearSelect" class="calSelect"></select>
         </div>
       </div>
@@ -81,8 +83,8 @@
       </div>
 
       <div class="datePopupOverlay" id="datePopupOverlay" hidden>
-        <div class="datePopup">
-          <button type="button" id="closeDatePopup" class="closeDatePopup">
+        <div class="datePopup" role="dialog" aria-modal="true" aria-labelledby="popupDateTitle">
+          <button type="button" id="closeDatePopup" class="closeDatePopup" aria-label="Close date details">
             &times;
           </button>
 

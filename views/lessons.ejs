@@ -155,7 +155,7 @@
             </div>
             <% if (lessons.length === 0) { %>
             <div class="emptyState" id="noLessonsMessage">
-              <span>🌱</span>
+              <span aria-hidden="true">🌱</span>
               <h3>No lessons yet!</h3>
               <p>Add your first lesson and start learning.</p>
             </div>
@@ -163,8 +163,8 @@
             <% lessons.forEach(lesson => { %>
             <article class="lessonItem <%= lesson.status === 'completed' ? 'isCompleted' : '' %>" data-lesson-id="<%= lesson._id %>" data-subject-id="<%= lesson.subject?._id || lesson.subject %>" data-status="<%= lesson.status %>">
               <label class="lessonCheckboxLabel">
-                <input type="checkbox" class="lessonCheckbox" <%= lesson.status === 'completed' ? 'checked' : '' %>>
-                <span class="customCheckbox"></span>
+                <input type="checkbox" class="lessonCheckbox" aria-label="Mark <%= lesson.title %> as completed" <%= lesson.status === 'completed' ? 'checked' : '' %>>
+                <span class="customCheckbox" aria-hidden="true"></span>
               </label>
 
               <div class="lessonInfo">
@@ -173,7 +173,7 @@
                   <%= lesson.subject?.name || 'Subject' %>
                 </p>
               </div>
-              <button type="button" class="deleteItemBtn" data-delete-type="lessons" data-id="<%= lesson._id %>" aria-label="Delete lesson">
+              <button type="button" class="deleteItemBtn" data-delete-type="lessons" data-id="<%= lesson._id %>" aria-label="Delete lesson <%= lesson.title %>">
                 🗑️
               </button>
               <span class="lessonStatus">
@@ -185,7 +185,7 @@
           </div>
 
           <div class="emptyState hidden" id="noFilteredLessons">
-            <span>🌷</span>
+            <span aria-hidden="true">🌷</span>
             <h3>No lessons in this subject yet.</h3>
             <p>Add a lesson to get started.</p>
           </div>
@@ -213,14 +213,14 @@
             </div>
             <% if (materials.length === 0) { %>
             <div class="emptyState" id="noMaterialsMessage">
-              <span>📖</span>
+              <span aria-hidden="true">📖</span>
               <h3>No materials yet</h3>
               <p>Add links to slides, PDFs, videos, or notes.</p>
             </div>
             <% } else { %>
             <% materials.forEach(material => { %>
             <article class="materialItem" data-subject-id="<%= material.subject?._id || material.subject %>">
-              <div class="materialIcon">📄</div>
+              <div class="materialIcon" aria-hidden="true">📄</div>
               <div class="materialInfo">
                 <a href="<%= material.url %>" target="_blank" rel="noopener noreferrer" class="materialTitle">
                   <%= material.title %>
@@ -228,7 +228,7 @@
                 <p><%= material.subject?.name || 'Subject' %></p>
               </div>
               <a href="<%= material.url %>" target="_blank" rel="noopener noreferrer" class="openMaterial" aria-label="Open <%= material.title %>">↗</a>
-              <button type="button" class="deleteItemBtn" data-delete-type="materials" data-id="<%= material._id %>" aria-label="Delete course material">
+              <button type="button" class="deleteItemBtn" data-delete-type="materials" data-id="<%= material._id %>" aria-label="Delete material <%= material.title %>">
                 🗑️
               </button>
             </article>
@@ -237,7 +237,7 @@
           </div>
 
           <div class="emptyState hidden" id="noFilteredMaterials">
-            <span>🌼</span>
+            <span aria-hidden="true">🌼</span>
             <h3>No materials for this subject.</h3>
             <p>Add a useful link whenever you're ready.</p>
           </div>
@@ -252,7 +252,7 @@
 
   <div class="deleteModalOverlay" id="deleteItemModal" hidden>
     <div class="deleteModalCard" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
-      <div class="deleteModalIcon">🌸</div>
+      <div class="deleteModalIcon" aria-hidden="true">🌸</div>
 
       <h2 id="deleteModalTitle">Delete this item?</h2>
 
@@ -269,7 +269,7 @@
 
   <div class="modalOverlay hidden" id="subjectModal">
     <div class="modalCard">
-      <button class="closeModal" type="button" data-close="subjectModal">×</button>
+      <button class="closeModal" type="button" data-close="subjectModal" aria-label="Close dialog">×</button>
       <p class="eyebrow">NEW LEARNING SPACE 🌷</p>
       <h2>Add a Subject</h2>
       <p class="modalDescription">Create a subject to organize your lessons.</p>
@@ -287,7 +287,7 @@
 
   <div class="modalOverlay hidden" id="lessonModal">
     <div class="modalCard">
-      <button class="closeModal" type="button" data-close="lessonModal">×</button>
+      <button class="closeModal" type="button" data-close="lessonModal" aria-label="Close dialog">×</button>
       <p class="eyebrow">ONE STEP AT A TIME ✏️</p>
       <h2>Add a Lesson</h2>
       <p class="modalDescription">Add a topic you want to study.</p>
@@ -314,7 +314,7 @@
 
   <div class="modalOverlay hidden" id="materialModal">
     <div class="modalCard">
-      <button class="closeModal" type="button" data-close="materialModal">×</button>
+      <button class="closeModal" type="button" data-close="materialModal" aria-label="Close dialog">×</button>
       <p class="eyebrow">YOUR STUDY TOOLKIT 📎</p>
       <h2>Add Course Material</h2>
       <p class="modalDescription">
@@ -349,7 +349,7 @@
     <%- JSON.stringify({ subjects, lessons, materials }).replace(/</g, "\\u003c") %>
   </script>
 
- <script src="/js/lessons.js" defer></script>
+  <script src="/js/lessons.js" defer></script>
 </body>
 
 </html>

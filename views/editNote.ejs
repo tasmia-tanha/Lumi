@@ -7,6 +7,7 @@
   <title><%= title %></title>
 
   <link rel="stylesheet" href="/stylesheet/noteEditor.css" />
+
   <link rel="icon" type="image/png" href="../images/Lumi Capybara Study Planner.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,21 +35,21 @@
           <label for="noteContent">Your note</label>
 
           <div class="richTextToolbar">
-            <button type="button" data-command="heading" data-level="2">H2</button>
-            <button type="button" data-command="heading" data-level="3">H3</button>
+            <button type="button" data-command="heading" data-level="2" aria-label="Heading 2">H2</button>
+            <button type="button" data-command="heading" data-level="3" aria-label="Heading 3">H3</button>
             <button type="button" data-command="bold" aria-label="Bold"><b>B</b></button>
             <button type="button" data-command="italic" aria-label="Italic"><i>I</i></button>
             <button type="button" data-command="underline" aria-label="Underline"><u>U</u></button>
             <button type="button" data-command="strike" aria-label="Strikethrough"><s>S</s></button>
-            <button type="button" data-command="highlight">🖍️</button>
+            <button type="button" data-command="highlight" aria-label="Highlight">🖍️</button>
 
-            <button type="button" data-command="bulletList">•</button>
-            <button type="button" data-command="orderedList">1.</button>
+            <button type="button" data-command="bulletList" aria-label="Bullet List">•</button>
+            <button type="button" data-command="orderedList" aria-label="Ordered List">1.</button>
             <button type="button" data-command="undo" aria-label="Undo">↶</button>
             <button type="button" data-command="redo" aria-label="Redo">↷</button>
           </div>
 
-          <div id="noteContent" class="richTextEditor"></div>
+          <div id="noteContent" class="richTextEditor" role="textbox" aria-label="Your note" aria-multiline="true"></div>
           <input type="hidden" id="noteContentInput" name="content" />
 
           <div class="noteBottomRow">

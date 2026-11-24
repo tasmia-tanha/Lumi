@@ -60,7 +60,7 @@
       <div class="notesList" id="notesList">
         <% if (notes.length === 0) { %>
         <div class="emptyNotes" id="emptyNotes">
-          <span class="emptyIcon">🪴</span>
+          <span class="emptyIcon" aria-hidden="true">🪴</span>
           <h2>Your notebook is waiting!</h2>
           <p>Create your first note and keep your thoughts in one place.</p>
           <a href="/notes/new" class="emptyCreateBtn">Create a note</a>
@@ -77,8 +77,13 @@
             </div>
 
             <div class="noteActions">
-              <button type="button" class="pinNoteBtn" aria-label="<%= note.pinned ? 'Unpin' : 'Pin' %> note" title="<%= note.pinned ? 'Unpin note' : 'Pin note' %>"><%= note.pinned ? "📌" : "📍" %></button>
-              <button type="button" class="deleteNoteBtn" aria-label="Delete note" title="Delete note">🗑️</button>
+              <button type="button" class="pinNoteBtn" aria-label="<%= note.pinned ? 'Unpin' : 'Pin' %> <%= note.title %>" title="<%= note.pinned ? 'Unpin note' : 'Pin note' %>">
+                <%= note.pinned ? "📌" : "📍" %>
+              </button>
+
+              <button type="button" class="deleteNoteBtn" aria-label="Delete <%= note.title %>" title="Delete note">
+                🗑️
+              </button>
             </div>
           </div>
 
@@ -150,7 +155,7 @@
   </div>
   <div class="deleteModalOverlay" id="deleteNoteModal" hidden>
     <div class="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteNoteModalTitle">
-      <div class="deleteModalIcon">🌸</div>
+      <div class="deleteModalIcon" aria-hidden="true">🌸</div>
 
       <h2 id="deleteNoteModalTitle">Delete this note?</h2>
 
@@ -165,7 +170,7 @@
     </div>
   </div>
 
-<script src="/js/notes.js" defer></script>
+  <script src="/js/notes.js" defer></script>
 </body>
 
 </html>

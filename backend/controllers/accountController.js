@@ -72,6 +72,7 @@ export async function changePassword(req, res, next) {
       signed: true,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       path: "/",
     });
 
@@ -164,6 +165,7 @@ export async function deleteAccount(req, res, next) {
       signed: true,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       path: "/",
     });
 

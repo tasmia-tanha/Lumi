@@ -33,7 +33,6 @@ export async function login(req, res, next) {
         };
 
         const token = jwt.sign(userObj, process.env.JWT_SECRET, {
-          
           expiresIn: Number(process.env.JWT_EXPIRES),
         });
 
@@ -42,6 +41,8 @@ export async function login(req, res, next) {
           httpOnly: true,
           signed: true,
           secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          path: "/",
         });
 
         res.locals.loggedinUser = userObj;
@@ -54,14 +55,24 @@ export async function login(req, res, next) {
       throw new Error("Invalid email or password.");
     }
   } catch (error) {
-    console.log("LOGIN ERROR:", error.message);
+    const isExpectedLoginError = [
+      "Please enter a valid email address!",
+      "Invalid email or password.",
+    ].includes(error.message);
+
+    if (!isExpectedLoginError) {
+      console.error("LOGIN ERROR:", error);
+    }
+
     res.render("login", {
       data: {
         username: req.body.username,
       },
       errors: {
         common: {
-          msg: error.message,
+          msg: isExpectedLoginError
+            ? error.message
+            : "Something went wrong. Please try again later.",
         },
       },
     });
@@ -72,10 +83,12 @@ export function logout(req, res) {
   res.clearCookie(process.env.COOKIE_NAME, {
     signed: true,
     httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
   });
   return res.status(200).json({ message: "Logged out successfully" });
 }
-
 
 export async function resetPassword(req, res, next) {
   try {
@@ -83,24 +96,20 @@ export async function resetPassword(req, res, next) {
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    
     const user = await people
       .findOne({ email: normalizedEmail })
       .select("+password +recoveryCodeHash");
 
-    
     if (!user || !user.recoveryCodeHash) {
       return res.status(400).json({
         message: "Invalid email or recovery code.",
       });
     }
 
-    
     const submittedHash = createHash("sha256")
       .update(recoveryCode.trim())
       .digest("hex");
 
-    
     const storedBuffer = Buffer.from(user.recoveryCodeHash, "hex");
     const submittedBuffer = Buffer.from(submittedHash, "hex");
 
@@ -115,22 +124,17 @@ export async function resetPassword(req, res, next) {
       });
     }
 
-    
-    const isSamePassword = await bcrypt.compare(
-      newPassword,
-      user.password
-    );
+    const isSamePassword = await bcrypt.compare(newPassword, user.password);
 
     if (isSamePassword) {
       return res.status(400).json({
-        message: "Your new password must be different from your current password.",
+        message:
+          "Your new password must be different from your current password.",
       });
     }
 
-    
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    
     const result = await people.updateOne(
       {
         _id: user._id,
@@ -147,7 +151,7 @@ export async function resetPassword(req, res, next) {
         $inc: {
           tokenVersion: 1,
         },
-      }
+      },
     );
 
     if (result.modifiedCount !== 1) {
@@ -159,7 +163,6 @@ export async function resetPassword(req, res, next) {
     return res.status(200).json({
       message: "Password reset successfully. Please log in.",
     });
-
   } catch (error) {
     next(error);
   }

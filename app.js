@@ -36,11 +36,7 @@ app.use(
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-//database connection
 
-mongoose.connect(process.env.MONGO_CONNECTION_STRING)
-.then(()=>console.log("Database connection successsful"))
-.catch((err)=>console.log(`${err}`));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -70,9 +66,22 @@ app.use(notFoundHandler);
 
 app.use(errorHandler);
 
-app.listen(process.env.PORT,()=>{
-    console.log(`listening on port ${process.env.PORT}`)
-});
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
+
+    console.log("Database connection successful");
+
+    app.listen(process.env.PORT, () => {
+      console.log(`Listening on port ${process.env.PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to connect to database:", error);
+    process.exit(1);
+  }
+}
+
+startServer();
 
 
 //after selecting a host remember to add trust proxy

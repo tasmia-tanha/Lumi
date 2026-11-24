@@ -16,7 +16,11 @@ export const changePasswordValidation = [
     })
     .withMessage(
       "Password must be at least 8 characters and contain an uppercase letter, lowercase letter, number and symbol."
-    ),
+    )
+    .custom((value) => {
+      return Buffer.byteLength(value, "utf8") <= 72;
+    })
+    .withMessage("Password must not exceed 72 bytes."),
 
   check("confirmPassword")
     .notEmpty()

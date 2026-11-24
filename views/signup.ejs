@@ -26,19 +26,23 @@
       <img id="logo" src="../images/Lumi Capybara Study Planner.png" alt="Lumi" />
 
       <form action="/signup" method="POST" class="user_info" novalidate>
-        <input id="username" type="text" placeholder="Username" name="name" required />
-        <p class="error name-error">This is error</p>
+        <label for="username" class="visuallyHidden">Username</label>
+        <input id="username" type="text" placeholder="Username" name="name" required aria-describedby="nameError"/>
+        <p id="nameError" class="error name-error">This is error</p>
 
-        <input id="email" type="email" placeholder="Email" name="email" required />
-        <p class="error email-error">This is error</p>
+        <label for="email" class="visuallyHidden">Email</label>
+        <input id="email" type="email" placeholder="Email" name="email" required aria-describedby="emailError"/>
+        <p id="emailError" class="error email-error">This is error</p>
 
-        <input id="key" type="password" placeholder="Password" name="password" required />
-        <p class="error password-error">This is error</p>
+        <label for="key" class="visuallyHidden">Password</label>
+        <input id="key" type="password" placeholder="Password" name="password" required aria-describedby="passwordError"/>
+        <p id="passwordError" class="error password-error">This is error</p>
 
-        <input id="confirmKey" type="password" placeholder="Confirm Password" name="confirmPassword" required />
-        <p class="error confirm-password-error">This is error</p>
+        <label for="confirmKey" class="visuallyHidden">Confirm Password</label>
+        <input id="confirmKey" type="password" placeholder="Confirm Password" name="confirmPassword" required aria-describedby="confirmPasswordError" />
+        <p id="confirmPasswordError" class="error confirm-password-error">This is error</p>
 
-        <p class="error common-error">This is error</p>
+        <p class="error common-error" role="alert" aria-live="assertive">This is error</p>
 
         <button id="signUpBtn" type="submit">Create my account →</button>
       </form>

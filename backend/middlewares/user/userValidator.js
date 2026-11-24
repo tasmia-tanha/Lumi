@@ -23,7 +23,7 @@ export const userValidation = [
       return true;
     }),
 
-  check("password")
+    check("password")
     .isStrongPassword({
       minLength: 8,
       minLowercase: 1,
@@ -33,7 +33,12 @@ export const userValidation = [
     })
     .withMessage(
       "Password must be of 8 characters and contain at least 1 lowercase,1 uppercase,1 number and 1 symbol",
-    ),
+    )
+    .custom((value) => {
+      return Buffer.byteLength(value, "utf8") <= 72;
+    })
+    .withMessage("Password must not exceed 72 bytes."),
+
 ];
 
 export const addUserValidatorHandler = function (req, res, next) {

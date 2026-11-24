@@ -75,7 +75,7 @@
                   <div class="habitColHeader">
                     <span>Habits</span>
 
-                    <button class="addHabitBtn" id="addHabitBtn" title="Add new habit">
+                    <button class="addHabitBtn" id="addHabitBtn" title="Add new habit" type="button" aria-label="Add a new habit">
                       + Add
                     </button>
                   </div>
@@ -92,7 +92,7 @@
     <aside class="rightPanel">
       <div class="statCard streakCard">
         <div class="streakTop">
-          <div class="streakFire">🔥</div>
+          <div class="streakFire" aria-hidden="true">🔥</div>
 
           <div>
             <h3>Active Streak</h3>
@@ -114,7 +114,7 @@
         <div class="cardHeading">
           <h3>Today's Progress</h3>
 
-          <span> 🌱 </span>
+          <span aria-hidden="true"> 🌱 </span>
         </div>
 
         <div class="todayProgress">
@@ -138,7 +138,7 @@
         <div class="cardHeading">
           <h3>This Month</h3>
 
-          <span> 📊 </span>
+          <span aria-hidden="true"> 📊 </span>
         </div>
 
         <div class="monthlyStats">
@@ -166,7 +166,7 @@
 
   <div class="deleteModalOverlay" id="deleteHabitModal" hidden>
     <div class="deleteModalCard" role="dialog" aria-modal="true" aria-labelledby="deleteHabitModalTitle">
-      <div class="deleteModalIcon">🌸</div>
+      <div class="deleteModalIcon" aria-hidden="true">🌸</div>
 
       <h2 id="deleteHabitModalTitle">Delete this habit?</h2>
 
@@ -183,13 +183,13 @@
 
   <div class="addHabitModalOverlay" id="addHabitModal" hidden>
     <div class="addHabitModalCard" role="dialog" aria-modal="true" aria-labelledby="addHabitModalTitle">
-      <div class="addHabitModalIcon">🌱</div>
+      <div class="addHabitModalIcon" aria-hidden="true">🌱</div>
 
       <h2 id="addHabitModalTitle">Grow a new habit!</h2>
 
       <p>What little habit would you like to grow?</p>
 
-      <input type="text" id="newHabitName" placeholder="e.g. Read for 20 minutes" maxlength="50" autocomplete="off" />
+      <input type="text" id="newHabitName" aria-label="New habit name" placeholder="e.g. Read for 20 minutes" maxlength="50" autocomplete="off" />
 
       <div class="addHabitModalButtons">
         <button type="button" id="cancelAddHabit">Cancel</button>
