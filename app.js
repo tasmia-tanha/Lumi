@@ -21,6 +21,7 @@ import taskRouter from "./backend/routes/taskRouter.js";
 import accountRouter from "./backend/routes/accountRouter.js";
 dotenv.config();
 const app=express();
+app.set("trust proxy", 1);
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -84,4 +85,3 @@ async function startServer() {
 startServer();
 
 
-//after selecting a host remember to add trust proxy
