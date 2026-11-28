@@ -72,7 +72,7 @@ Users can organize academic activities, monitor their progress, and maintain the
 ![Lumi Lessons](screenshots/lessons.png)
 
 ### Notes
-![Lumi Notes](screenshots/notes.png)
+![Lumi Notes](screenshots/Notes.png)
 
 ## Try Lumi
 
