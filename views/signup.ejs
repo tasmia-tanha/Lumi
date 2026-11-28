@@ -27,15 +27,15 @@
 
       <form action="/signup" method="POST" class="user_info" novalidate>
         <label for="username" class="visuallyHidden">Username</label>
-        <input id="username" type="text" placeholder="Username" name="name" required aria-describedby="nameError"/>
+        <input id="username" type="text" placeholder="Username" name="name" required aria-describedby="nameError" />
         <p id="nameError" class="error name-error">This is error</p>
 
         <label for="email" class="visuallyHidden">Email</label>
-        <input id="email" type="email" placeholder="Email" name="email" required aria-describedby="emailError"/>
+        <input id="email" type="email" placeholder="Email" name="email" required aria-describedby="emailError" />
         <p id="emailError" class="error email-error">This is error</p>
 
         <label for="key" class="visuallyHidden">Password</label>
-        <input id="key" type="password" placeholder="Password" name="password" required aria-describedby="passwordError"/>
+        <input id="key" type="password" placeholder="Password" name="password" required aria-describedby="passwordError" />
         <p id="passwordError" class="error password-error">This is error</p>
 
         <label for="confirmKey" class="visuallyHidden">Confirm Password</label>
@@ -43,7 +43,15 @@
         <p id="confirmPasswordError" class="error confirm-password-error">This is error</p>
 
         <p class="error common-error" role="alert" aria-live="assertive">This is error</p>
-
+        <div class="policy-agreement">
+          <label for="termsAccepted">
+            <input id="termsAccepted" type="checkbox" name="termsAccepted" value="true" required />
+            <span>
+              I agree to the <a href="/terms" target="_blank">Terms of Service</a>
+              and acknowledge the <a href="/privacy" target="_blank">Privacy Policy</a>.
+            </span>
+          </label>
+        </div>
         <button id="signUpBtn" type="submit">Create my account →</button>
       </form>
 
@@ -57,4 +65,5 @@
 
 </body>
 <script src="/js/signup.js" defer></script>
+
 </html>

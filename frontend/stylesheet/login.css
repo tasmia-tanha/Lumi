@@ -320,3 +320,24 @@ p.error.visible {
 }
 
 
+.policy-links {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.policy-links a {
+  color: var(--green-deep);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.policy-links a:hover {
+  color: var(--green-dark);
+  text-decoration: underline;
+}
+
+.policy-links span {
+  color: var(--muted);
+}

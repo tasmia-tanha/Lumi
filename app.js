@@ -19,6 +19,7 @@ import lessonsRouter from "./backend/routes/lessonRouter.js";
 import notesRouter from "./backend/routes/noteRouter.js";
 import taskRouter from "./backend/routes/taskRouter.js";
 import accountRouter from "./backend/routes/accountRouter.js";
+import policyRouter from "./backend/routes/policyRouter.js";
 dotenv.config();
 const app=express();
 app.set("trust proxy", 1);
@@ -60,6 +61,7 @@ app.use("/notes",notesRouter);
 app.use("/task",taskRouter);
 app.use("/signup",signUpRouter);
 app.use("/account", accountRouter);
+app.use("/", policyRouter);
 
 //error handling
 

@@ -259,3 +259,33 @@ input.error {
     transform: rotate(360deg);
   }
 }
+
+.policy-agreement {
+  margin: 10px 0 15px;
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.policy-agreement label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.policy-agreement input[type="checkbox"] {
+  margin-top: 4px;
+  accent-color: var(--green-dark);
+  flex-shrink: 0;
+}
+
+.policy-agreement a {
+  color: var(--green-deep);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.policy-agreement a:hover {
+  text-decoration: underline;
+}

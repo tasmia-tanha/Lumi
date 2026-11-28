@@ -6,8 +6,16 @@ export function getSignUp(req, res, next) {
 
 export async function createUser(req, res, next) {
   try {
-    const { name, email, password, confirmPassword } = req.body;
-
+    const { name, email, password, confirmPassword, termsAccepted } = req.body;
+    if (termsAccepted !== "true") {
+      return res.status(400).json({
+        errors: {
+          common: {
+            msg: "You must accept the Terms of Service to create an account.",
+          },
+        },
+      });
+    }
     if (password !== confirmPassword) {
       return res.status(400).json({
         errors: {
