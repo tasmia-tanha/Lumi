@@ -819,7 +819,7 @@ body,
   }
 }
 
-@media (min-width: 761px) {
+/*@media (min-width: 761px) {
   html,
   body {
     height: auto;
@@ -845,8 +845,45 @@ body,
     min-height: 100vh;
     overflow: visible;
   }
+}*/
+@media (min-width: 761px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .main {
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 245px;
+    height: 100vh;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .dashboardContent {
+    grid-column: 2;
+    height: 100vh;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
+@media (min-width: 761px) and (max-width: 1300px) {
+  .sidebar {
+    width: 205px;
+  }
+}
 /* Larger tablets and desktops */
 @media (min-width: 801px) {
   .dashboardContent {
@@ -946,7 +983,8 @@ body,
   }
 
   .sidebar {
-    position: sticky;
+    position: fixed;
+    left: 0;
     top: 0;
     height: 100vh;
     min-height: 0;
