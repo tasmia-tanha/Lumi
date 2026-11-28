@@ -898,7 +898,7 @@ body,
 
     /* Center cards without stretching their heights */
     align-items: start;
-    align-content: center;
+    align-content: start;
 
     padding: 24px;
     gap: 18px;
@@ -1153,3 +1153,33 @@ body,
 .weeklyChart .skeletonFri { height: 70%; }
 .weeklyChart .skeletonSat { height: 40%; }
 .weeklyChart .skeletonSun { height: 50%; }
+
+
+@media (min-width: 801px) {
+  .main {
+    grid-template-columns: 245px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .dashboardContent {
+    grid-column: 2;
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+    min-width: 0;
+    padding: 24px;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 800px) {
+  .main {
+    grid-template-columns: 205px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .dashboardContent {
+    grid-column: 2;
+    width: 100%;
+    min-width: 0;
+  }
+}
